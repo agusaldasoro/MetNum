@@ -1,0 +1,166 @@
+
+\documentclass[11pt, a4paper]{article}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{todonotes}
+%\usepackage[ruled,vlined]{algorithm2e}
+
+\parskip = 11pt
+
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\nat}{\mathbb{N}}
+
+\newcommand{\atacante}{sanguijuela}
+\newcommand{\capitan}{Capit\'an Guybrush Threepwood}
+\newcommand{\objeto}{parabrisas}
+\newcommand{\nave}{El Pepino Marino}
+
+\newcommand{\revJ}[1]{{\color{red} #1}}
+
+\begin{document}
+
+
+\begin{centering}
+\large\bf Laboratorio de M\'etodos Num\'ericos - Segundo Cuatrimestre 2014 \\
+\large\bf Trabajo Pr\'actico N\'umero 1: \emph{``No creo que a \'el le gustara eso''}\\
+\end{centering}
+
+
+\vskip 0.5 cm
+\hrule
+\vskip 0.1 cm
+
+{\noindent \bf Introducci\'on}
+
+El afamado \capitan\ se encuentra nuevamente en problemas. El
+\objeto\ de su nave \nave\ est\'a siendo atacado simult\'aneamente por varios
+dispositivos hostiles vulgarmente conocidos como \emph{\atacante s
+mutantes}. Estos artefactos se adhieren a los \objeto\ de las naves y
+llevan a cabo su ataque aplicando altas temperaturas sobre la superficie, con
+el objetivo de debilitar la resistencia del mismo y permitir as\'\i \
+un ataque m\'as mort\'\i fero. Cada \atacante\ consta de una \emph{sopapa
+de ataque} circular, que se adhiere al \objeto\ y aplica una temperatura
+constante sobre todos los puntos del \objeto\ en contacto con la sopapa.
+
+Para con\-tra\-rres\-tar estas acciones hostiles, el \capitan\ 
+solamente cuenta con el sistema de refrigeraci\'on de la nave, que puede
+aplicar una temperatura constante de -100${}^o$C a los bordes del \objeto.
+El manual del usuario de la nave dice que si el punto central del \objeto\ 
+alcanza una temperatura de 235${}^o$C, el \objeto\ no resiste la temperatura
+y se destruye. Llamamos a este punto el \emph{punto cr\'\i tico} del
+\objeto.
+
+En caso de que el sistema de refrigeraci\'on no sea suficiente para salvar
+el punto cr\'\i tico, nues\-tro \capitan\ tiene todav\'\i a una posibilidad
+adicional: puede des\-tru\-ir algunas de las \atacante s, pero debe eliminar la
+menor cantidad posible de \atacante s dado que cada eliminaci\'on consume
+energ\'\i a que puede ser vital para la concreci\'on de la misi\'on.
+La situaci\'on es desesperante, y nuestro h\'eroe debe tomar una r\'apida
+determinaci\'on: debe decidir qu\'e \atacante s eliminar de modo tal que el
+\objeto\ resista hasta alcanzar la base m\'as cercana.
+
+{\noindent \bf El modelo}
+
+Suponemos que el \objeto\ es una placa rectangular de $a$ metros de ancho y $b$ metros de altura. Llamemos $T(x,y)$ a la temperatura en el punto dado por las coordenadas $(x,y)$. En el estado estacionario, esta temperatura satisface la ecuaci\'on del calor:
+
+\begin{equation}\label{eq:calor}
+\frac{\partial^2T(x,y)}{\partial x^{2}}+\frac{\partial^2 T(x,y)}{\partial y^{2}} = 0.
+\end{equation}
+
+\noindent La temperatura constante en los bordes queda definida por la siguiente ecuaci\'on:
+\begin{equation}
+T(x,y) = -100^o\textrm{C}~~~~~\textrm{si } x = 0,a \textrm{ \'o } y = 0,b.
+\label{eq:borde}
+\end{equation}
+
+\noindent De forma an\'aloga es posible fijar la temperatura en aquellos puntos cubiertos por una \atacante, considerando $T_s$ a la temperatura ejercida por las mismas.
+
+El problema en derivadas parciales dado por la primera ecuaci\'on con las condiciones de contorno presentadas recientemente, permite encontrar la funci\'on $T$ de temperatura en el \objeto, en funci\'on de los datos mencionados en esta secci\'on.
+
+%(x_j,y_i) = (ib/n,ja/m)
+Para estimar la temperatura computacionalmente, con\-si\-de\-ra\-mos la siguiente discretizaci\'on del \objeto: sea $h \in \mathbb{R}$ la granularidad de la discretizaci\'on, de forma tal que $a = m\times h$ y $b = n \times h$, con $n,m \in \mathbb{N}$, obteniendo as\'i una grilla de $(n+1)\times(m+1)$ puntos. Luego, para $i=0,1,\dots,n$ y $j=0,1,\dots,m$, llamemos $t_{ij} = T(x_j,y_i)$ al valor (desconocido) de la funci\'on $T$ en el punto $(x_j, y_i) = (ih, jh)$, donde el punto $(0,0)$ se corresponde con el extremo inferior izquierdo del \objeto.
+La aproximaci\'on por \emph{diferencias finitas} de la ecuaci\'on del calor afirma que:
+\begin{equation}
+t_{ij} \ =\ \frac{ t_{i-1,j} + t_{i+1,j} + t_{i,j-1} + t_{i,j+1}}{4}.\label{eq:calordd}
+\end{equation}
+
+Es decir, la temperatura de cada punto de la grilla debe ser igual al promedio de las tem\-pe\-ra\-tu\-ras de sus puntos vecinos en la grilla. Adicionalmente, conocemos la temperatura en los bordes, y los datos del problema permiten conocer la temperatura en los puntos que est\'an en contacto con las \atacante s.
+
+{\noindent \bf Enunciado}
+
+Se debe implementar un programa en \verb+C+ o \verb-C++- que tome como entrada los par\'ametros del problema ($a$, $b$, $h$, $r$, $T_s$ y las posiciones de las \atacante s) que calcule la temperatura en el \objeto\ utilizando el modelo propuesto en la secci\'on anterior y que determine a qu\'e \atacante s dispararle con el fin de evitar que se destruya el \objeto. El m\'etodo para determinar las \atacante s que ser\'an destru\'idas queda a criterio del grupo, y puede ser exacto o heur\'istico.
+
+Para resolver este problema, se deber\'a formular un sistema de ecuaciones lineales que permita calcular la temperatura en todos los puntos de la grilla que discretiza el \objeto, e implementar el m\'etodo de Eliminaci\'on Gaussiana (EG) para resolver este sistema particular. Dependiendo de la granularidad utilizada en la discretizaci\'on, el sistema de ecuaciones resultante para este problema puede ser muy grande. Luego, es importante plantear el sistema de ecuaciones de forma tal que posea cierta estructura (i.e., una matriz banda), con el objetivo de explotar esta caracter\'istica tanto desde la \emph{complejidad espacial} como \emph{temporal} del algoritmo.
+
+En funci\'on de la implementaci\'on, como m\'inimo se pide:
+\begin{enumerate}
+\item Representar la matriz del sistema utilizando como estructura de datos los tradicionales arreglos bi-dimensionales. Implementar el algoritmo cl\'asico de EG. \label{enum:EGcomun}
+\item Representar la matriz del sistema aprovechando la estructura banda de la misma, haciendo hincapi\'e en la complejidad espacial.  Realizar las modificaciones necesarias al algoritmo de EG para que aproveche la estructura banda de la matriz. \label{enum:EGbanda}
+\end{enumerate}
+
+En funci\'on de la experimentaci\'on, como m\'inimo deben realizarse los siguientes experimentos:
+
+\begin{itemize}
+\item Considerar al menos dos instancias de prueba, generando discretizaciones variando la granularidad para cada una de ellas y comparando el valor de la temperatura en el punto cr\'itico. Se sugiere presentar gr\'aficos de temperatura para los mismos, ya sea utilizando las herramientas provistas por la c\'atedra o implementando sus propias herramientas de graficaci\'on. 
+\item Analizar el tiempo de c\'omputo requerido en funci\'on de la granularidad de la discretizaci\'on, buscando un compromiso entre la calidad de la soluci\'on obtenida y el tiempo de c\'omputo requerido. Comparar los resultados obtenidos para las variantes propuestas en \ref{enum:EGcomun} y \ref{enum:EGbanda}. 
+\item Estudiar el comportamiento del m\'etodo propuesto para la estimaci\'on de la temperatura en el punto cr\'itico y para la eliminaci\'on de \atacante s.
+\end{itemize}
+
+Finalmente, se deber\'a presentar un informe que incluya una descripci\'on detallada de los m\'etodos implementados y las decisiones tomadas, incluyendo las estructuras utilizadas para representar la matriz banda  y los experimentos realizados, junto con el correspondiente an\'alisis y siguiendo las pautas definidas en el archivo \verb+pautas.pdf+.
+
+{\noindent \bf Programa y formato de archivos}
+
+El programa debe tomar tres par\'ametros (y en ese orden): el archivo de entrada, el archivo de salida y el m\'etodo a ejecutar (0: EG com\'un, 1: EG banda).
+El archivo de entrada contiene los datos del problema (tama\~no del
+\objeto, ubicaci\'on, radio y temperatura de las \atacante s) desde un
+archivo de texto con el siguiente formato:
+
+\begin{verbatim}
+      (a)  (b)  (h)  (r)  (t)  (k)
+      (x1) (y1)
+      (x2) (y2)
+      ...
+      (xk) (yk)
+\end{verbatim}
+
+En esta descripci\'on, $a\in\real_+$ y $b\in\real_+$ representan el ancho
+y largo en metros del \objeto, respectivamente. De acuerdo con la descripci\'on
+de la discretizaci\'on del \objeto, $h$ es la longitud de cada intervalo de discretizaci\'on,
+obteniendo como resultado una grilla de $n+1\in\nat$ filas y $m+1\in\nat$ columnas.
+Por su parte, $r\in\real_+$ representa el radio de las sopapas de ataque de las
+\atacante s (en metros), $t\in\real$ es la temperatura de ataque de las sopapas,
+y $k\in\nat$ es la cantidad de \atacante s. Finalmente, para $i=1,\dots,k$,
+el par $(x_i,y_i)$ representa la ubicaci\'on de la $i$-\'esima sanguijuela en el
+\objeto, suponiendo que el punto $(0,0)$  corresponde al extremo inferior
+izquierdo del mismo.
+
+El archivo de salida contendr\'a los valores de la temperatura en cada punto de la discretizaci\'on utilizando la informaci\'on original del problema (es decir, antes de aplicar el m\'etodo de remoci\'on de sanguijuelas), y ser\'a utilizado para realizar un testeo parcial de correctitud de la implementaci\'on. El formato del archivo de salida contendr\'a, una por l\'inea, el indicador de cada posici\'on de la grilla $i$, $j$ junto con el correspondiente valor de temperatura. A modo de ejemplo, a continuaci\'on se muestran c\'omo se reportan los valores de temperatura para las posiciones $(3,19)$, $(3,20)$, $(4,0)$ y $(4,1)$. 
+
+\begin{verbatim}
+      ...
+      3   19  -92.90878
+      3   20  -100.00000
+      4   0   -100.00000
+      4   1   60.03427
+      ...
+\end{verbatim}
+
+El programa debe ser compilado, ejecutado y testeado utilizando los \emph{scripts} de \emph{python} que acompa\~nan este informe. Estos permiten ejecutar los tests provistos por la c\'atedra, incluyendo la evaluaci\'on de los resultados obtenidos e informando si los mismos son correctos o no. Es requisito que el c\'odigo entregado pase satisfactoriamente los casos de tests provistos para su posterior correcci\'on. Junto con los archivos podr\'an encontrar un archivo \texttt{README} que explica la utilizaci\'on de los mismos.
+
+\vskip 0.5 cm
+\hrule
+\vskip 0.1 cm
+
+{\bf Fecha de entrega} 
+\begin{itemize}
+\item \textsl{Formato electr\'onico:} Jueves 04 de Septiembre de 2014, \underline{hasta las 23:59 hs.}, enviando el trabajo
+(\texttt{informe} + \texttt{c\'odigo}) a \texttt{metnum.lab@gmail.com}. El \texttt{asunto} del email debe comenzar con el texto \verb|[TP1]| seguido
+de la lista de apellidos de los integrantes del grupo. Ejemplo: \texttt{[TP1] D\'iaz, Bianchi, Borghi}
+\item \textsl{Formato f\'isico:} Viernes 05 de Septiembre de 2014, de 17:30 a 18:00 hs.
+\end{itemize}
+
+
+\end{document}
