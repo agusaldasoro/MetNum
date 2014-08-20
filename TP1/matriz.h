@@ -141,7 +141,7 @@ void Matriz<T>::EG()
 }
 
 
-//PRE: Recibe una matriz aumentada/ampliada
+//PRE: Recibe una matriz aumentada/ampliada (sino, se obtiene la identidad (en el caso de ser LI))
 template<typename T>
 void Matriz<T>::Diagonalizar()
 {
@@ -149,7 +149,7 @@ void Matriz<T>::Diagonalizar()
 
 	int i = 0;
 
-	while(i<fil)
+	while(i<fil) //voy recorriendo la diagonal, y divido las filas por lo que corresponda para dejar 1s
 	{
 		double d = Elem(i,i);
 
@@ -159,17 +159,9 @@ void Matriz<T>::Diagonalizar()
 		++i;
 	}
 
-	/*for (i < fil; ++i)
-	{
-		double d = Elem(i,i);
+	i--; //ahora i = fil, que se va del rango, por eso resto 1
 
-		if (d != 0)
-			mtrx[i] = Mult(1/d, mtrx[i]);
-	}*/
-
-	i--;
-
-	while(i >= 0)
+	while(i >= 0) //y ahora resto de abajo para arriba para diagonalizar
 	{
 		for (int j = i-1; j >= 0; --j) //con j recorro cada columna de abajo hacia arriba, empezando por i, que ahora es la de más a la derecha (sin contar la columna de resultados, claramente)
 		{
@@ -184,21 +176,6 @@ void Matriz<T>::Diagonalizar()
 		}
 		--i;
 	}
-
-	/*for (i >= 0; --i)
-	{
-		for (int j = i-1; j >= 0; --j) //con j recorro cada columna de abajo hacia arriba, empezando por i, que ahora es la de más a la derecha (sin contar la columna de resultados, claramente)
-		{
-			if (Elem(j,i) != 0)
-			{
-				double m = Elem(j,i);
-
-				std::vector<T> f = Mult(m,mtrx[i]);
-
-				Resta(mtrx[j], f);
-			}
-		}
-	}*/
 }
 
 #endif
