@@ -107,14 +107,16 @@ std::vector<T> Matriz<T>::Mult(double m, const std::vector<T>& a)
 template<typename T>
 void Matriz<T>::EG()
 {
-	for (int i = 0; i < col; ++i)
+	int lim = col;
+	if (fil<col)
+		lim = fil;
+
+	for (int i = 0; i < lim; ++i)
 	{
 		for (int j = i+1; j < fil; ++j)
 		{
 			if (Elem(i,i)==0)
 			{
-				//std::cout << "holi" << std::endl;
-
 				int r = j;
 				while(Elem(r,i) == 0 && r<fil)
 					r++;
@@ -122,12 +124,10 @@ void Matriz<T>::EG()
 				if (r==fil)
 					j=fil;
 				else
-					mtrx[j].swap(mtrx[r]);
+					(mtrx[i]).swap(mtrx[r]);
 			}
 			else
 			{
-				//std::cout << "chau" << std::endl;
-
 				double m = Elem(j,i)/Elem(i,i);
 
 				std::vector<T> f = Mult(m,mtrx[i]);
