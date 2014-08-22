@@ -3,6 +3,7 @@
 
 #include<vector>
 #include<iostream>
+#include <cmath>
 
 typedef unsigned int Nat;
 
@@ -10,6 +11,8 @@ template<typename T>
 class Matriz
 {
 public:
+	//Matriz();
+
 	Matriz(const Nat& filas, const Nat& columnas);
 
 	const Nat Filas() const;
@@ -35,6 +38,9 @@ private:
 	Nat col;
 	std::vector< std::vector< T > > mtrx;
 };
+
+/*template<typename T>
+Matriz<T>::Matriz() {};*/
 
 template<typename T>
 Matriz<T>::Matriz(const Nat& filas, const Nat& columnas) : fil(filas), col(columnas), mtrx(fil)
@@ -117,10 +123,10 @@ void Matriz<T>::EG()
 	{
 		for (int j = i+1; j < fil; ++j)
 		{
-			if (Elem(i,i)==0)
+			if (fabs(Elem(i,i))<0.0001)
 			{
 				int r = j;
-				while(Elem(r,i) == 0 && r<fil)
+				while(fabs(Elem(i,i))<0.0001 && r<fil)
 					r++;
 
 				if (r==fil)
@@ -153,7 +159,7 @@ void Matriz<T>::Diagonalizar()
 	{
 		double d = Elem(i,i);
 
-		if (d != 0)
+		if (fabs(d)>=0.0001)
 			mtrx[i] = Mult(1/d, mtrx[i]);
 
 		++i;
@@ -165,7 +171,7 @@ void Matriz<T>::Diagonalizar()
 	{
 		for (int j = i-1; j >= 0; --j) //con j recorro cada columna de abajo hacia arriba, empezando por i, que ahora es la de más a la derecha (sin contar la columna de resultados, claramente)
 		{
-			if (Elem(j,i) != 0)
+			if (fabs(Elem(j,i))>=0.0001)
 			{
 				double m = Elem(j,i);
 
