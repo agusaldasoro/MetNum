@@ -7,91 +7,98 @@
 
 typedef unsigned int Nat;
 
-template<typename T>
 class Matriz
 {
 public:
-	//Matriz();
+	Matriz();
 
 	Matriz(const Nat& filas, const Nat& columnas);
 
-	const Nat Filas() const;
+	const Nat& Filas() const;
 
-	const Nat Columnas() const;
+	const Nat& Columnas() const;
 
-	const T& Elem(const Nat& fila, const Nat& columna) const;
+	const double& Elem(const Nat& fila, const Nat& columna) const;
 
-	T& Elem(const Nat& fila, const Nat& columna);
+	double& Elem(const Nat& fila, const Nat& columna);
 
-	void Ver();
+	void Redimensionar(const Nat& filas, const Nat& columnas); //ESTA FUNCION ES NECESARIA PARA REDIMENSIONAR LA MATRIZ (por si es banda o no, al llamarla desde parabrisas.h)
 
-	void EG();
+	//void Ver(); //BORRAR
 
-	void Diagonalizar();
+	void EGComun();
+
+	void EGBanda();
+
+	void ResolverSistema(char const *tipoMatriz);
 
 private:
 
-	void Resta(std::vector<T>& a, std::vector<T>& b);
-	std::vector<T> Mult(double m, const std::vector<T>& a);
+	void Resta(std::vector<double>& a, const std::vector<double>& b);
+	std::vector<double> Mult(double m, const std::vector<double>& a);
 
 	Nat fil;
 	Nat col;
-	std::vector< std::vector< T > > mtrx;
+	std::vector< std::vector<double> > mtrx;
 };
 
-/*template<typename T>
-Matriz<T>::Matriz() {};*/
+Matriz::Matriz() {};
 
-template<typename T>
-Matriz<T>::Matriz(const Nat& filas, const Nat& columnas) : fil(filas), col(columnas), mtrx(fil)
+Matriz::Matriz(const Nat& filas, const Nat& columnas) : fil(filas), col(columnas), mtrx(fil)
 {
-	for (typename std::vector< std::vector< T > >::iterator i = mtrx.begin(); i != mtrx.end(); ++i)
+	for (std::vector< std::vector<double> >::iterator i = mtrx.begin(); i != mtrx.end(); ++i)
 	{
 		i->resize(col);
 	};
 }
 
-template<typename T>
-const Nat Matriz<T>::Filas() const
+const Nat& Matriz::Filas() const
 {
 	return this->fil;
 };
 
-template<typename T>
-const Nat Matriz<T>::Columnas() const
+const Nat& Matriz::Columnas() const
 {
 	return this->col;
 };
 
-template<typename T>
-const T& Matriz<T>::Elem(const Nat& fila, const Nat& columna) const
+const double& Matriz::Elem(const Nat& fila, const Nat& columna) const
 {
 	return mtrx[fila][columna];
 };
 
-template<typename T>
-T& Matriz<T>::Elem(const Nat& fila, const Nat& columna)
+double& Matriz::Elem(const Nat& fila, const Nat& columna)
 {
 	return mtrx[fila][columna];
 };
 
-template<typename T>
-void Matriz<T>::Ver()
+void Matriz::Redimensionar(const Nat& filas, const Nat& columnas)
 {
-	for (typename std::vector< std::vector< T > >::iterator i = mtrx.begin(); i != mtrx.end(); ++i)
+	fil = filas;
+	col = columnas;
+
+	mtrx.resize(filas);
+	for (std::vector< std::vector<double> >::iterator i = mtrx.begin(); i != mtrx.end(); ++i)
 	{
-		for (typename std::vector< T >::iterator j = i->begin(); j != i->end(); ++j)
+		i->resize(columnas);
+	}
+}
+
+/*void Matriz<double>::Ver()
+{
+	for (typename std::vector< std::vector<double> >::iterator i = mtrx.begin(); i != mtrx.end(); ++i)
+	{
+		for (typename std::vector<double>::iterator j = i->begin(); j != i->end(); ++j)
 		{
 			std::cout << *j << " ";
 		}
 
 		std::cout << std::endl;
 	}
-};
+};*/
 
 //PRE: Largo de a  = largo de b
-template<typename T>
-void Matriz<T>::Resta(std::vector<T>& a, std::vector<T>& b)
+void Matriz::Resta(std::vector<double>& a, const std::vector<double>& b)
 {
 	for (int i = 0; i < a.size(); ++i)
 	{
@@ -99,21 +106,17 @@ void Matriz<T>::Resta(std::vector<T>& a, std::vector<T>& b)
 	}
 };
 
-template<typename T>
-std::vector<T> Matriz<T>::Mult(double m, const std::vector<T>& a)
+std::vector<double> Matriz::Mult(double m, const std::vector<double>& a)
 {
-	std::vector<T> b(a);
+	std::vector<double> b(a);
 
 	for (int i = 0; i < a.size(); ++i)
-		{
-			b[i] = m*a[i];
-		}
+		b[i] = m*a[i];
 
 	return b;
 }
 
-template<typename T>
-void Matriz<T>::EG()
+void Matriz::EGComun()
 {
 	int lim = col;
 	if (fil<col)
@@ -138,7 +141,7 @@ void Matriz<T>::EG()
 			{
 				double m = Elem(j,i)/Elem(i,i);
 
-				std::vector<T> f = Mult(m,mtrx[i]);
+				std::vector<double> f = Mult(m,mtrx[i]);
 
 				Resta(mtrx[j], f);
 			}
@@ -146,42 +149,42 @@ void Matriz<T>::EG()
 	}
 }
 
-
-//PRE: Recibe una matriz aumentada/ampliada (sino, se obtiene la identidad (en el caso de ser LI))
-template<typename T>
-void Matriz<T>::Diagonalizar()
+void Matriz::EGBanda()
 {
-	this->EG();
+	//MAGIA
+};
 
-	int i = 0;
 
-	while(i<fil) //voy recorriendo la diagonal, y divido las filas por lo que corresponda para dejar 1s
+//PRE: Recibe una matriz aumentada/ampliada
+void Matriz::ResolverSistema(char const *tipo)
+{
+	if (*tipo == '0')
 	{
-		double d = Elem(i,i);
+		this->EGComun();
 
-		if (fabs(d)>=0.0001)
-			mtrx[i] = Mult(1/d, mtrx[i]);
+		int i = fil-1; //i=filas
 
-		++i;
-	}
-
-	i--; //ahora i = fil, que se va del rango, por eso resto 1
-
-	while(i >= 0) //y ahora resto de abajo para arriba para diagonalizar
-	{
-		for (int j = i-1; j >= 0; --j) //con j recorro cada columna de abajo hacia arriba, empezando por i, que ahora es la de más a la derecha (sin contar la columna de resultados, claramente)
+		while(i >= 0)
 		{
-			if (fabs(Elem(j,i))>=0.0001)
+			for (int j = col-2; j > i; --j)
 			{
-				double m = Elem(j,i);
-
-				std::vector<T> f = Mult(m,mtrx[i]);
-
-				Resta(mtrx[j], f);
+				mtrx[i][col-1] = mtrx[i][col-1] - ((mtrx[i][j])*(mtrx[j][col-1]));
 			}
+
+			mtrx[i][col-1] = ((mtrx[i][col-1])/(mtrx[i][i]));
+
+			i--;
 		}
-		--i;
 	}
+	else if (*tipo == '1')
+	{
+		this->EGBanda();
+
+		//RESOLVER SISTEMA BANDA
+	}
+	else
+		std::cout << "El tercer parámetro ingresado es erróneo: tiene que ser 0 (matriz común) o 1 (banda)" << std::endl;
+
 }
 
 #endif

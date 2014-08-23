@@ -19,14 +19,14 @@ struct Intervalo
 class Parabrisas
 {
 public:
-	Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v); //sistema de ecuaciones
-	void CalcularTemperaturas(char const *salida); //resuelve el sistema
+	Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v, char const *tipoMatriz); //sistema de ecuaciones
+	void CalcularTemperaturas(char const *salida, char const *tipoMatriz); //resuelve el sistema
 	bool EsEstable(); //punto critico < 235
 	void MatarSanguijuelas(); //VER SI DEVOLVEMOS LAS MUERTAS
-	void VerMatriz();
+	//void VerMatriz(); //BORRAR
 
 private:
-	Matriz<double> sist;
+	Matriz sist;
 	double ancho;
 	double b_altura;
 	double radio;
@@ -37,60 +37,65 @@ private:
 	void Ataque(Posicion p);
 };
 
-Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v) : ancho(a), b_altura(b), radio(r), h_disc(h), temp(t), sist( ((a/h)+1)*((b/h)+1) , ((a/h)+1)*((b/h)+1)+1), sanguijuelas(v)
+Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v, char const *tipo) : ancho(a), b_altura(b), radio(r), h_disc(h), temp(t), sanguijuelas(v)
 {
-	Nat mod = a/h;
-	for (int i = 0; i < ((a/h)+1)*((b/h)+1); ++i)
+	//ACA HAY QUE PONER LOS DOS CASOS PARA ARMAR LA MATRIZ: SI BANDA O NO.
+
+	if (*tipo == '0')
 	{
-		if (i<(mod+1) || i>=(((a/h)+1)*((b/h)+1) - (mod+1)) || i%((mod)+1)==0 || i%((mod)+1)==mod)
+		sist.Redimensionar(((a/h)+1)*((b/h)+1), ((a/h)+1)*((b/h)+1)+1);
+
+		Nat mod = a/h;
+		for (int i = 0; i < ((a/h)+1)*((b/h)+1); ++i)
 		{
-			sist.Elem(i,i) = 1.0;
-			sist.Elem(i,((a/h)+1)*((b/h)+1)) = -100.0;
+			if (i<(mod+1) || i>=(((a/h)+1)*((b/h)+1) - (mod+1)) || i%((mod)+1)==0 || i%((mod)+1)==mod)
+			{
+				sist.Elem(i,i) = 1.0;
+				sist.Elem(i,((a/h)+1)*((b/h)+1)) = -100.0;
+			}
+		}
+
+		for (std::vector<Posicion>::iterator i = sanguijuelas.begin(); i != sanguijuelas.end(); ++i)
+		{
+			Ataque(*i);
+		}
+
+		for (int i = 0; i < ((a/h)+1)*((b/h)+1); ++i)
+		{
+			if (sist.Elem(i,i) == 0)
+			{
+				sist.Elem(i,i) = -4.0;
+				sist.Elem(i,i-1) = 1.0;
+				sist.Elem(i,i+1) = 1.0;
+				sist.Elem(i,i-(mod+1)) = 1.0;
+				sist.Elem(i,i+(mod+1)) = 1.0;
+			}
 		}
 	}
-
-	for (std::vector<Posicion>::iterator i = sanguijuelas.begin(); i != sanguijuelas.end(); ++i)
-	{
-		Ataque(*i);
-	}
-
-	for (int i = 0; i < ((a/h)+1)*((b/h)+1); ++i)
-	{
-		if (sist.Elem(i,i) == 0)
-		{
-			sist.Elem(i,i) = -4.0;
-			sist.Elem(i,i-1) = 1.0;
-			sist.Elem(i,i+1) = 1.0;
-			sist.Elem(i,i-(mod+1)) = 1.0;
-			sist.Elem(i,i+(mod+1)) = 1.0;
-		}
-	}
-
-	/*for (int i = 0; i < sist.Filas(); ++i)
-	{
-		std::cout << sist.Elem(i, (sist.Columnas()-1)) << std:: endl;
-	}*/
 };
 
-void Parabrisas::VerMatriz()
+/*void Parabrisas::VerMatriz()
 {
 	sist.Ver();
 	std::cout << std::endl << "Filas: " << sist.Filas() << std::endl;
 	std::cout << "Columnas: " << sist.Columnas() << std::endl;
-}
+}*/
 
-void Parabrisas::CalcularTemperaturas(char const *salida)
+void Parabrisas::CalcularTemperaturas(char const *salida, char const *tipo)
 {
-	sist.Diagonalizar();
+	sist.ResolverSistema(tipo);
 
 	int f = 0;
 	int c = 0;
 
 	std::ofstream ofs(salida);
 
+	ofs.setf( std::ios::fixed, std::ios::floatfield );
+	ofs.precision(5);
+
 	for (int i = 0; i < sist.Filas(); ++i)
 	{
-		ofs << f << " " << c << " " << sist.Elem(i, (sist.Columnas()-1)) << std:: endl;
+		ofs << f << "\t" << c << "\t" << sist.Elem(i, (sist.Columnas()-1)) << std::endl;
 
 		if ( c == ancho/h_disc )
 		{

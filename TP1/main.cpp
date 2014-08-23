@@ -27,9 +27,9 @@ int main(int argc, char const *argv[])
 
   	entrada.close();
 
-  	Parabrisas nuevo(a,b,h,r,t,pos);
+  	Parabrisas nuevo(a,b,h,r,t,pos,argv[3]);
 
-  	nuevo.CalcularTemperaturas(argv[2]); //AGREGAR OTRO PARAMETRO QUE SEA SI ES MATRIZ BANDA O NO
+  	nuevo.CalcularTemperaturas(argv[2],argv[3]); //AGREGAR OTRO PARAMETRO QUE SEA SI ES MATRIZ BANDA O NO
 
 	return 0;
 }
