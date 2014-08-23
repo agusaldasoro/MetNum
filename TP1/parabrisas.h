@@ -2,6 +2,7 @@
 #define PARABRISAS_H
 
 #include "matriz.h"
+#include <fstream>
 
 struct Posicion
 {
@@ -19,7 +20,7 @@ class Parabrisas
 {
 public:
 	Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v); //sistema de ecuaciones
-	void CalcularTemperaturas(); //resuelve el sistema
+	void CalcularTemperaturas(char const *salida); //resuelve el sistema
 	bool EsEstable(); //punto critico < 235
 	void MatarSanguijuelas(); //VER SI DEVOLVEMOS LAS MUERTAS
 	void VerMatriz();
@@ -78,16 +79,18 @@ void Parabrisas::VerMatriz()
 	std::cout << "Columnas: " << sist.Columnas() << std::endl;
 }
 
-void Parabrisas::CalcularTemperaturas()
+void Parabrisas::CalcularTemperaturas(char const *salida)
 {
 	sist.Diagonalizar();
 
 	int f = 0;
 	int c = 0;
 
+	std::ofstream ofs(salida);
+
 	for (int i = 0; i < sist.Filas(); ++i)
 	{
-		std::cout << f << " " << c << " " << sist.Elem(i, (sist.Columnas()-1)) << std:: endl;
+		ofs << f << " " << c << " " << sist.Elem(i, (sist.Columnas()-1)) << std:: endl;
 
 		if ( c == ancho/h_disc )
 		{

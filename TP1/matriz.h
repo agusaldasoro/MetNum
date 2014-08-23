@@ -126,7 +126,7 @@ void Matriz<T>::EG()
 			if (fabs(Elem(i,i))<0.0001)
 			{
 				int r = j;
-				while(fabs(Elem(i,i))<0.0001 && r<fil)
+				while(fabs(Elem(i,i))>0.0001 && r<fil)
 					r++;
 
 				if (r==fil)
