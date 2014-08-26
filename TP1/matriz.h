@@ -24,7 +24,7 @@ public:
 
 	void Redimensionar(const Nat& filas, const Nat& columnas); //ESTA FUNCION ES NECESARIA PARA REDIMENSIONAR LA MATRIZ (por si es banda o no, al llamarla desde parabrisas.h)
 
-	//void Ver(); //BORRAR
+	void Ver(); //BORRAR
 
 	void EGComun();
 
@@ -84,18 +84,24 @@ void Matriz::Redimensionar(const Nat& filas, const Nat& columnas)
 	}
 }
 
-/*void Matriz<double>::Ver()
-{
-	for (typename std::vector< std::vector<double> >::iterator i = mtrx.begin(); i != mtrx.end(); ++i)
-	{
-		for (typename std::vector<double>::iterator j = i->begin(); j != i->end(); ++j)
-		{
-			std::cout << *j << " ";
+void Matriz::Ver(){
+	Nat f = fil;
+	Nat c = col;
+	Nat i = 0;
+	Nat j = 0;
+	std:: cout << std::endl ;
+	while(i<f){
+		j = 0;
+		std:: cout << "[ " ;
+		while(j<c){
+			double most = this->Elem(i,j);
+			std::cout << most  << " ";
+		j++;	
 		}
-
-		std::cout << std::endl;
+		std:: cout << "] " << std::endl ;
+		i++;			
 	}
-};*/
+}
 
 //PRE: Largo de a  = largo de b
 void Matriz::Resta(std::vector<double>& a, const std::vector<double>& b)
@@ -162,7 +168,7 @@ void Matriz::ResolverSistema(char const *tipo)
 	{
 		this->EGComun();
 
-		int i = fil-1; //i=filas
+		/*int i = fil-1; //i=filas
 
 		while(i >= 0)
 		{
@@ -174,7 +180,7 @@ void Matriz::ResolverSistema(char const *tipo)
 			mtrx[i][col-1] = ((mtrx[i][col-1])/(mtrx[i][i]));
 
 			i--;
-		}
+		}*/
 	}
 	else if (*tipo == '1')
 	{
