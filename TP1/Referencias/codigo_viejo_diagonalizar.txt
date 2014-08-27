@@ -1,0 +1,58 @@
+template<typename T>
+void Matriz<T>::Diagonalizar()
+{
+	this->EG();
+
+	int i = 0;
+
+	while(i<fil)
+	{
+		double d = Elem(i,i);
+
+		if (d != 0)
+			mtrx[i] = Mult(1/d, mtrx[i]);
+
+		++i;
+	}
+
+	/*for (i < fil; ++i)
+	{
+		double d = Elem(i,i);
+
+		if (d != 0)
+			mtrx[i] = Mult(1/d, mtrx[i]);
+	}*/
+
+	i--;
+
+	while(i >= 0)
+	{
+		for (int j = i-1; j >= 0; --j) //con j recorro cada columna de abajo hacia arriba, empezando por i, que ahora es la de más a la derecha (sin contar la columna de resultados, claramente)
+		{
+			if (Elem(j,i) != 0)
+			{
+				double m = Elem(j,i);
+
+				std::vector<T> f = Mult(m,mtrx[i]);
+
+				Resta(mtrx[j], f);
+			}
+		}
+		--i;
+	}
+
+	/*for (i >= 0; --i)
+	{
+		for (int j = i-1; j >= 0; --j) //con j recorro cada columna de abajo hacia arriba, empezando por i, que ahora es la de más a la derecha (sin contar la columna de resultados, claramente)
+		{
+			if (Elem(j,i) != 0)
+			{
+				double m = Elem(j,i);
+
+				std::vector<T> f = Mult(m,mtrx[i]);
+
+				Resta(mtrx[j], f);
+			}
+		}
+	}*/
+}

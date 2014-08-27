@@ -23,7 +23,7 @@ public:
 	void CalcularTemperaturas(char const *salida, char const *tipoMatriz); //resuelve el sistema
 	bool EsEstable(); //punto critico < 235
 	void MatarSanguijuelas(); //VER SI DEVOLVEMOS LAS MUERTAS
-	void VerMatriz(); //BORRAR
+	//void VerMatriz(); //BORRAR
 
 private:
 	Matriz sist;
@@ -34,8 +34,7 @@ private:
 	double temp;
 	std::vector<Posicion> sanguijuelas;
 
-	void AtaqueB(Posicion p);
-	void AtaqueC(Posicion p);
+	void Ataque(Posicion p, char const *tipoMatriz);
 };
 
 Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v, char const *tipo) : ancho(a), b_altura(b), radio(r), h_disc(h), temp(t), sanguijuelas(v)
@@ -56,7 +55,7 @@ Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const 
 
 		for (std::vector<Posicion>::iterator i = sanguijuelas.begin(); i != sanguijuelas.end(); ++i)
 		{
-			AtaqueC(*i);
+			Ataque(*i, tipo);
 		}
 
 		for (int i = 0; i < ((a/h)+1)*((b/h)+1); ++i)
@@ -70,15 +69,15 @@ Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const 
 				sist.Elem(i,i+(mod+1)) = 1.0;
 			}
 		}
-	}else if (*tipo == '1')
+	}
+	else if (*tipo == '1')
 	{
-		//Le agregue los ceros de la izquierda
 		Nat mod = a/h;
-		sist.Redimensionar(((a/h)+1)*((b/h)+1), 2*(mod)+4);
+		sist.Redimensionar(((a/h)+1)*((b/h)+1), (2*(mod+1))+2); //
 
 		for (int i = 0; i < ((a/h)+1)*((b/h)+1); ++i)
 		{
-			if (i<(mod+1) || i>=(((mod)+1)*((b/h)+1) - (mod+1)) || i%((mod)+1)==0 || i%((mod)+1)==mod)
+			if (i<(mod+1) || i>=((mod+1)*((b/h)+1) - (mod+1)) || i%((mod)+1)==0 || i%((mod)+1)==mod)
 			{
 				sist.Elem(i,mod+1) = 1.0;
 				sist.Elem(i,2*(mod)+3) = -100.0;
@@ -87,7 +86,7 @@ Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const 
 
 		for (std::vector<Posicion>::iterator i = sanguijuelas.begin(); i != sanguijuelas.end(); ++i)
 		{
-			AtaqueB(*i);
+			Ataque(*i, tipo);
 		}
 
 		for (int i = 0; i < (mod+1)*((b/h)+1); ++i)
@@ -104,15 +103,17 @@ Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const 
 	}
 };
 
-void Parabrisas::VerMatriz(){
-
-	std::cout<< "A: " << ancho << "|| B: " << b_altura << "| H: " << h_disc << std::endl;
-	this->sist.Ver();
-}
+/*void Parabrisas::VerMatriz()
+{
+	sist.Ver();
+	std::cout << std::endl << "Filas: " << sist.Filas() << std::endl;
+	std::cout << "Columnas: " << sist.Columnas() << std::endl;
+}*/
 
 void Parabrisas::CalcularTemperaturas(char const *salida, char const *tipo)
 {
-	sist.ResolverSistema(tipo);
+	const Nat k = ((ancho/h_disc));
+	sist.ResolverSistema(tipo, k);
 
 	int f = 0;
 	int c = 0;
@@ -136,12 +137,13 @@ void Parabrisas::CalcularTemperaturas(char const *salida, char const *tipo)
 	}
 }
 
-void Parabrisas::AtaqueC(Posicion p)
+void Parabrisas::Ataque(Posicion p, char const *tipo)
 {
 	p.x = (p.x)/h_disc;
 	p.y = (p.y)/h_disc;
 
 	double radio_h = radio/h_disc;
+	double radioe = pow(radio_h,2);
 
 	Intervalo intervalo_x;
 	Intervalo intervalo_y;
@@ -154,15 +156,18 @@ void Parabrisas::AtaqueC(Posicion p)
 	int i = ceil(intervalo_x.izq);
 	int j = ceil(intervalo_y.izq);
 
-	while(i <= floor(intervalo_x.der))
+
+	if (*tipo == '0')
 	{
+		while(i <= floor(intervalo_x.der))
+		{
 
 		int c = j;
 		while(c <= floor(intervalo_y.der))
 		{
 			double norma2 = (pow(i-(p.x),2) + pow(c-(p.y),2));
 
-			if (norma2 <= pow(radio_h,2))
+			if (norma2 <= radioe)
 			{
 				sist.Elem(c*((ancho/h_disc)+1)+i, ((ancho/h_disc)+1)*((b_altura/h_disc)+1)) = temp;
 				sist.Elem(c*((ancho/h_disc)+1)+i, c*((ancho/h_disc)+1)+i) = 1;
@@ -175,42 +180,29 @@ void Parabrisas::AtaqueC(Posicion p)
 		c = j;
 	}
 
-}
-
-void Parabrisas::AtaqueB(Posicion p){
-	p.x = (p.x)/h_disc;
-	p.y = (p.y)/h_disc;
-
-	double radio_h = radio/h_disc;
-
-	Intervalo intervalo_x;
-	Intervalo intervalo_y;
-
-	intervalo_x.izq = (p.x)-radio_h;
-	intervalo_x.der = (p.x)+radio_h;
-	intervalo_y.izq = (p.y)-radio_h;
-	intervalo_y.der = (p.y)+radio_h;
-
-	int i = ceil(intervalo_x.izq);
-	int j = ceil(intervalo_y.izq);
-
-	while(i <= floor(intervalo_x.der))
+	}
+	else if (*tipo == '1')
+	{
+		while(i <= floor(intervalo_x.der))
 		{
 			int c = j;
 			while(c <= floor(intervalo_y.der))
 			{
 				double norma2 = (pow(i-(p.x),2) + pow(c-(p.y),2));
 
-				if (norma2 <= pow(radio_h,2))
+				if (norma2 <= radioe)
 				{
 					sist.Elem(c*((ancho/h_disc)+1)+i, 2*(ancho/h_disc)+3) = temp;
 					sist.Elem(c*((ancho/h_disc)+1)+i, (ancho/h_disc)+1) = 1;
 				}
 			c++;
 			}
+
 			i++;
 			c = j;
 		}
+	}
+
 }
 
 #endif

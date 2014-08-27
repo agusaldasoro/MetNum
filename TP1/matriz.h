@@ -28,9 +28,9 @@ public:
 
 	void EGComun();
 
-	void EGBanda();
+	void EGBanda(const Nat& k);
 
-	void ResolverSistema(char const *tipoMatriz);
+	void ResolverSistema(char const *tipoMatriz, const Nat& k);
 
 private:
 
@@ -84,24 +84,18 @@ void Matriz::Redimensionar(const Nat& filas, const Nat& columnas)
 	}
 }
 
-void Matriz::Ver(){
-	Nat f = fil;
-	Nat c = col;
-	Nat i = 0;
-	Nat j = 0;
-	std:: cout << std::endl ;
-	while(i<f){
-		j = 0;
-		std:: cout << "[ " ;
-		while(j<c){
-			double most = this->Elem(i,j);
-			std::cout << most  << " ";
-		j++;	
+void Matriz::Ver()
+{
+	for (std::vector< std::vector<double> >::iterator i = mtrx.begin(); i != mtrx.end(); ++i)
+	{
+		for (std::vector<double>::iterator j = i->begin(); j != i->end(); ++j)
+		{
+			std::cout << *j << " ";
 		}
-		std:: cout << "] " << std::endl ;
-		i++;			
+
+		std::cout << std::endl;
 	}
-}
+};
 
 //PRE: Largo de a  = largo de b
 void Matriz::Resta(std::vector<double>& a, const std::vector<double>& b)
@@ -124,6 +118,7 @@ std::vector<double> Matriz::Mult(double m, const std::vector<double>& a)
 
 void Matriz::EGComun()
 {
+	//Ver();
 	int lim = col;
 	if (fil<col)
 		lim = fil;
@@ -153,22 +148,48 @@ void Matriz::EGComun()
 			}
 		}
 	}
+
+	//Ver();
 }
 
-void Matriz::EGBanda()
+void Matriz::EGBanda(const Nat& k)
 {
-	//MAGIA
+	Nat j;
+	//Recorro por filas
+	for (int i = k+2; i < fil-k; ++i){
+		j=0;
+		int com;
+		//Mientras no llego a la posicion que ocupa la diagonal:
+		while(j<k+1){
+			com = i + j - (k + 1);
+			if(fabs(Elem(i,j)) >0.00000001){ //PARA QUE ANDE BIEN CON LA BANDA HAY QUE AGREGAR MUCHOS MAS CEROS: EXPERIMENTO!!!
+				//Armo el coeficiente
+				double m = Elem(i,j)/Elem(com, k+1);
+				std::vector<double> f = Mult(m,mtrx[com]);
+
+				//Empiezo a recorrer el vector desde el elemento de la diagonal, porque antes eran ceros
+				//Y lo resto en la fila actual, excepto al resultado.
+				int q = j;
+				for (int w = k+1; w < (f.size() -1); ++w){
+					Elem(i,q) -= f[w];
+					q++;
+				}
+				Elem(i, col-1) -= f[f.size() -1];
+			}
+			j++;
+		}
+	}
 };
 
 
 //PRE: Recibe una matriz aumentada/ampliada
-void Matriz::ResolverSistema(char const *tipo)
+void Matriz::ResolverSistema(char const *tipo, const Nat& k)
 {
 	if (*tipo == '0')
 	{
 		this->EGComun();
 
-		/*int i = fil-1; //i=filas
+		int i = fil-1; //i=filas
 
 		while(i >= 0)
 		{
@@ -180,17 +201,27 @@ void Matriz::ResolverSistema(char const *tipo)
 			mtrx[i][col-1] = ((mtrx[i][col-1])/(mtrx[i][i]));
 
 			i--;
-		}*/
+		}
 	}
 	else if (*tipo == '1')
 	{
-		this->EGBanda();
+		this->EGBanda(k);
 
-		//RESOLVER SISTEMA BANDA
+		int i = (fil-1)-(k+1);
+
+		while(i > k){
+			Nat f = 1;
+			for (int j = k+2; j < col-1; ++j)
+			{
+				Elem(i, col-1) = Elem(i, col-1) - ((mtrx[i][j])*(mtrx[i+f][col-1]));
+				f++;
+			}
+			Elem(i, col-1) = (Elem(i, col-1)/Elem(i, k+1));
+			i--;
+		}
 	}
 	else
 		std::cout << "El tercer parámetro ingresado es erróneo: tiene que ser 0 (matriz común) o 1 (banda)" << std::endl;
-
 }
 
 #endif
