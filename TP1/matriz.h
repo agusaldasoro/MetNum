@@ -26,7 +26,7 @@ public:
 
 	void Ver(); //BORRAR
 
-	void EGComun();
+	void EGComun(const Nat& k);
 
 	void EGBanda(const Nat& k);
 
@@ -116,18 +116,19 @@ std::vector<double> Matriz::Mult(double m, const std::vector<double>& a)
 	return b;
 }
 
-void Matriz::EGComun()
+void Matriz::EGComun(const Nat& k)
 {
-	//Ver();
+	int a;
+	double m;
 	int lim = col;
 	if (fil<col)
 		lim = fil;
 
-	for (int i = 0; i < lim; ++i)
+	for (int i = 0; i < lim; ++i) //columnas
 	{
-		for (int j = i+1; j < fil; ++j)
+		for (int j = i+1; j < fil-k; ++j) //filas
 		{
-			if (fabs(Elem(i,i))<0.0001)
+			/*if (fabs(Elem(i,i))<0.0001)
 			{
 				int r = j;
 				while(fabs(Elem(i,i))>0.0001 && r<fil)
@@ -139,16 +140,26 @@ void Matriz::EGComun()
 					(mtrx[i]).swap(mtrx[r]);
 			}
 			else
-			{
-				double m = Elem(j,i)/Elem(i,i);
+			{*/
+				//double m = Elem(j,i)/Elem(i,i);
+				if (fabs(mtrx[j][i]) > 0.0000000001) //idem EG banda (y con cero anda tambien)
+				{
+					m = mtrx[j][i]/mtrx[i][i];
+					a = i;
+					while(a<col)
+					{
+						if (fabs(mtrx[i][a]) > 0)
+							mtrx[j][a] -= (m*(mtrx[i][a]));
+						a++;
+					}
+				}
 
-				std::vector<double> f = Mult(m,mtrx[i]);
+				//std::vector<double> f = Mult(m,mtrx[i]);
 
-				Resta(mtrx[j], f);
-			}
+				//Resta(mtrx[j], f);
+			//}
 		}
 	}
-
 	//Ver();
 }
 
@@ -162,23 +173,24 @@ void Matriz::EGBanda(const Nat& k)
 		//Mientras no llego a la posicion que ocupa la diagonal:
 		while(j<k+1){
 			com = i + j - (k + 1);
-			if(fabs(Elem(i,j)) >0.00000001){ //PARA QUE ANDE BIEN CON LA BANDA HAY QUE AGREGAR MUCHOS MAS CEROS: EXPERIMENTO!!!
+			if(fabs(Elem(i,j)) >0.00000001){ //PARA QUE ANDE BIEN CON LA BANDA HAY QUE AGREGAR MUCHOS MAS CEROS: EXPERIMENTO!!! (con cero anda)
 				//Armo el coeficiente
 				double m = Elem(i,j)/Elem(com, k+1);
-				std::vector<double> f = Mult(m,mtrx[com]);
+				//std::vector<double> f = Mult(m,mtrx[com]);
 
 				//Empiezo a recorrer el vector desde el elemento de la diagonal, porque antes eran ceros
 				//Y lo resto en la fila actual, excepto al resultado.
 				int q = j;
-				for (int w = k+1; w < (f.size() -1); ++w){
-					Elem(i,q) -= f[w];
+				for (int w = k+1; w < (col-1); ++w){
+					Elem(i,q) -= (m*(mtrx[com][w]));
 					q++;
 				}
-				Elem(i, col-1) -= f[f.size() -1];
+				Elem(i, col-1) -= (m*(mtrx[com][col -1]));
 			}
 			j++;
 		}
 	}
+	//Ver();
 };
 
 
@@ -187,7 +199,7 @@ void Matriz::ResolverSistema(char const *tipo, const Nat& k)
 {
 	if (*tipo == '0')
 	{
-		this->EGComun();
+		this->EGComun(k);
 
 		int i = fil-1; //i=filas
 
