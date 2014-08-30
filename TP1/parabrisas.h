@@ -22,6 +22,7 @@ public:
 	Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v, char const *tipoMatriz); //sistema de ecuaciones
 	void CalcularTemperaturas(char const *salida, char const *tipoMatriz); //resuelve el sistema
 	bool EsEstable(); //punto critico < 235
+	double TempPtoCritico();
 	void MatarSanguijuelas(); //VER SI DEVOLVEMOS LAS MUERTAS
 	//void VerMatriz(); //BORRAR
 
@@ -37,7 +38,8 @@ private:
 	void Ataque(Posicion p, char const *tipoMatriz);
 };
 
-Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v, char const *tipo) : ancho(a), b_altura(b), radio(r), h_disc(h), temp(t), sanguijuelas(v)
+Parabrisas::Parabrisas(const double& a, const double& b, const double& h, const double& r, const double& t, const std::vector<Posicion>& v, 
+char const *tipo) : ancho(a), b_altura(b), radio(r), h_disc(h), temp(t), sanguijuelas(                                                                                                                                                                                                                                                           v)
 {
 	if (*tipo == '0')
 	{
@@ -167,7 +169,7 @@ void Parabrisas::Ataque(Posicion p, char const *tipo)
 		{
 			double norma2 = (pow(i-(p.x),2) + pow(c-(p.y),2));
 
-			if (norma2 <= radioe)
+			if (norma2 <= radioe) // +error ¿?
 			{
 				sist.Elem(c*((ancho/h_disc)+1)+i, ((ancho/h_disc)+1)*((b_altura/h_disc)+1)) = temp;
 				sist.Elem(c*((ancho/h_disc)+1)+i, c*((ancho/h_disc)+1)+i) = 1;
@@ -203,6 +205,47 @@ void Parabrisas::Ataque(Posicion p, char const *tipo)
 		}
 	}
 
+}
+
+
+double TempPtoCritico(){
+	double x = ancho/(2*h_disc);
+	double y = b_altura/(2*h_disc);
+	if(floor(x)==x && floor(y)==y){
+		return sist.Elem(2*x*y+x,sist.Columnas()-1);
+	}else{
+		int colDer = ceil(x);
+		int colIzq = floor(x);
+		int filArri = floor(y);
+		int filAba = ceil(y);
+
+		if(fabs(colIzq+(h_disc/2)-x)<0.00001){
+			if(fabs(colDer+(h_disc/2)-x)<0.00001)
+				return ((sist.Elem(filArri,colDer)+sist.Elem(filAba,colDer)+sist.Elem(filArri,colIzq)+sist.Elem(filAba,colIzq))/4);
+			else if((filArri+(h_disc/2))<y) //PENSAR SI PONER TOLERANCIA
+				return ((sist.Elem(filAba,colDer)+sist.Elem(filAba,colIzq))/2);
+			else
+				return ((sist.Elem(filArri,colDer)+sist.Elem(filArri,colIzq))/2);
+		}else if(fabs(filArri+(h_disc/2)-y)<0.00001){
+			if((colIzq+(h_disc/2))<x){ //PENSAR SI PONER TOLERANCIA
+				return ((sist.Elem(filAba,colDer)+sist.Elem(filArri,colDer))/2);
+			}else{
+				return ((sist.Elem(filAba,colIzq)+sist.Elem(filArri,colIzq))/2);
+			}
+		}else{
+			if(x<colIzq+(h_disc/2)){
+				if(y<filArri+(h_disc/2))
+					return sist.Elem(filArri,colIzq);
+				else
+					return sist.Elem(filAba,colIzq);
+			}else{
+				if(y<filArri+(h_disc/2))
+					return sist.Elem(filArri,colDer);
+				else
+					return sist.Elem(filAba,colDer);
+			}
+		}
+	}
 }
 
 #endif
