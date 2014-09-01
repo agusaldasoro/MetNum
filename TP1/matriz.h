@@ -173,7 +173,7 @@ void Matriz::EGBanda(const Nat& k)
 		//Mientras no llego a la posicion que ocupa la diagonal:
 		while(j<k+1){
 			com = i + j - (k + 1);
-			if(fabs(Elem(i,j)) >0.00000001){ //PARA QUE ANDE BIEN CON LA BANDA HAY QUE AGREGAR MUCHOS MAS CEROS: EXPERIMENTO!!! (con cero anda)
+			if(fabs(Elem(i,j)) >0.00000000000000000000001){ //PARA QUE ANDE BIEN CON LA BANDA HAY QUE AGREGAR MUCHOS MAS CEROS: EXPERIMENTO!!! (con cero anda)
 				//Armo el coeficiente
 				double m = Elem(i,j)/Elem(com, k+1);
 				//std::vector<double> f = Mult(m,mtrx[com]);

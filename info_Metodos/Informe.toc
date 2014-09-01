@@ -1,0 +1,16 @@
+\contentsline {chapter}{\numberline {1}Introducci\'on Te\'orica}{1}
+\contentsline {chapter}{\numberline {2}Desarrollo}{3}
+\contentsline {section}{\numberline {2.1}Planteo del Sistema de Ecuaciones}{3}
+\contentsline {section}{\numberline {2.2}Planteo acerca de las estructura internas de las matrices}{4}
+\contentsline {section}{\numberline {2.3}Planteo en relaci\'on al empleo de nuestras estructuras en el problema presentado}{6}
+\contentsline {section}{\numberline {2.4}Planteo en relaci\'on a la implementaci\'on del Algoritmo de Eliminaci\'on Gaussiana y back substitution}{7}
+\contentsline {chapter}{\numberline {3}Resultados}{10}
+\contentsline {chapter}{\numberline {4}Discusi\'on}{11}
+\contentsline {chapter}{\numberline {5}Conclusiones}{15}
+\contentsline {section}{\numberline {5.1}First Subsection}{15}
+\contentsline {chapter}{\numberline {6}Ap\'endices}{17}
+\contentsline {section}{\numberline {6.1}Ap\'endice A}{17}
+\contentsline {section}{\numberline {6.2}Ap\'endice B}{18}
+\contentsline {section}{\numberline {6.3}Ap\'endices con numeros romanos}{18}
+\contentsline {chapter}{Bibliography}{18}
+\contentsline {chapter}{\numberline {7}Referencias}{20}

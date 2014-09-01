@@ -31,5 +31,18 @@ int main(int argc, char const *argv[])
 
   	nuevo.CalcularTemperaturas(argv[2],argv[3]);
 
+    cout << nuevo.EsEstable() << endl;
+    cout << nuevo.TempPtoCritico() << endl;
+
+    if (argc==5)
+    {
+      nuevo.MatarSanguijuelasDEA1(argv[4]);
+      //nuevo.MatarSanguijuelasProximas(argv[4]);
+      //nuevo.MatarSanguijuelasPorcentaje(argv[4]);
+
+      cout << nuevo.EsEstable() << endl;
+      cout << nuevo.TempPtoCritico() << endl;
+    }
+
 	return 0;
 }

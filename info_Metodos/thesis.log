@@ -1,0 +1,305 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.8.22)  30 AUG 2014 08:59
+entering extended mode
+**C:/Users/Belen/Facultad/Metodos/beavtex/beavtex/thesis.tex
+(C:/Users/Belen/Facultad/Metodos/beavtex/beavtex/thesis.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\beavtex.cls
+Document Class: beavtex 2013/12/05 v1.1 BeavTeX: OSU thesis class
+("C:\Program Files\MiKTeX 2.9\tex\latex\setspace\setspace.sty"
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ulem\ulem.sty"
+\UL@box=\box26
+\UL@hyphenbox=\box27
+\UL@skip=\skip41
+\UL@hook=\toks14
+\UL@height=\dimen102
+\UL@pe=\count79
+\UL@pixel=\dimen103
+\ULC@box=\box28
+Package: ulem 2012/05/18
+\ULdepth=\dimen104
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\book.cls"
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\bk12.clo"
+File: bk12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@chapter=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\c@figure=\count87
+\c@table=\count88
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\bibindent=\dimen105
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count89
+))
+\Gin@req@height=\dimen106
+\Gin@req@width=\dimen107
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\rotating\rotating.sty"
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+\c@r@tfl@t=\count90
+\rotFPtop=\skip44
+\rotFPbot=\skip45
+\rot@float@box=\box29
+\rot@mess@toks=\toks16
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tablefootnote\tablefootnote.sty"
+Package: tablefootnote 2014/01/26 v1.1c Table foot notes (HMM)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\letltxmacro.sty"
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\xifthen\xifthen.sty"
+Package: xifthen 2009/04/17 v1.3 Extended ifthen features
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\misc\etex.sty"
+Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
+\et@xins=\count91
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\calc.sty"
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count92
+\calc@Bcount=\count93
+\calc@Adimen=\dimen108
+\calc@Bdimen=\dimen109
+\calc@Askip=\skip46
+\calc@Bskip=\skip47
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count94
+\calc@Cskip=\skip48
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ifmtarg\ifmtarg.sty"
+Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty"
+Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
+\etb@tempcnta=\count95
+))
+(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count96
+\scratchdimen=\dimen110
+\scratchbox=\box30
+\nofMPsegments=\count97
+\nofMParguments=\count98
+\everyMPshowfont=\toks17
+\MPscratchCnt=\count99
+\MPscratchDim=\dimen111
+\MPnumerator=\count100
+\makeMPintoPDFobject=\count101
+\everyMPtoPDFconversion=\toks18
+) [1
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 32.
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
+ [2{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 32.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 32.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 32.
+ [3
+
+] [4
+
+] [5
+
+] [6
+
+]
+(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.toc)
+\tf@toc=\write3
+
+Overfull \hbox (2.61108pt too wide) has occurred while \output is active
+$[]$ 
+ []
+
+[7
+
+
+] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.lof)
+\tf@lof=\write4
+
+Overfull \hbox (2.61108pt too wide) has occurred while \output is active
+$[]$ 
+ []
+
+[8
+
+] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.lot)
+\tf@lot=\write5
+
+Overfull \hbox (2.61108pt too wide) has occurred while \output is active
+$[]$ 
+ []
+
+[9
+
+] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.loap)
+\tf@loap=\write6
+
+(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.loaf)
+\tf@loaf=\write7
+
+(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.loat)
+\tf@loat=\write8
+
+Chapter 1.
+[1
+
+
+
+
+
+] [2]
+Chapter 2.
+<frog.jpg, id=39, 748.7975pt x 741.77126pt>
+File: frog.jpg Graphic file (type jpg)
+ <use frog.jpg>
+Package pdftex.def Info: frog.jpg used on input line 64.
+(pdftex.def)             Requested size: 256.0748pt x 253.6703pt.
+ [3
+
+ <C:/Users/Belen/Facultad/Metodos/beavtex/beavtex/frog.jpg>] [4]
+Chapter 3.
+[5
+
+] [6]
+Chapter 4.
+[7
+
+] [8] [9] <chart.pdf, id=66, 455.7025pt x 255.95625pt>
+File: chart.pdf Graphic file (type pdf)
+ <use chart.pdf>
+Package pdftex.def Info: chart.pdf used on input line 157.
+(pdftex.def)             Requested size: 398.33858pt x 223.74245pt.
+File: chart.pdf Graphic file (type pdf)
+
+<use chart.pdf>
+Package pdftex.def Info: chart.pdf used on input line 167.
+(pdftex.def)             Requested size: 512.1496pt x 287.66885pt.
+ [10 <C:/Users/Belen/Facultad/Metodos/beavtex/beavtex/chart.pdf>] [11]
+Chapter 5.
+[12
+
+] [13] [14]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 235.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 235.
+ [15]
+Chapter 6.
+[16
+
+] [17] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.bbl) [18
+
+]
+[19
+
+]
+Appendix A.
+[20
+
+
+]
+Appendix B.
+[21
+
+] [22
+
+] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.aux) ) 
+Here is how much of TeX's memory you used:
+ 2108 strings out of 493921
+ 28003 string characters out of 3147282
+ 88396 words of memory out of 3000000
+ 5371 multiletter control sequences out of 15000+200000
+ 7434 words of font info for 27 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 29i,14n,21p,991b,314s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on thesis.pdf (31 pages, 313559 bytes).
+PDF statistics:
+ 165 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+
