@@ -147,9 +147,9 @@
 \setlength{\textwidth}{\@texwidth}
 % Other margins. T.G.: all other margins must be at least 1 inch.
 \setlength{\topmargin}{0in}
-\setlength{\headheight}{.5in}
-\setlength{\headsep}{.3in}
-\setlength{\footskip}{.5in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{1in}
+\setlength{\footskip}{0in}
 
 % -------------------------------------------------------------------------------
 % Font size for headings. T.G. : headings may be either 14pt only if all
@@ -241,31 +241,7 @@
 % set. Also, I commented out the lines adding space between figures/tables of
 % different chapters. I am not sure yet if it is necessary. The following code
 % is pretty much copied from book.cls. If it looks messy, don't blame me :P
-\def\@chapter[#1]#2{
-  \ifnum \c@secnumdepth >\m@ne
-    \if@mainmatter
-      \refstepcounter{chapter}
-      \typeout{\@chapapp\space\thechapter.}
-      \addcontentsline{\ext@toc}{\if@appendix app\else chapter\fi}{\protect\numberline{\thechapter}#1}
-    \else
-      \addcontentsline{\ext@toc}{chapter}{#1}
-    \fi
-  \else
-    \addcontentsline{\ext@toc}{chapter}{#1}
-  \fi
-  \chaptermark{#1}
-  \addtocontents{\ext@figure}{\protect\addvspace{10\p@}}
-  \addtocontents{\ext@table}{\protect\addvspace{10\p@}}
-	\ifthenelse{\isundefined{\listofalgorithms}}{}{
-  	\addtocontents{\ext@algorithm}{\protect\addvspace{10\p@}}
-  }
-  \if@twocolumn
-    \@topnewpage[\@makechapterhead{#2}]
-  \else
-    \@makechapterhead{#2}
-    \@afterheading
-  \fi
-}
+
 
 % T.G. : These elements should be single-spaced: Blocked quotes, bibliography,
 % footnotes, endnotes, multiple-line headers, figure titles, listed items
@@ -355,8 +331,6 @@
 % Flyleaf, a blankpage
 \newcommand{\flyleaf}{\thispagestyle{empty}\phantom{}\newpage}
 
-
-
 % Title page
 \renewcommand{\titlepage}{
     \thispagestyle{empty}
@@ -375,8 +349,7 @@
 \rule{150mm}{0.7mm}\\
       \emptyline
       \@submitdate\\
-      \vfill
-
+\emptyline
  {\heading Autores}\\
 \emptyline
       \@Agustina\\
@@ -384,17 +357,17 @@
       \@Belen\\
       \emptyline
       \@Gustavo\\
-      \emptyline
-      \vfill
+ \emptyline
  {\heading Resumen}\\
       \emptyline
-Meee dijeron que en el Reino del rev\'es nada el pato y vuela el pez (8)
+En esta presentaci\'on se intentar\'a implementar, optimizar y analizar el comportamiento de un conjunto de algoritmos que faciliten la estimaci\'on de la temperatura en el punto central de una superficie rectangular, partiendo del conocimiento de la temperatura en determinados puntos de la misma. Asimismo, se discutir\'an diferentes alternativas algor\'itmicas que permitan garantizar que dicho punto no exceda los 235 grados cent\'igrados.
       \vfill
+\emptyline
  {\heading Palabras Clave}\\
 \begin{itemize}
-\item Pa triangular la banda
-\item Rosa, Rosa, tan maravillosa
-\item  Y si hay gente en el mundo a la que no le das bola porque para vos no est\'a discretizada? APA. Para pensar.
+\item Algoritmo de Eliminaci\'on Gaussiana
+\item Back Substitution
+\item Matriz Banda
 \end{itemize}
 
       \vfill
@@ -501,7 +474,7 @@ Meee dijeron que en el Reino del rev\'es nada el pato y vuela el pez (8)
   \pagenumbering{roman}
   
   % Mandatory pages
-  \flyleaf           % A. Flyleaf
+
   \titlepage         % D. Title page
 
 
@@ -513,26 +486,6 @@ Meee dijeron que en el Reino del rev\'es nada el pato y vuela el pez (8)
   \tableofcontents        % H.
 
 
-	% Algorithm listing
-	\ifthenelse{\isundefined{\listofalgorithms}}{}{
-  \expandafter\newcommand\csname ps@loaa\endcsname{
-  \renewcommand{\@oddhead}{%
-  \parbox{\textwidth}{%
-  \centering {\heading LIST OF ALGORITHMS} \\ 
-  \uline{Algorithm}\hfill\uline{Page}}}
-  \renewcommand{\@oddfoot}{}
-  \renewcommand{\@evenfoot}{}}
-  \expandafter\newcommand\csname ps@loab\endcsname{%
-  \renewcommand{\@oddhead}{%
-  \parbox{\textwidth}{%
-  \centering {\heading LIST OF ALGORITHMS\ (Continued)} \\ 
-  \uline{Algorithm}\hfill\uline{Page}}}
-  \renewcommand{\@evenhead}{\@oddhead}
-  \renewcommand{\@oddfoot}{}
-  \renewcommand{\@evenfoot}{}}
-	\renewcommand{\listalgorithmname}{\pagestyle{loab}\thispagestyle{loaa}\vspace{-1.28in}}
-  \listofalgorithms
-  }
 
 
 
