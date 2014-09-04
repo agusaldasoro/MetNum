@@ -24,8 +24,6 @@ public:
 
 	void Redimensionar(const Nat& filas, const Nat& columnas); //ESTA FUNCION ES NECESARIA PARA REDIMENSIONAR LA MATRIZ (por si es banda o no, al llamarla desde parabrisas.h)
 
-	void Ver(); //BORRAR
-
 	void EGComun(const Nat& k);
 
 	void EGBanda(const Nat& k);
@@ -33,10 +31,6 @@ public:
 	void ResolverSistema(char const *tipoMatriz, const Nat& k);
 
 private:
-
-	void Resta(std::vector<double>& a, const std::vector<double>& b);
-	std::vector<double> Mult(double m, const std::vector<double>& a);
-
 	Nat fil;
 	Nat col;
 	std::vector< std::vector<double> > mtrx;
@@ -84,83 +78,32 @@ void Matriz::Redimensionar(const Nat& filas, const Nat& columnas)
 	}
 }
 
-void Matriz::Ver()
-{
-	for (std::vector< std::vector<double> >::iterator i = mtrx.begin(); i != mtrx.end(); ++i)
-	{
-		for (std::vector<double>::iterator j = i->begin(); j != i->end(); ++j)
-		{
-			std::cout << *j << " ";
-		}
-
-		std::cout << std::endl;
-	}
-};
-
-//PRE: Largo de a  = largo de b
-void Matriz::Resta(std::vector<double>& a, const std::vector<double>& b)
-{
-	for (int i = 0; i < a.size(); ++i)
-	{
-		a[i] = a[i] - b[i];
-	}
-};
-
-std::vector<double> Matriz::Mult(double m, const std::vector<double>& a)
-{
-	std::vector<double> b(a);
-
-	for (int i = 0; i < a.size(); ++i)
-		b[i] = m*a[i];
-
-	return b;
-}
-
 void Matriz::EGComun(const Nat& k)
 {
 	int a;
 	double m;
 	int lim = col;
 	if (fil<col)
-		lim = fil;
+		lim = fil; //para triangular, la matriz tiene que ser cuadrada,
+				   //pero en el caso de recibir una matriz ampliada, la ultima columna no se tiene en cuenta
 
-	for (int i = 0; i < lim; ++i) //columnas
+	for (int i = 0; i < lim; ++i) //recorro las columnas
 	{
-		for (int j = i+1; j < fil-k; ++j) //filas
+		for (int j = i+1; j < fil-k; ++j) //recorro las filas
 		{
-			/*if (fabs(Elem(i,i))<0.0001)
-			{
-				int r = j;
-				while(fabs(Elem(i,i))>0.0001 && r<fil)
-					r++;
-
-				if (r==fil)
-					j=fil;
-				else
-					(mtrx[i]).swap(mtrx[r]);
-			}
-			else
-			{*/
-				//double m = Elem(j,i)/Elem(i,i);
-				if (fabs(mtrx[j][i]) > 0.0000000001) //idem EG banda (y con cero anda tambien)
+			if (fabs(mtrx[j][i]) > 0.00000000001) //si el elemento no es cero...
+			{//armo el coeficiente
+				m = mtrx[j][i]/mtrx[i][i];
+				a = i;
+				while(a<col) //resto las filas, multiplicando por el coeficiente
 				{
-					m = mtrx[j][i]/mtrx[i][i];
-					a = i;
-					while(a<col)
-					{
-						if (fabs(mtrx[i][a]) > 0)
-							mtrx[j][a] -= (m*(mtrx[i][a]));
-						a++;
-					}
+					if (fabs(mtrx[i][a]) > 0.00000000001)
+						mtrx[j][a] -= (m*(mtrx[i][a]));
+					a++;
 				}
-
-				//std::vector<double> f = Mult(m,mtrx[i]);
-
-				//Resta(mtrx[j], f);
-			//}
+			}
 		}
 	}
-	//Ver();
 }
 
 void Matriz::EGBanda(const Nat& k)
@@ -170,13 +113,12 @@ void Matriz::EGBanda(const Nat& k)
 	for (int i = k+2; i < fil-k; ++i){
 		j=0;
 		int com;
-		//Mientras no llego a la posicion que ocupa la diagonal:
+		//Mientras no llego a la posicion que ocupa la diagonal (es decir, la posicion "del medio" de la matriz):
 		while(j<k+1){
 			com = i + j - (k + 1);
-			if(fabs(Elem(i,j)) >0.00000000000000000000001){ //PARA QUE ANDE BIEN CON LA BANDA HAY QUE AGREGAR MUCHOS MAS CEROS: EXPERIMENTO!!! (con cero anda)
+			if(fabs(Elem(i,j)) > 0.00000000001){ //si el elemento no es cero
 				//Armo el coeficiente
 				double m = Elem(i,j)/Elem(com, k+1);
-				//std::vector<double> f = Mult(m,mtrx[com]);
 
 				//Empiezo a recorrer el vector desde el elemento de la diagonal, porque antes eran ceros
 				//Y lo resto en la fila actual, excepto al resultado.
@@ -190,45 +132,44 @@ void Matriz::EGBanda(const Nat& k)
 			j++;
 		}
 	}
-	//Ver();
 };
 
 
 //PRE: Recibe una matriz aumentada/ampliada
 void Matriz::ResolverSistema(char const *tipo, const Nat& k)
 {
-	if (*tipo == '0')
+	if (*tipo == '0') //si la estructura de la matriz es la convencional
 	{
 		this->EGComun(k);
 
 		int i = fil-1; //i=filas
 
-		while(i >= 0)
+		while(i >= 0) //recorro de abajo para arriba las filas
 		{
-			for (int j = col-2; j > i; --j)
+			for (int j = col-2; j > i; --j) //y las columnas desde la derecha hasta la diagonal
 			{
-				mtrx[i][col-1] = mtrx[i][col-1] - ((mtrx[i][j])*(mtrx[j][col-1]));
-			}
+				mtrx[i][col-1] = mtrx[i][col-1] - ((mtrx[i][j])*(mtrx[j][col-1])); //y voy restandole a la posicion i del vector independiente,
+			}																	  //los valores ya despejados de las incognitas previas, multiplicados por el elem(i,j) (su coeficiente)
 
-			mtrx[i][col-1] = ((mtrx[i][col-1])/(mtrx[i][i]));
+			mtrx[i][col-1] = ((mtrx[i][col-1])/(mtrx[i][i])); //finalmente, al llegar al valor de la diagonal, "paso dividiendo" el coeficiente para terminar de despejar X_i
 
 			i--;
 		}
 	}
-	else if (*tipo == '1')
+	else if (*tipo == '1') //si la estructura de la matriz es banda
 	{
 		this->EGBanda(k);
 
-		int i = (fil-1)-(k+1);
+		int i = (fil-1)-(k+1); //voy ignorar recorrer las ultimas k filas porque son la identidad y no hay nada que despejar
 
-		while(i > k){
+		while(i > k){ //tambien voy a ignorar recorrer las primeras k filas por la misma razon
 			Nat f = 1;
-			for (int j = k+2; j < col-1; ++j)
+			for (int j = k+2; j < col-1; ++j) //recorro las columnas desde la posicion siguiente a la diagonal, y hacia la derecha, hasta el final
 			{
-				Elem(i, col-1) = Elem(i, col-1) - ((mtrx[i][j])*(mtrx[i+f][col-1]));
+				Elem(i, col-1) = Elem(i, col-1) - ((mtrx[i][j])*(mtrx[i+f][col-1])); //y despejo de la misma forma que antes, solo que de izquierda a derecha en lugar de derecha a izquierda
 				f++;
 			}
-			Elem(i, col-1) = (Elem(i, col-1)/Elem(i, k+1));
+			Elem(i, col-1) = (Elem(i, col-1)/Elem(i, k+1)); //finalmente, al igual que antes, divido al resultado por el valor de la diagonal
 			i--;
 		}
 	}

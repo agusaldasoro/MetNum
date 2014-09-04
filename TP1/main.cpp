@@ -31,17 +31,25 @@ int main(int argc, char const *argv[])
 
   	nuevo.CalcularTemperaturas(argv[2],argv[3]);
 
-    cout << nuevo.EsEstable() << endl;
-    cout << nuevo.TempPtoCritico() << endl;
+    cout.setf( std::ios::fixed, std::ios::floatfield );
+    cout.precision(5);
 
-    if (argc==5)
+    cout << "La temperatura en el punto crítico es: " << nuevo.TempPtoCritico() << endl;
+
+    if (argc==6)
     {
-      nuevo.MatarSanguijuelasDEA1(argv[4]);
-      //nuevo.MatarSanguijuelasProximas(argv[4]);
-      //nuevo.MatarSanguijuelasPorcentaje(argv[4]);
+      if (*argv[5]=='1') //se llama al programa con MatarSanguijuelasDEA1
+      {
+        nuevo.MatarSanguijuelasDEA1(argv[4]);
+      }else if (*argv[5]=='2') //se llama al programa con MatarSanguijuelasProximas
+      {
+        nuevo.MatarSanguijuelasProximas(argv[4]);
+      }else if (*argv[5]=='3') //se llama al programa con MatarSanguijuelasPorcentaje
+      {
+        nuevo.MatarSanguijuelasPorcentaje(argv[4]);
+      }
 
-      cout << nuevo.EsEstable() << endl;
-      cout << nuevo.TempPtoCritico() << endl;
+      cout << "La nueva temperatura en el punto crítico es: " << nuevo.TempPtoCritico() << endl;
     }
 
 	return 0;
