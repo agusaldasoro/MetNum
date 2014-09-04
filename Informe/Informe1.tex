@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{color}
+\usepackage{float}
  \usepackage[ruled,vlined,linesnumbered,resetcount,algochapter]{algorithm2e}
 
 \title{Trabajo Pr\'actico N\'umero 1:}
@@ -321,72 +322,291 @@ Por lo tanto, decidimos ir triangulando por filas, es decir, despejar cada eleme
 %-------------------RESULTADOS--------------------------
 
 \chapter{Resultados}
+Siendo A el ancho del parabrisas, B la altura, H el tama\~no de la discretizaci\'on, R el radio de las sanguijuelas, $\#$S la cantidad de sanguijuelas:
+\section{Caso de test 1}
+%EN REALIDAD ES EL 2
+En nuestro primer intento de test, elegimos los datos de entrada detallados abajo bajo la hip\'otesis de que cada m\'etodo heur\'istico no iba a matar las mismas sanguijuelas, pero si la misma cantidad.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=10cm]{Graficos/test2PRE.png}
+	\caption{Los m\'etodos de entrada para este caso fueron:
+A = 256, 
+B = 256, 
+H = 4, 
+R = 3, 
+Ts = 600, 
+$\#$S = 8}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
 
-Cito: \\
 
-Deben incluir los resultados de los experimentos, utilizando el formato mas adecuado
-para su presentacion. Deber´an especificar claramente a que experiencia corresponde
-cada resultado. No se incluir´an aqu´ı corridas de maquina\\
-No es aceptable incluir tablas de resultados numericos siempre que sea posible su
-graficacion. 
-Esto no significa que se deban mostrar los resultados exclusivamente en forma de graficos.
-Se debe buscar la manera de mostrar la informacion importante en la mejor forma de visualizacion. Este hecho sera tenido en cuenta para la evaluacion de la presentacion de los informes.
-Es conveniente que el proceso de experimentacion no se realice en forma independiente
-de la presentacion de los resultados, de manera que los resultados parciales obtenidos en
-los primeros experimentos vayan orientando la experimentacion posterior.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2variacionPC_h.png}
+	\caption{En el gr\'afico se puede apreciar c\'omo var\'ia la temperatura del punto cr\'itico a medida que se va modificando el h entre 128, 64, 32, 16, 8, 4, 2, 1, 0.5}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
 
 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2variacionPC_h_mayor_temperatura.png}
+	\caption{Si hacemos la misma prueba, pero aumentando la temperatura a 800 se obtiene un esquema similar}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
 
 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2variacionPC_h_menor_radio.png}
+	\caption{En cambio, si lo que hacemos es achicar el radio a 1.5, se obtiene}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2_comparacion.png}
+	\caption{}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
 
 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2_post_d4.png}
+	\caption{Cabe mencionar, el resultado de matar Sanguijuelas de a una, con un h=4:}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
 
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2_postH_d4.png}
+	\caption{El resultado de matar sanguijuelas mediante un algoritmo eur\'istico (da igual cual), con h=4}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+\section{Caso de test 2}
+%EN REALIDAD ES EL 3
+Elegimos los datos de entrada detallados abajo bajo la hip\'otesis de que eligiendo estos par\'ametros las sanguijuelas borradas iba a diferir respecto al algoritmo eur\'istico usado.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=10cm]{Graficos/test3PRE.png}
+	\caption{Los m\'etodos de entrada para este caso fueron:
+A = 512, 
+B = 512, 
+H = 0.5, 
+R = 40, 
+Ts = 500, 
+$\#$S = 7}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test3_varTemp.png}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+No todos los algoritmos eliminan la misma cantidad de sanguijuelas.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test3_deA1_d2.png}
+	\caption{El resultado de matar sanguijuelas mediante el algoritmo de a 1}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+En este caso, los dos algoritmos de eliminaci\'on heur\'isticos no elimiman a las mismas sanguijuelas, pero si la misma cantidad.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test3_porcen_d2.png}
+	\caption{El resultado de matar sanguijuelas mediante el algoritmo de 25$\%$}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test3_proximidad_2.png}
+	\caption{El resultado de matar sanguijuelas mediante el algoritmo de proximidad}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test3_comparacion_post_matar.png}
+	\caption{}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\section{Caso de test 3}
+
+%EN REALIDAD ES EL 4
+Pusimos una temperatura suficientemente chica (apenas arriba del l\'imite) y colocamos una sola sanguijuela cerca del punto cr\'itico y las dem\'as cerca de los bordes. Nuestra hip\'otesis fue que al influir mayoritariamente una sola sanguijuela en la temperatura del punto cr\'itico, el algoritmo exacto iba a funcionar mejor que cualquier eur\'istico, ya que se matar\'ian sanguijuelas innecesariamente.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4_PREd5.png}
+	\caption{Los m\'etodos de entrada para este caso fueron:
+A = 100, 
+B = 50, 
+H = 5, 
+R = 1, 
+Ts = 240, 
+$\#$S = 13}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4PREd2.png}
+	\caption{El mismo sistema cambiando el h}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4_1d2.png}
+	\caption{Sistema luego de matar con el algoritmo de a 1}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4postH_d2.png}
+	\caption{Sistema luego de matar con alg\'un algoritmo eur\'istico}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4_cmp_tempe.png}
+	\caption{}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\section{Caso de test 4}
+%EN REALIDAD ES EL 5
 
 
 %------------------------DISCUSION--------------------------------
 
 \chapter{Discusi\'on}
 
-Cito: \\
-
-Se incluira aqui un analisis de los resultados obtenidos en la seccion anterior (se analizara
-su validez, coherencia, etc.). Deben analizarse como mınimo los items pedidos en el
-enunciado. No es aceptable decir que “los resultados fueron los esperados”, sin hacer
-clara referencia a la teorıa a la cual se ajustan. Ademas, se deben mencionar los resultados interesantes y los casos "patologicos" encontrados.
-
-La seccion de discusion debe estar relacionada indefectiblemente con el desarrollo y los
-resultados presentados en las secciones anteriores. No se aceptaran afirmaciones que no esten
-respaldadas por los datos presentados
+Los resultados presentados en la secci\'on anterior son el producto de un intento de contrastar  diversas hip\'otesis que fuimos formulando conforme nos dedic\'abamos al diseño, la implementaci\'on y el desarrollo del presente trabajo. \\
+A continuaci\'on intentaremos presentar un esbozo de las mismas, junto con una posible interpretaci\'on de los resultados obtenidos. \\
 
 
-\pagebreak[4]
-
-\begin{figure}
-\begin{center}
-	\includegraphics[width=14cm]{chart.pdf}
-	\caption{A Chart.}
-	\label{fig:chart}
-	\end{center}
-\end{figure}
-
-\pagebreak[4]
 
 
+\section{Test 1}
+\textbf{Hip\'otesis:} Cada m\'etodo heur\'istico no matar\'ia las mismas sanguijuelas, pero si la misma cantidad. \\
+\textbf{Discusi\'on:} Sin embargo, en todos los casos -excepto uno- ambos algoritmos eur\'isticos matan a las mismas sanguijuelas.  \\
+Viendo el gr\'afico de distribuci\'on de las sanguijuelas con la discretizacion h= 4, junto a los resultados obtenidos luego de la eliminaci\'on, se puede ver que es el ejemplo de un caso en que “no convendr\'ia” usar el m\'etodo de eliminar de a una. Puesto que al matarla el centro queda a una temperatura riesgosa de 234.551º, muy cercana a la temperatura de muerte. Si se discretizara un poco mas, el algoritmo matar\'ia a dos sanguijuelas. Es decir, que se esta pasando por alto que en realidad el centro est\'a realmente a una temperatura superior a lo que se considera estable. En este caso, se hacen evidentes los peligros de utilizar una mala discretizaci\'on.  \\
+
+\section{Test 2}
+\textbf{Hip\'otesis:}  Las sanguijuelas borradas iban a diferir respecto al algoritmo eur\'istico usado. El algoritmo del 25 $\%$ iba a ser \'optimo. \\
+\textbf{Discusi\'on:} Como muestra en la figura 2.12, contrastando con la hip\'otesis, la temperatura del punto cr\'itico despu\'es de resolver el problema, variando el h, se va a estabilizar antes utilizando la funci\'on de proximidad. Luego, parecen converger todas a lo mismo.\\
+
+\section{Test 3}
+\textbf{Hip\'otesis:} Pusimos una temperatura suficientemente chica (apenas arriba del l\'imite) y colocamos una sola sanguijuela cerca del punto cr\'itico y las dem\'as cerca de los bordes. Nuestra hip\'otesis fue que al influir mayoritariamente una sola sanguijuela en la temperatura del punto cr\'itico, el algoritmo exacto iba a funcionar mejor que cualquier eur\'istico, ya que se matar\'ian sanguijuelas innecesariamente. \\
+\textbf{Discusi\'on:} Todos los algoritmos tardan el mismo tiempo, pero en este caso los algoritmos heuristicos son mucho peores que el de a uno: se mata cuatro veces mas sanquijuelas que para el otro. \\
+
+\section{Test 4}
+\textbf{Hip\'otesis:}
+\textbf{Discusi\'on:}
+\section{Correcta discretizaci\'on}
+
+Uno de los primeros dilemas presentados fue: “¿c\'omo podemos hacer frente a unos par\'ametros que no permiten plasmar fielmente la realidad en el modelo presentado?”.  Esta pregunta naci\'o a partir de una idea que todos los integrantes del grupo inferimos  desde la presentaci\'on del enunciado del trabajo pr\'actico: en una analog\'ia con las sumas de Riemann, donde una longitud \'infima de base de los rect\'angulos permite una mejor aproximaci\'on al valor real de una integral definida (de hecho, su valor se encontrar\'a con el l\'imite de dicha base tendiendo a cero), del mismo modo, la magnitud de error que produzca la estimaci\'on de la temperatura en un punto dado de la superficie estar\'a \'intimamente vinculada con la discretizaci\'on que el usuario decida escoger.  \\
+
+
+Esta dependencia y sus riesgos se ilustran en los resultados “bla” “bla” y “bla”
+[FIGURA DE 4 SANGUIJUELITAS DEJANDO EN CRISIS AL SISTEMA PERO PASANDOSE POR ALTO]  \\
+
+
+En dicho ejemplo se aprecia la forma en que al utilizar una granularidad grosera el sistema informa de una temperatura que indica indefectiblemente que no se ha hallado sanguijuela alguna. Sin embargo, al comenzar a refinar la discretizaci\'on la temperatura se dispara ante la detecci\'on de sanguijuelas que inicialmente hab\'ian pasado inadvertidas, progresivamente pasando a retornar temperaturas cada vez m\'as estabilizadas, es decir,  convergiendo a un \'unico valor mucho m\'as coherente con el sistema desde el punto de vista te\'orico. \\
+
+\section{Dependencia entre el radio y el valor de discretizaci\'on}
+
+En estrecha relaci\'on con lo antedicho, deducimos tambi\'en la dependencia existente entre el radio de las sanguijuelas y el valor de la discretizaci\'on a partir del cual las temperaturas del punto cr\'itico se aproximan lo suficiente a un valor de convergencia. Para definir la validez de nuestros razonamientos, realizamos dos pruebas con instancias cuyos par\'ametros eran id\'enticos, a excepci\'on del radio de las sanguijuelas. \\
+
+Ver \textbf{figure 2.4} (Caso de test 1)\\
+
+De los resultados arrojados se puede interpretar que, si se quiere aproximar una temperatura en alg\'un punto, la granularidad que se debe tomar en el caso de que el radio de las sanguijuelas sean muy pequeñas debe ser m\'as fina que aquella necesaria para lograr un resultado aceptable  en un contexto de sanguijuelas de gran tamaño.\\
+
+
+\section{Desventajas de un h \'optimo}
+Ahora bien, si en varios contextos la calidad de los resultados parece crecer a medida que aumenta la granularidad – es decir, a medida que el h se achica - entonces ¿por qu\'e no se decide optar siempre por hacer empleo de la mayor granularidad posible? La respuesta est\'a en el deseo de los rencorosos: “tarde o temprano todo se paga”. \\
+Parte del costo de hacer que el modelo aproxime lo m\'as fielmente posible a la realidad se visibiliza en las figuras. \\
+
+\color{red}{ BLABLABLABLA.}
+ 
+Allí se puede apreciar la abismal diferencia entre el tiempo de cómputo demandado por dos parabrisas idénticos modelados con granularidades disímiles. \\
+Es necesario aclarar que la eleccci\'on del h m\'as chico no es “arbitraria”. Si se elige un nuevo h muy cercano al anterior, es muy probable que no exista una diferencia significantemente posible. Pero en el ejemplo, se opt\'o por tomar un h que sea la mitad del anterior. Esto hace que se duplique la cantidad de columnas y la cantidad de filas, por lo tanto la cantidad de puntos discretizados va a ser cuatro veces la anterior.
+
+
+\section{Soluci\'on a problemas de tiempo de c\'omputo}
+Pero “¿qui\'en dijo que todo est\'a perdido?” Nosotros venimos a ofrecer una soluci\'on. Visto que las matrices con m\'as posiciones demandan tiempos de procesamiento mayores y considerando que nos interesa poder obtener resultados de calidad, nos aventuramos a comprobar que existe al menos una manera de comprimir lo suficiente la estructura de una matriz  “Banda” como para garantizar una precisi\'on aceptable de los resultados sin comprometer demasiado el tiempo requerido por la computadora para procesarla. \\
+Esta forma de almacenar la matriz fue explicada en la secci\'on “Desarrollo” del presente trabajo, y fue puesta a prueba en numerosas oportunidades para cerciorarnos de que la nueva estructura realmente aventajara a la matriz cl\'asica generada con vectores de vectores. \\
+Los resultados de estas pruebas se observan en las figuras \\
+\color{red}{
+BLA Y BLA (x ej el de matriz vacia y las q puedan usarse para comparar TIEMPO en funcion de BANDA/COMUN aplicando o sin aplicar algoritmos) }\\
+
+ las cuales ponen de manifiesto el tiempo empleado en la resoluci\'on y estabilizaci\'on del sistema para los distintos algoritmos de eliminaci\'on de sanguijuelas en funci\'on de la estructura de base utilizada. \\
+
+
+
+\section{Gasto de energ\'ia vs gasto de tiempo}
+Una vez hubimos terminado de corroborar el costo temporal del c\'alculo de las temperaturas en las diferentes estructuras implementadas, comenzamos a idear formas algor\'itmicas que, de ser necesario, nos permitieran eliminar una cantidad de sanguijuelas que estuvieran impidiendo que el punto central del parabrisas se encontrara por debajo de los 235 grados C. \\
+En vistas a optimizar el cuidado de los recursos energ\'eticos de la nave, la primera idea que se nos ocurr\'o fue la de fijarse qu\'e sanguijuela se encuentra m\'as próxima al punto cr\'itico, eliminarla, recalcular el sistema y averiguar si el sistema est\'a estable para decidir si seguir matando m\'as sanguijuelas es una necesidad. \\
+Como intu\'imos que iba a ser un procedimiento lento, decidimos pensar otras alternativas que pudieran emplearse en contextos de “emergencia”. \\
+La presencia de un rango que acotara las temperaturas posibles de las sanguijuelas o alg\'un dato sobre la posible distribuci\'on de las mismas hubiera facilitado la elecci\'on de un algoritmo que fuera m\'as eficiente en determinado contexto. Sin embargo, al no contar con estos datos debimos apelar a la intuici\'on y al desarrollo de algoritmos m\'as generalizables a diversos contextos aunque menos espec\'ificos y, por ende, tal vez menos competente bajo determinadas condiciones. \\
+Una de estas alternativas consisti\'o en buscar y eliminar cada vez el 25$\%$ de las sanguijuelas que se encontraran en el parabrisas. Las m\'as próximas al punto cr\'itico serían las que desaparecer\'ian y luego se recalcular\'ia el sistema para evaluar la necesidad de aplicar la eliminaci\'on una nueva vez. \\
+Este algoritmo en particular se bas\'o fuertemente en el comportamiento del calor. Sabemos que mientras todas las fuentes de calor apliquen la misma temperatura, las m\'as cercanas al punto cr\'itico ser\'an las que mayor injerencia tengan en la fluctuaci\'on de su temperatura.  \\
+Que la cantidad de sanguijuelas a eliminar sea proporcional a la cantidad de sanguijuelas totales nos pareci\'o una idea sensata que se desprend\'ia de saber que a mayor cantidad de ellas, mayor ser\'ia la temperatura en general (sin superar en ning\'un punto a $T_s$). \\
+Luego de descartar algunos algoritmos menos interesantes desde el punto de vista experimental, incluimos uno que tenía una l\'ogica m\'as arbitraria que heur\'istica. Esto lo hicimos para poder contrastar los resultados del mismo con los que habíamos ideado.\\
+En principio supusimos que el primer algoritmo mencionado ser\'ia m\'as exacto y que ahorrar\'ia m\'as energ\'ia, pero tardar\'ia m\'as. En contraposici\'on, los otros dos ser\'ian menos eficientes en t\'erminos de energ\'ia , pero tardar\'ian menos.  \\
+
+\color{red}{
+[VER Y ANALIZAR LOS GRAFICOS QUE COMPARAN LOS ALGORITMOS. DESCRIBIRLOS. PONER LAS CONCLUSIONES EN CONCLUSIONES!]
+Idea: Podemos aclarar que “mas proximo” esperabamos que fuera cualquiera y dio mejor de lo esperado.” Funcionan relativamente parecido cuando la discretizacion es grande, porque es un mecanismo “paleativo” pero en cuando se empieza a hacer una granularidad mas chiquita y la precision es mayor, el metodo de porcentaje es el mejor: Ya que vas a matar 4 en cualquiera de los dos casos, es preferible que mates aquellas que aumentan mas la temperatura del punto critico. 
+}
+
+
+%\pagebreak[4]
 
 
 %-----------------------CONCLUSION--------------------------------
 
 \chapter{Conclusiones}
 
-Cito: \\
+Con respecto a la elecci\'on de estructuras, destacamos que elegir almacenar la matriz como la matriz "banda" es lo m\'as acertado en cuanto complejidad espacial. Ya que esta forma de implementaci\'on no tiene ning\'un tipo de restricci\'on por sobre la manera convencional. \\
+Nuestro algoritmo de Eliminaci\'n Gaussiana tiene ciertas mejoras en cuanto complejidad espacial.\\
 
-Esta seccion debe contener las conclusiones generales del trabajo. Se deben mencionar
-las relaciones de la discusion sobre las que se tiene certeza, junto con comentarios
-y observaciones generales aplicables a todo el proceso. Mencionar tambien posibles
-extensiones a los metodos, experimentos que hayan quedado pendientes\\
-Se pide certeza y rigor logico de la discusion, el analisis y las conclusiones. Se pondra especial
-enfasis en que las conclusiones se desprendan de las experiencias realizadas. 
+Calcular, o mejor dicho, estimar la temperatura del punto cr\'itico est\'a \'intimamente relacionado con el tama\~no del h y del r. Por lo visto anteriormente, si un r es muy chico para determinado h, una sanguijuela podr\'ia desaparecer y as\'i dejar de influir con su temperatura en el punto cr\'itico. Cuanto m\'as chico el h, m\'as exacta la cuenta. Cuando h tiende a cero, el punto cr\'itico va a tener su valor real. Por eso mismo es importante, a la hora de utilizar este m\'etodo, saber elegir un h donde la temperatura en el punto cr\'itico ya este estabilizada (Ver gr\'afico). \\
 
+ponemos algo respecto del cambio de temperatura?? \\
+
+A la hora de elegir el "mejor" m\'etodo para eliminar sanguijuelas nos parece importante establecer un equilibrio entre gasto de energ\'ia y gasto de tiempo. Por lo tanto, consideramos que elegir el 25$\%$ de la cantidad de sanguijuelas pertenecientes es una cota acertada por lo demostrado en resultados. \\
 
 
 \chapter{Ap\'endices}

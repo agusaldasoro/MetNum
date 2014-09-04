@@ -13,6 +13,6 @@
 \contentsline {section}{\numberline {5.2}Another Subsection}{14}
 \contentsline {chapter}{\numberline {6}Conclusion}{16}
 \contentsline {chapter}{Bibliography}{18}
-\contentsline {chapter}{Appendices}{19}
-\contentsline {app}{\numberline {A}Things}{20}
-\contentsline {app}{\numberline {B}More Things}{21}
+\contentsline {chapter}{Appendices}{18}
+\contentsline {chapter}{\numberline {A}Things}{19}
+\contentsline {chapter}{\numberline {B}More Things}{20}

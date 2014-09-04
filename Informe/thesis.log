@@ -1,19 +1,19 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.8.22)  30 AUG 2014 08:59
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  4 SEP 2014 05:11
 entering extended mode
-**C:/Users/Belen/Facultad/Metodos/beavtex/beavtex/thesis.tex
-(C:/Users/Belen/Facultad/Metodos/beavtex/beavtex/thesis.tex
+**thesis.tex
+(C:\Users\Agustina\Documents\UBA\Métodos\Repo2wc\trunk\Informe\thesis.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
 croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+lician, german, german-x-2012-05-30, greek, gujarati, hindi, hungarian, iceland
 ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
  lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
-german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\beavtex.cls
+(C:\Users\Agustina\Documents\UBA\Métodos\Repo2wc\trunk\Informe\beavtex.cls
 Document Class: beavtex 2013/12/05 v1.1 BeavTeX: OSU thesis class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\setspace\setspace.sty"
 Package: setspace 2011/12/19 v6.7a set line spacing
@@ -124,7 +124,36 @@ Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
 \etb@tempcnta=\count95
 ))
-(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.aux)
+! Undefined control sequence.
+l.19 \abstract
+              {This is a LaTex template derived from the beavtex template fo...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.19 \abstract{T
+                his is a LaTex template derived from the beavtex template fo...
+
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 21.
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 21.
+
+No file thesis.aux.
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
@@ -137,7 +166,6 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
-
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count96
@@ -151,93 +179,167 @@ LaTeX Font Info:    ... okay on input line 31.
 \MPnumerator=\count100
 \makeMPintoPDFobject=\count101
 \everyMPtoPDFconversion=\toks18
-) [1
-
-]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 32.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
- [2{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 32.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 32.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 32.
- [3
+Overfull \hbox (7.62512pt too wide) in paragraph at lines 32--32
+ [] 
+ []
 
-] [4
 
-] [5
+! LaTeX Error: No subtitle defined.
 
-] [6
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 \maketitle
+               
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 \maketitle
+               
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (7.62512pt too wide) in paragraph at lines 32--32
+ [][] 
+ []
+
+
+! LaTeX Error: No Agustina defined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 \maketitle
+               
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: No Belen defined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 \maketitle
+               
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: No Gustavo defined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 \maketitle
+               
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \vbox (236.25513pt too high) has occurred while \output is active []
+
+
+[1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
 
 ]
-(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.toc)
+(C:\Users\Agustina\Documents\UBA\Métodos\Repo2wc\trunk\Informe\thesis.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 1.
+)
 \tf@toc=\write3
 
-Overfull \hbox (2.61108pt too wide) has occurred while \output is active
-$[]$ 
- []
-
-[7
+Overfull \vbox (7.96431pt too high) has occurred while \output is active []
 
 
-] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.lof)
-\tf@lof=\write4
+[3
 
-Overfull \hbox (2.61108pt too wide) has occurred while \output is active
-$[]$ 
- []
 
-[8
+]
+Overfull \vbox (8.2pt too high) has occurred while \output is active []
 
-] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.lot)
-\tf@lot=\write5
-
-Overfull \hbox (2.61108pt too wide) has occurred while \output is active
-$[]$ 
- []
-
-[9
-
-] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.loap)
-\tf@loap=\write6
-
-(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.loaf)
-\tf@loaf=\write7
-
-(C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.loat)
-\tf@loat=\write8
-
+ [4]
 Chapter 1.
+
+LaTeX Warning: Citation `smith' on page 1 undefined on input line 41.
+
 [1
 
 
+]
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
 
 
-
-] [2]
+[2]
 Chapter 2.
-<frog.jpg, id=39, 748.7975pt x 741.77126pt>
+<frog.jpg, id=25, 748.7975pt x 741.77126pt>
 File: frog.jpg Graphic file (type jpg)
  <use frog.jpg>
 Package pdftex.def Info: frog.jpg used on input line 64.
 (pdftex.def)             Requested size: 256.0748pt x 253.6703pt.
- [3
 
- <C:/Users/Belen/Facultad/Metodos/beavtex/beavtex/frog.jpg>] [4]
+
+LaTeX Warning: Reference `fig:frog' on page 3 undefined on input line 71.
+
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[3
+
+ <C:/Users/Agustina/Documents/UBA/Métodos/Repo2wc/trunk/Informe/frog.jpg>]
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[4]
 Chapter 3.
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
 [5
 
-] [6]
+]
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[6]
 Chapter 4.
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
 [7
 
-] [8] [9] <chart.pdf, id=66, 455.7025pt x 255.95625pt>
+]
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[8]
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[9] <chart.pdf, id=53, 455.7025pt x 255.95625pt>
 File: chart.pdf Graphic file (type pdf)
  <use chart.pdf>
 Package pdftex.def Info: chart.pdf used on input line 157.
@@ -247,59 +349,116 @@ File: chart.pdf Graphic file (type pdf)
 <use chart.pdf>
 Package pdftex.def Info: chart.pdf used on input line 167.
 (pdftex.def)             Requested size: 512.1496pt x 287.66885pt.
- [10 <C:/Users/Belen/Facultad/Metodos/beavtex/beavtex/chart.pdf>] [11]
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[10 <C:/Users/Agustina/Documents/UBA/Métodos/Repo2wc/trunk/Informe/chart.pdf>]
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[11]
 Chapter 5.
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
 [12
 
-] [13] [14]
+]
+
+LaTeX Warning: Reference `eq:initialeq' on page 13 undefined on input line 191.
+
+
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[13]
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[14]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 235.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 235.
- [15]
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[15]
 Chapter 6.
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
 [16
 
-] [17] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.bbl) [18
-
 ]
-[19
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[17]
+No file thesis.bbl.
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[18
 
 ]
 Appendix A.
-[20
+
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
+
+
+[19
 
 
 ]
 Appendix B.
-[21
 
-] [22
+Overfull \vbox (7.73332pt too high) has occurred while \output is active []
 
-] (C:\Users\Belen\Facultad\Metodos\beavtex\beavtex\thesis.aux) ) 
+
+[20
+
+] [21
+
+]
+(C:\Users\Agustina\Documents\UBA\Métodos\Repo2wc\trunk\Informe\thesis.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2108 strings out of 493921
- 28003 string characters out of 3147282
- 88396 words of memory out of 3000000
- 5371 multiletter control sequences out of 15000+200000
- 7434 words of font info for 27 fonts, out of 3000000 for 9000
+ 2076 strings out of 493921
+ 27130 string characters out of 3147274
+ 87309 words of memory out of 3000000
+ 5357 multiletter control sequences out of 15000+200000
+ 8037 words of font info for 29 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 29i,14n,21p,991b,314s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program File
+ 29i,14n,21p,943b,314s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program File
 s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on thesis.pdf (31 pages, 313559 bytes).
+ 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on thesis.pdf (25 pages, 320261 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
+ 150 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -4,10 +4,23 @@
 \contentsline {section}{\numberline {1.3}Planteo en relaci\'on al empleo de nuestras estructuras en el problema presentado}{9}
 \contentsline {section}{\numberline {1.4}Planteo en relaci\'on a la implementaci\'on del Algoritmo de Eliminaci\'on Gaussiana y back substitution}{13}
 \contentsline {chapter}{\numberline {2}Resultados}{16}
-\contentsline {chapter}{\numberline {3}Discusi\'on}{17}
-\contentsline {chapter}{\numberline {4}Conclusiones}{19}
-\contentsline {chapter}{\numberline {5}Ap\'endices}{20}
-\contentsline {section}{\numberline {5.1}Ap\'endice A}{20}
-\contentsline {section}{\numberline {5.2}Ap\'endice B}{27}
-\contentsline {chapter}{Bibliography}{34}
-\contentsline {chapter}{\numberline {6}Referencias}{36}
+\contentsline {section}{\numberline {2.1}Caso de test 1}{16}
+\contentsline {section}{\numberline {2.2}Caso de test 2}{23}
+\contentsline {section}{\numberline {2.3}Caso de test 3}{29}
+\contentsline {section}{\numberline {2.4}Caso de test 4}{34}
+\contentsline {chapter}{\numberline {3}Discusi\'on}{35}
+\contentsline {section}{\numberline {3.1}Test 1}{35}
+\contentsline {section}{\numberline {3.2}Test 2}{36}
+\contentsline {section}{\numberline {3.3}Test 3}{36}
+\contentsline {section}{\numberline {3.4}Test 4}{37}
+\contentsline {section}{\numberline {3.5}Correcta discretizaci\'on}{37}
+\contentsline {section}{\numberline {3.6}Dependencia entre el radio y el valor de discretizaci\'on}{38}
+\contentsline {section}{\numberline {3.7}Desventajas de un h \'optimo}{39}
+\contentsline {section}{\numberline {3.8}Soluci\'on a problemas de tiempo de c\'omputo}{40}
+\contentsline {section}{\numberline {3.9}Gasto de energ\'ia vs gasto de tiempo}{41}
+\contentsline {chapter}{\numberline {4}Conclusiones}{43}
+\contentsline {chapter}{\numberline {5}Ap\'endices}{45}
+\contentsline {section}{\numberline {5.1}Ap\'endice A}{45}
+\contentsline {section}{\numberline {5.2}Ap\'endice B}{52}
+\contentsline {chapter}{Bibliography}{59}
+\contentsline {chapter}{\numberline {6}Referencias}{61}
