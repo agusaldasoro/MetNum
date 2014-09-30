@@ -7,7 +7,7 @@
 class MatrizEsparsa //solo se pueden hacer matrices cuadradas
 {
 public:
-	MatrizEsparsa(int dim);
+	MatrizEsparsa(int dim, int elemsNoNulos);
 
 	//Pre: (val != 0) && (fila < dim) && (col < dim)
 	void definirPos(int fila, int col, double val); //los parametros tienen que ser pasados en ese orden: primero fila, despues columna, despues valor.
@@ -19,8 +19,6 @@ public:
 	void trasponer();
 
 	int dimension() const;
-
-	void imprimir() const;
 
 private:
 	std::vector<double> val;

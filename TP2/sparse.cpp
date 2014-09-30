@@ -1,45 +1,16 @@
 #include "sparse.h"
 
-MatrizEsparsa::MatrizEsparsa(int dim) : ptr_fil(dim+1, 0), es_traspuesta(false) {};
+MatrizEsparsa::MatrizEsparsa(int dim, int elemsNoNulos) : val(elemsNoNulos), ind_col(elemsNoNulos), ptr_fil(dim+1, 0), es_traspuesta(false) {};
 
-void MatrizEsparsa::definirPos(int fila, int col, double elem)
+void MatrizEsparsa::definirPos(int fila, int col, double val)
 {
-	int i = this->ptr_fil[fila];
-	int fin = this->ptr_fil[fila+1]-1;
-	std::vector<int>::iterator itcol = ind_col.begin();
-	std::vector<double>::iterator itval = val.begin();
-	std::advance(itcol, i);
-	std::advance(itval, i);
-	// if (i==fin)
-	// {
-	// 	ind_col.insert(itcol,col);
-	// 	val.insert(itval,elem);
-	// }
-	// else
-	// {
-		while( (i < fin) && (col > *itcol) )
-		{
-			std::advance(itcol, 1);
-			std::advance(itval, 1);
-			i++;
-		}
+	int filas = ptr_fil.size();
+	int indice = this->ind_col[fila];
+	this->val[indice] = val; //SI NO PUEDO ASUMIR QUE VOY A INSERTAR LOS ELEMENTOS EN ORDEN EN LA MATRIZ, ESTO ESTA MAL Y TENGO QUE USAR OTRA COSA (sino estaria pisando lo que hay en esa pos)
+	this->ind_col[indice] = col; //idem
 
-		if (i == ind_col.size()) //i == fin
-		{
-			ind_col.push_back(col);
-			val.push_back(elem);
-		}
-		else
-		{
-			ind_col.insert(itcol,col);
-			val.insert(itval,elem);
-		}
-
-		int filas = ptr_fil.size();
-		for (int i = fila+1; i < filas; ++i)
-			this->ptr_fil[i] += 1;
-
-	//}
+	for (int i = fila+1; i < filas; ++i)
+		this->ptr_fil[i] += 1;
 };
 
 void MatrizEsparsa::trasponer(){this->es_traspuesta = !(this->es_traspuesta);};
@@ -99,34 +70,4 @@ std::vector<double> MatrizEsparsa::multMatVec(std::vector<double> v) const
 };
 
 int MatrizEsparsa::dimension() const {return (((this->ptr_fil).size())-1);};
-
-void MatrizEsparsa::imprimir() const
-{
-	std::cout << "Valores: [";
-	for (int i = 0; i < val.size(); ++i)
-	{
-		if (i<(val.size()-1))
-			std::cout << val[i] << ", ";
-		else
-			std::cout << val[i] << "]" << std::endl;
-	}
-
-	std::cout << "Indices columnas: [";
-	for (int i = 0; i < ind_col.size(); ++i)
-	{
-		if (i < (ind_col.size()-1))
-			std::cout << ind_col[i] << ", ";
-		else
-			std::cout << ind_col[i] << "]" << std::endl;
-	}
-
-	std::cout << "Puntero fila: [";
-	for (int i = 0; i < ptr_fil.size(); ++i)
-	{
-		if (i<(ptr_fil.size()-1))
-			std::cout << ptr_fil[i] << ", ";
-		else
-			std::cout << ptr_fil[i] << "]" << std::endl;
-	}
-};
 
