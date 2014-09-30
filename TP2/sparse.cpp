@@ -5,7 +5,7 @@ MatrizEsparsa::MatrizEsparsa(int dim) : ptr_fil(dim+1, 0), es_traspuesta(false) 
 void MatrizEsparsa::definirPos(int fila, int col, double elem)
 {
 	int i = this->ptr_fil[fila];
-	int fin = this->ptr_fil[fila+1]-1;
+	int fin = this->ptr_fil[fila+1];
 	std::vector<int>::iterator itcol = ind_col.begin();
 	std::vector<double>::iterator itval = val.begin();
 	std::advance(itcol, i);
@@ -49,7 +49,6 @@ std::vector<double> MatrizEsparsa::multMatVec(std::vector<double> v) const
 	//PROBABLEMENTE TENGA QUE HACER NEW, pero habra que probar
 
 	int numFilas = this->ptr_fil.size()-1;
-
 	std::vector<double> res(numFilas, 0);
 
 	if(!es_traspuesta)
@@ -72,11 +71,56 @@ std::vector<double> MatrizEsparsa::multMatVec(std::vector<double> v) const
 	}
 	else
 	{
+		int inicio;
+		int fin;
+		int col;
+
+		for (int i = 0; i < numFilas; ++i)
+		{
+			inicio = this->ptr_fil[i];
+			fin = this->ptr_fil[i+1];
+
+			for (int j = inicio; j < fin; ++j)
+			{
+				col = this->ind_col[j];
+				res[col] += ((this->val[j])*(v[i]));
+			}
+		}
+
+
+
+
+
+
+		/*int numCols = this->ptr_fil.size()-1;
+		std::vector<double> res(numCols, 0);
+
+		int inicio;
+		int fin;
+		int fila;
+
+		for (int i = 0; i < numCols; ++i)
+		{
+			inicio = this->ptr_fil[i]; //indice donde arranca la columna i
+			fin = this->ptr_fil[i+1]; //indice donde arranca la i+1/termina la i
+
+			for (int j = inicio; j < fin; ++j)
+			{
+				fila = this->ind_col[j];
+				res[i] += ((this->val[j])*(v[col]));
+			}
+		}
+
+
+
+
+
+
 		int col;
 		int j;
 
-		for (int i = 0; i < numFilas; ++i) //por cada fila, recorro los indices de ind_col (que por estar traspuesta la matriz ahora tiene los indices de las filas, no las cols) y veo cuales corresponden a la fila actual
-		{
+		for (int i = 0; i < numFilas; ++i) //por cada fila, recorro los indices de ind_col (que por estar traspuesta la matriz,
+		{								   //ahora tiene los indices de las filas, no las cols) y veo cuales corresponden a la fila actual
 			j = 0;
 
 			while(j < numFilas) //como ptr_fil.size()-1 == ind_col.size(), esto va a recorrer todo el arreglo
@@ -92,7 +136,7 @@ std::vector<double> MatrizEsparsa::multMatVec(std::vector<double> v) const
 				}
 				j++;
 			}
-		}
+		}*/
 	}
 
 	return res;
