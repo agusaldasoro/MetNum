@@ -1,8 +1,8 @@
 #ifndef SPARSE_H
 #define SPARSE_H
 
-#include<vector>
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 class MatrizEsparsa //solo se pueden hacer matrices cuadradas
 {
@@ -28,6 +28,5 @@ private:
 	std::vector<int> ptr_fil;
 	bool es_traspuesta; //estamos utilizando CSR, por lo que si es_traspuesta es true, vamos a interpretar a la matriz como si estuvieramos usando CSC
 };
-
 
 #endif
