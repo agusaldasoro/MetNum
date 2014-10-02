@@ -24,9 +24,7 @@ bool vecIguales(std::vector<double>& x, std::vector<double>& y, double tol)
 	for (int i = 0; i < tam; ++i)
 	{
 		if (fabs(x[i]-y[i]) > tol)
-		{
 			return false;
-		}
 	}
 	return true;
 }
