@@ -1,0 +1,11 @@
+# Directed graph (each unordered pair of nodes is saved once): web-Stanford.txt 
+# Nodes: 7 Edges: 8
+# FromNodeId	ToNodeId
+1 2
+3 2
+4 2
+4 5
+5 2
+5 4
+6 2
+7 2

@@ -1,0 +1,197 @@
+\documentclass[a4paper]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}   % tipografia
+\usepackage{graphicx}
+%\usepackage{makeidx}
+\usepackage{paralist} %itemize inline
+
+%\usepackage{float}
+%\usepackage{amsmath, amsthm, amssymb}
+%\usepackage{amsfonts}
+%\usepackage{sectsty}
+%\usepackage{charter}
+%\usepackage{wrapfig}
+%\usepackage{listings}
+%\lstset{language=C}
+
+
+\input{codesnippet}
+\input{page.layout}
+% \setcounter{secnumdepth}{2}
+\usepackage{underscore}
+\usepackage{caratula}
+\usepackage{url}
+
+
+% ******************************************************** %
+%              TEMPLATE DE INFORME ORGA2 v0.1              %
+% ******************************************************** %
+% ******************************************************** %
+%                                                          %
+% ALGUNOS PAQUETES REQUERIDOS (EN UBUNTU):                 %
+% ========================================
+%                                                          %
+% texlive-latex-base                                       %
+% texlive-latex-recommended                                %
+% texlive-fonts-recommended                                %
+% texlive-latex-extra?                                     %
+% texlive-lang-spanish (en ubuntu 13.10)                   %
+% ******************************************************** %
+
+
+
+\begin{document}
+
+
+\thispagestyle{empty}
+\materia{M\'etodos Num\'ericos}
+\submateria{Segundo Cuatrimestre de 2014}
+\titulo{Trabajo Práctico II}
+\subtitulo{Tirate un qu\'e, tirate un ranking...}
+\integrante{Aldasoro Agustina}{86/13}{agusaldasoro@gmail.com}
+\integrante{Bouz\'on Mar\'ia Bel\'en}{128/13}{belenbouzon@hotmail.com}
+\integrante{Cairo Gustavo Juan}{89/13}{gjcairo@gmail.com}
+
+\maketitle
+\newpage
+
+\thispagestyle{empty}
+\vfill
+\begin{abstract}
+El resumen de no m\'as de 200 palabras, deber\'a explicar brevemente el trabajo realizado y las conclusiones de los auores de manera que pueda ser \'util por s\'i solo para dar una idea del contenido del trabajo. \\
+\\
+\\
+\indent \indent \textbf{Palabras claves} \\
+\\
+Las palabras claves, no m\'as de cuatro, deben ser t\'erminos t\'ecnicos que den una idea del contenido del trabajo para facilitar su b\'usqueda en una base de datos tem\'atica. \\
+$\clubsuit$ Wachi \\
+$\clubsuit$ turroh \\
+\end{abstract}
+
+\thispagestyle{empty}
+\vspace{3cm}
+\tableofcontents
+\newpage
+
+
+%\normalsize
+\newpage
+
+\section{Introducci\'on Te\'orica}
+
+Contendr\'a una breve explicaci\'on de la base te\'orica que fundamenta los m\'etodos involucrados
+en el trabajo, junto con los m\'etodos mismos. No deben incluirse demostraciones
+de propiedades ni teoremas, ejemplos innecesarios, ni definiciones elementales (como
+por ejemplo la de matriz sim\'etrica). \\
+\\
+Explicar de donde surge el querer ordenar los datos y bla... \\
+\\
+\subsection{PageRank, HITS, In-deg}
+El trabajo consistir\'a en estudiar distintos aspectos de los siguientes m\'etodos: PageRank,
+HITS e In-deg. \\
+\\
+\indent \indent \emph{\textbf{PageRank} - Modelo del Navegante Aleatorio} \\
+\indent Este m\'etodo consta de tres fases: explorar la web y localizar todas las p\'aginas de acceso p\'ublico; indexar los datos desde el primer paso, as\'i se puede acceder eficientemente a palabras claves o frases relavantes; y valorar la importancia de cada una de las p\'aginas en la base de datos. A nivel de nuestro desarrollo, s\'olo nos vamos a encargar de la \'ultima etapa: estimar un orden de importancia para los datos.\\
+\indent Teniendo un grafo dirigido, se le otorga a cada componente $X_k$ del mismo un valor dado por la siguiente ecuaci\'on:
+\[
+ X_k = \sum_{j \epsilon L_k} \frac{X_j}{n_j}
+\]
+Donde\emph{ $L_k$} es el conjunto de links entrantes a la p\'agina k y \emph{$n_j$} es el n\'umero de links salientes desde la p\'agina j.\\
+\indent Luego, se construye una matriz (que llamaremos A), donde se encuentra por filas las respectivas ecuaciones para cada $X_i$ como la descripta arriba.\\
+\indent La resoluci\'on de este m\'etodo consiste en hallar el autovector con autovalor asociado 1 para la matriz A. De acuerdo al trabajo de Bryan y Leise, este c\'alculo se computa mediante el m\'etodo de la potencia. \\
+\indent La matriz A cuenta con ciertas mejoras para determinados casos espec\'ificos. Por un lado, si alguna p\'agina p no tuviera ning\'un link saliente se considera que tiene igual probabilidad de ir a cualquiera de las otras p\'aginas y se le otorga al vector columna p de la matriz A el valor de $\frac{1}{n}$ para cada componente. Por otro lado, existe un fen\'omeno denominado "\textit{Teletransportaci\'on}" que consiste en que un navegante se mueva de una p\'agina a otra pero no mediante los links existentes, sino tipeando la URL.  \\
+\\
+\indent \indent \emph{\textbf{Hyperlink-Induced Topic Search (HITS)}} \\
+\indent Hola. \\
+\\
+\indent \indent \emph{\textbf{In-deg}} \\
+\indent Consiste en definir el ranking de las p\'aginas utilizando solamente la cantidad de ejes entrantes a cada una de ellas, orden\'andolos en forma decreciente.\\
+
+\newpage
+\section{Desarrollo}
+Deben explicarse los m\'etodos num\'ericos que utilizaron y su aplicaci\'on al problema
+concreto involucrado en el trabajo pr\'actico. Se deben mencionar los pasos que siguieron
+para implementar los algoritmos, las dificultades que fueron encontrando y la
+descripci\'on de c\'omo las fueron resolviendo. Explicar tambi\'en c\'omo fueron planteadas
+y realizadas las mediciones experimentales. Los ensayos fallidos, hip\'otesis y conjeturas
+equivocadas, experimentos y m\'etodos malogrados deben figurar en esta secci\'on, con
+una breve explicaci\'on de los motivos de estas fallas (en caso de ser conocidas).\\
+\\
+\subsection{Elecci\'on de las estructuras}
+\indent Luego de haber estudiado los tres tipos de estructuras dados por la c\'atedra: Dictionary of Keys (DOK), Compressed Sparse Row (CSR) y Compressed Sparse Column (CSC), decidimos cual elegir. \\
+\indent En primera instacia, consideramos la estructura \textit{Dictionary of Keys}. La misma consiste en un diccionario con doble clave, donde cada una es fila y columna respectivamente y su significado son los elementos de la matriz distintos de cero. De esta manera, se aprovecha en t\'erminos de espacio en memoria la notable cantidad de ceros de la matriz. Contaba con la gran ventaja de que es buena para construirla incrementalmente en un arreglo esparso y adem\'as se puede trasponer de manera sencilla ya que es invertir el orden de las claves. En contraposici\'on, para procesar los c\'alculos aritm\'eticos es necesario convertirla a otro formato. Por este motivo, descartamos esta opci\'on. \\
+\indent El modo de almacenamiento \textit{Compressed Sparse Row} requiere la implementacion de tres arreglos (en nuestro caso vectores) que llamaremos val, ind_col y ptr_fila. El tamaño de los dos primeros estar\'a dado por la cantidad de elementos distintos de cero de la matriz. Mientras que el primero (val) almacenar\'a estos valores de izquierda a derecha y luego desde arriba hacia abajo, el segundo vector (ind_col) el n\'umero de columna para cada elemento. Es decir, el elemento almacenado en la posición i-esima del vector ind_col representa la columna correspondiente al valor almanacenado en val$_i$. Y el tercer vector (ptr_fila) tiene un tama\~no equivalente a la cantidad de filas+1 conteniendo los \'indices de donde comienza cada columna.\\
+\indent El modo de almacenamiento \textit{Compressed Sparse Column} cuenta tambi\'en con la implementaci\'on de tres arreglos llamados: val, ind_fila, ptr_col. Val es un arreglo con todos los valores distintos de cero de la matriz, desde arriba hacia abajo y luego de izquierda a derecha. Ind_fila son los indices de fila correspondientes a esos valores.  Por ultimo, ptr_col lista los indices donde comienza cada columna.\\
+\indent En segunda instancia, nos encontramos frente a la disyuntiva sobre si elegir el formato CSR (por filas) o CSC (por columnas) ya que no notamos un beneficio de una sobre otra. \\
+\indent Por ultimo, el vector ptr_fila tendra de tamaño la cantidad de filas incrementada en uno y listara los indices que indicaran los valores de val que comienzan cada fila.\\
+\indent Haciendo c\'alculos pequeños notamos que si nos situamos en el formato de \textit{Compressed Spare} trasponer una matriz almacenada de manera CSC no es m\'as que interpretar los mismos tres arreglos como CSC. \textbf{ VA DEMOSTRACION DE ESTO???}. Fue decisi\'on del grupo considerar el formato por defecto de la matriz el CSR (filas) y al trasponerlas s\'olo modificarle un bool que indique si est\'a traspuesta y de ahora en mas leerla y considerarla como CSC (columnas). Esta decisión fue tomada luego de que \textbf{Agust\'in Montero nos confirmara} que estaba permitido elegir una opción de las ofrecidas y adaptarla a nuestra conveniencia, siempre que se aclararan los cambios. Por este motivo, en el algoritmo de multiplicar una matriz por un vector se diferencia la manera en que este almacenada y hace la multiplicaci\'on acorde a su manera respectiva, se incluye el pseudoc\'odigo de este algoritmo en el \emph{Ap\'endice B}. \\
+
+
+\newpage
+\section{Resultados y discusi\'on}
+Deben incluir los resultados de los experimentos, utilizando el formato m\'as adecuado
+para su presentaci\'on. Deber\'an especificar claramente a qu\'e experiencia corresponde
+cada resultado. No se incluir\'an aqu\'i corridas de m\'aquina.\\
+Se incluir\'a aqu\'i un an\'alisis de los resultados obtenidos en la secci\'on anterior (se analizar\'a su validez, coherencia, etc.). Deben analizarse como m\'inimo los items pedidos en el enunciado. No es aceptable decir que los resultados fueron los esperados", sin hacer
+clara referencia a la teorica a la cual se ajustan. Adem\'as, se deben mencionar los resultados
+interesantes y los casos "patologicos" encontrados.
+
+\newpage
+\section{Conclusiones}
+Esta secci\'on debe contener las conclusiones generales del trabajo. Se deben mencionar
+las relaciones de la discusi\'on sobre las que se tiene certeza, junto con comentarios
+y observaciones generales aplicables a todo el proceso. Mencionar tambi\'en posibles
+extensiones a los m\'etodos, experimentos que hayan quedado pendientes, etc.
+
+\newpage
+\section{Ap\'endices}
+	\subsection{Ap\'endice A}
+%----LO COMENTO PARA QUE NO MOLESTE	
+%		\input{tp2}
+\newpage
+	\subsection{Ap\'endice B}
+En el ap\'endice B se incluir\'an los c\'odigos fuente de las funciones relevantes desde el punto de vista num\'erico.\\
+PONER EL PSEUDOCODIGO DE LA MULTIPLICACION DE MATRICES, PORQUE DIJE QUE ESTABA ACA. JE
+	\subsection{Ap\'endice $\Phi$}
+ Resultados que valga la pena mencionar en el trabajo pero que sean demasiado especificos para
+aparecer en el cuerpo principal del trabajo podr\'an mencionarse en sucesivos ap\'endices
+rotulados con las letras may\'usculas del alfabeto romano. Por ejemplo: la demostraci\'on
+de una propiedad que aplican para optimizar el algoritmo que programaron para resolver
+un problema.
+
+
+\newpage
+\section{Referencias}
+Es importante incluir referencias a libros, art\'iculos y p\'aginas de Internet consultados
+durante el desarrollo del trabajo, haciendo referencia a estos materiales a lo largo del
+informe. Se deben citar tambi\'en las comunicaciones personales con otros grupos.
+
+\end{document}
+
+%\begin{figure}
+%  \begin{center}
+%	\includegraphics[scale=0.66]{imagenes/logouba.jpg}
+%	\caption{Descripcion de la figura}
+%	\label{nombreparareferenciar}
+%  \end{center}
+%\end{figure}
+
+
+%\paragraph{\textbf{Titulo del parrafo} } Bla bla bla bla.
+%Esto se muestra en la figura~\ref{nombreparareferenciar}.
+
+
+
+%\begin{codesnippet}
+%\begin{verbatim}
+
+%struct Pepe {
+
+%    ...
+
+%};
+
+%\end{verbatim}
+%\end{codesnippet}
+
