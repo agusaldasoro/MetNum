@@ -60,14 +60,16 @@
 \thispagestyle{empty}
 \vfill
 \begin{abstract}
-El resumen de no m\'as de 200 palabras, deber\'a explicar brevemente el trabajo realizado y las conclusiones de los auores de manera que pueda ser \'util por s\'i solo para dar una idea del contenido del trabajo. \\
+\textcolor{blue}{El resumen de no m\'as de 200 palabras, deber\'a explicar brevemente el trabajo realizado y las conclusiones de los autores de manera que pueda ser \'util por s\'i solo para dar una idea del contenido del trabajo.} \\
 \\
 \\
 \indent \indent \textbf{Palabras claves} \\
 \\
-Las palabras claves, no m\'as de cuatro, deben ser t\'erminos t\'ecnicos que den una idea del contenido del trabajo para facilitar su b\'usqueda en una base de datos tem\'atica. \\
-$\clubsuit$ Wachi \\
-$\clubsuit$ turroh \\
+$\circ$ Matriz Esparsa \\
+$\circ$ PageRank \\
+$\circ$ HITS \\
+$\circ$ In-deg \\
+
 \end{abstract}
 
 \thispagestyle{empty}
@@ -81,16 +83,23 @@ $\clubsuit$ turroh \\
 
 \section{Introducci\'on Te\'orica}
 
+\textcolor{blue}{
 Contendr\'a una breve explicaci\'on de la base te\'orica que fundamenta los m\'etodos involucrados
 en el trabajo, junto con los m\'etodos mismos. No deben incluirse demostraciones
 de propiedades ni teoremas, ejemplos innecesarios, ni definiciones elementales (como
-por ejemplo la de matriz sim\'etrica). \\
+por ejemplo la de matriz sim\'etrica).
+} \\
 \\
-Explicar de donde surge el querer ordenar los datos y bla... \\
+\indent A la hora de dise\~nar un Motor de B\'usqueda hay varios aspectos a tener en cuenta, tales como: contar con un acceso a las p\'aginas disponibles en la red, un base de datos donde almacenarlas e indexarlas para su procesamiento posterior y luego tener la capacidad de ordenarlas de acuerdo a su importancia relativa dentro de la red. Nuestro trabajo se va a centrar en este aspecto \'ultimo.
+
+Existen varios m\'etodos los cuales priorizan distintas caracter\'isticas para dar cierto orden a una red de p\'aginas acorde con determinada b\'usqueda. Por ejemplo, uno podr\'ia ser situar en una posici\'on m\'as alta a aquellas p\'aginas que contengan mayor cantidad de coincidencias con el string de b\'usqueda. Esto podr\'ia no ser lo \'optimo si se buscara el string \textbf{\"Red Social\"}, uno esperar\'ia que entre los 'ganadores' de esta b\'usqueda se encuentren determinadas Redes Sociales como Facebook o Twitter, sin embargo la cantidad de veces que estas p\'aginas contienen al string \textbf{\"Red Social\"} es muy peque\~na o nula y esto provocar\'ia que no aparezcan en los primeros lugares las p\'aginas deseadas.
+
+Todos los m\'etodos a desarrollar en este trabajo se basan en la comparaci\'on de Links Salientes/Entrantes y otorgarles cierto orden en base a esto.
 \\
 \subsection{PageRank, HITS, In-deg}
 El trabajo consistir\'a en estudiar distintos aspectos de los siguientes m\'etodos: PageRank,
 HITS e In-deg. \\
+\\
 \\
 \indent \indent \emph{\textbf{PageRank} - Modelo del Navegante Aleatorio} \\
 \indent Este m\'etodo consta de tres fases: explorar la web y localizar todas las p\'aginas de acceso p\'ublico; indexar los datos desde el primer paso, as\'i se puede acceder eficientemente a palabras claves o frases relavantes; y valorar la importancia de cada una de las p\'aginas en la base de datos. A nivel de nuestro desarrollo, s\'olo nos vamos a encargar de la \'ultima etapa: estimar un orden de importancia para los datos.\\
@@ -103,6 +112,7 @@ Donde\emph{ $L_k$} es el conjunto de links entrantes a la p\'agina k y \emph{$n_
 \indent La resoluci\'on de este m\'etodo consiste en hallar el autovector con autovalor asociado 1 para la matriz A. De acuerdo al trabajo de Bryan y Leise, este c\'alculo se computa mediante el m\'etodo de la potencia. \\
 \indent La matriz A cuenta con ciertas mejoras para determinados casos espec\'ificos. Por un lado, si alguna p\'agina p no tuviera ning\'un link saliente se considera que tiene igual probabilidad de ir a cualquiera de las otras p\'aginas y se le otorga al vector columna p de la matriz A el valor de $\frac{1}{n}$ para cada componente. Por otro lado, existe un fen\'omeno denominado "\textit{Teletransportaci\'on}" que consiste en que un navegante se mueva de una p\'agina a otra pero no mediante los links existentes, sino tipeando la URL. Para modelar de manera \'optima este suceso, se reemplaza a la matriz A por la matriz M definida bajo la siguiente ecuaci\'on: \textit{M = (1-m)A + m.S} siendo m la probabilidad de que un navegante se \textit{teletransporte} y S una matriz cuyos valores $S_{ij}$ tienen todos el mismo valor: $\frac{1}{n}$ representando as\'i una matriz donde la probabilidad de ir a cualquier p\'agina del gr\'afico es uniforme.\\
 \indent El\emph{ M\'etodo de la Potencia} se realiza de manera iterativa lo cual permite reducir el tiempo de c\'omputo para elevar a la k la matriz M. Si tenemos en cuenta el trabajo de Kamvar, presenta una herramienta de c\'alculo que permite encontrar el principal autovector de M en una serie menor de pasos.\\
+\\
 \\
 \indent \indent \emph{\textbf{Hyperlink-Induced Topic Search (HITS)}} \\
 \indent El m\'etodo planteado por Kleinberg consiste en: Dada una consulta sobre $\sigma$, nos queremos focalizar en una colecci\'on de p\'aginas $S_\sigma$ tal que sea relativamente peque\~na, sea rica en p\'aginas relevantes sobre el tema y contenga la mayor\'ia de las autoridades m\'as fuertes sobre el tema. Considerando autoridad a una p\'agina que tiene muchos links entrantes. Esto se realiza del siguiente modo:\\
@@ -129,11 +139,13 @@ d) Admite hasta \emph{m} p\'aginas del mismo dominio apuntar a cualquier p\'agin
 Y_i = \sum_{j: i\rightarrow j} X_j
 \]
 \\
+\\
 \indent \indent \emph{\textbf{In-deg}} \\
 \indent Consiste en definir el ranking de las p\'aginas utilizando solamente la cantidad de ejes entrantes a cada una de ellas, orden\'andolos en forma decreciente.\\
 
 \newpage
 \section{Desarrollo}
+\textcolor{blue}{
 Deben explicarse los m\'etodos num\'ericos que utilizaron y su aplicaci\'on al problema
 concreto involucrado en el trabajo pr\'actico. Se deben mencionar los pasos que siguieron
 para implementar los algoritmos, las dificultades que fueron encontrando y la
@@ -141,33 +153,73 @@ descripci\'on de c\'omo las fueron resolviendo. Explicar tambi\'en c\'omo fueron
 y realizadas las mediciones experimentales. Los ensayos fallidos, hip\'otesis y conjeturas
 equivocadas, experimentos y m\'etodos malogrados deben figurar en esta secci\'on, con
 una breve explicaci\'on de los motivos de estas fallas (en caso de ser conocidas).\\
+}
 \\
 \subsection{Elecci\'on de las estructuras}
 
- Con el fin de elegir la estructura que representar\'ia nuestra matriz esparsa, estudiamos tres tipos proporcionados por la c\'atedra: Dictionary of Keys (DOK), Compressed Sparse Row (CSR) y Compressed Sparse Column (CSC). \\
- La primera consiste en un diccionario con doble clave (fila y columna) y su significado son los elementos de la matriz distintos de cero. De esta manera se saca provecho de la cantidad de elementos nulos de la matriz, garantizando una optimizaci\'on en t\'erminos de espacio en memoria. Adem\'as esta implementaci\'on cuenta con la gran ventaja de que resulta simple construirla incrementalmente en un arreglo esparso y adem\'as puede ser traspuesta de manera sencilla (inviertiendo el orden de las claves). Sin embargo, el principal inconveniente reside en la necesidad de convertirla a otro formato para procesar los c\'alculos aritm\'eticos. A causa de esto fue descartada la opci\'on. \\
- El modo de almacenamiento \textit{Compressed Sparse Row} requiere la implementacion de tres arreglos (en nuestro caso vectores) que llamaremos val, ind_col y ptr_fila. El tamaño de los dos primeros est\'a dado por la cantidad de elementos no nulos de la matriz. Mientras que el primero (val) almacena estos valores de izquierda a derecha y luego desde arriba hacia abajo, el segundo vector (ind_col) indica el n\'umero de columna para cada elemento. En otras palabras, el elemento almacenado en la posici\'on i- \'esima del vector ind_col representa la columna correspondiente al valor almanacenado en val$_i$. Por \'ultimo el tercer vector (ptr_fila) tiene un tama\~no equivalente a la cantidad de filas incrementada en uno, conteniendo los \'indices de del comienzo de cada columna.\\
- El modo de almacenamiento \textit{Compressed Sparse Column} cuenta tambi\'en con la implementaci\'on de tres arreglos llamados: val, ind_fila, ptr_col. EL primero contiene todos los valores distintos de cero de la matriz, desde arriba hacia abajo y luego de izquierda a derecha. Ind_fila son los \'indices de fila correspondientes a dichos valores.  Por \'ultimo, ptr_col lista los \'indices donde comienza cada columna.\\
- Por \'ultimo, el tama\~no del vector ptr_fila se encuentra determinado por la cantidad de filas incrementada en uno, y lista los \'indices que indican los valores de val que comienzan cada fila.\\
+ Con el fin de elegir la estructura que representar\'ia nuestra matriz esparsa, estudiamos tres tipos proporcionados por la c\'atedra: \textit{Dictionary of Keys} (DOK), \textit{Compressed Sparse Row} (CSR) y \textit{Compressed Sparse Column} (CSC). \\
+\indent La primera consiste en un diccionario con doble clave (fila y columna) y su significado son los elementos de la matriz distintos de cero. De esta manera se saca provecho de la cantidad de elementos nulos de la matriz, garantizando una optimizaci\'on en t\'erminos de espacio en memoria. Adem\'as esta implementaci\'on cuenta con la gran ventaja de que resulta simple construirla incrementalmente en un arreglo esparso y adem\'as puede ser traspuesta de manera sencilla (inviertiendo el orden de las claves). Sin embargo, el principal inconveniente reside en la necesidad de convertirla a otro formato para procesar los c\'alculos aritm\'eticos. A causa de esto fue descartada la opci\'on. \\
+\indent El modo de almacenamiento \textit{Compressed Sparse Row} requiere la implementacion de tres arreglos (en nuestro caso vectores) que llamaremos val, ind_col y ptr_fila. El tamaño de los dos primeros est\'a dado por la cantidad de elementos no nulos de la matriz. Mientras que el primero (val) almacena estos valores de izquierda a derecha y luego desde arriba hacia abajo, el segundo vector (ind_col) indica el n\'umero de columna para cada elemento. En otras palabras, el elemento almacenado en la posici\'on i- \'esima del vector ind_col representa la columna correspondiente al valor almanacenado en val$_i$. Por \'ultimo el tercer vector (ptr_fila) tiene un tama\~no equivalente a la cantidad de filas incrementada en uno, conteniendo los \'indices del comienzo de cada fila.\\
+\indent El modo de almacenamiento \textit{Compressed Sparse Column} cuenta tambi\'en con la implementaci\'on de tres arreglos llamados: val, ind_fila, ptr_col. El primero contiene todos los valores distintos de cero de la matriz, desde arriba hacia abajo y luego de izquierda a derecha. Ind_fila son los \'indices de fila correspondientes a dichos valores.  Por \'ultimo, ptr_col lista los \'indices donde comienza cada columna.\\
+\indent Por \'ultimo, el tama\~no del vector ptr_fila se encuentra determinado por la cantidad de filas incrementada en uno, y lista los \'indices que indican los valores de val que comienzan cada fila.\\
 
- Ante a la disyuntiva acerca de cu\'al de estos \'ultimos formatos escoger (CSR o CSC) decidimos realizar una serie de c\'alculos peque\~nos que nos permitieron notar que si nos situ\'abamos en el formato de \textit{Compressed Spare}, trasponer una matriz almacenada de manera CSC no ser\'ia m\'as que interpretar sus mismos arreglos como CSC. \textbf{ VA DEMOSTRACION DE ESTO???}. Fue decisi\'on del grupo considerar el formato por defecto de la matriz el CSR (filas) y al trasponerlas s\'olo modificarle un bool que indique si est\'a traspuesta y leerla y considerarla en adelante como CSC (columnas). Esta decisi\'on fue tomada luego de que \textbf{Agust\'in Montero nos confirmara} que estaba permitido elegir una opci\'on de las ofrecidas y adaptarla a nuestra provecho, siempre que se aclararan los cambios. Por este motivo, en el algoritmo de multiplicar una matriz por un vector se diferencia la manera en que la misma se encuentre almacenada y se obtiene el producto acorde a su formato. Se incluye el pseudoc\'odigo de este algoritmo en el \emph{Ap\'endice B}. \\
+ Ante a la disyuntiva acerca de cu\'al de estos \'ultimos formatos escoger (CSR o CSC) decidimos realizar una serie de c\'alculos peque\~nos que nos permitieron notar que si nos situ\'abamos en el formato de \textit{Compressed Spare}, trasponer una matriz almacenada de manera CSC no ser\'ia m\'as que interpretar sus mismos arreglos como CSC. \textbf{ VA DEMOSTRACION DE ESTO???}. Fue decisi\'on del grupo considerar el formato por defecto de la matriz el CSR (filas) y al trasponerlas s\'olo modificarle un bool que indique si est\'a traspuesta y leerla y considerarla en adelante como CSC (columnas). Esta decisi\'on fue tomada luego de que la c\'atedra nos confirmara que estaba permitido elegir una opci\'on de las ofrecidas y adaptarla a nuestra provecho, siempre que se aclararan los cambios. Por este motivo, en el algoritmo de multiplicar una matriz por un vector se diferencia la manera en que la misma se encuentre almacenada y se obtiene el producto acorde a su formato. Se incluye el pseudoc\'odigo de este algoritmo en la Subsecci\'on \emph{Multiplicar una matriz por un vector}. \\
 
+\subsection{Multiplicar una matriz por un vector}
+ Considerando la estructura elegida, nos vemos obligados a diferenciar dentro del algoritmo de multiplicaci\'on de una matriz por un vector acorde al modo en que debe ser le\'ido (CSR/CSC).\\
+ \\
+\indent Para computar el c\'alculo de una matriz por un vector ley\'endolo bajo la estructura Compressed Sparse Row se utiliz\'o el siguiente algoritmo: \\
+ \\
+\textbf{ INSERTAR EL PSEUDOCODIGO de csr}\\
+ \\
+  \indent Y para computar el c\'alculo de una matriz por un vector ley\'endolo bajo la estructura Compressed Sparse Column se utiliz\'o el siguiente algoritmo: \\
+   \\
+\textbf{ INSERTAR EL PSEUDOCODIGO de csc}\\
+ \\
 \newpage
+
 \section{Resultados y discusi\'on}
-Deben incluir los resultados de los experimentos, utilizando el formato m\'as adecuado
+\textcolor{blue}{Deben incluir los resultados de los experimentos, utilizando el formato m\'as adecuado
 para su presentaci\'on. Deber\'an especificar claramente a qu\'e experiencia corresponde
 cada resultado. No se incluir\'an aqu\'i corridas de m\'aquina.\\
 Se incluir\'a aqu\'i un an\'alisis de los resultados obtenidos en la secci\'on anterior (se analizar\'a su validez, coherencia, etc.). Deben analizarse como m\'inimo los items pedidos en el enunciado. No es aceptable decir que los resultados fueron los esperados", sin hacer
 clara referencia a la teorica a la cual se ajustan. Adem\'as, se deben mencionar los resultados
 interesantes y los casos "patologicos" encontrados.
+}
+\\
+\subsection{Convergencia de PageRank}
+Estudiar la convergencia de PageRank, analizando la evoluci\'on de la norma Manhattan
+(norma L1) entre dos iteraciones sucesivas. Comparar los resultados obtenidos para
+al menos dos instancias de tama\~no mediano-grande, variando el valor de c. Opcional:
+Establecer una relaci\'on con la proporci\'on entre lambda 1 = 1 y modulo de lambda 2.
 
+\subsection{Convergencia de HITS}
+2. Estudiar la convergencia de los vectores de peso x e y para HITS de forma similar al
+punto anterior.
+
+\subsection{Factor Temporal}
+3. Estudiar el tiempo de c\'omputo requerido por PageRank y HITS. Si bien ambos pueden
+se aplicados sobre una red gen\'erica, cada algoritmo tiene un contexto particular de
+aplicaci\'on. Estudiar como impacta el factor temporal en este sentido.
+
+\subsection{Comparaci\'on de los tres M\'etodos}
+4. Estudiar cualitativamente los rankings obtenidos por los tres m\'etodos. Para ello, se sugiere
+considerar distintos ejemplos de b\'usquedas de p\'aginas web4. Analizar los resultados
+individualmente en una primera etapa, y luego realizar un an\'alisis comparativo entre
+los tres rankings obtenidos.
+
+\subsection{Peque\~nos Ejemplos}
+5. Para cada algoritmo, proponer ejemplos de tama\~no peque\~no que ilustren el comportamiento
+esperado (puede ser utilizando las instancias provistas por la c\'atedra o generadas
+por el grupo).
 \newpage
 \section{Conclusiones}
-Esta secci\'on debe contener las conclusiones generales del trabajo. Se deben mencionar
+\textcolor{blue}{Esta secci\'on debe contener las conclusiones generales del trabajo. Se deben mencionar
 las relaciones de la discusi\'on sobre las que se tiene certeza, junto con comentarios
 y observaciones generales aplicables a todo el proceso. Mencionar tambi\'en posibles
 extensiones a los m\'etodos, experimentos que hayan quedado pendientes, etc.
-
+}
+\\
 \newpage
 \section{Ap\'endices}
 	\subsection{Ap\'endice A}
@@ -177,21 +229,22 @@ extensiones a los m\'etodos, experimentos que hayan quedado pendientes, etc.
 	\subsection{Ap\'endice B}
 En el ap\'endice B se incluir\'an los c\'odigos fuente de las funciones relevantes desde el punto de vista num\'erico.\\
 PONER EL PSEUDOCODIGO DE LA MULTIPLICACION DE MATRICES, PORQUE DIJE QUE ESTABA ACA. JE
-	\subsection{Ap\'endice $\Phi$}
- Resultados que valga la pena mencionar en el trabajo pero que sean demasiado especificos para
+	\subsection{Ap\'endice C}
+\textcolor{blue}{Resultados que valga la pena mencionar en el trabajo pero que sean demasiado especificos para
 aparecer en el cuerpo principal del trabajo podr\'an mencionarse en sucesivos ap\'endices
 rotulados con las letras may\'usculas del alfabeto romano. Por ejemplo: la demostraci\'on
 de una propiedad que aplican para optimizar el algoritmo que programaron para resolver
-un problema.
+un problema.}
 
 
 \newpage
 \section{Referencias}
-Es importante incluir referencias a libros, art\'iculos y p\'aginas de Internet consultados
+\textcolor{blue}{Es importante incluir referencias a libros, art\'iculos y p\'aginas de Internet consultados
 durante el desarrollo del trabajo, haciendo referencia a estos materiales a lo largo del
 informe. Se deben citar tambi\'en las comunicaciones personales con otros grupos.\\
 PONER ACA LOS PAPERSSSSSSSSSSS\\
-
+}
+\\
 
 \end{document}
 
