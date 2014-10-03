@@ -40,29 +40,28 @@ int main(int argc, char const *argv[])
       {
         int i, j, col;
         double contador;
-        entrada >> j >> i;
-        col = j;
+        entrada >> j;                       //leo la primer coordenada
+
         while (k > 0){
-          contador = 0;
           std::vector<int> filas;
-          //cout << "HOLA1" << endl;
-          while(entrada.good() && j==col)
-          {
-            contador++;
-            filas.push_back(i);
-            entrada >> col >> i;
-            //cout << "Fila: " << col << endl << "Columna: " << i << endl;
+          entrada >> i;                     //leo la segunda
+          filas.push_back(i);               //y la guardo en mi arreglo de filas
+          contador = 1;                     //seteo en 1 el contador
+          entrada >> col;                   //leo la primer coordenada de la siguiente linea
+
+          while(entrada.good() && j==col){  //mientras la primer coordenada de la linea de abajo sea igual
+            entrada >> i;                   //extraigo la segunda coordenada,
+            filas.push_back(i);             //la guardo en el arreglo
+            contador++;                     //incremento el conrador
+            entrada >> col;                 //extraigo la primer coordenada de la linea de abajo y repito
           }
-          //cout << "HOLA2" << endl;
-          double pij = 1/contador;
-          // cout << "Pij: " << pij << endl;
-          // cout << "Contador: " << contador << endl;
+
+          double pij = 1/contador;          //cuando termine, calculo el coeficiente que va a ir en cada columna (1/nj)
           for (int i = 0; i < filas.size(); ++i)
             a.definirPos(filas[i]-1,j-1,pij);
 
-          j=col;
-
-          k -= contador;
+          j = col;                          //como a esta altura j != col, los igualo para no saltearme ninguna linea
+          k -= contador;                    //acabo de definir "contador" coordenadas, asi que le resto esa cant. a k
         }
         //a.imprimir();
 
@@ -188,6 +187,7 @@ int main(int argc, char const *argv[])
         salida.precision(6);
         double tol = strtod(argv[5], NULL);
         double c = strtod(argv[2], NULL);
+        //cout << "Tele: " << c << "Tolerancia: " << tol << endl;
         pagerank(a, c, tol, salida);
 
         salida.close();

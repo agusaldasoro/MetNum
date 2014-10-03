@@ -1,0 +1,26 @@
+Files downloaded from
+http://www.cs.toronto.edu/~tsap/experiments/datasets/index.html
+
+The difference among the different categories is explained in 
+http://www.cs.toronto.edu/~tsap/experiments/www10-experiments/help.html
+
+An extract:
+Regular Dataset: The Base Set is constructed by including only the first 50 out-links of each Root page. We use the simple algorithm for detecting intra-domain links.
+Refined Dataset: The Base Set is constructed by including only the first 50 out-links of each Root page. We use the refined algorithm for deleting intra-domain links.
+Expanded Dataset: The Base Set is constructed by including all out-links of each page in the Root Set. We use the refined algorithm for detecting intra-domain links.
+
+
+Nodes file: The file nodes.txt is formatted as follows. First there is an entry that gives the number of pages in the graph. Then there is a list of the page entries. An example of a page entry is the following
+
+34 (67) [R] 
+http://www.ece.wpi.edu/~jinlee/events/wave/sld024.htm 
+Accuracy & Computational Complexity 
+0 1 
+ 
+
+The first number is the page id, a unique indetifier for each page. The second number is an id assigned to the page, when it is first entered in the base set (this can be ignored). The character associated with each page describes the type of the page. The character R is for the pages in the Root set, the character O is for the pages that are pointed to by a page in the page set, and character I is for the pages that point to a page in the root set. The following line is the http address of the page, and the next the title of the page. The two numbers in the last line are the in and out degree of the node.
+
+The Adjancency Matrix file: Stores the adjacency matrix of the undelying graph of the pages. The (i,j) entry of the matrix is 1 if there is a link from page with id i to page with id j, and zero otherwise.
+
+The Adjancency List file: Stores the adjacency list of the undelying graph of the pages. Each entry of the list is in the form  pid: pid1,pid2,.....,pidN,-1,  which means that the page with id pid, points to the pages with ids pid1,pid2,.....,pidN.
+ The Inverted Adjancency List file: Stores the inverted adjacency list of the undelying graph of the pages. Each entry of the list is in the form  pid: pid1,pid2,.....,pidN,-1 which means that the page with id pid, is pointed to by the pages with ids pid1,pid2,.....,pidN.
