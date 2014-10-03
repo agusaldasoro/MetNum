@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 %\usepackage{makeidx}
 \usepackage{paralist} %itemize inline
+\usepackage{amsmath}
 
 %\usepackage{float}
 %\usepackage{amsmath, amsthm, amssymb}
@@ -100,10 +101,33 @@ HITS e In-deg. \\
 Donde\emph{ $L_k$} es el conjunto de links entrantes a la p\'agina k y \emph{$n_j$} es el n\'umero de links salientes desde la p\'agina j.\\
 \indent Luego, se construye una matriz (que llamaremos A), donde se encuentra por filas las respectivas ecuaciones para cada $X_i$ como la descripta arriba.\\
 \indent La resoluci\'on de este m\'etodo consiste en hallar el autovector con autovalor asociado 1 para la matriz A. De acuerdo al trabajo de Bryan y Leise, este c\'alculo se computa mediante el m\'etodo de la potencia. \\
-\indent La matriz A cuenta con ciertas mejoras para determinados casos espec\'ificos. Por un lado, si alguna p\'agina p no tuviera ning\'un link saliente se considera que tiene igual probabilidad de ir a cualquiera de las otras p\'aginas y se le otorga al vector columna p de la matriz A el valor de $\frac{1}{n}$ para cada componente. Por otro lado, existe un fen\'omeno denominado "\textit{Teletransportaci\'on}" que consiste en que un navegante se mueva de una p\'agina a otra pero no mediante los links existentes, sino tipeando la URL.  \\
+\indent La matriz A cuenta con ciertas mejoras para determinados casos espec\'ificos. Por un lado, si alguna p\'agina p no tuviera ning\'un link saliente se considera que tiene igual probabilidad de ir a cualquiera de las otras p\'aginas y se le otorga al vector columna p de la matriz A el valor de $\frac{1}{n}$ para cada componente. Por otro lado, existe un fen\'omeno denominado "\textit{Teletransportaci\'on}" que consiste en que un navegante se mueva de una p\'agina a otra pero no mediante los links existentes, sino tipeando la URL. Para modelar de manera \'optima este suceso, se reemplaza a la matriz A por la matriz M definida bajo la siguiente ecuaci\'on: \textit{M = (1-m)A + m.S} siendo m la probabilidad de que un navegante se \textit{teletransporte} y S una matriz cuyos valores $S_{ij}$ tienen todos el mismo valor: $\frac{1}{n}$ representando as\'i una matriz donde la probabilidad de ir a cualquier p\'agina del gr\'afico es uniforme.\\
+\indent El\emph{ M\'etodo de la Potencia} se realiza de manera iterativa lo cual permite reducir el tiempo de c\'omputo para elevar a la k la matriz M. Si tenemos en cuenta el trabajo de Kamvar, presenta una herramienta de c\'alculo que permite encontrar el principal autovector de M en una serie menor de pasos.\\
 \\
 \indent \indent \emph{\textbf{Hyperlink-Induced Topic Search (HITS)}} \\
-\indent Hola. \\
+\indent El m\'etodo planteado por Kleinberg consiste en: Dada una consulta sobre $\sigma$, nos queremos focalizar en una colecci\'on de p\'aginas $S_\sigma$ tal que sea relativamente peque\~na, sea rica en p\'aginas relevantes sobre el tema y contenga la mayor\'ia de las autoridades m\'as fuertes sobre el tema. Considerando autoridad a una p\'agina que tiene muchos links entrantes. Esto se realiza del siguiente modo:\\
+a) Acorde a un par\'ametro \emph{t}, se coleccionan las primeras t p\'aginas rankeadas bajo una b\'usqueda basada estrictamente por texto. A este conjunto se lo llama $R_\sigma$. \\
+b) Incrementamos el conjunto $R_\sigma$ a\~nadiendo las p\'aginas que tienen links entrantes y salientes al mismo, formando as\'i el conjunto $S_\sigma$. Para cada p\'agina de $R_\sigma$ se permite a\~nadir, a lo sumo \emph{d} p\'aginas que la apunten y \emph{d} p\'aginas a las cuales apunte. \\
+c) Se eliminan de $S_\sigma$ los links intr\'insecos, es decir no se tienen en cuenta links que apuntan a una p\'agina del mismo dominio que la p\'agina saliente. \\
+d) Admite hasta \emph{m} p\'aginas del mismo dominio apuntar a cualquier p\'agina p. Esta idea no fue utilizada por el autor. \\
+\indent El conjunto obtenido hasta aca lo llamamos $G_\sigma$. Nuestro trabajo asume un conjunto $G_\sigma$ bien formado y comienza el trabajo desde aqu\'i.\\
+\indent Se construye una matriz de adyacencia que denominaremos A, bajo la siguiente f\'ormula:
+\[
+   a_{ij} = 
+   \begin{cases} 
+      1              & \exists$\textit{ link desde i hasta j}$   \\
+      0 & $\textit{caso contrario}$
+   \end{cases}
+\]
+\indent A cada p\'agina i de la Web se le otorga un peso como Autoridad y un peso de Hub: \\
+\indent \underline{Peso de autoridad:}
+\[
+	X_j = \sum_{i: i\rightarrow j}^{} Y_i
+\]
+\indent \underline{Peso de Hub:}
+\[
+Y_i = \sum_{j: i\rightarrow j} X_j
+\]
 \\
 \indent \indent \emph{\textbf{In-deg}} \\
 \indent Consiste en definir el ranking de las p\'aginas utilizando solamente la cantidad de ejes entrantes a cada una de ellas, orden\'andolos en forma decreciente.\\
@@ -165,7 +189,8 @@ un problema.
 \section{Referencias}
 Es importante incluir referencias a libros, art\'iculos y p\'aginas de Internet consultados
 durante el desarrollo del trabajo, haciendo referencia a estos materiales a lo largo del
-informe. Se deben citar tambi\'en las comunicaciones personales con otros grupos.
+informe. Se deben citar tambi\'en las comunicaciones personales con otros grupos.\\
+PONER ACA LOS PAPERSSSSSSSSSSS\\
 
 \end{document}
 
