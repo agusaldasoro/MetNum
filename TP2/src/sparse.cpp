@@ -42,6 +42,20 @@ void MatrizEsparsa::definirPos(int fila, int col, double elem)
 	//}
 };
 
+/*void MatrizEsparsa::completarDanglingNodes()
+{
+	double n = this->dimension();
+	double dn = 1/n;
+	for (int i = 0; i < n; i++)
+	{
+		if(ptr_fil[i]==ptr_fil[i+1])
+		{
+			for (int j = 0; j < n; ++j)
+				this->definirPos(i,j,dn);
+		}
+	}
+}*/
+
 void MatrizEsparsa::trasponer(){this->es_traspuesta = !(this->es_traspuesta);};
 
 std::vector<double> MatrizEsparsa::multMatVec(std::vector<double> v) const

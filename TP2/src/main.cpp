@@ -1,10 +1,12 @@
 #include <fstream>
+#include <stdlib.h>
 #include <string>
 #include <iostream>
 #include "sparse.h"
 #include "hits.h"
 #include "pagerank.h"
 #include "indeg.h"
+#include <limits>
 
 using namespace std;
 
@@ -38,6 +40,7 @@ int main(int argc, char const *argv[])
 
       if (*argv[1]=='0') //PageRank
       {
+        a.trasponer();
         int i, j, col;
         double contador;
         entrada >> j;                       //leo la primer coordenada
@@ -52,23 +55,23 @@ int main(int argc, char const *argv[])
           while(entrada.good() && j==col){  //mientras la primer coordenada de la linea de abajo sea igual
             entrada >> i;                   //extraigo la segunda coordenada,
             filas.push_back(i);             //la guardo en el arreglo
-            contador++;                     //incremento el conrador
+            contador++;                     //incremento el contador
             entrada >> col;                 //extraigo la primer coordenada de la linea de abajo y repito
           }
 
           double pij = 1/contador;          //cuando termine, calculo el coeficiente que va a ir en cada columna (1/nj)
           for (int i = 0; i < filas.size(); ++i)
-            a.definirPos(filas[i]-1,j-1,pij);
+            a.definirPos(j-1,filas[i]-1,pij);
 
           j = col;                          //como a esta altura j != col, los igualo para no saltearme ninguna linea
           k -= contador;                    //acabo de definir "contador" coordenadas, asi que le resto esa cant. a k
         }
-        //a.imprimir();
 
         string nombre(argv[4]);
         string nombreSalida(nombre.begin(),nombre.end()-4);
         nombreSalida.append(".out");
-        ofstream salida(nombreSalida);
+        const char *nsalida = nombreSalida.c_str();
+        ofstream salida(nsalida);
 
         salida.setf( std::ios::fixed, std::ios::floatfield );
         salida.precision(6);
@@ -91,7 +94,8 @@ int main(int argc, char const *argv[])
         string nombre(argv[4]);
         string nombreSalida(nombre.begin(),nombre.end()-4);
         nombreSalida.append(".out");
-        ofstream salida(nombreSalida);
+        const char *nsalida = nombreSalida.c_str();
+        ofstream salida(nsalida);
 
         salida.setf( std::ios::fixed, std::ios::floatfield );
         salida.precision(6);
@@ -112,7 +116,8 @@ int main(int argc, char const *argv[])
         string nombre(argv[4]);
         string nombreSalida(nombre.begin(),nombre.end()-4);
         nombreSalida.append(".out");
-        ofstream salida(nombreSalida);
+        const char *nsalida = nombreSalida.c_str();
+        ofstream salida(nsalida);
         indeg(a, salida);
         salida.close();
       }
@@ -127,8 +132,10 @@ int main(int argc, char const *argv[])
     string adjlist(argv[4]);
     nodes.append("/nodes");
     adjlist.append("/adj_list");
-    ifstream nodos(nodes);
-    ifstream ady(adjlist);
+    const char *entrada1 = nodes.c_str();
+    const char *entrada2 = adjlist.c_str();
+    ifstream nodos(entrada1);
+    ifstream ady(entrada2);
 
     if (!(nodos.is_open() && ady.is_open()))
       cout << "Path incorrecto." << endl;
@@ -181,7 +188,8 @@ int main(int argc, char const *argv[])
         //a.imprimir();
         string nombreSalida(argv[4]);
         nombreSalida.append("/pagerank.out");
-        ofstream salida(nombreSalida);
+        const char *nsalida = nombreSalida.c_str();
+        ofstream salida(nsalida);
 
         salida.setf( std::ios::fixed, std::ios::floatfield );
         salida.precision(6);
@@ -211,7 +219,8 @@ int main(int argc, char const *argv[])
         //a.imprimir();
         string nombreSalida(argv[4]);
         nombreSalida.append("/hits.out");
-        ofstream salida(nombreSalida);
+        const char *nsalida = nombreSalida.c_str();
+        ofstream salida(nsalida);
 
         salida.setf( std::ios::fixed, std::ios::floatfield );
         salida.precision(6);
@@ -240,7 +249,8 @@ int main(int argc, char const *argv[])
         //a.imprimir();
         string nombreSalida(argv[4]);
         nombreSalida.append("/indeg.out");
-        ofstream salida(nombreSalida);
+        const char *nsalida = nombreSalida.c_str();
+        ofstream salida(nsalida);
         indeg(a, salida);
         salida.close();
       }

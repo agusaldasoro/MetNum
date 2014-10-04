@@ -18,6 +18,8 @@ public:
 
 	void trasponer();
 
+	//void completarDanglingNodes();
+
 	int dimension() const;
 
 	void imprimir() const;
