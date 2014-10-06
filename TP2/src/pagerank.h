@@ -55,6 +55,11 @@ void pagerank(MatrizEsparsa a, double c, double tol, std::ofstream& salida)
 			j++;
 
 		x = xp;
+
+		// double normaprint = 0;
+		// for (int i = 0; i < x.size(); ++i)
+		// 	normaprint += abs(x[i])	;
+		// std::cout << "Norma 1: " << normaprint << std::endl;
 	}
 
 	double norma = 0.0;

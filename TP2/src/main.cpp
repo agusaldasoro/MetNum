@@ -12,9 +12,19 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-  if (*argv[3]=='0') //SNAP
+  ifstream main(argv[1]);
+  int alg, inst;
+  double c, tol;
+  string path;
+  const char* nombrePath;
+  main >> alg >> c >> inst >> path >> tol;
+  //cout << "Algoritmo: " << alg << "C: " << c << "Instancia: " << inst << "Path: " << path << "Tolerancia: " << tol;
+
+  nombrePath =  path.c_str();
+
+  if (inst==0) //SNAP
   {
-    ifstream entrada(argv[4]);
+    ifstream entrada(nombrePath);
     if (!entrada.is_open())
       cout << "Path incorrecto." << endl;
     else
@@ -38,7 +48,7 @@ int main(int argc, char const *argv[])
 
       MatrizEsparsa a(dim);
 
-      if (*argv[1]=='0') //PageRank
+      if (alg==0) //PageRank
       {
         a.trasponer();
         int i, j, col;
@@ -67,21 +77,14 @@ int main(int argc, char const *argv[])
           k -= contador;                    //acabo de definir "contador" coordenadas, asi que le resto esa cant. a k
         }
 
-        string nombre(argv[4]);
-        string nombreSalida(nombre.begin(),nombre.end()-4);
-        nombreSalida.append(".out");
-        const char *nsalida = nombreSalida.c_str();
-        ofstream salida(nsalida);
-
+        ofstream salida(argv[2]);
         salida.setf( std::ios::fixed, std::ios::floatfield );
         salida.precision(6);
-        double tol = strtod(argv[5], NULL);
-        double c = strtod(argv[2], NULL);
         pagerank(a, c, tol, salida);
 
         salida.close();
       }
-      else if (*argv[1]=='1') //HITS
+      else if (alg==1) //HITS
       {
         int i, j;
         while (k > 0){
@@ -91,20 +94,14 @@ int main(int argc, char const *argv[])
           k--;
         }
         //a.imprimir();
-        string nombre(argv[4]);
-        string nombreSalida(nombre.begin(),nombre.end()-4);
-        nombreSalida.append(".out");
-        const char *nsalida = nombreSalida.c_str();
-        ofstream salida(nsalida);
-
+        ofstream salida(argv[2]);
         salida.setf( std::ios::fixed, std::ios::floatfield );
         salida.precision(6);
-        double tol = strtod(argv[5], NULL);
         hits(a, tol, salida);
 
         salida.close();
       }
-      else if (*argv[1]=='2') //In-Deg
+      else if (alg==2) //In-Deg
       {
         int i, j;
         while (k > 0){
@@ -113,11 +110,9 @@ int main(int argc, char const *argv[])
           k--;
         }
         //a.imprimir();
-        string nombre(argv[4]);
-        string nombreSalida(nombre.begin(),nombre.end()-4);
-        nombreSalida.append(".out");
-        const char *nsalida = nombreSalida.c_str();
-        ofstream salida(nsalida);
+        ofstream salida(argv[2]);
+        salida.setf( std::ios::fixed, std::ios::floatfield );
+        salida.precision(6);
         indeg(a, salida);
         salida.close();
       }
@@ -126,10 +121,10 @@ int main(int argc, char const *argv[])
     }
     entrada.close();
   }
-  else if (*argv[3]=='1') //No SNAP
+  else if (inst==1) //No SNAP
   {
-    string nodes(argv[4]);
-    string adjlist(argv[4]);
+    string nodes(path);
+    string adjlist(path);
     nodes.append("/nodes");
     adjlist.append("/adj_list");
     const char *entrada1 = nodes.c_str();
@@ -149,7 +144,7 @@ int main(int argc, char const *argv[])
       k = 0;
       MatrizEsparsa a(dim);
 
-      if (*argv[1]=='0') //PageRank
+      if (alg==0) //PageRank
       {
         int j;
         double od, pij;
@@ -186,22 +181,16 @@ int main(int argc, char const *argv[])
         }
 
         //a.imprimir();
-        string nombreSalida(argv[4]);
-        nombreSalida.append("/pagerank.out");
-        const char *nsalida = nombreSalida.c_str();
-        ofstream salida(nsalida);
-
+        ofstream salida(argv[2]);
         salida.setf( std::ios::fixed, std::ios::floatfield );
         salida.precision(6);
-        double tol = strtod(argv[5], NULL);
-        double c = strtod(argv[2], NULL);
         //cout << "Tele: " << c << "Tolerancia: " << tol << endl;
         pagerank(a, c, tol, salida);
 
         salida.close();
 
       }
-      else if (*argv[1]=='1') //HITS
+      else if (alg==1) //HITS
       {
         int j;
         while(k<dim)
@@ -217,20 +206,15 @@ int main(int argc, char const *argv[])
         }
 
         //a.imprimir();
-        string nombreSalida(argv[4]);
-        nombreSalida.append("/hits.out");
-        const char *nsalida = nombreSalida.c_str();
-        ofstream salida(nsalida);
-
+        ofstream salida(argv[2]);
         salida.setf( std::ios::fixed, std::ios::floatfield );
         salida.precision(6);
-        double tol = strtod(argv[5], NULL);
         hits(a, tol, salida);
 
         salida.close();
 
       }
-      else if (*argv[1]=='2') //In-Deg
+      else if (alg==2) //In-Deg
       {
         int j;
         while(k<dim)
@@ -247,11 +231,9 @@ int main(int argc, char const *argv[])
         }
         //cout << "SALI" << endl;
         //a.imprimir();
-        string nombreSalida(argv[4]);
-        nombreSalida.append("/indeg.out");
-        const char *nsalida = nombreSalida.c_str();
-        ofstream salida(nsalida);
-        indeg(a, salida);
+        ofstream salida(argv[2]);
+        salida.setf( std::ios::fixed, std::ios::floatfield );
+        salida.precision(6);
         salida.close();
       }
       else

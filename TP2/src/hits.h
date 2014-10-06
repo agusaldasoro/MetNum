@@ -28,6 +28,16 @@ void hits(MatrizEsparsa a, double tol, std::ofstream& salida)
 
 		x = xp;
 		y = yp;
+
+		double normaprint = 0;
+		for (int i = 0; i < x.size(); ++i)
+			normaprint += fabs(x[i])	;
+		//std::cout << "Norma 1 X: " << normaprint << std::endl;
+
+		normaprint = 0;
+		for (int i = 0; i < y.size(); ++i)
+			normaprint += fabs(y[i])	;
+		std::cout << "Norma 1 Y: " << normaprint << std::endl;
 	}
 
 	for (int i = 0; i < x.size(); ++i)
