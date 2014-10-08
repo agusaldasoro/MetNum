@@ -9,6 +9,10 @@ void hits(MatrizEsparsa a, double tol, std::ofstream& salida)
 
 	std::vector<double> x(n,1.0), y(n,1.0), xp, yp;
 
+	std::ofstream norma("normasHITS.out");
+    norma.setf( std::ios::fixed, std::ios::floatfield );
+    norma.precision(6);
+
 	int i = 0;
 	while(i < maxIt)
 	{
@@ -29,15 +33,14 @@ void hits(MatrizEsparsa a, double tol, std::ofstream& salida)
 		x = xp;
 		y = yp;
 
-		double normaprint = 0;
-		for (int i = 0; i < x.size(); ++i)
-			normaprint += fabs(x[i])	;
-		//std::cout << "Norma 1 X: " << normaprint << std::endl;
 
-		normaprint = 0;
-		for (int i = 0; i < y.size(); ++i)
-			normaprint += fabs(y[i])	;
-		std::cout << "Norma 1 Y: " << normaprint << std::endl;
+		double normaX = 0;
+		double normaY = 0;
+		for (int j = 0; j < x.size(); ++j){
+			normaX += fabs(x[j]);
+			normaY += fabs(y[j]);
+		}
+		norma << "Normas iteracion " << i << std::endl << "X: " << normaX << "\t Y: " << normaY << std::endl;
 	}
 
 	for (int i = 0; i < x.size(); ++i)

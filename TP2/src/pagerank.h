@@ -15,6 +15,10 @@ void pagerank(MatrizEsparsa a, double c, double tol, std::ofstream& salida)
 		x[i] = 1/n;*/
 	double factor = ((1-c)/n);
 
+	std::ofstream normaFile("normasPageRank.out");
+    normaFile.setf( std::ios::fixed, std::ios::floatfield );
+    normaFile.precision(6);
+
 	int j = 0;
 	while(j < maxIt)
 	{
@@ -56,10 +60,10 @@ void pagerank(MatrizEsparsa a, double c, double tol, std::ofstream& salida)
 
 		x = xp;
 
-		// double normaprint = 0;
-		// for (int i = 0; i < x.size(); ++i)
-		// 	normaprint += abs(x[i])	;
-		// std::cout << "Norma 1: " << normaprint << std::endl;
+		double normaprint = 0;
+		for (int i = 0; i < x.size(); ++i)
+			normaprint += fabs(x[i]);
+		normaFile << "Norma iteracion " << j << ": " << normaprint << std::endl;
 	}
 
 	double norma = 0.0;
