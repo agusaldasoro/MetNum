@@ -68,7 +68,7 @@ void pagerank(MatrizEsparsa a, double c, double tol, std::ofstream& salida)
 		double normaprint = 0;
 		for (int i = 0; i < x.size(); ++i)
 			normaprint += fabs(dif[i]);
-		normaFile /*<< "Norma iteracion " << j << ": "*/ << normaprint << std::endl;
+		normaFile << "Norma iteracion " << j << ": " << normaprint << std::endl;
 	}
 
 	double norma = 0.0;
