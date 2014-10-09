@@ -7,13 +7,13 @@
 #include "pagerank.h"
 #include "indeg.h"
 #include <limits>
-//#include <chrono>
+#include <chrono>
 
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	//std::chrono::time_point<std::chrono::system_clock> start, end;
+	std::chrono::time_point<std::chrono::system_clock> start, end;
 
 	ifstream main(argv[1]);
 	int alg, inst;
@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
 						contador++;                     //incremento el contador
 						entrada >> col;                 //extraigo la primer coordenada de la linea de abajo y repito
 					}
-
+					cout << "Fila: " << col << endl;
 					double pij = 1/contador;          //cuando termine, calculo el coeficiente que va a ir en cada columna (1/nj)
 					for (int i = 0; i < filas.size(); ++i)
 						a.definirPos(j-1,filas[i]-1,pij);
@@ -84,9 +84,9 @@ int main(int argc, char const *argv[])
 			    salida.setf( std::ios::fixed, std::ios::floatfield );
 			    salida.precision(6);
 
-			    //start = std::chrono::system_clock::now();
+			    start = std::chrono::system_clock::now();
 			    pagerank(a, c, tol, salida);
-			    //end = std::chrono::system_clock::now();
+			    end = std::chrono::system_clock::now();
 
 			    salida.close();
 			}
@@ -95,7 +95,7 @@ int main(int argc, char const *argv[])
 				int i, j;
 				while (k > 0){
 					entrada >> i >> j;
-					//cout << "Fila: " << i << endl << "Columna: " << j << endl;
+					cout << "Fila: " << i << endl << "Columna: " << j << endl;
 					a.definirPos(i-1,j-1,1);
 					k--;
 				}
@@ -104,9 +104,9 @@ int main(int argc, char const *argv[])
 				salida.setf( std::ios::fixed, std::ios::floatfield );
 				salida.precision(6);
 
-				//start = std::chrono::system_clock::now();
+				start = std::chrono::system_clock::now();
 				hits(a, tol, salida);
-				//end = std::chrono::system_clock::now();
+				end = std::chrono::system_clock::now();
 
 				salida.close();
 			}
@@ -123,9 +123,9 @@ int main(int argc, char const *argv[])
 				salida.setf( std::ios::fixed, std::ios::floatfield );
 				salida.precision(6);
 
-				//start = std::chrono::system_clock::now();
+				start = std::chrono::system_clock::now();
 				indeg(a, salida);
-				//end = std::chrono::system_clock::now();
+				end = std::chrono::system_clock::now();
 
 				salida.close();
 			}
@@ -198,9 +198,9 @@ int main(int argc, char const *argv[])
 				salida.setf( std::ios::fixed, std::ios::floatfield );
 				salida.precision(6);
 				//cout << "Tele: " << c << "Tolerancia: " << tol << endl;
-				//start = std::chrono::system_clock::now();
+				start = std::chrono::system_clock::now();
 				pagerank(a, c, tol, salida);
-				//end = std::chrono::system_clock::now();
+				end = std::chrono::system_clock::now();
 
 				salida.close();
 			}
@@ -223,9 +223,9 @@ int main(int argc, char const *argv[])
 				salida.setf( std::ios::fixed, std::ios::floatfield );
 				salida.precision(6);
 
-				//start = std::chrono::system_clock::now();
+				start = std::chrono::system_clock::now();
 				hits(a, tol, salida);
-				//end = std::chrono::system_clock::now();
+				end = std::chrono::system_clock::now();
 
 				salida.close();
 
@@ -250,9 +250,9 @@ int main(int argc, char const *argv[])
 				salida.setf( std::ios::fixed, std::ios::floatfield );
 				salida.precision(6);
 
-				//start = std::chrono::system_clock::now();
+				start = std::chrono::system_clock::now();
 				indeg(a, salida);
-				//end = std::chrono::system_clock::now();
+				end = std::chrono::system_clock::now();
 
 				salida.close();
 			}
@@ -263,8 +263,8 @@ int main(int argc, char const *argv[])
 	ady.close();
 	}
 
-	//std::chrono::duration<double> elapsed_seconds = end-start;
-	//cout << "Tiempo: " << elapsed_seconds.count() << endl;
+	std::chrono::duration<double> elapsed_seconds = end-start;
+	cout << "Tiempo: " << elapsed_seconds.count() << endl;
 
 	return 0;
 }

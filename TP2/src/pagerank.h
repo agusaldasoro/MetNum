@@ -5,7 +5,7 @@ void pagerank(MatrizEsparsa a, double c, double tol, std::ofstream& salida)
 {
 	double n = a.dimension();
 
-	int maxIt = 1000000; //NOSOTROS TENEMOS QUE ELEGIR LA CANT MAX DE ITERACIONES
+	int maxIt = 1000; //NOSOTROS TENEMOS QUE ELEGIR LA CANT MAX DE ITERACIONES
 
 	//HAY QUE AGREGAR LA COMPARACION DE Xk > Xk-1 POR SI NO CONVERGE
 	//RANDOMIZAMOS EL VECTOR O QUE?
@@ -17,12 +17,13 @@ void pagerank(MatrizEsparsa a, double c, double tol, std::ofstream& salida)
 	double factor = ((1-c)/n);
 
 	std::ofstream normaFile("normasPageRank.out");
-    normaFile.setf( std::ios::fixed, std::ios::floatfield );
-    normaFile.precision(6);
+	normaFile.setf( std::ios::fixed, std::ios::floatfield );
+	normaFile.precision(6);
 
 	int j = 0;
 	while(j < maxIt)
 	{
+		std::cout << "Iteración " << j << std::endl;
 		xp = a.multMatVec(x);
 
 		for (int i = 0; i < xp.size(); ++i)

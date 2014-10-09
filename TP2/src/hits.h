@@ -5,18 +5,19 @@ void hits(MatrizEsparsa a, double tol, std::ofstream& salida)
 {
 	int n = a.dimension();
 
-	int maxIt = 100000; //NOSOTROS TENEMOS QUE ELEGIR LA CANT MAX DE ITERACIONES
+	int maxIt = 10000; //NOSOTROS TENEMOS QUE ELEGIR LA CANT MAX DE ITERACIONES
 
 	std::vector<double> difx(n), dify(n);
 	std::vector<double> x(n,1.0), y(n,1.0), xp, yp;
 
 	std::ofstream norma("normasHITS.out");
-    	norma.setf( std::ios::fixed, std::ios::floatfield );
-    	norma.precision(6);
+ 	norma.setf( std::ios::fixed, std::ios::floatfield );
+ 	norma.precision(6);
 
 	int i = 0;
 	while(i < maxIt)
 	{
+		std::cout << "Iteración " << i << std::endl;
 		a.trasponer();
 		xp = a.multMatVec(y);
 		normalizar(xp); //probar poniendolo inline
