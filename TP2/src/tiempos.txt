@@ -40,16 +40,6 @@ Movies
 	In-Deg Tiempo: 0.032868
 
 ////LARGE SIZE:
-BerkStan
-	Hits
-	PageRank
-	In-Deg
-
-Google
-	Hits
-	PageRank
-	In-Deg
-
 Notre Dame
 	Hits Tiempo: 7.40984
 	PageRank Tiempo: 6.84165
