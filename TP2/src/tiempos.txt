@@ -48,4 +48,4 @@ Notre Dame
 Stanford
 	Hits
 	PageRank
-	In-Deg
+	In-Deg Tiempo: 0.786145
