@@ -43,7 +43,7 @@ Movies
 Notre Dame
 	Hits Tiempo: 7.40984
 	PageRank Tiempo: 6.84165
-	In-Deg
+	In-Deg Tiempo: 0.727501
 
 Stanford
 	Hits
