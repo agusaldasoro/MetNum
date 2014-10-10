@@ -1,0 +1,32 @@
+{
+    ".deps_version": 2, 
+    "g++ -c ./main.cpp -o ./main.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "hits.h": "input-dd662cdb32e8fb21e1dee1940c50f688", 
+        "indeg.h": "input-dcc3efcd2ecd8d710ae4c7dd0cfce905", 
+        "main.cpp": "input-e2475af2308bbb2102392b82af70bc02", 
+        "main.o": "output-4361c13bc88df87a612af76e497e0116", 
+        "pagerank.h": "input-c65fdacf1246ead053f58d4732ba4a41", 
+        "sparse.h": "input-63e5880b80de2c6c2ed65ad5d682791c", 
+        "vectores.h": "input-ab11058ff885fe0d20524c0fc4eb23e0"
+    }, 
+    "g++ -c ./sparse.cpp -o ./sparse.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "sparse.cpp": "input-77d33f34e717d51e5c1daf96321a5f84", 
+        "sparse.h": "input-63e5880b80de2c6c2ed65ad5d682791c", 
+        "sparse.o": "output-30c2cc6018474aa760f9723f94544156"
+    }, 
+    "g++ -c ./vectores.cpp -o ./vectores.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "vectores.cpp": "input-1c8173f6da645d786ea1ad58146ce685", 
+        "vectores.h": "input-ab11058ff885fe0d20524c0fc4eb23e0", 
+        "vectores.o": "output-4dd3d0406950cd9cc3a6c29bc1184bfa"
+    }, 
+    "g++ -o ./tp ./sparse.o ./vectores.o ./main.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "main.o": "input-4361c13bc88df87a612af76e497e0116", 
+        "sparse.o": "input-30c2cc6018474aa760f9723f94544156", 
+        "tp": "output-b06bfb8ad10e877998ca73e32d74a6de", 
+        "vectores.o": "input-4dd3d0406950cd9cc3a6c29bc1184bfa"
+    }
+}
