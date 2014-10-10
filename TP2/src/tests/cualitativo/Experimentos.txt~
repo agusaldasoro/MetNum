@@ -8,9 +8,6 @@ HITS va a considerar importantes las paginas que apunten a paginas que son muy a
 comparacion HITS / pagerank: Vemos en que casos hits devuelve resultados que a PageRank no le parecen importantes. Esto pasa con los hubs. Nuestra hipotesis es que si tomamos un conjunto de paginas base (no apuntadas por ninguna) que apunten a un mismo grupo de conceptos, entonces HITS va a devolver estas bases con buen puntaje (porque apuntan a paginas muy apuntadas) pero pagerank no las va a considerar como destacables, sino que va a devolver las "muy apuntadas" y ningun hub.
 Tomo paginas de corrientes filosoficas y busco que otras pueden estar apuntando a esas mismas SIN estar apuntando a "corrientes filosoficas" ni entre ellas (cosa de que todas resulten hubs y cada corriente una autoridad)
 
-FOrmulamos una red esperando que gane "empirismo" para probar que aunque tenga una pagina muchos links que la apunten, si dichos links apuntan a su vez a otras direcciones entonces la página en cuestión 
-puede tener menor "peso"final que otra apuntada por menos links más "concentrados".
-
 RED 1:
 
 	http://es.wikipedia.org/wiki/Escuela_filos%C3%B3fica
