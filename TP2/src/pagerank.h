@@ -10,20 +10,20 @@ void pagerank(MatrizEsparsa a, double c, double tol, std::ofstream& salida)
 	//HAY QUE AGREGAR LA COMPARACION DE Xk > Xk-1 POR SI NO CONVERGE
 	//RANDOMIZAMOS EL VECTOR O QUE?
 
-	std::vector<double> dif(n);
+	//std::vector<double> dif(n);
 	std::vector<double> x(n,1), xp;
 	/*for (int i = 0; i < n; ++i)
 		x[i] = 1/n;*/
 	double factor = ((1-c)/n);
 
-	std::ofstream normaFile("normasPageRank.out");
-	normaFile.setf( std::ios::fixed, std::ios::floatfield );
-	normaFile.precision(6);
+	// std::ofstream normaFile("normasPageRank.out");
+	// normaFile.setf( std::ios::fixed, std::ios::floatfield );
+	// normaFile.precision(6);
 
 	int j = 0;
 	while(j < maxIt)
 	{
-		std::cout << "Iteración " << j << std::endl;
+		//std::cout << "Iteración " << j << std::endl;
 		xp = a.multMatVec(x);
 
 		for (int i = 0; i < xp.size(); ++i)
@@ -61,15 +61,15 @@ void pagerank(MatrizEsparsa a, double c, double tol, std::ofstream& salida)
 			j++;
 
 
-		for (int i = 0; i < x.size(); ++i)
-			dif[i] = x[i]-xp[i];
+		// for (int i = 0; i < x.size(); ++i)
+		// 	dif[i] = x[i]-xp[i];
 
 		x = xp;
 
-		double normaprint = 0;
-		for (int i = 0; i < x.size(); ++i)
-			normaprint += fabs(dif[i]);
-		normaFile /*<< "Norma iteracion " << j << ": "*/ << normaprint << std::endl;
+		// double normaprint = 0;
+		// for (int i = 0; i < x.size(); ++i)
+		// 	normaprint += fabs(dif[i]);
+		// normaFile /*<< "Norma iteracion " << j << ": "*/ << normaprint << std::endl;
 	}
 
 	double norma = 0.0;

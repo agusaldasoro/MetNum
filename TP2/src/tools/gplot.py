@@ -4,8 +4,9 @@
 import sys
 import networkx as nx
 import matplotlib.pyplot as plt
+import pylab
 
-""" 
+"""
 Just need to install:
 
 	sudo apt-get install python-networkx
@@ -29,8 +30,9 @@ if __name__ == '__main__':
 	G=nx.read_adjlist(gpath,create_using=nx.DiGraph())
 
 	# networkx draw()
-	nx.draw(G,node_color='w')
-	
+	nx.draw_networkx(G,node_color='w')
+	limits=pylab.axis('off') # turn of axis
+
 	if (len(sys.argv) > 2):
 		# save to file
 		fout= str(sys.argv[2])
