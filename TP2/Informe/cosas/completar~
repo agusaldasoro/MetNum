@@ -1,0 +1,4 @@
+Algoritmo de Hits
+\indent Nuestra tarea aquí es extraer del subconjunto $G_THETA?$ sus autoridades analizando puramente la estructura de sus links. Ordenar las páginas dándoles un puntaje de acuerdo a la cantidad de links de entrantes trabaja mejor bajo el contexto de nuestro subconjunto, de todos modos este ranking carece de una unidad temática. Las páginas con mayor puntaje de autoridad no solo tienen una cantidad significante de nodos entrantes sino que también van a tener muchas páginas en común que las apunten. \\
+\\
+\indent Hubs y Autoridades reprensantan una relacion de mutua dependencia, frente a esto es necesario un método para romper esta SIMBIOSIS (BELEN ARREGLAR) 
