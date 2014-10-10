@@ -8,6 +8,7 @@
 \usepackage{amsmath}
 %\usepackage[ruled,vlined,linesnumbered,resetcount,algochapter]{algorithm2e}
 \usepackage{algorithm2e}
+\usepackage{amssymb}
 
 %\usepackage{float}
 %\usepackage{amsmath, amsthm, amssymb}
@@ -374,9 +375,45 @@ aparecer en el cuerpo principal del trabajo podr\'an mencionarse en sucesivos ap
 rotulados con las letras may\'usculas del alfabeto romano. Por ejemplo: la demostraci\'on
 de una propiedad que aplican para optimizar el algoritmo que programaron para resolver
 un problema.}\\
-- Va un ejemplo de que trasponer en csc es leerla como csr.\\
-
-
+El siguiente es un ejemplo de una matriz $A$ $\in$ $\mathbb{R}^{4x4}$ y su traspuesta con su forma de implementaci\'on.\\
+\begin{equation}
+A = \left(
+\begin{array}{cccc}
+1 & 0 & 2 & 0 \\
+3 & 4 & 0 & 8 \\
+0 & 0 & 9 & 0 \\
+10 & 11 & 0 & 0
+\end{array}
+\right)
+\end{equation}
+ \underline{CSR}:\\
+ \indent \indent val = \indent \indent  [1,2,3,4,8,9,10,11]\\
+ \indent \indent ind_col = \indent [0,2,0,1,3,2,0,1]\\
+ \indent \indent ptr_fil = \indent [0,2,5,6,8]\\
+ \underline{CSC}:\\
+ \indent \indent val = \indent \indent [1,3,10,4,11,2,9,8]\\
+ \indent \indent ind_fil = \indent [0,1,3,1,3,0,2,1]\\
+ \indent \indent ptr_col = \indent [0,3,5,7,8]\\
+\begin{equation}
+A^t = \left(
+\begin{array}{cccc}
+1 & 3 & 0 & 10 \\
+0 & 4 & 0 & 11 \\
+2 & 0 & 9 & 0 \\
+0 & 8 & 0 & 0
+\end{array}
+\right)
+\end{equation}
+ \underline{CSR}:\\
+ \indent \indent val = \indent \indent [1,3,10,4,11,2,9,8]\\
+ \indent \indent ind_col = \indent [0,1,3,1,3,0,2,1]\\
+ \indent \indent ptr_fil = \indent [0,3,5,7,8]\\
+ \underline{CSC}:\\
+ \indent \indent val = \indent \indent  [1,2,3,4,8,9,10,11]\\
+ \indent \indent ind_fil = \indent [0,2,0,1,3,2,0,1]\\
+ \indent \indent ptr_col = \indent [0,2,5,6,8]\\
+ \\
+ En este ejemplo, se puede apreciar que al trasponer la matriz los arreglos conservan sus mismos valores, s\'olo que cambia la forma de interpretarlos. Es decir: ind_fil pasa a ser ind_col, ptr_col pasa a ser ptr_fil y viceversa.
 \newpage
 \section{Referencias}
 \textcolor{blue}{Es importante incluir referencias a libros, art\'iculos y p\'aginas de Internet consultados

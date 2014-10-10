@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  6 OCT 2014 16:43
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  9 OCT 2014 14:28
 entering extended mode
 **informe.tex
 (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\informe.tex
@@ -426,7 +426,17 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \c@algocf=\count106
 \algocf@algoframe=\box34
 \algocf@algobox=\box35
-) (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\codesnippet.tex
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\codesnippet.tex
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\color.sty"
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
@@ -474,19 +484,19 @@ Cargando package 'caratula' v0.3 (2005/08/09)
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
 (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\informe.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Try loading font information for OT1+bch on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Try loading font information for OT1+bch on input line 48.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1bch.fd"
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
@@ -508,27 +518,36 @@ File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
 File: imagenes/logodc.jpg Graphic file (type jpg)
 
 <use imagenes/logodc.jpg>
-Package pdftex.def Info: imagenes/logodc.jpg used on input line 59.
+Package pdftex.def Info: imagenes/logodc.jpg used on input line 60.
 (pdftex.def)             Requested size: 215.60497pt x 83.59207pt.
+LaTeX Font Info:    Try loading font information for U+msa on input line 60.
 
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 60.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 <imagenes/logouba.jpg, id=2, 225.4824pt x 231.7458pt>
 File: imagenes/logouba.jpg Graphic file (type jpg)
 
 <use imagenes/logouba.jpg>
-Package pdftex.def Info: imagenes/logouba.jpg used on input line 59.
+Package pdftex.def Info: imagenes/logouba.jpg used on input line 60.
 (pdftex.def)             Requested size: 225.48184pt x 231.74522pt.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/b/n' undefined
-(Font)              using `OT1/cmss/m/n' instead on input line 59.
+(Font)              using `OT1/cmss/m/n' instead on input line 60.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
 
  []
 
 
-Overfull \hbox (22.76358pt too wide) in paragraph at lines 59--59
+Overfull \hbox (22.76358pt too wide) in paragraph at lines 60--60
 [][][] 
  []
 
@@ -537,22 +556,22 @@ Overfull \hbox (22.76358pt too wide) in paragraph at lines 59--59
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Agustina/Documen
 ts/UBA/Métodos/MetNum/TP2/Informe/imagenes/logodc.jpg> <C:/Users/Agustina/Docu
 ments/UBA/Métodos/MetNum/TP2/Informe/imagenes/logouba.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 65--74
+Underfull \hbox (badness 10000) in paragraph at lines 66--75
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--74
+Underfull \hbox (badness 10000) in paragraph at lines 66--75
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--74
+Underfull \hbox (badness 10000) in paragraph at lines 66--75
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--74
+Underfull \hbox (badness 10000) in paragraph at lines 66--75
 
  []
 
@@ -560,126 +579,136 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--74
 \tf@toc=\write4
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 92--94
+Underfull \hbox (badness 10000) in paragraph at lines 93--95
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--102
+Underfull \hbox (badness 10000) in paragraph at lines 96--103
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--102
+Underfull \hbox (badness 10000) in paragraph at lines 96--103
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--120
+Underfull \hbox (badness 10000) in paragraph at lines 105--121
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--120
+Underfull \hbox (badness 10000) in paragraph at lines 105--121
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 135--142
+Underfull \hbox (badness 10000) in paragraph at lines 136--143
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--142
+Underfull \hbox (badness 10000) in paragraph at lines 136--143
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--142
+Underfull \hbox (badness 10000) in paragraph at lines 136--143
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 153--155
+Underfull \hbox (badness 10000) in paragraph at lines 154--156
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--162
+Underfull \hbox (badness 10000) in paragraph at lines 158--163
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 167--214
+Underfull \hbox (badness 10000) in paragraph at lines 168--215
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--214
+Underfull \hbox (badness 10000) in paragraph at lines 168--215
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--214
+Underfull \hbox (badness 10000) in paragraph at lines 168--215
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--214
+Underfull \hbox (badness 10000) in paragraph at lines 168--215
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--214
+Underfull \hbox (badness 10000) in paragraph at lines 168--215
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
+Underfull \hbox (badness 10000) in paragraph at lines 216--217
 
  []
 
 [6] [7] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 298--300
+Underfull \hbox (badness 10000) in paragraph at lines 299--301
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 331--333
+Underfull \hbox (badness 10000) in paragraph at lines 332--334
 
  []
 
 [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 340--341
+Underfull \hbox (badness 10000) in paragraph at lines 341--342
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--378
+Underfull \hbox (badness 10000) in paragraph at lines 377--379
 
  []
 
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 386--388
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--397
 
  []
 
-[13] (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\informe.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 406--417
+
+ []
+
+[12] [13]
+Underfull \hbox (badness 10000) in paragraph at lines 423--425
+
+ []
+
+[14] (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\informe.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 4663 strings out of 493921
- 60256 string characters out of 3147274
- 154521 words of memory out of 3000000
- 7881 multiletter control sequences out of 15000+200000
- 27873 words of font info for 49 fonts, out of 3000000 for 9000
+ 4952 strings out of 493921
+ 63428 string characters out of 3147274
+ 155008 words of memory out of 3000000
+ 8151 multiletter control sequences out of 15000+200000
+ 29945 words of font info for 59 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  28i,16n,43p,1152b,396s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
@@ -696,10 +725,11 @@ MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9
 ype1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
 lic/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmsy9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-tt10.pfb>
-Output written on informe.pdf (13 pages, 555169 bytes).
+tt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm1
+0.pfb>
+Output written on informe.pdf (14 pages, 563223 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
+ 115 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
