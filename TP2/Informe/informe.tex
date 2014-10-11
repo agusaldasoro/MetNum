@@ -219,6 +219,9 @@ res[col] $\leftarrow$ res[fil] + (m.val[j] * v[i])\\
 \newpage
 \subsection{Algoritmo de HITS}
 
+\indent Nuestra tarea aquí es extraer del subconjunto $G_\sigma$ sus autoridades analizando puramente la estructura de sus links. Ordenar las páginas, dándoles un puntaje de acuerdo a la cantidad de links de entrantes, trabaja mejor bajo el contexto de nuestro subconjunto, de todos modos un ranking de este tipo carece de una unidad temática. Las páginas con mayor puntaje de autoridad no solo tienen una cantidad significante de nodos entrantes sino que también van a tener muchas páginas en común que las apunten. \\
+\indent Hubs y Autoridades reprensentan una relacion de mutua dependencia, frente a esto es necesario un método para solucionar este ciclo como el siguiente:\\
+
 \IncMargin{1em}
 \begin{algorithm}
 \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
@@ -240,20 +243,34 @@ m.$trasponer()$ \\
 yp $\leftarrow$ a.$multMatVect(x)$ \\
 yp.$normalizar()$ \\
 \eIf{(xp $\simeq$ x $\wedge$ yp $\simeq$ y)}{ 
-			i $\leftarrow$ M\'axima Iteraci\'on
+			i $\leftarrow$ $M$\textit{\'a}$xima$ $Iteraci$\textit{\'o}$n$
 		}{
 			i++
 		}
-x $\leftarrow$ xp \\
-y $\leftarrow$ yp \\
+x $\leftarrow$ $xp$ \\
+y $\leftarrow$ $yp$ \\
 }
 print \emph{x} e \emph{y}
 \end{algorithm}\DecMargin{1em}
-\textit{La cantidad m\'axima de iteraciones la fijamos nosotros en 100.000 \\
-El $\simeq$ considera la tolerancia (tol) pasada por parametro. Es decir, es equivalente a evaluar abs(x-xp)$\leq$tol} \\
-\textcolor{red}{Hay que poner algo sobre que copiamos el algoritmo del paper?}
+
+$\circ$Este algoritmo devuelve los valores de Autoridad y Hub para todas las p\'aginas, en X e Y respectivamente.\\
+\indent $\circ$Los vectores X e Y arrancan inicializados en 1 \textcolor{blue}{ porque PINTO (??? GUSSSSSSSSS).}\\
+\indent $\circ$El $\simeq$ considera la tolerancia (tol) pasada por parametro. Es decir, es equivalente a evaluar \\ abs(x-xp)$\leq$tol. \\
+\indent $\circ$La cantidad m\'axima de iteraciones la fijamos nosotros en 100.000 pero al existir la guarda del if cabe la posibilidad de salir del scope del while antes de las 100.000 iteraciones. \\
+\\
+\indent El modelo de c\'alculo es un algoritmo iterativo, el cual conserva y actualiza los pesos de Hub y de Autoridad para cada p\'agina. Se cuenta con dos vectores de un tama\~no igual a la cantidad de nodos en la red, donde los pesos de autoridad de la p\'agina i se pueden ver en la posici\'on i del vector X, mientras que los de Hub se encuentran en la posici\'on i del vector Y. Ambos vectores son normalizados -bajo la Norma 2- en cada iteraci\'on. De este modo, las p\'aginas con mayor valor en X son ``mejores'' autoridades y las que tengan mayor valor en Y son ``mejores'' Hubs. \\
+\indent Lo que se hace en cada iteraci\'on es actualizar primero los valores de X en base a los de Y, y luego actualizar los de Y en base a los nuevos de X. Se tiene una matriz A -\textit{Matriz de adyacencia}- la cual posee un 1 en A(i,j) si existe un link i $\rightarrow$ j y un 0 en caso contrario. De este modo, trasponi\'endola se puede observar la relaci\'on inversa. Esto explica que a la hora de actualizar los valores de X e Y se puede realizar asignando X $\leftarrow$ A$^t$Y, Y $\leftarrow$ AX; acorde a lo visto en la \emph{Introducci\'on Te\'orica} sobre el \textit{Algoritmo de HITS} se adaptan las ecuaciones a la forma matricial.\\ 
+\indent Bas\'andonos en el trabajo de Kleinberg \textcolor{red}{(PONER EL NUMERO DEL PAPER)}, podemos asegurar que este m\'etodo converge bajo ciertas hip\'otesis \textcolor{blue}{(ESTOY MANDANDO FRUTA?)} como que el grafo $G_\sigma$ sea un grafo bien formado y que la matriz A tiene como principal autovector un valor \'unico \textcolor{blue}{(CREO QUE NADA MAS. PREGUNTAR A GUS.)}. En el mismo trabajo se puede ver la demostraci\'on  de que los vectores X e Y convergen a X* e Y*, y adem\'as X* es el principal autovector de A$^t$A e Y* es el principal autovector de AA$^t$.\\
+
+
 \newpage
 \subsection{Algoritmo de PageRank}
+
+
+\indent En este esquema, cada p\'agina se define como la suma de los valores de las p\'aginas con links entrantes divididos por su cantidad de enlaces salientes (modelo visto en la Introducci\'on te\'orica). La matriz a abordar se arma por columnas, para cada columna X$_i$ se pone un 0 en los elementos que no los dirija ning\'un link y $1/k$ en los dem\'as, siendo $k$ la cantidad de links salientes de la p\'agina X$_i$. Algo debe hacerse para solventar el problema de las p\'aginas con dangling nodes (p\'aginas sin ning\'un link saliente).\\
+\indent Al contar con la matriz A -matriz de conectividad-, nuestro problema a resolver se limita a encontrar un autovector de A con autovalor 1. En el trabajo de Bryan y Leise \textcolor{red}{ACA PONER EL NUMERO DEL PAPER} se demuestra que: Si la Web con la que trabajamos no presenta ning\'un danglin node, la matriz de conectividad A tiene al 1 como autovalor mediante las siguientes preposiciones: \emph{La matriz A para alguna Web sin dangling nodes es estoc\'astica por columnas} (una matriz cuadrada es estoc\'astica por columnas si todos sus valores son no-negativos y los elementos de cada columna suman 1) y \emph{Toda matriz estoc\'astica por columnas tiene al 1 como autovalor}. Para asegurar la unicidad del ranking a armar es concluyente exigir que autovalor 1 tenga multiplicidad 1. \\
+\indent Pero nosotros vamos a reemplazar A por M, la cual est\'a definida por la f\'ormula M = (1-m)A +  mS, con m la probabilidad de moverme entre p\'aginas no por medio de links y S una matriz con todos sus componentes iguales a 1/n. Donde as\'i no debe efectuarse ninguna hip\'otesis fuerte sobre A ya que M queda estoc\'astica por columnas y positiva la multiplicidad de $\lambda_1$ es 1. \\
+\indent A fines de emplear menos recursos de c\'omputo se opt\'o por llevar a cabo el algoritmo desarrollado por Kamvar \textcolor{red}{PONER NUMERO DE PAPER}:
 
 \IncMargin{1em}
 \begin{algorithm}
@@ -271,22 +288,29 @@ Vector xp\\
 xp $\leftarrow$ m.$MultMatVec(x)$ \\
 \For{$i\leftarrow 0$ \KwTo $tama$\textit{\~n}$o$ $de$ $xp$}{
 xp[i] $\leftarrow$ xp[i] * c \\
-\textcolor{red}{No s\'e cual forma poner ahora :(} \\
+}
+\For{$i\leftarrow 0$ \KwTo $tama$\textit{\~n}$o$ $de$ $xp$}{
+			xp[i] $\leftarrow$ $xp[i] + \frac{norma(x) - norma(xp)}{n}$
+}
 \eIf{(xp $\simeq$ x)}{ 
-			i $\leftarrow$ M\'axima Iteraci\'on
+			i $\leftarrow$ \textit{M\'axima Iteraci\'on}
 		}{
 			i++
 		}
 x $\leftarrow$ xp
-}
+
 }
 normalizar el vector \emph{x} \\
 print \emph{x}
 \end{algorithm}\DecMargin{1em}
-\textit{La cantidad m\'axima de iteraciones la fijamos nosotros en 1.000.000 \\
-El $\simeq$ considera la tolerancia (tol) pasada por parametro. Es decir, es equivalente a evaluar abs(x-xp)$\leq$tol} \\
-\textcolor{red}{Hay que poner algo sobre que copiamos el algoritmo del paper?}
 
+$\circ$Este algoritmo devuelve el vector X el cual tiene Norma1 = 1 y representa para cada $X_i$ el porcentaje de tiempo que el \textit{Navegante Aleatorio} permanece en cada p\'agina i. \\
+\indent $\circ$En este algoritmo no hace falta normalizar en cada iteraci\'on ya que conserva la norma.\\
+\indent $\circ$El $\simeq$ considera la tolerancia (tol) pasada por parametro. Es decir, es equivalente a evaluar \\ abs(x-xp)$\leq$tol. \\
+\indent $\circ$La cantidad m\'axima de iteraciones la fijamos nosotros en 1.000.000 pero al existir la guarda del if cabe la posibilidad de salir del scope del while antes del 1.000.000 de iteraciones. \\
+\indent $\circ$ el par\'ametro C de entrada corresponde a la probabilidad de \textit{teletransportarse}.\\
+\\
+Lo que se calcula en este algoritmo es $X_k = M X_{k+1}$ mediante el m\'etodo de la potencia pero no se ejecuta la multiplicaci\'on de matrices sino que se hacen todos c\'alculos con vectores.
 
 \newpage
 \section{Resultados y discusi\'on}
@@ -304,6 +328,8 @@ Estudiar la convergencia de PageRank, analizando la evoluci\'on de la norma Manh
 al menos dos instancias de tama\~no mediano-grande, variando el valor de c. Opcional:
 Establecer una relaci\'on con la proporci\'on entre lambda 1 = 1 y modulo de lambda 2.
 
+\textcolor{red}{INCLUIR EXPERIMENTOS SOBRE LA PROPORCION DEL LAMBDA. Cuanto mas se acerca a 1 (xq lambda uno es uno) mas tarda en converger.}
+
 \subsection{Convergencia de HITS}
 2. Estudiar la convergencia de los vectores de peso x e y para HITS de forma similar al
 punto anterior.
@@ -313,16 +339,371 @@ punto anterior.
 se aplicados sobre una red gen\'erica, cada algoritmo tiene un contexto particular de
 aplicaci\'on. Estudiar como impacta el factor temporal en este sentido.
 
-\subsection{Comparaci\'on de los tres M\'etodos}
-4. Estudiar cualitativamente los rankings obtenidos por los tres m\'etodos. Para ello, se sugiere
+\textcolor{red}{PONER ACA LOS EXPERIMENTOS SOBRE EL VECTOR INICIAL Y LA CANTIDAD DE ITERACIONES}
+\newpage
+
+\subsection{Ejemplos ilustrativos y comparaci\'on de los tres M\'etodos}
+
+\textcolor{blue}{4. Estudiar cualitativamente los rankings obtenidos por los tres m\'etodos. Para ello, se sugiere
 considerar distintos ejemplos de b\'usquedas de p\'aginas web4. Analizar los resultados
 individualmente en una primera etapa, y luego realizar un an\'alisis comparativo entre
 los tres rankings obtenidos.
-
-\subsection{Peque\~nos Ejemplos}
 5. Para cada algoritmo, proponer ejemplos de tama\~no peque\~no que ilustren el comportamiento
 esperado (puede ser utilizando las instancias provistas por la c\'atedra o generadas
-por el grupo).
+por el grupo).}
+
+Con el fin de poner a prueba experimentalmente el conocimiento aprendido de manera teórica acerca de los algoritmos, destinamos esta sección a la presentación de las hipótesis que formulamos acerca de sus funcionamientos, a los ensayos dirigidos a partir de las mismas y a los resultados obtenidos a partir de aquellos junto con una serie de posibles explicaciones a los comportamientos observados.
+
+\textbf{Hipótesis 1: \itshape{Si se toma un conjunto de páginas base (es decir, no apuntadas por ninguna otra de la red) que tengan links salientes hacia un conjunto de webs de menor dimensión cuyas direcciones se encuentran muy apuntadas, entonces mientras que el algoritmo de HITS va a considerar importantes dichas páginas, no encabezarán el listado de webs sugerido por un algoritmo de PageRank}}\\
+\textcolor{red}{faltaria correr para Indeg y meterlo, ya que estamos}
+
+Para contrastar esta hipótesis diseñamos una red que cuya particularidad es que existen conjuntos de webs poco apuntadas que poseen links salientes a un grupo reducido de páginas que - en lo posible - no apunten recíprocamente a aquellas. La idea es generar una instancia en la cual existan un conjunto de autoridades destacables  que concedan a las páginas que las apuntan una fuerte identidad de hubs, para poder anailzar cómo jerarquiza a estas últimas cada método.
+
+Los resultados obtenidos para la Red 1  (cita a continuación) son los presentados en las figuras \ref{hitsa1}, \ref{hitsh1} y \ref{fig:pr1}.
+
+\textbf{Red 1:}\\
+
+\begin{tabular}{l l}
+1 & Empirismo \\
+2 & Racionalismo \\
+3 & Humanismo \\
+4 & Crítica de la razón pura \\
+5 & Metafísica \\
+6 & Discurso del método \\
+7 & Lógica de Port-Royal \\
+8 & Principio de razon suficiente \\
+9 & Juicio sintáctico a priori \\
+10 & Investigación sobre el entendimiento humano \\
+11 & Razonamiento inductivo \\
+12 & Instrumentalismo \\
+13 & Ecdótica \\
+14 & Robert G. Ingersoll \\
+15 & Antihumanismo \\
+\end{tabular}
+
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.66]{imagenes/Exp1/hitsA1}
+	\label{hitsa1}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.66]{imagenes/Exp1/hitsH1}
+	\label{hitsh1}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.66]{imagenes/Exp1/PR1}
+	\label{fig:pr1}
+  \end{center}
+\end{figure}
+\textcolor{red}{che, a todas las figuras las llama igual O_O}\\
+\textcolor{red}{A partir de la observación de dichos resultados...}\\
+
+\newpage
+
+\textbf{Hipótesis 2: \itshape{Si se toma la misma red y se le incluye una web que apunte a las mayores autoridades, entonces ésta pasará a ser el hub más importante de la nueva red. }}\\
+
+Para intentar contrastar esta proposición tomamos la Red 1 presentada en la $hip$ó$tesis$ $1$, le agregamos una web nueva ($"Escuelas Filos$ó$ficas"$), ejecutamos los algoritmos de PageRank y de HITS y luego analizamos los datos obtenidos en este apartado en conjunto con los arrojados en el inmediato anterior.\\
+
+Los resultados son los presentados en las figuras \ref{fig:hitsa2}, \ref{fig:hitsh2} y \ref{fig:pr2}, mientras que en la figura \ref{grafo2} se puede observar el grafo de la nueva web.
+
+\textbf{Red 2:}\\
+
+\begin{tabular}{l l}
+1 & Escuela Filosófica \\
+2 & Empirismo \\
+3 & Racionalismo \\
+4 & Humanismo \\
+5 & Crítica de la razón pura \\
+6 & Metafísica \\
+7 & Discurso del método \\
+8 & Lógica de Port-Royal \\
+9 & Principio de razon suficiente \\
+10 & Juicio sintáctico a priori \\
+11 & Investigación sobre el entendimiento humano \\
+12 & Razonamiento inductivo \\
+13 & Instrumentalismo \\
+14 & Ecdótica \\
+15 & Robert G. Ingersoll \\
+16 & Antihumanismo \\
+\end{tabular}
+
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.3]{imagenes/Exp2/grafo2}
+	\label{grafo2}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+ \begin{center}
+	\includegraphics[scale=0.3]{imagenes/Exp2/PR2}
+	\label{hitsa2}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.3]{imagenes/Exp2/hitsa2nuevo}
+	\label{pr2}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+ \begin{center}
+	\includegraphics[scale=0.3]{imagenes/Exp2/hitsH2}
+	\label{hitsh2}
+  \end{center}
+\end{figure}
+
+
+Si se contrasta la figura \ref{hitsh1} con la figura \ref{hitsh2} (propia de este experimento) se puede ver que el máximo valor de hub  no se realiza en el peso del sitio agregado, sino en los que eran hubs destacados en la red original. \\
+Si bien no obtuvimos los resultados esperados (la web agregada no resultó ser el hub más importante), esto pudo deberse a que ell peso de hubs preexistentes era de gran magnitud. Al subestimar la dificultad de reemplazar un hub por otro y considerar que bastaría con que la nueva página apuntase a unas pocas pero fuertes autoridades, no tuvimos presente el hecho de que cada link saliente de una página incrementa o mantiene en la misma su valor de hub, sea cual fuere el peso de la página apuntada. Sin tener en cuenta esto, desestimamos la posibilidad de que se constituyera como hub prioritario una web que apuntara a muchas otras de pesos - en principio - poco relevantes, siendo que existía otra que aglutinaba en sus links a varias de las mejores autoridades de la red.
+
+Nos parece importante destacar que a pesar de no haber obtenido estrictamente los resultados esperados, notamos que la nueva red preservó el orden relativo de los hubs de la red inicial a excepción de la nueva página agregada que, a pesar de no haber obtenido el mejor de los valores, fue posicionada entre los hubs de mayor relevancia.\\
+
+\textcolor{red}{AGREGAR ACA EL REBUSQUE DE ESTE EXPERIMENTO, SI QUEREMOS: HACER QUE EL HUB Q AGREGAMOS APUNTE TAMBIÉN AL HUB MÁS IMPORTANTE O A LA PROXIMA AUTORIDAD MÁS IMPORTANTE Y VER SI ASÍ LOGRA QUEDAR PRIMERO. }\\
+
+\newpage
+
+\textbf{Hipótesis 3: \itshape{Sea A una página de la red apuntada por otra página B perteneciente a la misma. En caso de que se agreguen a la red nuevos nodos a los que B apunte, entonces el nivel de importancia de la web A se verá dismunído en la segunda red de cuerdo al método de PageRank.}}\\
+
+Con el fin de contrastar la presente hipótesis, agregamos a la $Red$ $2$ un conjunto de links salientes de "$Antihumanismo$" (página que apuntaba a "humanismo"), resultando la siguiente red:
+
+\textbf{Red 3:}\\
+
+\begin{tabular}{l l}
+1 & Escuela Filosófica \\
+2 & Empirismo \\
+3 & Racionalismo \\
+4 & Humanismo \\
+5 & Crítica de la razón pura \\
+6 & Metafísica \\
+7 & Discurso del método \\
+8 & Lógica de Port-Royal \\
+9 & Principio de razon suficiente \\
+10 & Juicio sintáctico a priori \\
+11 & Investigación sobre el entendimiento humano \\
+12 & Razonamiento inductivo \\
+13 & Instrumentalismo \\
+14 & Ecdótica \\
+15 & Robert G. Ingersoll \\
+16 & Antihumanismo \\
+17 & Razón \\
+18 & Muerte de Dios \\
+19 & Claude Levì-Strauss \\
+20 & Michel Foucault \\
+\end{tabular}\\
+
+Los resultados obtenidos son los presentados en las figuras ~\ref{before3}, ~\ref{after3}, mientras que en la figuras ~\ref{gbefore3} se puede observar el grafo de la web inicial.
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.80]{imagenes/Exp3/before}
+	\label{before3}
+	\caption{Descripcion de la figura}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.80]{imagenes/Exp3/after}
+	\label{after3}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.80]{imagenes/Exp3/grafobefore}
+	\label{gbefore3}
+  \end{center}
+\end{figure}
+
+Al realizar este experimento, nuestro principal objetivo consistía en averiguar si el incremento de los links salientes de un nodo que apuntara a pocas páginas afectaría a las mismas, decrementando su importancia. Sin embargo, la fluctuación de dichos valores no fue lo más llamativo de la compraración entre el orden dado por PageRank en la red inicial y el dado por el mismo método para la red modificada. \\
+Si bien se puede apreciar una diferencia negativa entre el valor de la página de "humanismo" entre la primera instancia y la segunda, también es cierto que la mayor parte de los nodos manifiestan este cambio. Esto puede deberse a la imposibilidad de garantizar que todos las modificaciones realizadas sean locales, puesto se cuenta con una red entramada en la cual cada cambio es potencialmente transitivo. \\
+Por otro lado, el nodo cuyo valor se disminuyó notablemente fue aquel que incorporó nuevos links salientes. Esto cobra sentido cuando se piensa en la interpretación que se les da a los valores obtenidos en el método analizado: cada uno representa la proporción de tiempo que, en el largo plazo, el navegante aleatorio pasa en dicha página. De esta forma, si se incrementa la cantidad de links salientes de un nodo, se amplía la cantidad de sitios que el navegante aleatorio visitará sin teletransportarse, disminuyendo así el tiempo que el mismo pasará en el nodo en cuestión.
+
+
+\newpage
+
+
+\textbf{Hipótesis 4: \itshape{Al aumentar la probilidad de que el navegante aleatorio se transporte, crece también la proporcion de tiempo que se espera que permanezca en paginas que inicialmente no se consideran de gran relevancia.
+ }}\\
+\textcolor{red}{COMPLETAR TODO}\\
+
+\newpage
+
+\textbf{Hipótesis 5: \itshape{BLA }}\\
+\textcolor{red}{LA HIP 5 LA PENSAMOS INICIALMENTE PARA PROBAR MAS O MENOS COMO IBA TODO, SIN HIPOTESIS. QUE PONGO? (ES LA Q SE AGREGA "MATRIZ" A LO ULTIMO)}\\
+
+\newpage
+\subsection*{Abortion}
+\indent Al momento de correr los tres algoritmos sobre la red \emph{Abortion} (con 2.293 nodos), los primeros elementos en figurar dentro de los ranking fueron los siguientes: \\
+\\
+\underline{Pagerank}: \\
+\\
+(0.012534) \textbf{The John Birch Society} \\
+\textit{http://www.jbs.org} \\
+Links entrantes:32 \indent Links salientes: 5\\
+\\
+(0.009202) \textbf{About - The Human Internet} \\
+\textit{http://home.about.com} \\
+Links entrantes:30 \indent Links salientes: 0\\
+\\
+(0.008679)\textbf{ AllExperts.com }\\
+\textit{http://www.allexperts.com/about.asp} \\
+Links entrantes:55 \indent Links salientes: 1\\
+\\
+(0.007845) \textbf{American Opinion Book Services Online Store }\\
+\textit{http://www.aobs-store.com} \\
+Links entrantes:25 \indent Links salientes: 1\\
+\\
+(0.006514) \textbf{National Right to Life Organization} \\
+\textit{http://www.nrlc.org} \\
+Links entrantes:184 \indent Links salientes: 1\\
+\\
+\\
+\underline{In-deg}:\\
+\\
+(184) \textbf{National Right to Life Organization} \\
+\textit{http://www.nrlc.org} \\
+Links entrantes:184 \indent Links salientes: 1\\
+\\
+(126) \textbf{Planned Parenthood Federation of America} \\
+\textit{http://www.plannedparenthood.org} \\
+Links entrantes:126 \indent Links salientes: 0\\
+\\
+(115) \textbf{NARAL: Abortion and Reproductive Rights: Choice For Women} \\
+\textit{http://www.naral.org }\\
+Links entrantes:115 \indent Links salientes: 0\\
+\\
+(114) \textbf{DimeClicks.com - Complete Web and Marketing Solutions} \\
+\textit{http://www5.dimeclicks.com }\\
+Links entrantes:114 \indent Links salientes: 0\\
+\\
+(114)\textbf{ Amazon.com--Earth's Biggest Selection }\\
+\textit{http://www.amazon.com/exec/obidos/redirect-home/youdebatecom} \\
+Links entrantes:114 \indent Links salientes: 0\\
+\\
+(114) \textbf{HitBox.com - hitbox web site traffic counter - internet statistics and site promotion tools - WebSideStory} \\
+\textit{http://rd1.hitbox.com/rd?acct=WQ590703J6FB45EN5} \\
+Links entrantes:114 \indent Links salientes: 0\\
+\\
+\underline{Hits}: \\
+\\
+\emph{Mayores Autoridades}: \\
+\\
+(0.333946) \textbf{DimeClicks.com - Complete Web and Marketing Solutions} \\
+\textit{http://www5.dimeclicks.com }\\
+Links entrantes:114 \indent Links salientes: 0\\
+\\
+(0.333946) \textbf{Amazon.com--Earth's Biggest Selection} \\
+\textit{http://www.amazon.com/exec/obidos/redirect-home/youdebatecom} \\
+Links entrantes:114 \indent Links salientes: 0\\
+\\
+(0.333946) \textbf{HitBox.com - hitbox web site traffic counter - internet statistics and site promotion tools - WebSideStory} \\
+\textit{http://rd1.hitbox.com/rd?acct=WQ590703J6FB45EN5} \\
+Links entrantes:114 \indent Links salientes: 0\\
+\\
+\\
+\emph{Mayores Hubs}: \\
+\\
+(0.095693)\textbf{ Abortion Books Pro and Con} \\
+\textit{http://www.4greatbooks.com/abortion-books.htm} \\
+Links entrantes:0 \indent Links salientes: 27\\
+\\
+(0.09428) \textbf{Government Debates and Polls} \\
+\textit{http://www.youdebate.com/government.htm }\\
+Links entrantes:0 \indent Links salientes: 10\\
+\\
+(0.09428) \textbf{Political Debates and Polls }\\
+\textit{http://www.youdebate.com/POLITICS.htm} \\
+Links entrantes:0 \indent Links salientes: 10\\
+\\
+(0.09428) \textbf{United States debates} \\
+\textit{http://www.youdebate.com/UNITEDSTATES.htm} \\
+Links entrantes:0 \indent Links salientes: 10\\
+\\
+\\
+\indent Es necesario destacar que  la p\'agina \emph{DimeClicks.com} queda en la posici\'on 1 dentro del Ranking de Autoridades de HITS y en la posici\'on 4 en el de In-Deg, cuando esta p\'agina no nos es de inter\'es al momento de hacer una b\'usqueda con el string \textit{``Abortion''} ya que consiste en una p\'agina de Marketing y soluciones Web. En cambio, para PageRank esta p\'agina se sit\'ua en la posici\'on 27 con un puntaje de 0,00318. Adem\'as, la p\'agina que ocupa la tercera posici\'on del Ranking de pesos de autoridad -\emph{HitBox.com}- tampoco est\'a relacionada con el contexto de \emph{Aborto}, ya que habla de promociones y estad\'isticas en Internet. Mientras que HitBox se sit\'ua en la posici\'on 6 para In-Deg y en la posici\'on 27 para PageRank con un puntaje de 0,00318. \\
+\indent Por lo tanto, se puede concluir que para estar Red, PageRank sabe filtrar \textit{``mejor''} las p\'aginas que no nos son de ning\'un inter\'es bajo el contexto de b\'usqueda.\\
+
+\subsection*{Movies}
+\indent A continuaci\'on se muestran los rankings obtenidos tras correr los tres algoritmos sobre la red \emph{Movies} (con 5.757 nodos), los primeros elementos en figurar dentro de los ranking fueron los siguientes: \\
+\\
+\\
+\underline{PageRank}: \\
+\\
+(0.007915)\textbf{ On Wisconsin }\\
+\textit{http://www.onwisconsin.com} \\
+Links entrantes:127 \indent Links salientes: 8\\
+\\
+(0.007829) \textbf{GuideLive: Movies in Dallas and Fort Worth }\\
+\textit{http://www.guidelive.com/topic/movies.htm} \\
+Links entrantes:62 \indent Links salientes: 51\\
+\\
+(0.007015)\textbf{ citysearch.com} \\
+\textit{http://www.citysearch.com }\\
+Links entrantes:27 \indent Links salientes: 9\\
+\\
+\\
+\underline{In-Deg}: \\
+\\
+(393)\textbf{ The Internet Movie Database (IMDb). }\\
+\textit{http://www.moviedatabase.com }\\
+Links entrantes:393 \indent Links salientes: 0\\
+\\
+(277) \textbf{Hollywood.com - Your entertainment source for movies, movie showtimes, movie reviews, television and celebrity news.!} \\
+\textit{http://www.hollywood.com }\\
+Links entrantes:277 \indent Links salientes: 0\\
+\\
+(143)\textbf{ Paramount Pictures - Home Page} \\
+\textit{http://www.paramount.com }\\
+Links entrantes:143 \indent Links salientes: 0\\
+\\
+\\
+\underline{HITS}: \\
+\\
+\emph{Mayores Autoridades}: \\
+\\
+(0.1412) \textbf{Empty title field} \\
+\textit{http://chatting.about.com} \\
+Links entrantes:70 \indent Links salientes: 0\\
+\\
+(0.139835)\textbf{ About.com A-Z} \\
+\textit{http://a-zlist.about.com} \\
+Links entrantes:48 \indent Links salientes: 0\\
+\\
+(0.139793) \textbf{About - Arts/Humanities} \\
+\textit{http://home.about.com/arts} \\
+Links entrantes:47 \indent Links salientes: 0\\
+\\
+\\
+\emph{Mayores Hubs}: \\
+\\
+(0.159812) \textbf{History of Classic Movies} \\
+\textit{http://classicfilm.miningco.com/entertainment/classicfilm/msub19.htm} \\
+Links entrantes:0 \indent Links salientes: 73\\
+\\
+(0.159471)\textbf{ Movie Reviews} \\
+\textit{http://movieboxoffice.miningco.com/entertainment/movieboxoffice/msub7.htm} \\
+Links entrantes:0 \indent Links salientes: 68\\
+\\
+(0.159471) \textbf{Characters: Creatures} \\
+\textit{http://starwars.miningco.com/entertainment/starwars/msubchar-crea.htm }\\
+Links entrantes:0 \indent Links salientes: 68\\
+\\
+\\
+\indent En esta ocasi\'on, tambi\'en se puede apreciar que las p\'aginas con mayor puntaje de autoridad no son las m\'as acertadas para nuestro contexto. Sin embargo, lo m\'as llamativo de este caso es que las p\'aginas con mejor puntaje de Hub resultan ser p\'aginas acertadas para la b\'usqueda, p\'aginas que un usuario podr\'ia estar interesado en encontrarse al momento de buscar el string COMILLAS movie. La p\'agina \emph{History of Classic Movies} queda en la posici\'on 3783 para PageRank y para In-Deg, con un puntaje de Autoridad que lo ubica en la posici\'on 2888. Por otro lado, la p\'agina \emph{Movie Reviews} se ubica en la posici\'on 3771 del ranking de PageRank, tambi\'en en la 3771 de In-Deg y ocupa la posici\'on 2876 con su puntaje de Autoridad.\\
+\indent De este modo, se puede concluir que -para la Web Movies- priorizar las p\'aginas con mayor puntaje de Hub por sobre las que tengan mejor puntaje de Autoridad es una buena idea, ya que los resultados obtenidos fueron m\'as cercanos a lo esperado de este modo.\\
+\\
 \newpage
 \section{Conclusiones}
 \textcolor{blue}{Esta secci\'on debe contener las conclusiones generales del trabajo. Se deben mencionar
@@ -425,13 +806,13 @@ PONER ACA LOS PAPERSSSSSSSSSSS\\
 
 \end{document}
 
-%\begin{figure}
-%  \begin{center}
-%	\includegraphics[scale=0.66]{imagenes/logouba.jpg}
-%	\caption{Descripcion de la figura}
-%	\label{nombreparareferenciar}
-%  \end{center}
-%\end{figure}
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.66]{imagenes/logouba.jpg}
+	\caption{Descripcion de la figura}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
 
 
 %\paragraph{\textbf{Titulo del parrafo} } Bla bla bla bla.
