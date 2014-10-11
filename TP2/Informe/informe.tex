@@ -143,16 +143,6 @@ Este algoritmo devuelve dos arreglos: uno representa los pesos de Hub y otro los
 
 \newpage
 \section{Desarrollo}
-\textcolor{blue}{
-Deben explicarse los m\'etodos num\'ericos que utilizaron y su aplicaci\'on al problema
-concreto involucrado en el trabajo pr\'actico. Se deben mencionar los pasos que siguieron
-para implementar los algoritmos, las dificultades que fueron encontrando y la
-descripci\'on de c\'omo las fueron resolviendo. Explicar tambi\'en c\'omo fueron planteadas
-y realizadas las mediciones experimentales. Los ensayos fallidos, hip\'otesis y conjeturas
-equivocadas, experimentos y m\'etodos malogrados deben figurar en esta secci\'on, con
-una breve explicaci\'on de los motivos de estas fallas (en caso de ser conocidas).\\
-}
-\\
 \subsection{Elecci\'on de las estructuras}
 
  Con el fin de elegir la estructura que representar\'ia nuestra matriz esparsa, estudiamos tres tipos proporcionados por la c\'atedra: \textit{Dictionary of Keys} (DOK), \textit{Compressed Sparse Row} (CSR) y \textit{Compressed Sparse Column} (CSC). \\
@@ -314,52 +304,213 @@ Lo que se calcula en este algoritmo es $X_k = M X_{k+1}$ mediante el m\'etodo de
 
 \newpage
 \section{Resultados y discusi\'on}
-\textcolor{blue}{Deben incluir los resultados de los experimentos, utilizando el formato m\'as adecuado
-para su presentaci\'on. Deber\'an especificar claramente a qu\'e experiencia corresponde
-cada resultado. No se incluir\'an aqu\'i corridas de m\'aquina.\\
-Se incluir\'a aqu\'i un an\'alisis de los resultados obtenidos en la secci\'on anterior (se analizar\'a su validez, coherencia, etc.). Deben analizarse como m\'inimo los items pedidos en el enunciado. No es aceptable decir que los resultados fueron los esperados", sin hacer
-clara referencia a la teorica a la cual se ajustan. Adem\'as, se deben mencionar los resultados
-interesantes y los casos "patologicos" encontrados.
-}
-\\
 \subsection{Convergencia de PageRank}
-Estudiar la convergencia de PageRank, analizando la evoluci\'on de la norma Manhattan
-(norma L1) entre dos iteraciones sucesivas. Comparar los resultados obtenidos para
-al menos dos instancias de tama\~no mediano-grande, variando el valor de c. Opcional:
-Establecer una relaci\'on con la proporci\'on entre lambda 1 = 1 y modulo de lambda 2.
 
 \textcolor{red}{INCLUIR EXPERIMENTOS SOBRE LA PROPORCION DEL LAMBDA. Cuanto mas se acerca a 1 (xq lambda uno es uno) mas tarda en converger.}
 
+Estudio de la convergencia de PageRank, analizando la evolución de la norma Manhattan.\\
+\textbf{Hip\'otesis}: Suponiendo que el método de la potencia converge (dado que la probabilidad de que no ocurra es minima), consideramos que la norma Manhattan de la diferencia entre iteraciones sucesivas debe converger a cero. Creemos que cuanto mayor sea el valor de c, más va a tardar en converger.\\
+\\
+\indent Nuestra hip\'otesis se bas\'o en la ecuaci\'on $P_2= cP_1+(1-c)E$, la cual hace que los datos cobren sentido. Dado un c, el segundo t\'ermino queda constante; por lo tanto, podemos considerarlo despreciable para nuestros cálculos, restringiéndonos a analizar lo que pueda suceder s\'olo con el primero. $cP_1$ implica la multiplicación de una matriz por un valor c tal que $0 \leq c \leq 1$. No resulta relevante considerar los casos en que $c= 0$ \'o $c=1$, dado que esos valores no modelarían un aspecto de la realidad. Esto se debe a que si $c=0$, la probabilidad de teletransportarse es 1 por lo tanto se moldear\'ia una realidad donde nunca se viaja a trav\'es de Links. Y por otro lado, si $c=1$ no se estar\'ia considerando la \emph{teletransportaci\'on}. \\
+\indent Dado que c se encuentra entre $0$ y $1$, el resultado va a ser un vector de valores muy pequeños, que va a achicarse progresivamente. Es m\'as significativo lo que achica el c a $P_2$ que lo que aporta el segundo t\'ermino.   \\
+\\
+\textcolor{red}{INCLUIR EXPERIMENTOS SOBRE LA PROPORCION DEL LAMBDA. Cuanto mas se acerca a 1 (xq lambda uno es uno) mas tarda en converger.}\\
+
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/abortionPAGERANK.png}
+	\caption{Variaci\'on de la norma cambiando el C para la Red Abortion}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
+ \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
+\hline
+ & C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
+\hline
+Cantidad &  & & & & & & \\ 
+de Iteraciones & 5 & 7 & 11 & 19 & 46 & 80 & 251 \\
+\hline
+	\end{tabular}\\\\
+\\
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/complexityPAGERANK.png}
+	\caption{Variaci\'on de la norma cambiando el C para la Red Complexity}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
+ \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
+\hline
+ & C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
+\hline
+Cantidad &  & & & & & & \\ 
+de Iteraciones & 5 & 8 & 12 & 21 & 49 & 86 & 268 \\
+\hline
+	\end{tabular}\\\\
+\newpage
+
+
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/moviesPAGERANK.png}
+	\caption{Variaci\'on de la norma cambiando el C para la Red Movies}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
+ \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
+\hline
+& C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
+\hline
+Cantidad &  & & & & & & \\ 
+de Iteraciones & 6 & 8 & 13 & 21 & 51 & 90 & 282 \\
+\hline
+	\end{tabular}\\\\
+\\
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/notredamePAGERANK.png}
+	\caption{Variaci\'on de la norma cambiando el C para la Red Notre Dame}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
+ \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
+\hline
+ & C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
+\hline
+Cantidad &  & & & & & & \\ 
+de Iteraciones & 6 & 10 & 15 & 25 & 56 & 96 & 295\\
+\hline
+	\end{tabular}\\\\
+\\
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/stanfordPAGERANK.png}
+	\caption{Variaci\'on de la norma cambiando el C para la Red Stanford}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+
+En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
+ \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
+\hline
+ & C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
+\hline
+Cantidad &  & & & & & & \\ 
+de Iteraciones & 6 & 9 & 14 & 25 & 59 & 104 & 329\\
+\hline
+	\end{tabular}\\\\
+\\
+\\
+\indent Experimentamos con Redes de distintos tama\~nos y podemos concluir que para todas ellas: Cuanto mayor es el C, se necesita una mayor cantidad de iteraciones para concluir algor\'itmicamente que ya convergi\'o el vector $x$ a $x\ast$. Es decir, que se aumenta la cantidad de veces que se ejecuta el ciclo hasta que la norma de la diferencia entre X actual y X anterior sea menor a la tolerancia. 
+\newpage
+
 \subsection{Convergencia de HITS}
-2. Estudiar la convergencia de los vectores de peso x e y para HITS de forma similar al
-punto anterior.
+Creemos que converge a 0. \\
+
+Explicacion: es un algoritmo circular. Se trasladan los "pesos" al multiplicar un vector x grande por la matriz, y haciendo que el otro - que es chico - tome ese valor. EN la iteración sig x sera menor...\\ 
+\\
+--podemos incluir acá la cosa intermedia: hacer una comparacion entre el tiempo de convergencia (o sea, ver cuál converge más rápido) de hits y PR para usarlo como fundamento en el exp 3.\\
+\\
+
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/abortionHITS.png}
+	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Abortion}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 56.\\
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/complexityHITS.png}
+	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Complexity}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 121.\\
+
+
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/moviesHITS.png}
+	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Movies}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 29.\\
+
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/notredameHITS.png}
+	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Notre Dame}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 31.\\
+
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/stanfordHITS.png}
+	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Stanford}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 28.\\
 
 \subsection{Factor Temporal}
-3. Estudiar el tiempo de c\'omputo requerido por PageRank y HITS. Si bien ambos pueden
-se aplicados sobre una red gen\'erica, cada algoritmo tiene un contexto particular de
-aplicaci\'on. Estudiar como impacta el factor temporal en este sentido.
-
 \textcolor{red}{PONER ACA LOS EXPERIMENTOS SOBRE EL VECTOR INICIAL Y LA CANTIDAD DE ITERACIONES}
+
+*Trabajo a futuro*
+Ver si lo que influye en el tiempo que demora pr al lado de hits, es la dimension, la cantidad de elementos o la composicion de la red.
+Ver como dan los resultados para cada c, para la misma red y ver qué valor de c podría tener sentido. fruta++ \\
+\\
+El siguiente gr\'afico mide el tiempo de c\'omputo para redes de tama\~no mediano.
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/expTiempo/tiemposMedianos.png}
+	\caption{Medici\'on de los tres m\'etodos para redes medianas}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+
+El siguiente gr\'afico mide el tiempo de c\'omputo para redes de tama\~no grande.\\
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/expTiempo/tiemposGrandes.png}
+	\caption{Medici\'on de los tres m\'etodos para redes grandes}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+
+
 \newpage
 
 \subsection{Ejemplos ilustrativos y comparaci\'on de los tres M\'etodos}
 
-\textcolor{blue}{4. Estudiar cualitativamente los rankings obtenidos por los tres m\'etodos. Para ello, se sugiere
-considerar distintos ejemplos de b\'usquedas de p\'aginas web4. Analizar los resultados
-individualmente en una primera etapa, y luego realizar un an\'alisis comparativo entre
-los tres rankings obtenidos.
-5. Para cada algoritmo, proponer ejemplos de tama\~no peque\~no que ilustren el comportamiento
-esperado (puede ser utilizando las instancias provistas por la c\'atedra o generadas
-por el grupo).}
 
 Con el fin de poner a prueba experimentalmente el conocimiento aprendido de manera teórica acerca de los algoritmos, destinamos esta sección a la presentación de las hipótesis que formulamos acerca de sus funcionamientos, a los ensayos dirigidos a partir de las mismas y a los resultados obtenidos a partir de aquellos junto con una serie de posibles explicaciones a los comportamientos observados.
 
 \textbf{Hipótesis 1: \itshape{Si se toma un conjunto de páginas base (es decir, no apuntadas por ninguna otra de la red) que tengan links salientes hacia un conjunto de webs de menor dimensión cuyas direcciones se encuentran muy apuntadas, entonces mientras que el algoritmo de HITS va a considerar importantes dichas páginas, no encabezarán el listado de webs sugerido por un algoritmo de PageRank}}\\
-\textcolor{red}{faltaria correr para Indeg y meterlo, ya que estamos}
+
 
 Para contrastar esta hipótesis diseñamos una red que cuya particularidad es que existen conjuntos de webs poco apuntadas que poseen links salientes a un grupo reducido de páginas que - en lo posible - no apunten recíprocamente a aquellas. La idea es generar una instancia en la cual existan un conjunto de autoridades destacables  que concedan a las páginas que las apuntan una fuerte identidad de hubs, para poder anailzar cómo jerarquiza a estas últimas cada método.
 
-Los resultados obtenidos para la Red 1  (cita a continuación) son los presentados en las figuras \ref{hitsa1}, \ref{hitsh1} y \ref{fig:pr1}.
+Los resultados obtenidos para la Red 1  (citada continuación) son los presentados en las figuras \ref{hitsa1}, \ref{hitsh1} y \ref{fig:pr1}.
 
 \textbf{Red 1:}\\
 
@@ -403,7 +554,20 @@ Los resultados obtenidos para la Red 1  (cita a continuación) son los presentad
   \end{center}
 \end{figure}
 \textcolor{red}{che, a todas las figuras las llama igual O_O}\\
-\textcolor{red}{A partir de la observación de dichos resultados...}\\
+
+En los gráficos adjuntados se puede observar que las webs mejor puntuadas para PageRank resultaron\\ ser \\
+Empirismo \\
+Racionalismo \\
+Humanismo \\
+Metafísica \\
+Razonamiento inductivo \\
+Principio de la razón \\
+\indent Si analizamos los resultados de Hits para organizar las autoridades, encontramos en este caso más páginas coincidentes con las priorizadas con el algoritmo de Pagerank. De hecho, las cinco páginas a las que éste último método concede las primeras posiciones, son las mismas que pueden encontrarse en los cinco principales puestos resultantes de Hits para autoridades.  \\
+\indent Ahora bien, Si comparamos con la jerarquía sugerida por Hits (hubs), notamos que una de las webs anteriormente mencionadas (humanismo) tiene valor nulo, mientras que muchas otras sugeridas por este método ni siquiera figuran entre las que PageRank considera webs de importancia (crítica a la razón pura, antihumanismo, etc.). \\
+\indent Los acuerdos entre ambos gráficos se dan en los casos de las páginas ``Empirismo'' y ``Metafísica'', las cuales poseen más links salientes que todas las demás (y apuntan a la mejor autoridad, que es racionalismo) y, a su vez, son apuntadas por más de dos webs. En otras palabras, estas dos páginas no nos interesan realmente a los fines analíticos de la hipótesis en cuestión, dado que al poder ser considerados ``hibridos'' entre hubs y autoridades, no nos permiten emitir conclusiones claras al respecto.\\
+\indent Dicho esto, si dercartaramos estos dos casos notaríamos que las coincidencias entre los resultados arrojados son muy disímiles.\\
+\indent Esto nos hace pensar que el nivel de relación que puedan tener los resultados de PageRank con los de HITS, dependerá diréctamente del criterio que se tome para ordenar jerárquicamente los resultados de HITS. Con este ejemplo podemos deducir que si los hubs fueran considerados más importantes que las autoridades, entonces las coincidencias entre los principales resultados de los métodos enunciados serán menores que en el caso en que el nivel de prioridades entre hubs y autoridades se intercambie.
+
 
 \newpage
 
@@ -465,15 +629,14 @@ Los resultados son los presentados en las figuras \ref{fig:hitsa2}, \ref{fig:hit
 
 
 Si se contrasta la figura \ref{hitsh1} con la figura \ref{hitsh2} (propia de este experimento) se puede ver que el máximo valor de hub  no se realiza en el peso del sitio agregado, sino en los que eran hubs destacados en la red original. \\
-Si bien no obtuvimos los resultados esperados (la web agregada no resultó ser el hub más importante), esto pudo deberse a que ell peso de hubs preexistentes era de gran magnitud. Al subestimar la dificultad de reemplazar un hub por otro y considerar que bastaría con que la nueva página apuntase a unas pocas pero fuertes autoridades, no tuvimos presente el hecho de que cada link saliente de una página incrementa o mantiene en la misma su valor de hub, sea cual fuere el peso de la página apuntada. Sin tener en cuenta esto, desestimamos la posibilidad de que se constituyera como hub prioritario una web que apuntara a muchas otras de pesos - en principio - poco relevantes, siendo que existía otra que aglutinaba en sus links a varias de las mejores autoridades de la red.
+Si bien no obtuvimos los resultados esperados (la web agregada no resultó ser el hub más importante), esto pudo deberse a que el peso de hubs preexistentes era de gran magnitud. Al subestimar la dificultad de reemplazar un hub por otro y considerar que bastaría con que la nueva página apuntase a unas pocas pero fuertes autoridades, no tuvimos presente el hecho de que cada link saliente de una página incrementa o mantiene en la misma su valor de hub, sea cual fuere el peso de la página apuntada. Sin tener en cuenta esto, desestimamos la posibilidad de que se constituyera como hub prioritario una web que apuntara a muchas otras de pesos - en principio - poco relevantes, siendo que existía otra que aglutinaba en sus links a varias de las mejores autoridades de la red.
 
 Nos parece importante destacar que a pesar de no haber obtenido estrictamente los resultados esperados, notamos que la nueva red preservó el orden relativo de los hubs de la red inicial a excepción de la nueva página agregada que, a pesar de no haber obtenido el mejor de los valores, fue posicionada entre los hubs de mayor relevancia.\\
 
-\textcolor{red}{AGREGAR ACA EL REBUSQUE DE ESTE EXPERIMENTO, SI QUEREMOS: HACER QUE EL HUB Q AGREGAMOS APUNTE TAMBIÉN AL HUB MÁS IMPORTANTE O A LA PROXIMA AUTORIDAD MÁS IMPORTANTE Y VER SI ASÍ LOGRA QUEDAR PRIMERO. }\\
 
 \newpage
 
-\textbf{Hipótesis 3: \itshape{Sea A una página de la red apuntada por otra página B perteneciente a la misma. En caso de que se agreguen a la red nuevos nodos a los que B apunte, entonces el nivel de importancia de la web A se verá dismunído en la segunda red de cuerdo al método de PageRank.}}\\
+\textbf{Hipótesis 3: \itshape{Sea A una página de la red apuntada por otra página B perteneciente a la misma. En caso de que se agreguen a la red nuevos nodos a los que B apunte, entonces el nivel de importancia de la web A se verá dismunído en la segunda red de acuerdo al método de PageRank.}}\\
 
 Con el fin de contrastar la presente hipótesis, agregamos a la $Red$ $2$ un conjunto de links salientes de "$Antihumanismo$" (página que apuntaba a "humanismo"), resultando la siguiente red:
 
@@ -526,9 +689,9 @@ Los resultados obtenidos son los presentados en las figuras ~\ref{before3}, ~\re
   \end{center}
 \end{figure}
 
-Al realizar este experimento, nuestro principal objetivo consistía en averiguar si el incremento de los links salientes de un nodo que apuntara a pocas páginas afectaría a las mismas, decrementando su importancia. Sin embargo, la fluctuación de dichos valores no fue lo más llamativo de la compraración entre el orden dado por PageRank en la red inicial y el dado por el mismo método para la red modificada. \\
-Si bien se puede apreciar una diferencia negativa entre el valor de la página de "humanismo" entre la primera instancia y la segunda, también es cierto que la mayor parte de los nodos manifiestan este cambio. Esto puede deberse a la imposibilidad de garantizar que todos las modificaciones realizadas sean locales, puesto se cuenta con una red entramada en la cual cada cambio es potencialmente transitivo. \\
-Por otro lado, el nodo cuyo valor se disminuyó notablemente fue aquel que incorporó nuevos links salientes. Esto cobra sentido cuando se piensa en la interpretación que se les da a los valores obtenidos en el método analizado: cada uno representa la proporción de tiempo que, en el largo plazo, el navegante aleatorio pasa en dicha página. De esta forma, si se incrementa la cantidad de links salientes de un nodo, se amplía la cantidad de sitios que el navegante aleatorio visitará sin teletransportarse, disminuyendo así el tiempo que el mismo pasará en el nodo en cuestión.
+\indent Al realizar este experimento, nuestro principal objetivo consistía en averiguar si el incremento de los links salientes de un nodo que apuntara a pocas páginas afectaría a las mismas, decrementando su importancia. Sin embargo, la fluctuación de dichos valores no fue lo más llamativo de la compraración entre el orden dado por PageRank en la red inicial y el dado por el mismo método para la red modificada. \\
+\indent Si bien se puede apreciar una diferencia negativa entre el valor de la página de ``humanismo'' entre la primera instancia y la segunda, también es cierto que la mayor parte de los nodos manifiestan este cambio. Esto puede deberse a la imposibilidad de garantizar que todos las modificaciones realizadas sean locales, puesto se cuenta con una red entramada en la cual cada cambio es potencialmente transitivo. \\
+\indent Por otro lado, el nodo cuyo valor se disminuyó notablemente fue aquel que incorporó nuevos links salientes. Esto cobra sentido cuando se piensa en la interpretación que se les da a los valores obtenidos en el método analizado: cada uno representa la proporción de tiempo que, en el largo plazo, el navegante aleatorio pasa en dicha página. De esta forma, si se incrementa la cantidad de links salientes de un nodo, se amplía la cantidad de sitios que el navegante aleatorio visitará sin teletransportarse, disminuyendo así el tiempo que el mismo pasará en el nodo en cuestión.
 
 
 \newpage
@@ -544,10 +707,12 @@ Por otro lado, el nodo cuyo valor se disminuyó notablemente fue aquel que incor
 \textcolor{red}{LA HIP 5 LA PENSAMOS INICIALMENTE PARA PROBAR MAS O MENOS COMO IBA TODO, SIN HIPOTESIS. QUE PONGO? (ES LA Q SE AGREGA "MATRIZ" A LO ULTIMO)}\\
 
 \newpage
+\subsection{Comparaci\'on de la calidad de los Resultados para distintos m\'etodos}
+A continuaci\'on se presentan los primeros 6 y 3 resultados de cada ranking.
 \subsection*{Abortion}
 \indent Al momento de correr los tres algoritmos sobre la red \emph{Abortion} (con 2.293 nodos), los primeros elementos en figurar dentro de los ranking fueron los siguientes: \\
 \\
-\underline{Pagerank}: \\
+\underline{Pagerank} (bajo un C=0.85): \\
 \\
 (0.012534) \textbf{The John Birch Society} \\
 \textit{http://www.jbs.org} \\
@@ -568,6 +733,10 @@ Links entrantes:25 \indent Links salientes: 1\\
 (0.006514) \textbf{National Right to Life Organization} \\
 \textit{http://www.nrlc.org} \\
 Links entrantes:184 \indent Links salientes: 1\\
+\\
+(0.00647) \textbf{TRIMonline - Lower Taxes Through Less Government} \\
+\textit{http://www.trimonline.org} \\
+Links entrantes:24 \indent Links salientes: 4\\
 \\
 \\
 \underline{In-deg}:\\
@@ -627,10 +796,6 @@ Links entrantes:0 \indent Links salientes: 10\\
 \textit{http://www.youdebate.com/POLITICS.htm} \\
 Links entrantes:0 \indent Links salientes: 10\\
 \\
-(0.09428) \textbf{United States debates} \\
-\textit{http://www.youdebate.com/UNITEDSTATES.htm} \\
-Links entrantes:0 \indent Links salientes: 10\\
-\\
 \\
 \indent Es necesario destacar que  la p\'agina \emph{DimeClicks.com} queda en la posici\'on 1 dentro del Ranking de Autoridades de HITS y en la posici\'on 4 en el de In-Deg, cuando esta p\'agina no nos es de inter\'es al momento de hacer una b\'usqueda con el string \textit{``Abortion''} ya que consiste en una p\'agina de Marketing y soluciones Web. En cambio, para PageRank esta p\'agina se sit\'ua en la posici\'on 27 con un puntaje de 0,00318. Adem\'as, la p\'agina que ocupa la tercera posici\'on del Ranking de pesos de autoridad -\emph{HitBox.com}- tampoco est\'a relacionada con el contexto de \emph{Aborto}, ya que habla de promociones y estad\'isticas en Internet. Mientras que HitBox se sit\'ua en la posici\'on 6 para In-Deg y en la posici\'on 27 para PageRank con un puntaje de 0,00318. \\
 \indent Por lo tanto, se puede concluir que para estar Red, PageRank sabe filtrar \textit{``mejor''} las p\'aginas que no nos son de ning\'un inter\'es bajo el contexto de b\'usqueda.\\
@@ -639,7 +804,7 @@ Links entrantes:0 \indent Links salientes: 10\\
 \indent A continuaci\'on se muestran los rankings obtenidos tras correr los tres algoritmos sobre la red \emph{Movies} (con 5.757 nodos), los primeros elementos en figurar dentro de los ranking fueron los siguientes: \\
 \\
 \\
-\underline{PageRank}: \\
+\underline{PageRank} (bajo un C=0.85): \\
 \\
 (0.007915)\textbf{ On Wisconsin }\\
 \textit{http://www.onwisconsin.com} \\
@@ -701,7 +866,7 @@ Links entrantes:0 \indent Links salientes: 68\\
 Links entrantes:0 \indent Links salientes: 68\\
 \\
 \\
-\indent En esta ocasi\'on, tambi\'en se puede apreciar que las p\'aginas con mayor puntaje de autoridad no son las m\'as acertadas para nuestro contexto. Sin embargo, lo m\'as llamativo de este caso es que las p\'aginas con mejor puntaje de Hub resultan ser p\'aginas acertadas para la b\'usqueda, p\'aginas que un usuario podr\'ia estar interesado en encontrarse al momento de buscar el string COMILLAS movie. La p\'agina \emph{History of Classic Movies} queda en la posici\'on 3783 para PageRank y para In-Deg, con un puntaje de Autoridad que lo ubica en la posici\'on 2888. Por otro lado, la p\'agina \emph{Movie Reviews} se ubica en la posici\'on 3771 del ranking de PageRank, tambi\'en en la 3771 de In-Deg y ocupa la posici\'on 2876 con su puntaje de Autoridad.\\
+\indent En esta ocasi\'on, tambi\'en se puede apreciar que las p\'aginas con mayor puntaje de autoridad no son las m\'as acertadas para nuestro contexto. Sin embargo, lo m\'as llamativo de este caso es que las p\'aginas con mejor puntaje de Hub resultan ser p\'aginas acertadas para la b\'usqueda, p\'aginas que un usuario podr\'ia estar interesado en encontrarse al momento de buscar el string ``movie''. La p\'agina \emph{History of Classic Movies} queda en la posici\'on 3783 para PageRank y para In-Deg, con un puntaje de Autoridad que lo ubica en la posici\'on 2888. Por otro lado, la p\'agina \emph{Movie Reviews} se ubica en la posici\'on 3771 del ranking de PageRank, tambi\'en en la 3771 de In-Deg y ocupa la posici\'on 2876 con su puntaje de Autoridad.\\
 \indent De este modo, se puede concluir que -para la Web Movies- priorizar las p\'aginas con mayor puntaje de Hub por sobre las que tengan mejor puntaje de Autoridad es una buena idea, ya que los resultados obtenidos fueron m\'as cercanos a lo esperado de este modo.\\
 \\
 \newpage
@@ -751,11 +916,6 @@ Iterador itcol $\leftarrow$ crear iterador del vector ind_col \\
 }
 \end{algorithm}\DecMargin{1em}
 	\subsection{Ap\'endice C}
-\textcolor{blue}{Resultados que valga la pena mencionar en el trabajo pero que sean demasiado especificos para
-aparecer en el cuerpo principal del trabajo podr\'an mencionarse en sucesivos ap\'endices
-rotulados con las letras may\'usculas del alfabeto romano. Por ejemplo: la demostraci\'on
-de una propiedad que aplican para optimizar el algoritmo que programaron para resolver
-un problema.}\\
 El siguiente es un ejemplo de una matriz $A$ $\in$ $\mathbb{R}^{4x4}$ y su traspuesta con su forma de implementaci\'on.\\
 \begin{equation}
 A = \left(

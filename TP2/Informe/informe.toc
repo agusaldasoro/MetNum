@@ -8,12 +8,13 @@
 \contentsline {subsection}{\numberline {2.4}Algoritmo de PageRank}{9}
 \contentsline {section}{\numberline {3}Resultados y discusi\'on}{10}
 \contentsline {subsection}{\numberline {3.1}Convergencia de PageRank}{10}
-\contentsline {subsection}{\numberline {3.2}Convergencia de HITS}{10}
-\contentsline {subsection}{\numberline {3.3}Factor Temporal}{10}
-\contentsline {subsection}{\numberline {3.4}Ejemplos ilustrativos y comparaci\'on de los tres M\'etodos}{11}
-\contentsline {section}{\numberline {4}Conclusiones}{27}
-\contentsline {section}{\numberline {5}Ap\'endices}{28}
-\contentsline {subsection}{\numberline {5.1}Ap\'endice A}{28}
-\contentsline {subsection}{\numberline {5.2}Ap\'endice B}{29}
-\contentsline {subsection}{\numberline {5.3}Ap\'endice C}{29}
-\contentsline {section}{\numberline {6}Referencias}{31}
+\contentsline {subsection}{\numberline {3.2}Convergencia de HITS}{14}
+\contentsline {subsection}{\numberline {3.3}Factor Temporal}{14}
+\contentsline {subsection}{\numberline {3.4}Ejemplos ilustrativos y comparaci\'on de los tres M\'etodos}{15}
+\contentsline {subsection}{\numberline {3.5}Comparaci\'on de la calidad de los Resultados para distintos m\'etodos}{30}
+\contentsline {section}{\numberline {4}Conclusiones}{34}
+\contentsline {section}{\numberline {5}Ap\'endices}{35}
+\contentsline {subsection}{\numberline {5.1}Ap\'endice A}{35}
+\contentsline {subsection}{\numberline {5.2}Ap\'endice B}{36}
+\contentsline {subsection}{\numberline {5.3}Ap\'endice C}{36}
+\contentsline {section}{\numberline {6}Referencias}{38}

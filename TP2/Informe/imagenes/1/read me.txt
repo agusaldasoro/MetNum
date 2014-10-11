@@ -1,2 +1,0 @@
-En norma hits movies zoom arranca desde la instancia 2
-En norma Pagerank movie zoom arranca desde la instancia 4
