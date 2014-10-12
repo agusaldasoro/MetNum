@@ -481,6 +481,7 @@ Y para el algoritmo de PageRank, ver como dan los resultados para cada c, para l
 \\
 \indent El factor tiempo en el uso es una caracter\'istica importante de los algoritmos si se van a computar online, ya que es tiempo que el usuario debe esperar hasta obtener su resultado. Si bien el algoritmo de PageRank es computado, generalmente, online; el de HITS no lo es ya que debe primero armar la red con la que va a trabajar.\\
 \\
+\indent A continuaci\'on se incluyen los gr\'aficos de las mediciones de tiempo de ejecuci\'on de los m\'etodos, para ello no se incluye el costo de armado de la matriz con los datos pasados en el archivo de entrada como par\'ametro.\\
 El siguiente gr\'afico mide el tiempo de c\'omputo para redes de tama\~no mediano.
 
 \begin{figure}[h!]
@@ -515,7 +516,7 @@ Con el fin de poner a prueba experimentalmente el conocimiento aprendido de mane
 
 Para contrastar esta hipótesis diseñamos una red que cuya particularidad es que existen conjuntos de webs poco apuntadas que poseen links salientes a un grupo reducido de páginas que - en lo posible - no apunten recíprocamente a aquellas. La idea es generar una instancia en la cual existan un conjunto de autoridades destacables  que concedan a las páginas que las apuntan una fuerte identidad de hubs, para poder anailzar cómo jerarquiza a estas últimas cada método.
 
-Los resultados obtenidos para la Red 1  (citada continuación) son los presentados en las figuras \ref{hitsa1}, \ref{hitsh1} y \ref{fig:pr1}.
+Los resultados obtenidos para la Red 1  (citada continuación) son los presentados en las figuras \ref{hitsa1}, \ref{hitsh1} y 15.
 
 \textbf{Red 1:}\\
 
@@ -537,28 +538,34 @@ Los resultados obtenidos para la Red 1  (citada continuación) son los presentad
 15 & Antihumanismo \\
 \end{tabular}
 
-
-\begin{figure}
+\newpage
+\begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.66]{imagenes/Exp1/hitsA1}
+	\caption{}	
 	\label{hitsa1}
   \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.66]{imagenes/Exp1/hitsH1}
+	\caption{}
 	\label{hitsh1}
   \end{center}
 \end{figure}
 
-\begin{figure}
+\newpage
+
+\begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.66]{imagenes/Exp1/PR1}
-	\label{fig:pr1}
+	\caption{}
+	\label{PR1}
   \end{center}
 \end{figure}
-\textcolor{red}{che, a todas las figuras las llama igual O_O}\\
+
+
 
 En los gráficos adjuntados se puede observar que las webs mejor puntuadas para PageRank resultaron\\ ser \\
 Empirismo \\
@@ -578,9 +585,9 @@ Principio de la razón \\
 
 \textbf{Hipótesis 2: \itshape{Si se toma la misma red y se le incluye una web que apunte a las mayores autoridades, entonces ésta pasará a ser el hub más importante de la nueva red. }}\\
 
-Para intentar contrastar esta proposición tomamos la Red 1 presentada en la $hip$ó$tesis$ $1$, le agregamos una web nueva ($"Escuelas Filos$ó$ficas"$), ejecutamos los algoritmos de PageRank y de HITS y luego analizamos los datos obtenidos en este apartado en conjunto con los arrojados en el inmediato anterior.\\
+Para intentar contrastar esta proposición tomamos la Red 1 presentada en la \textit{hip\'otesis} $1$, le agregamos una web nueva (\textit{``Escuelas Filosóficas''}), ejecutamos los algoritmos de PageRank y de HITS y luego analizamos los datos obtenidos en este apartado en conjunto con los arrojados en el inmediato anterior.\\
 
-Los resultados son los presentados en las figuras \ref{fig:hitsa2}, \ref{fig:hitsh2} y \ref{fig:pr2}, mientras que en la figura \ref{grafo2} se puede observar el grafo de la nueva web.
+Los resultados son los presentados en las figuras \ref{hitsa2}, \ref{hitsh2} y \ref{pr2}, mientras que en la figura \ref{grafo2} se puede observar el grafo de la nueva web.
 
 \textbf{Red 2:}\\
 
@@ -603,31 +610,34 @@ Los resultados son los presentados en las figuras \ref{fig:hitsa2}, \ref{fig:hit
 16 & Antihumanismo \\
 \end{tabular}
 
-
-\begin{figure}
+\begin{figure}[h!]
   \begin{center}
-	\includegraphics[scale=0.3]{imagenes/Exp2/grafo2}
+	\includegraphics[scale=0.6]{imagenes/Exp2/grafo2}
+	\caption{}
 	\label{grafo2}
   \end{center}
 \end{figure}
-
-\begin{figure}
+\newpage
+\begin{figure}[h!]
  \begin{center}
 	\includegraphics[scale=0.3]{imagenes/Exp2/PR2}
+	\caption{}
 	\label{hitsa2}
   \end{center}
 \end{figure}
-
-\begin{figure}
+\newpage
+\begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.3]{imagenes/Exp2/hitsa2nuevo}
+	\caption{}
 	\label{pr2}
   \end{center}
 \end{figure}
-
+\newpage
 \begin{figure}
  \begin{center}
 	\includegraphics[scale=0.3]{imagenes/Exp2/hitsH2}
+	\caption{}
 	\label{hitsh2}
   \end{center}
 \end{figure}
@@ -670,9 +680,17 @@ Con el fin de contrastar la presente hipótesis, agregamos a la $Red$ $2$ un con
 20 & Michel Foucault \\
 \end{tabular}\\
 
-Los resultados obtenidos son los presentados en las figuras ~\ref{before3}, ~\ref{after3}, mientras que en la figuras ~\ref{gbefore3} se puede observar el grafo de la web inicial.
+Los resultados obtenidos son los presentados en las figuras \ref{before3}, ~\ref{after3}, mientras que en la figuras ~\ref{gbefore3} se puede observar el grafo de la web inicial.
 
-\begin{figure}
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.60]{imagenes/Exp3/grafobefore}
+	\caption{}
+	\label{gbefore3}
+  \end{center}
+\end{figure}
+\newpage
+\begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.80]{imagenes/Exp3/before}
 	\label{before3}
@@ -680,19 +698,15 @@ Los resultados obtenidos son los presentados en las figuras ~\ref{before3}, ~\re
   \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.80]{imagenes/Exp3/after}
+	\caption{}
 	\label{after3}
   \end{center}
 \end{figure}
+\newpage
 
-\begin{figure}
-  \begin{center}
-	\includegraphics[scale=0.80]{imagenes/Exp3/grafobefore}
-	\label{gbefore3}
-  \end{center}
-\end{figure}
 
 \indent Al realizar este experimento, nuestro principal objetivo consistía en averiguar si el incremento de los links salientes de un nodo que apuntara a pocas páginas afectaría a las mismas, decrementando su importancia. Sin embargo, la fluctuación de dichos valores no fue lo más llamativo de la compraración entre el orden dado por PageRank en la red inicial y el dado por el mismo método para la red modificada. \\
 \indent Si bien se puede apreciar una diferencia negativa entre el valor de la página de ``humanismo'' entre la primera instancia y la segunda, también es cierto que la mayor parte de los nodos manifiestan este cambio. Esto puede deberse a la imposibilidad de garantizar que todos las modificaciones realizadas sean locales, puesto se cuenta con una red entramada en la cual cada cambio es potencialmente transitivo. \\
