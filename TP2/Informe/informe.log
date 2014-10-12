@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  11 OCT 2014 23:18
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  11 OCT 2014 23:49
 entering extended mode
 **informe.tex
 (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\informe.tex
@@ -517,6 +517,12 @@ LaTeX Warning: Label `nombreparareferenciar' multiply defined.
 
 LaTeX Warning: Label `nombreparareferenciar' multiply defined.
 
+
+LaTeX Warning: Label `nombreparareferenciar' multiply defined.
+
+
+LaTeX Warning: Label `nombreparareferenciar' multiply defined.
+
 )
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
 LaTeX Font Info:    ... okay on input line 48.
@@ -712,17 +718,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 299--306
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 313--320
+Underfull \hbox (badness 10000) in paragraph at lines 311--318
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 313--320
+Underfull \hbox (badness 10000) in paragraph at lines 311--318
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 313--320
+Underfull \hbox (badness 10000) in paragraph at lines 311--318
 
  []
 
@@ -731,15 +737,15 @@ File: imagenes/exp12/complexityPAGERANK.png Graphic file (type png)
 
 <use imagenes/exp12/complexityPAGERANK.png>
 Package pdftex.def Info: imagenes/exp12/complexityPAGERANK.png used on input li
-ne 323.
+ne 321.
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--337
+Underfull \hbox (badness 10000) in paragraph at lines 326--335
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--337
+Underfull \hbox (badness 10000) in paragraph at lines 326--335
 
  []
 
@@ -750,15 +756,15 @@ File: imagenes/exp12/abortionPAGERANK.png Graphic file (type png)
 
 <use imagenes/exp12/abortionPAGERANK.png>
 Package pdftex.def Info: imagenes/exp12/abortionPAGERANK.png used on input line
- 342.
+ 340.
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 347--356
+Underfull \hbox (badness 10000) in paragraph at lines 345--354
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 347--356
+Underfull \hbox (badness 10000) in paragraph at lines 345--354
 
  []
 
@@ -769,20 +775,20 @@ File: imagenes/exp12/moviesPAGERANK.png Graphic file (type png)
 
 <use imagenes/exp12/moviesPAGERANK.png>
 Package pdftex.def Info: imagenes/exp12/moviesPAGERANK.png used on input line 3
-61.
+59.
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 366--376
+Underfull \hbox (badness 10000) in paragraph at lines 364--374
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 366--376
+Underfull \hbox (badness 10000) in paragraph at lines 364--374
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 366--376
+Underfull \hbox (badness 10000) in paragraph at lines 364--374
 
  []
 
@@ -791,7 +797,7 @@ File: imagenes/exp12/stanfordPAGERANK.png Graphic file (type png)
 
 <use imagenes/exp12/stanfordPAGERANK.png>
 Package pdftex.def Info: imagenes/exp12/stanfordPAGERANK.png used on input line
- 379.
+ 377.
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
 
 <imagenes/exp12/notredamePAGERANK.png, id=60, 867.24pt x 469.755pt>
@@ -799,30 +805,30 @@ File: imagenes/exp12/notredamePAGERANK.png Graphic file (type png)
 
 <use imagenes/exp12/notredamePAGERANK.png>
 Package pdftex.def Info: imagenes/exp12/notredamePAGERANK.png used on input lin
-e 397.
+e 395.
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--414
+Underfull \hbox (badness 10000) in paragraph at lines 383--412
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--414
+Underfull \hbox (badness 10000) in paragraph at lines 383--412
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--414
+Underfull \hbox (badness 10000) in paragraph at lines 383--412
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--414
+Underfull \hbox (badness 10000) in paragraph at lines 383--412
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--414
+Underfull \hbox (badness 10000) in paragraph at lines 383--412
 
  []
 
@@ -830,666 +836,885 @@ Underfull \hbox (badness 10000) in paragraph at lines 385--414
 /moviesPAGERANK.png> <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Infor
 me/imagenes/exp12/stanfordPAGERANK.png>] [13 <C:/Users/Agustina/Documents/UBA/M
 étodos/MetNum/TP2/Informe/imagenes/exp12/notredamePAGERANK.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 418--422
+Underfull \hbox (badness 10000) in paragraph at lines 416--417
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 418--422
+Underfull \hbox (badness 10000) in paragraph at lines 452--454
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 464--468
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 418--422
+Underfull \hbox (badness 10000) in paragraph at lines 464--468
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 424--425
+Underfull \hbox (badness 10000) in paragraph at lines 464--468
 
  []
 
-<imagenes/exp12/complexityHITS.png, id=71, 867.24pt x 469.755pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 470--471
+
+ []
+
+<imagenes/exp12/complexityHITS.png, id=76, 867.24pt x 469.755pt>
 File: imagenes/exp12/complexityHITS.png Graphic file (type png)
 
 <use imagenes/exp12/complexityHITS.png>
 Package pdftex.def Info: imagenes/exp12/complexityHITS.png used on input line 4
-29.
+75.
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
- [14 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/exp1
+ [15 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/exp1
 2/complexityHITS.png>]
-<imagenes/exp12/abortionHITS.png, id=76, 867.24pt x 469.755pt>
+<imagenes/exp12/abortionHITS.png, id=81, 867.24pt x 469.755pt>
 File: imagenes/exp12/abortionHITS.png Graphic file (type png)
 
 <use imagenes/exp12/abortionHITS.png>
-Package pdftex.def Info: imagenes/exp12/abortionHITS.png used on input line 438
+Package pdftex.def Info: imagenes/exp12/abortionHITS.png used on input line 484
 .
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
 
-<imagenes/exp12/moviesHITS.png, id=77, 867.24pt x 469.755pt>
+<imagenes/exp12/moviesHITS.png, id=82, 867.24pt x 469.755pt>
 File: imagenes/exp12/moviesHITS.png Graphic file (type png)
 
 <use imagenes/exp12/moviesHITS.png>
-Package pdftex.def Info: imagenes/exp12/moviesHITS.png used on input line 447.
+Package pdftex.def Info: imagenes/exp12/moviesHITS.png used on input line 493.
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
- [15 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/exp1
+ [16 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/exp1
 2/abortionHITS.png> <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Inform
 e/imagenes/exp12/moviesHITS.png>]
-<imagenes/exp12/stanfordHITS.png, id=83, 867.24pt x 469.755pt>
+<imagenes/exp12/stanfordHITS.png, id=88, 867.24pt x 469.755pt>
 File: imagenes/exp12/stanfordHITS.png Graphic file (type png)
 
 <use imagenes/exp12/stanfordHITS.png>
-Package pdftex.def Info: imagenes/exp12/stanfordHITS.png used on input line 456
+Package pdftex.def Info: imagenes/exp12/stanfordHITS.png used on input line 502
 .
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
 
-<imagenes/exp12/notredameHITS.png, id=84, 867.24pt x 469.755pt>
+<imagenes/exp12/notredameHITS.png, id=89, 867.24pt x 469.755pt>
 File: imagenes/exp12/notredameHITS.png Graphic file (type png)
 
 <use imagenes/exp12/notredameHITS.png>
-Package pdftex.def Info: imagenes/exp12/notredameHITS.png used on input line 46
-5.
+Package pdftex.def Info: imagenes/exp12/notredameHITS.png used on input line 51
+1.
 (pdftex.def)             Requested size: 433.61894pt x 234.87692pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 471--473
+Underfull \hbox (badness 10000) in paragraph at lines 517--519
 
  []
 
-[16 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/exp12
+[17 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/exp12
 /stanfordHITS.png> <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe
 /imagenes/exp12/notredameHITS.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 474--477
+Underfull \hbox (badness 10000) in paragraph at lines 520--523
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 474--477
+Underfull \hbox (badness 10000) in paragraph at lines 520--523
 
  []
 
-[17]
-Underfull \hbox (badness 10000) in paragraph at lines 480--486
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 525--529
 
  []
 
-<imagenes/expTiempo/tiemposMedianos.png, id=93, 610.53094pt x 363.60844pt>
+<imagenes/expTiempo/tiemposMedianos.png, id=98, 610.53094pt x 363.60844pt>
 File: imagenes/expTiempo/tiemposMedianos.png Graphic file (type png)
 
 <use imagenes/expTiempo/tiemposMedianos.png>
 Package pdftex.def Info: imagenes/expTiempo/tiemposMedianos.png used on input l
-ine 489.
+ine 532.
 (pdftex.def)             Requested size: 305.26472pt x 181.80377pt.
 
-<imagenes/expTiempo/tiemposGrandes.png, id=94, 540.51938pt x 330.48468pt>
+<imagenes/expTiempo/tiemposGrandes.png, id=99, 540.51938pt x 330.48468pt>
 File: imagenes/expTiempo/tiemposGrandes.png Graphic file (type png)
 
 <use imagenes/expTiempo/tiemposGrandes.png>
 Package pdftex.def Info: imagenes/expTiempo/tiemposGrandes.png used on input li
-ne 498.
+ne 541.
 (pdftex.def)             Requested size: 270.25902pt x 165.24193pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 505--507
-
- []
-
-[18 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/expTi
-empo/tiemposMedianos.png> <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/
-Informe/imagenes/expTiempo/tiemposGrandes.png>] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 514--515
+ [19 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/expT
+iempo/tiemposMedianos.png> <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2
+/Informe/imagenes/expTiempo/tiemposGrandes.png>] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 566--568
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 521--522
+Underfull \hbox (badness 10000) in paragraph at lines 569--571
 
  []
 
-[20] <imagenes/Exp1/hitsA1.png, id=106, 505.89pt x 361.35pt>
+<imagenes/002.jpg, id=108, 540.0175pt x 395.4775pt>
+File: imagenes/002.jpg Graphic file (type jpg)
+ <use imagenes/002.jpg>
+Package pdftex.def Info: imagenes/002.jpg used on input line 582.
+(pdftex.def)             Requested size: 270.00809pt x 197.73827pt.
+
+[21 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/002.j
+pg>]
+Underfull \hbox (badness 10000) in paragraph at lines 594--596
+
+ []
+
+<imagenes/001.jpg, id=112, 538.01pt x 399.4925pt>
+File: imagenes/001.jpg Graphic file (type jpg)
+ <use imagenes/001.jpg>
+Package pdftex.def Info: imagenes/001.jpg used on input line 601.
+(pdftex.def)             Requested size: 269.00433pt x 199.74576pt.
+
+[22 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/001.j
+pg>]
+Underfull \hbox (badness 10000) in paragraph at lines 613--614
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 620--621
+
+ []
+
+[23] <imagenes/Exp1/hitsA1.png, id=119, 505.89pt x 361.35pt>
 File: imagenes/Exp1/hitsA1.png Graphic file (type png)
 
 <use imagenes/Exp1/hitsA1.png>
-Package pdftex.def Info: imagenes/Exp1/hitsA1.png used on input line 544.
+Package pdftex.def Info: imagenes/Exp1/hitsA1.png used on input line 643.
 (pdftex.def)             Requested size: 333.88841pt x 238.49173pt.
 
-<imagenes/Exp1/hitsH1.png, id=107, 505.89pt x 361.35pt>
+<imagenes/Exp1/hitsH1.png, id=120, 505.89pt x 361.35pt>
 File: imagenes/Exp1/hitsH1.png Graphic file (type png)
 
 <use imagenes/Exp1/hitsH1.png>
-Package pdftex.def Info: imagenes/Exp1/hitsH1.png used on input line 552.
+Package pdftex.def Info: imagenes/Exp1/hitsH1.png used on input line 651.
 (pdftex.def)             Requested size: 333.88841pt x 238.49173pt.
- [21 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp1
+ [24 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp1
 /hitsA1.png> <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/image
 nes/Exp1/hitsH1.png>]
-<imagenes/Exp1/PR1.png, id=113, 505.89pt x 361.35pt>
+<imagenes/Exp1/PR1.png, id=126, 505.89pt x 361.35pt>
 File: imagenes/Exp1/PR1.png Graphic file (type png)
 
 <use imagenes/Exp1/PR1.png>
-Package pdftex.def Info: imagenes/Exp1/PR1.png used on input line 562.
+Package pdftex.def Info: imagenes/Exp1/PR1.png used on input line 661.
 (pdftex.def)             Requested size: 333.88841pt x 238.49173pt.
- [22 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp1
+ [25 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp1
 /PR1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 586--587
+Underfull \hbox (badness 10000) in paragraph at lines 685--686
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 588--589
+Underfull \hbox (badness 10000) in paragraph at lines 687--688
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 592--593
+Underfull \hbox (badness 10000) in paragraph at lines 691--692
 
  []
 
-<imagenes/Exp2/grafo2.png, id=118, 578.16pt x 433.62pt>
+<imagenes/Exp2/grafo2.png, id=132, 578.16pt x 433.62pt>
 File: imagenes/Exp2/grafo2.png Graphic file (type png)
 
 <use imagenes/Exp2/grafo2.png>
-Package pdftex.def Info: imagenes/Exp2/grafo2.png used on input line 615.
+Package pdftex.def Info: imagenes/Exp2/grafo2.png used on input line 714.
 (pdftex.def)             Requested size: 346.89867pt x 260.17401pt.
- [23 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp2
+ [26 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp2
 /grafo2.png>]
-<imagenes/Exp2/PR2.jpg, id=123, 1580.90625pt x 1129.21875pt>
+<imagenes/Exp2/PR2.jpg, id=137, 1580.90625pt x 1129.21875pt>
 File: imagenes/Exp2/PR2.jpg Graphic file (type jpg)
 
 <use imagenes/Exp2/PR2.jpg>
-Package pdftex.def Info: imagenes/Exp2/PR2.jpg used on input line 623.
+Package pdftex.def Info: imagenes/Exp2/PR2.jpg used on input line 722.
 (pdftex.def)             Requested size: 474.27554pt x 338.76823pt.
 
-Overfull \hbox (19.03146pt too wide) in paragraph at lines 623--624
+Overfull \hbox (19.03146pt too wide) in paragraph at lines 722--723
  [] 
  []
 
-[24 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp2/
-PR2.jpg>] <imagenes/Exp2/hitsa2nuevo.jpg, id=127, 1580.90625pt x 1129.21875pt>
+[27 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp2/
+PR2.jpg>] <imagenes/Exp2/hitsa2nuevo.jpg, id=141, 1580.90625pt x 1129.21875pt>
 File: imagenes/Exp2/hitsa2nuevo.jpg Graphic file (type jpg)
 
 <use imagenes/Exp2/hitsa2nuevo.jpg>
-Package pdftex.def Info: imagenes/Exp2/hitsa2nuevo.jpg used on input line 631.
+Package pdftex.def Info: imagenes/Exp2/hitsa2nuevo.jpg used on input line 730.
 (pdftex.def)             Requested size: 474.27554pt x 338.76823pt.
 
-Overfull \hbox (19.03146pt too wide) in paragraph at lines 631--632
+Overfull \hbox (19.03146pt too wide) in paragraph at lines 730--731
  [] 
  []
 
-[25 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp2/
+[28 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp2/
 hitsa2nuevo.jpg>]
-<imagenes/Exp2/hitsH2.jpg, id=132, 1580.90625pt x 1129.21875pt>
+<imagenes/Exp2/hitsH2.jpg, id=145, 1580.90625pt x 1129.21875pt>
 File: imagenes/Exp2/hitsH2.jpg Graphic file (type jpg)
 
 <use imagenes/Exp2/hitsH2.jpg>
-Package pdftex.def Info: imagenes/Exp2/hitsH2.jpg used on input line 639.
+Package pdftex.def Info: imagenes/Exp2/hitsH2.jpg used on input line 738.
 (pdftex.def)             Requested size: 474.27554pt x 338.76823pt.
 
-Overfull \hbox (19.03146pt too wide) in paragraph at lines 639--640
+Overfull \hbox (19.03146pt too wide) in paragraph at lines 738--739
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 649--650
+Underfull \hbox (badness 10000) in paragraph at lines 748--749
 
  []
 
-[26 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp2/
+[29 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp2/
 hitsH2.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 654--655
+Underfull \hbox (badness 10000) in paragraph at lines 753--754
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 658--659
+Underfull \hbox (badness 10000) in paragraph at lines 757--758
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 660--682
+Underfull \hbox (badness 10000) in paragraph at lines 759--781
 
  []
 
-<imagenes/Exp3/grafobefore.png, id=136, 578.16pt x 433.62pt>
+<imagenes/Exp3/grafobefore.png, id=149, 578.16pt x 433.62pt>
 File: imagenes/Exp3/grafobefore.png Graphic file (type png)
 
 <use imagenes/Exp3/grafobefore.png>
-Package pdftex.def Info: imagenes/Exp3/grafobefore.png used on input line 687.
+Package pdftex.def Info: imagenes/Exp3/grafobefore.png used on input line 786.
 (pdftex.def)             Requested size: 346.89867pt x 260.17401pt.
- [27 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp3
+ [30 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp3
 /grafobefore.png>]
-<imagenes/Exp3/before.png, id=141, 505.89pt x 361.35pt>
+<imagenes/Exp3/before.png, id=154, 505.89pt x 361.35pt>
 File: imagenes/Exp3/before.png Graphic file (type png)
 
 <use imagenes/Exp3/before.png>
-Package pdftex.def Info: imagenes/Exp3/before.png used on input line 695.
+Package pdftex.def Info: imagenes/Exp3/before.png used on input line 794.
 (pdftex.def)             Requested size: 404.71254pt x 289.0804pt.
 
-<imagenes/Exp3/after.png, id=142, 578.16pt x 400.3758pt>
+<imagenes/Exp3/after.png, id=155, 578.16pt x 400.3758pt>
 File: imagenes/Exp3/after.png Graphic file (type png)
 
 <use imagenes/Exp3/after.png>
-Package pdftex.def Info: imagenes/Exp3/after.png used on input line 703.
+Package pdftex.def Info: imagenes/Exp3/after.png used on input line 802.
 (pdftex.def)             Requested size: 462.52863pt x 320.30106pt.
 
-Overfull \hbox (7.28455pt too wide) in paragraph at lines 703--704
+Overfull \hbox (7.28455pt too wide) in paragraph at lines 802--803
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[28 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp3/
-before.png>] [29 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/i
+[31 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/Exp3/
+before.png>] [32 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/i
 magenes/Exp3/after.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 720--722
-
- []
-
-[30]
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--817
+Underfull \hbox (badness 10000) in paragraph at lines 821--910
 
  []
 
-[31]
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--887
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
 
  []
 
-[32] [33] [34] <imagenes/cambioshits.png, id=167, 650.43pt x 331.7193pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 912--980
+
+ []
+
+[34] [35] [36]
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--1021
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1056
+
+ []
+
+[37] [38] <imagenes/cambioshits.png, id=184, 650.43pt x 331.7193pt>
 File: imagenes/cambioshits.png Graphic file (type png)
 
 <use imagenes/cambioshits.png>
-Package pdftex.def Info: imagenes/cambioshits.png used on input line 898.
+Package pdftex.def Info: imagenes/cambioshits.png used on input line 1068.
 (pdftex.def)             Requested size: 429.28513pt x 218.9354pt.
- [35 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/camb
+ [39 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/camb
 ioshits.png>]
-<imagenes/cambiospagerank.png, id=172, 578.16pt x 361.35pt>
+<imagenes/cambiospagerank.png, id=189, 578.16pt x 361.35pt>
 File: imagenes/cambiospagerank.png Graphic file (type png)
 
 <use imagenes/cambiospagerank.png>
-Package pdftex.def Info: imagenes/cambiospagerank.png used on input line 910.
+Package pdftex.def Info: imagenes/cambiospagerank.png used on input line 1080.
 (pdftex.def)             Requested size: 381.58678pt x 238.49173pt.
- [36 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/camb
+ [40 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/imagenes/camb
 iospagerank.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 918--929
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1099
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 918--929
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1099
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 918--929
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1099
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 918--929
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1099
 
  []
 
-[37] (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\tp2.tex
-<logodpt.jpg, id=181, 138.5175pt x 160.6pt>
+[41] (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\tp2.tex
+<logodpt.jpg, id=197, 138.5175pt x 160.6pt>
 File: logodpt.jpg Graphic file (type jpg)
  <use logodpt.jpg>
 Package pdftex.def Info: logodpt.jpg used on input line 28.
 (pdftex.def)             Requested size: 45.52458pt x 52.7825pt.
 
 
-LaTeX Warning: Citation `Brin1998' on page 38 undefined on input line 78.
+LaTeX Warning: Citation `Brin1998' on page 42 undefined on input line 78.
 
-[38 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/logodpt.jpg>]
+[42 <C:/Users/Agustina/Documents/UBA/Métodos/MetNum/TP2/Informe/logodpt.jpg>]
 
-LaTeX Warning: Citation `Bryan2006' on page 39 undefined on input line 115.
-
-
-LaTeX Warning: Citation `Kamvar2003' on page 39 undefined on input line 115.
+LaTeX Warning: Citation `Bryan2006' on page 43 undefined on input line 115.
 
 
-LaTeX Warning: Reference `eq:basicmodel' on page 39 undefined on input line 137
+LaTeX Warning: Citation `Kamvar2003' on page 43 undefined on input line 115.
+
+
+LaTeX Warning: Reference `eq:basicmodel' on page 43 undefined on input line 137
 .
 
 
-LaTeX Warning: Citation `Bryan2006' on page 39 undefined on input line 142.
+LaTeX Warning: Citation `Bryan2006' on page 43 undefined on input line 142.
 
 
-LaTeX Warning: Citation `Kamvar2003' on page 39 undefined on input line 143.
+LaTeX Warning: Citation `Kamvar2003' on page 43 undefined on input line 143.
 
 
-LaTeX Warning: Citation `Kleinberg' on page 39 undefined on input line 154.
+LaTeX Warning: Citation `Kleinberg' on page 43 undefined on input line 154.
 
-[39]
+[43]
 
-LaTeX Warning: Citation `Kleinberg' on page 40 undefined on input line 211.
+LaTeX Warning: Citation `Kleinberg' on page 44 undefined on input line 211.
 
-[40]
+[44]
 
-LaTeX Warning: Citation `Bryan2006' on page 41 undefined on input line 212.
-
-
-LaTeX Warning: Citation `Kamvar2003' on page 41 undefined on input line 213.
+LaTeX Warning: Citation `Bryan2006' on page 45 undefined on input line 212.
 
 
-LaTeX Warning: Citation `Kamvar2003' on page 41 undefined on input line 215.
+LaTeX Warning: Citation `Kamvar2003' on page 45 undefined on input line 213.
 
 
-LaTeX Warning: Citation `Kleinberg' on page 41 undefined on input line 217.
-
-[41]
-
-LaTeX Warning: Citation `SNAP' on page 42 undefined on input line 268.
+LaTeX Warning: Citation `Kamvar2003' on page 45 undefined on input line 215.
 
 
-LaTeX Warning: Citation `dataset' on page 42 undefined on input line 269.
+LaTeX Warning: Citation `Kleinberg' on page 45 undefined on input line 217.
+
+[45]
+
+LaTeX Warning: Citation `SNAP' on page 46 undefined on input line 268.
 
 
-LaTeX Warning: Citation `Bryan2006' on page 42 undefined on input line 276.
+LaTeX Warning: Citation `dataset' on page 46 undefined on input line 269.
 
 
-LaTeX Warning: Citation `dataset' on page 42 undefined on input line 293.
+LaTeX Warning: Citation `Bryan2006' on page 46 undefined on input line 276.
+
+
+LaTeX Warning: Citation `dataset' on page 46 undefined on input line 293.
 
 No file informe.bbl.
-) [42] [43]
-Underfull \hbox (badness 10000) in paragraph at lines 937--938
+) [46] [47]
+Underfull \hbox (badness 10000) in paragraph at lines 1107--1108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 969--970
+Underfull \hbox (badness 10000) in paragraph at lines 1139--1140
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 979--988
+Underfull \hbox (badness 10000) in paragraph at lines 1149--1158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 997--1008
+Underfull \hbox (badness 10000) in paragraph at lines 1167--1178
 
  []
 
-[44] [45]
-Underfull \hbox (badness 10000) in paragraph at lines 1010--1028
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1010--1028
+[48] [49]
+Underfull \hbox (badness 10000) in paragraph at lines 1180--1198
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1010--1028
+Underfull \hbox (badness 10000) in paragraph at lines 1180--1198
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1010--1028
+Underfull \hbox (badness 10000) in paragraph at lines 1180--1198
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1010--1028
+Underfull \hbox (badness 10000) in paragraph at lines 1180--1198
 
  []
 
-[46] (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\informe.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 1180--1198
+
+ []
+
+[50] (C:\Users\Agustina\Documents\UBA\Métodos\MetNum\TP2\Informe\informe.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1502,17 +1727,17 @@ LaTeX Warning: There were multiply-defined labels.
  )
 (\end occurred inside a group at level 4)
 
-### simple group (level 4) entered at line 1027 ({)
-### simple group (level 3) entered at line 1023 ({)
-### simple group (level 2) entered at line 1018 ({)
-### simple group (level 1) entered at line 1016 ({)
+### simple group (level 4) entered at line 1197 ({)
+### simple group (level 3) entered at line 1193 ({)
+### simple group (level 2) entered at line 1188 ({)
+### simple group (level 1) entered at line 1186 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5147 strings out of 493921
- 68026 string characters out of 3147274
- 155214 words of memory out of 3000000
- 8301 multiletter control sequences out of 15000+200000
- 39960 words of font info for 75 fonts, out of 3000000 for 9000
+ 5165 strings out of 493921
+ 68300 string characters out of 3147274
+ 155215 words of memory out of 3000000
+ 8315 multiletter control sequences out of 15000+200000
+ 41505 words of font info for 81 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  30i,18n,43p,1152b,416s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C
@@ -1522,21 +1747,22 @@ TeX 2.9/fonts/type1/bitstrea/charter/bchr8a.pfb><C:/Program Files/MiKTeX 2.9/fo
 nts/type1/bitstrea/charter/bchri8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 /public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (46 pages, 3916056 bytes).
+/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi
+5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on informe.pdf (50 pages, 3967818 bytes).
 PDF statistics:
- 280 PDF objects out of 1000 (max. 8388607)
+ 299 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 136 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 146 words of extra memory for PDF output out of 10000 (max. 10000000)
 

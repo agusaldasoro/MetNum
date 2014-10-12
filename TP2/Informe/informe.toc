@@ -8,14 +8,17 @@
 \contentsline {subsection}{\numberline {2.4}Algoritmo de PageRank}{9}
 \contentsline {section}{\numberline {3}Resultados y discusi\'on}{10}
 \contentsline {subsection}{\numberline {3.1}Convergencia de PageRank}{10}
-\contentsline {subsection}{\numberline {3.2}Convergencia de HITS}{14}
-\contentsline {subsection}{\numberline {3.3}Factor Temporal}{18}
-\contentsline {subsection}{\numberline {3.4}Ejemplos ilustrativos y comparaci\'on de los tres M\'etodos}{20}
-\contentsline {subsection}{\numberline {3.5}Comparaci\'on de la calidad de los Resultados para distintos m\'etodos}{31}
-\contentsline {subsection}{\numberline {3.6}Modificaciones en el sistema}{35}
-\contentsline {section}{\numberline {4}Conclusiones}{37}
-\contentsline {section}{\numberline {5}Ap\'endices}{38}
-\contentsline {subsection}{\numberline {5.1}Ap\'endice A}{38}
-\contentsline {subsection}{\numberline {5.2}Ap\'endice B}{44}
-\contentsline {subsection}{\numberline {5.3}Ap\'endice C}{44}
-\contentsline {section}{\numberline {6}Referencias}{46}
+\contentsline {subsection}{\numberline {3.2}Convergencia de HITS}{15}
+\contentsline {subsection}{\numberline {3.3}Factor Temporal}{19}
+\contentsline {subsection}{\numberline {3.4}Valor del vector inicial}{21}
+\contentsline {subsection}{\numberline {3.5}Incidencia de la tolerancia en los m\IeC {\'e}todos iterativos}{22}
+\contentsline {subsection}{\numberline {3.6}Ejemplos ilustrativos y comparaci\'on de los tres M\'etodos}{23}
+\contentsline {subsection}{\numberline {3.7}Comparaci\'on de la calidad de los Resultados para distintos m\'etodos}{33}
+\contentsline {subsection}{\numberline {3.8}Comparaci\IeC {\'o}n de los resultados para distintos valores de C}{37}
+\contentsline {subsection}{\numberline {3.9}Modificaciones en el sistema}{39}
+\contentsline {section}{\numberline {4}Conclusiones}{41}
+\contentsline {section}{\numberline {5}Ap\'endices}{42}
+\contentsline {subsection}{\numberline {5.1}Ap\'endice A}{42}
+\contentsline {subsection}{\numberline {5.2}Ap\'endice B}{48}
+\contentsline {subsection}{\numberline {5.3}Ap\'endice C}{48}
+\contentsline {section}{\numberline {6}Referencias}{50}

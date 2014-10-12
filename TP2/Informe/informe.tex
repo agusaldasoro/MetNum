@@ -244,13 +244,13 @@ print \emph{x} e \emph{y}
 \end{algorithm}\DecMargin{1em}
 
 $\circ$Este algoritmo devuelve los valores de Autoridad y Hub para todas las p\'aginas, en X e Y respectivamente.\\
-\indent $\circ$Los vectores X e Y arrancan inicializados en 1 \textcolor{blue}{ porque PINTO (??? GUSSSSSSSSS).}\\
+\indent $\circ$Los vectores X e Y arrancan inicializados en 1. (Ver secci\'on \emph{Valor del Vector Inicial} 3.4.)\\
 \indent $\circ$El $\simeq$ considera la tolerancia (tol) pasada por parametro. Es decir, es equivalente a evaluar \\ abs(x-xp)$\leq$tol. \\
 \indent $\circ$La cantidad m\'axima de iteraciones la fijamos nosotros en 100.000 pero al existir la guarda del if cabe la posibilidad de salir del scope del while antes de las 100.000 iteraciones. \\
 \\
 \indent El modelo de c\'alculo es un algoritmo iterativo, el cual conserva y actualiza los pesos de Hub y de Autoridad para cada p\'agina. Se cuenta con dos vectores de un tama\~no igual a la cantidad de nodos en la red, donde los pesos de autoridad de la p\'agina i se pueden ver en la posici\'on i del vector X, mientras que los de Hub se encuentran en la posici\'on i del vector Y. Ambos vectores son normalizados -bajo la Norma 2- en cada iteraci\'on. De este modo, las p\'aginas con mayor valor en X son ``mejores'' autoridades y las que tengan mayor valor en Y son ``mejores'' Hubs. \\
 \indent Lo que se hace en cada iteraci\'on es actualizar primero los valores de X en base a los de Y, y luego actualizar los de Y en base a los nuevos de X. Se tiene una matriz A -\textit{Matriz de adyacencia}- la cual posee un 1 en A(i,j) si existe un link i $\rightarrow$ j y un 0 en caso contrario. De este modo, trasponi\'endola se puede observar la relaci\'on inversa. Esto explica que a la hora de actualizar los valores de X e Y se puede realizar asignando X $\leftarrow$ A$^t$Y, Y $\leftarrow$ AX; acorde a lo visto en la \emph{Introducci\'on Te\'orica} sobre el \textit{Algoritmo de HITS} se adaptan las ecuaciones a la forma matricial.\\ 
-\indent Bas\'andonos en el trabajo de Kleinberg $[6]$, podemos asegurar que este m\'etodo converge bajo ciertas hip\'otesis \textcolor{blue}{(ESTOY MANDANDO FRUTA?)} como que el grafo $G_\sigma$ sea un grafo bien formado y que la matriz A tiene como principal autovector un valor \'unico \textcolor{blue}{(CREO QUE NADA MAS. PREGUNTAR A GUS.)}. En el mismo trabajo se puede ver la demostraci\'on  de que los vectores X e Y convergen a X* e Y*, y adem\'as X* es el principal autovector de A$^t$A e Y* es el principal autovector de AA$^t$.\\
+\indent Bas\'andonos en el trabajo de Kleinberg $[6]$, podemos asegurar que este m\'etodo converge bajo ciertas hip\'otesis como que el grafo $G_\sigma$ sea un grafo bien formado y que la matriz A tiene como principal autovector un valor \'unico . En el mismo trabajo se puede ver la demostraci\'on  de que los vectores X e Y convergen a X* e Y*, y adem\'as X* es el principal autovector de A$^t$A e Y* es el principal autovector de AA$^t$.\\
 \\
 \indent Si bien nosotros optamos por devolver todos los puntajes de Hub y de Autoridad, al momento de emplearlo en una b\'usqueda de p\'aginas web se sit\'uan primero las \emph{k} mayores Autoridades y luego los \emph{k} mayores Hubs.
 
@@ -307,8 +307,6 @@ Lo que se calcula en este algoritmo es $X_k = M X_{k+1}$ mediante el m\'etodo de
 \newpage
 \section{Resultados y discusi\'on}
 \subsection{Convergencia de PageRank}
-
-\textcolor{red}{INCLUIR EXPERIMENTOS SOBRE LA PROPORCION DEL LAMBDA. Cuanto mas se acerca a 1 (xq lambda uno es uno) mas tarda en converger.}
 
 Estudio de la convergencia de PageRank, analizando la evolución de la norma Manhattan.\\
 \textbf{Hip\'otesis}: Suponiendo que el método de la potencia converge (dado que la probabilidad de que no ocurra es minima), consideramos que la norma Manhattan de la diferencia entre iteraciones sucesivas debe converger a cero. Creemos que cuanto mayor sea el valor de c, más va a tardar en converger.\\
@@ -412,7 +410,55 @@ de Iteraciones & 6 & 10 & 15 & 25 & 56 & 96 & 295\\
 \\
 \indent Experimentamos con Redes de distintos tama\~nos y podemos afimar que para todas ellas: \emph{Cuanto mayor es el C, se necesita una mayor cantidad de iteraciones para concluir algor\'itmicamente que ya convergi\'o el vector $x$ a $x\ast$}. Es decir, que se aumenta la cantidad de veces que se ejecuta el ciclo hasta que la norma de la diferencia entre X-actual y X-anterior sea menor a la tolerancia. Lo cual confirma nuestra hip\'otesis.
 \newpage
+\subsection*{Relación con la proporción entre $\lambda_1$ y $|\lambda_2|$}
 
+
+Luego de estudiar la convergencia de la norma Manhattan en el experimento anterior, nos preguntamos si existiría alguna relación entre la velocidad de convergencia y la proporción entre $\lambda_1$ y $|\lambda_2|$, es decir, el mayor autovalor de la matriz (que sabemos que es igual a 1) y el módulo del siguiente, respectivamente.\newline
+
+Para estudiarlo, planteamos dos matrices estocásticas por columnas (como las presentes en PageRank) de tamaño pequeño e igual dimensión, que nos permitieran conseguir una intuición de lo que está pasando.
+
+\begin{equation}
+A = \left(
+\begin{array}{cccc}
+0 & 0.33333 & 0 & 0.25 \\
+0.5 & 0 & 1 & 0.25 \\
+0.5 & 0.33333 & 0 & 0.25 \\
+0 & 0.33333 & 0 & 0.25
+\end{array}
+\right)
+\end{equation}
+
+Para esta matriz, $\lambda_1$ = 1 y $|\lambda_2|$=0.5.
+
+\begin{equation}
+B = \left(
+\begin{array}{cccc}
+0 & 0.33333 & 1 & 0 \\
+0.5 & 0 & 1 & 1 \\
+0.5 & 0.33333 & 0 & 0 \\
+0 & 0.33333 & 0 & 0
+\end{array}
+\right)
+\end{equation}
+
+Para esta matriz, $\lambda_1$ = 1 y $|\lambda_2|$=0.3512.
+
+Luego, corrimos PageRank sobre cada una de ellas, y obtuvimos:
+\begin{itemize}
+\item Para la matriz A, la cantidad de iteraciones necesarias para converger con tolerancia 0.00001 fue 17
+\item Mientras que para la matriz B, la cantidad necesaria fue 10
+\end{itemize}
+
+Puede observarse que $|\lambda{^B}{_2}| < |\lambda{^A}{_2}|$, y que el método de la potencia para B converge más rápido.\\
+Esto ilustra que, cuanto más parecido es $|\lambda_2|$ a $lambda_1$, más va a tardar en converger mediante el método PageRank.\\
+
+
+Creemos pertinente mencionar que en la sección sobre las mediciones de tiempo de ejecución de los algoritmos, hacemos referencia a este resultado.
+
+
+
+
+\newpage
 \subsection{Convergencia de HITS}
 
 \textbf{Hip\'otesis:} Nuestro planteo es que la norma 1 de la diferencia entre dos iteraciones consecutivas sobre el vector X y el vector Y va a converger al valor 0.\\
@@ -476,9 +522,6 @@ Los siguientes gr\'aficos est\'an citados en orden creciente de tama\~no de las 
 \indent Algo notorio que se observa es que: cuanto m\'as grande sea la red, una mayor cantidad de iteraciones es necesaria para llegar al valor que converge.\\
 \newpage
 \subsection{Factor Temporal}
-\textcolor{red}{PONER ACA LOS EXPERIMENTOS SOBRE EL VECTOR INICIAL Y LA CANTIDAD DE ITERACIONES
-Y para el algoritmo de PageRank, ver como dan los resultados para cada c, para la misma red y ver qué valor de c podría tener sentido. fruta++ }
-\\
 \indent El factor tiempo en el uso es una caracter\'istica importante de los algoritmos si se van a computar online, ya que es tiempo que el usuario debe esperar hasta obtener su resultado. Si bien el algoritmo de PageRank es computado, generalmente, online; el de HITS no lo es ya que debe primero armar la red con la que va a trabajar.\\
 \\
 \indent A continuaci\'on se incluyen los gr\'aficos de las mediciones de tiempo de ejecuci\'on de los m\'etodos, para ello no se incluye el costo de armado de la matriz con los datos pasados en el archivo de entrada como par\'ametro.\\
@@ -500,12 +543,68 @@ El siguiente gr\'afico mide el tiempo de c\'omputo para redes de tama\~no grande
 	\label{nombreparareferenciar}
   \end{center}
 \end{figure}
+\\
+Haciendo referencia ahora al Experimento 1, creemos pertinente hacer la siguiente aclaración para explicar por qué en algunos casos HITS fue más rápido que PageRank, y en otros PageRank más rápido que HITS. \\
+Como dijimos antes, la velocidad de convergencia en PageRank está dada por el valor de $|\lambda_2|$ de la matriz. A continuación ofrecemos los valores de los mismos para algunas de las matrices de las webs anteriormente analizadas:
 
-\textcolor{red}{Gus la tiene re clara aca, yo no tengo ni idea. perdon \\
-NOS QUEDO PENDIENTE? o es lo de gus?(lo que sigue aca abajo) ...} \\
-Un trabajo que nos qued\'o pendiente es experimentar cu\'ales son los factores que influyen en el aumento del tiempo para el algor\'itmo de HITS entre la dimensi\'on de la matriz, la cantidad de elementos o mismo la composici\'on del grafo de la red. \\
+\begin{itemize}
+\item \textbf{Death Penalty}: 0.9877
+\item \textbf{Censorship}: 0.9999
+\item \textbf{Gun Control}: 0.9979
+\item \textbf{Geometry}: 0.7065
+\item \textbf{Abortion}: 0.9928
+\end{itemize}
+
+Puede observarse que las redes para las cuales sus matrices de conectividad tienen un $|\lambda_2|$ muy cercano a uno, PageRank resulta más lento que HITS.
+
+
+
 \newpage
 
+\subsection{Valor del vector inicial}
+
+Al hacer la implementación de los algoritmos HITS y PageRank, como se trata de métodos iterativos, nos encontramos en la disyuntiva de tener que elegir un vector inicial con el cual comenzar a realizar las iteraciones.\\
+\indent Visto que bajo las hipótesis anteriormente planteadas, podemos asegurar que los métodos convergen, optamos por elegir un vector de unos, simplemente por razones arbitrarias.\\
+
+Sin embargo, una vez comenzada la experimentación, nos preguntamos cómo hubiera afectado a las distintas mediciones tomar un vector inicial distinto, por lo que creímos interesante realizar el presente experimento.\\
+Para el mismo, medimos la cantidad de iteraciones necesarias para que la red \textit{Movies} converja, utilizando vectores inicializados con todas sus componentes iguales a $n$ (donde $n$ representa la cantidad de nodos en el grafo dirigido dado por nuestra red, es decir, un número mucho mayor a 1), todas iguales a 1, todas iguales a 0.1, y por último todas iguales a 0.001.\\
+
+Pudimos observar lo siguiente:
+
+\begin{itemize}
+\item \textbf{HITS: } para este algoritmo, todos los vectores iniciales arrojaron el mismo número de iteraciones: 28. \newline
+Esto se debe a que en cada iteración, el vector resultante es normalizado, con lo cual luego de la primera, ya todos los vectores iniciales que utilicemos valdrían lo mismo.
+\item \textbf{PageRank: } con PageRank obtuvimos resultados mucho más interesantes, los cuales presentamos en el siguiente gráfico:
+\end{itemize}
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/002.jpg}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+
+
+Como puede observarse, el número de iteraciones que le lleva converger al algoritmo, es proporcional al tamaño del valor con el cual se inicializan las componentes del vector inicial.
+
+Creemos que es importante dar cuenta de que hubiera sido prudente hacer un análisis de lo antedicho antes de comenzar a plantear otros experimentos, ya que potencialmente hubieramos obtenido resultados más eficientes para PageRank utilizando un vector con componentes de menor valor que el elegido.
+\newpage
+\subsection{Incidencia de la tolerancia en los métodos iterativos}
+
+Al igual que en el experimento anterior, otra pregunta que nos planteamos fue cómo variaría la cantidad de iteraciones modificando el valor de tolerancia pasado como parámetro.\\
+\indent Nuevamente medimos, para distintos valores de tolerancia, el número de iteraciones para la red \textit{Movies}, comparando con el valor utilizado para todas las otras mediciones: 0.00001.\\
+
+Planteamos como hipótesis que la cantidad de iteraciones va a ser inversamente proporcional a la tolerancia que pedimos: es decir, a mayor tolerancia, menor cantidad de iteraciones. A continuación presentamos los resultados:
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/001.jpg}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+
+Efectivamente, los resultados fueron los esperados. Cuando la tolerancia es muy grosera (1), basta con una iteración, mientras que la cantidad de las mismas aumenta considerablemente a medida que nos volvemos más exigentes.
+\newpage
 \subsection{Ejemplos ilustrativos y comparaci\'on de los tres M\'etodos}
 
 
@@ -713,12 +812,6 @@ Los resultados obtenidos son los presentados en las figuras \ref{before3}, ~\ref
 \indent Por otro lado, el nodo cuyo valor se disminuyó notablemente fue aquel que incorporó nuevos links salientes. Esto cobra sentido cuando se piensa en la interpretación que se les da a los valores obtenidos en el método analizado: cada uno representa la proporción de tiempo que, en el largo plazo, el navegante aleatorio pasa en dicha página. De esta forma, si se incrementa la cantidad de links salientes de un nodo, se amplía la cantidad de sitios que el navegante aleatorio visitará sin teletransportarse, disminuyendo así el tiempo que el mismo pasará en el nodo en cuestión.
 
 
-\newpage
-
-
-\textbf{Hipótesis 4: \itshape{Al aumentar la probilidad de que el navegante aleatorio se transporte, crece también la proporcion de tiempo que se espera que permanezca en paginas que inicialmente no se consideran de gran relevancia.
- }}\\
-\textcolor{red}{COMPLETAR TODO}\\
 
 \newpage
 
@@ -884,6 +977,83 @@ Links entrantes:0 \indent Links salientes: 68\\
 \indent En esta ocasi\'on, tambi\'en se puede apreciar que las p\'aginas con mayor puntaje de autoridad no son las m\'as acertadas para nuestro contexto. Sin embargo, lo m\'as llamativo de este caso es que las p\'aginas con mejor puntaje de Hub resultan ser p\'aginas acertadas para la b\'usqueda, p\'aginas que un usuario podr\'ia estar interesado en encontrarse al momento de buscar el string ``movie''. La p\'agina \emph{History of Classic Movies} queda en la posici\'on 3783 para PageRank y para In-Deg, con un puntaje de Autoridad que lo ubica en la posici\'on 2888. Por otro lado, la p\'agina \emph{Movie Reviews} se ubica en la posici\'on 3771 del ranking de PageRank, tambi\'en en la 3771 de In-Deg y ocupa la posici\'on 2876 con su puntaje de Autoridad.\\
 \indent De este modo, se puede concluir que -para la Web Movies- priorizar las p\'aginas con mayor puntaje de Hub por sobre las que tengan mejor puntaje de Autoridad es una buena idea, ya que los resultados obtenidos fueron m\'as cercanos a lo esperado de este modo.\\
 \\
+\newpage
+\subsection{Comparación de los resultados para distintos valores de C}
+En la presente sección se pretende hacer una comparación de los resultados obtenidos a través de PageRank, variando el parámetro $c$, es decir, el factor de teletransportación.
+
+\textbf{Movies}
+\indent A continuaci\'on se muestran los rankings obtenidos tras correr PageRank sobre la red \emph{Movies} para distintos valores de c. Los primeros sitios en figurar en cada caso, fueron los siguientes: \\
+\\
+\\
+\underline{Bajo un C=0.95}: \\
+\\
+(0.013206)\textbf{ citysearch.com }\\
+\\
+(0.012182) \textbf{News At The '80s Server}\\
+\\
+(0.011459)\textbf{Ebert \& Roeper and the Movies} \\
+\\
+\\
+\underline{Bajo un C=0.30}: \\
+\\
+(0.004594)\textbf{eBay Announcement Board}\\
+\\
+(0.003414)\textbf{ The Internet Movie Database (IMDb). }\\
+\\
+(0.002413)\textbf{MovieFone Redirect}\\
+\\
+\\
+\underline{Bajo un C=0.05}: \\
+\\
+(0.001068)\textbf{eBay Announcement Board}\\
+\\
+(0.003414) \textbf{The Internet Movie Database (IMDb).} \\
+\\
+(0.000603)\textbf{Cox Interactive Media - homepage} \\
+\\
+\\
+Para esta red en particular, los resultados resultan ser bastante buenos para cualquier valor de C. Algo a notar es que para 0.95 tal vez los sitios obtenidos son más específicos (Ebert es un crítico de cine, una de las páginas es sobre películas de los '80, citysearch permite buscar cines en tu ciudad) que para valores más chicos (Internet Movie Database, MovieFone). \\
+Una de las cosas que llama la atención es que tanto para C=0.5 como para C=0.30, eBay está muy bien rankeada, cosa que nosotros consideramos que no es muy bueno, ya que no se centra en películas.\\
+Comparando con C=0.85, que es el valor utilizado para todas nuestras mediciones, creemos que sigue siendo el mejor, ya que no brinda resultados poco útiles o muy específicos, sino que da por resultado páginas que nos ayudan a buscar cines en la cercanía, revisar carteleras de cine, etc.
+\\
+\\
+\\
+
+\textbf{Abortion}
+\indent A continuaci\'on se muestran los rankings obtenidos tras correr PageRank sobre la red \emph{Abortion} para distintos valores de c. Los primeros sitios en figurar en cada caso, fueron los siguientes: \\
+\\
+\\
+\underline{Bajo un C=0.95}: \\
+\\
+(0.034662)\textbf{The John Birch Society}\\
+\\
+(0.021081) \textbf{American Opinion Book Services Online Store}\\
+\\
+(0.017035)\textbf{TRIMonline - Lower Taxes Through Less Government} \\
+\\
+\\
+\underline{Bajo un C=0.30}: \\
+\\
+(0.004594)\textbf{AllExperts.com}\\
+\\
+(0.003476)\textbf{National Right to Life Organization}\\
+\\
+(0.003123)\textbf{Current Events - Law - About Legal News, Issues, Reference Library}\\
+\\
+\\
+\underline{Bajo un C=0.05}: \\
+\\
+(0.001308)\textbf{AllExperts.com}\\
+\\
+(0.001018)\textbf{National Right to Life Organization}\\
+\\
+(0.000949)\textbf{Current Events - Law - About Legal News, Issues, Reference Library}\\
+\\
+\\
+Curiosamente, para esta red, C=0.5 y C=0.30 rankean a las mismas páginas, y parecerían ser mejores que las obtenidas mediante C=0.95: esta última presenta dos páginas con tinte político, y una tienda, mientras que las de C menores contienen una página de noticias legales, una asociación del derecho a la vida, y un sitio de opiniones.
+Creemos que C=0.85 sigue siendo la mejor opción, ya que nuclea ambas posturas: brinda links tanto de tinte político como de opinión.
+\\
+
 \newpage
 \subsection{Modificaciones en el sistema}
 
