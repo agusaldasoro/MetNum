@@ -63,7 +63,7 @@
 \thispagestyle{empty}
 \vfill
 \begin{abstract}
-\textcolor{blue}{El resumen de no m\'as de 200 palabras, deber\'a explicar brevemente el trabajo realizado y las conclusiones de los autores de manera que pueda ser \'util por s\'i solo para dar una idea del contenido del trabajo.} \\
+Habi\'endonos siendo dada la problem\'atica de c\'omo posicionar una p\'agina web alta en una b\'usqueda online, utilizando tres m\'etodos de ordenamiento de p\'aginas basados en links, este trabajo desarrolla distintas experimentaciones para la observaci\'on del comportamiento de los m\'etodos y de este modo saber cu\'al ser\'ia la tarea a llevar a cabo. \\
 \\
 \\
 \indent \indent \textbf{Palabras claves} \\
@@ -105,13 +105,13 @@ HITS e In-deg. Los mismos se detallan a continuaci\'on: \\
 \]
 Donde\emph{ $L_k$} es el conjunto de links entrantes a la p\'agina k y \emph{$n_j$} es el n\'umero de links salientes desde la p\'agina j.\\
 \indent Luego, se construye una matriz $A$ donde se encuentran -por filas- las respectivas ecuaciones para cada $X_i$, definidas como fue realizado anteriomente.\\
-\indent La resoluci\'on de este m\'etodo se logra al hallar el autovector con autovalor asociado 1 para la matriz $A$. De acuerdo al trabajo de Bryan y Leise \textcolor{red}{ACA PONER EL NUMERO DE REFERENCIA DE LA BIBLIOGRAFIA DONDE ESTE ESTE PAPER.}, este c\'alculo se computa mediante el m\'etodo de la potencia. \\
+\indent La resoluci\'on de este m\'etodo se logra al hallar el autovector con autovalor asociado 1 para la matriz $A$. De acuerdo al trabajo de Bryan y Leise $[4]$, este c\'alculo se computa mediante el m\'etodo de la potencia. \\
 \indent Dicha matriz cuenta con ciertas mejoras que proporcionan ventajas en casos espec\'ificos. Por un lado, si alguna p\'agina p no tuviera ning\'un link saliente se considera que el navegante aleatorio saltar\'a con equiprobabilidad a cualquiera de las otras p\'aginas. De esta forma, se le otorga al vector columna p de la matriz A el valor de $\frac{1}{n}$ para cada componente. Por otro lado, existe un fen\'omeno denominado \textit{``Teletransportaci\'on''} que considera la posibilidad de que dicho navegante se mueva de una p\'agina a otra pero no mediante los links existentes, sino tipeando la URL. Para modelar de manera \'optima este suceso, se reemplaza a la matriz A por la matriz M definida bajo la siguiente ecuaci\'on: \textit{M = (1-m)A + m.S} siendo m la probabilidad de que un navegante se \textit{teletransporte} y S una matriz cuyos valores $S_{ij}$ tienen todos el mismo valor: $\frac{1}{n}$ representando as\'i una matriz donde la probabilidad de ir a cualquier p\'agina del grafo es uniforme.\\
-\indent El\emph{ M\'etodo de la Potencia} se realiza de manera iterativa, lo cual permite reducir el tiempo de c\'omputo para elevar a la k la matriz M. Si tenemos en cuenta el trabajo de Kamvar \textcolor{red}{ACA PONER EL NUMERO DE REFERENCIA DE LA BIBLIOGRAFIA DONDE ESTE ESTE PAPER.}, presenta una herramienta de c\'alculo que permite encontrar el principal autovector de M en una serie menor de pasos modificando la ecuaci\'on de la matriz M.\\
+\indent El\emph{ M\'etodo de la Potencia} se realiza de manera iterativa, lo cual permite reducir el tiempo de c\'omputo para elevar a la k la matriz M. Si tenemos en cuenta el trabajo de Kamvar $[5]$, presenta una herramienta de c\'alculo que permite encontrar el principal autovector de M en una serie menor de pasos modificando la ecuaci\'on de la matriz M.\\
 \\
 \\
 \indent \indent \emph{\textbf{Hyperlink-Induced Topic Search (HITS)}} \\
-\indent El m\'etodo planteado por Kleinberg \textcolor{red}{ACA PONER EL NUMERO DE REFERENCIA DE LA BIBLIOGRAFIA DONDE ESTE ESTE PAPER.} consiste en partir de una consulta sobre $\sigma$ y focalizarse en una colecci\'on de p\'aginas $S_\sigma$ tal que sea relativamente peque\~na,  rica en p\'aginas relevantes sobre el tema y contenga la mayor\'ia de las autoridades m\'as fuertes sobre el mismo. Considerando autoridad a una p\'agina que tiene la mayor cantidad de links entrantes provenientes de p\'aginas vinculadas al tema, esto se realiza del siguiente modo:\\
+\indent El m\'etodo planteado por Kleinberg $[6]$ consiste en partir de una consulta sobre $\sigma$ y focalizarse en una colecci\'on de p\'aginas $S_\sigma$ tal que sea relativamente peque\~na,  rica en p\'aginas relevantes sobre el tema y contenga la mayor\'ia de las autoridades m\'as fuertes sobre el mismo. Considerando autoridad a una p\'agina que tiene la mayor cantidad de links entrantes provenientes de p\'aginas vinculadas al tema, esto se realiza del siguiente modo:\\
 a) Acorde a un par\'ametro \emph{t}, se coleccionan las primeras t p\'aginas rankeadas bajo una b\'usqueda basada estrictamente por texto. A este conjunto se lo denomina $R_\sigma$. \\
 b) Se incrementa el conjunto $R_\sigma$ a\~nadiendo las p\'aginas que tienen links entrantes y salientes al mismo, formando as\'i el conjunto $S_\sigma$. Para cada p\'agina de $R_\sigma$ se permite a\~nadir, a lo sumo \emph{d} p\'aginas que la apunten y \emph{d} p\'aginas a las cuales apunte. \\
 c) Se eliminan de $S_\sigma$ los links intr\'insecos, es decir no se tienen en cuenta links que apuntan a una p\'agina del mismo dominio que la p\'agina saliente. \\
@@ -250,7 +250,9 @@ $\circ$Este algoritmo devuelve los valores de Autoridad y Hub para todas las p\'
 \\
 \indent El modelo de c\'alculo es un algoritmo iterativo, el cual conserva y actualiza los pesos de Hub y de Autoridad para cada p\'agina. Se cuenta con dos vectores de un tama\~no igual a la cantidad de nodos en la red, donde los pesos de autoridad de la p\'agina i se pueden ver en la posici\'on i del vector X, mientras que los de Hub se encuentran en la posici\'on i del vector Y. Ambos vectores son normalizados -bajo la Norma 2- en cada iteraci\'on. De este modo, las p\'aginas con mayor valor en X son ``mejores'' autoridades y las que tengan mayor valor en Y son ``mejores'' Hubs. \\
 \indent Lo que se hace en cada iteraci\'on es actualizar primero los valores de X en base a los de Y, y luego actualizar los de Y en base a los nuevos de X. Se tiene una matriz A -\textit{Matriz de adyacencia}- la cual posee un 1 en A(i,j) si existe un link i $\rightarrow$ j y un 0 en caso contrario. De este modo, trasponi\'endola se puede observar la relaci\'on inversa. Esto explica que a la hora de actualizar los valores de X e Y se puede realizar asignando X $\leftarrow$ A$^t$Y, Y $\leftarrow$ AX; acorde a lo visto en la \emph{Introducci\'on Te\'orica} sobre el \textit{Algoritmo de HITS} se adaptan las ecuaciones a la forma matricial.\\ 
-\indent Bas\'andonos en el trabajo de Kleinberg \textcolor{red}{(PONER EL NUMERO DEL PAPER)}, podemos asegurar que este m\'etodo converge bajo ciertas hip\'otesis \textcolor{blue}{(ESTOY MANDANDO FRUTA?)} como que el grafo $G_\sigma$ sea un grafo bien formado y que la matriz A tiene como principal autovector un valor \'unico \textcolor{blue}{(CREO QUE NADA MAS. PREGUNTAR A GUS.)}. En el mismo trabajo se puede ver la demostraci\'on  de que los vectores X e Y convergen a X* e Y*, y adem\'as X* es el principal autovector de A$^t$A e Y* es el principal autovector de AA$^t$.\\
+\indent Bas\'andonos en el trabajo de Kleinberg $[6]$, podemos asegurar que este m\'etodo converge bajo ciertas hip\'otesis \textcolor{blue}{(ESTOY MANDANDO FRUTA?)} como que el grafo $G_\sigma$ sea un grafo bien formado y que la matriz A tiene como principal autovector un valor \'unico \textcolor{blue}{(CREO QUE NADA MAS. PREGUNTAR A GUS.)}. En el mismo trabajo se puede ver la demostraci\'on  de que los vectores X e Y convergen a X* e Y*, y adem\'as X* es el principal autovector de A$^t$A e Y* es el principal autovector de AA$^t$.\\
+\\
+\indent Si bien nosotros optamos por devolver todos los puntajes de Hub y de Autoridad, al momento de emplearlo en una b\'usqueda de p\'aginas web se sit\'uan primero las \emph{k} mayores Autoridades y luego los \emph{k} mayores Hubs.
 
 
 \newpage
@@ -258,9 +260,9 @@ $\circ$Este algoritmo devuelve los valores de Autoridad y Hub para todas las p\'
 
 
 \indent En este esquema, cada p\'agina se define como la suma de los valores de las p\'aginas con links entrantes divididos por su cantidad de enlaces salientes (modelo visto en la Introducci\'on te\'orica). La matriz a abordar se arma por columnas, para cada columna X$_i$ se pone un 0 en los elementos que no los dirija ning\'un link y $1/k$ en los dem\'as, siendo $k$ la cantidad de links salientes de la p\'agina X$_i$. Algo debe hacerse para solventar el problema de las p\'aginas con dangling nodes (p\'aginas sin ning\'un link saliente).\\
-\indent Al contar con la matriz A -matriz de conectividad-, nuestro problema a resolver se limita a encontrar un autovector de A con autovalor 1. En el trabajo de Bryan y Leise \textcolor{red}{ACA PONER EL NUMERO DEL PAPER} se demuestra que: Si la Web con la que trabajamos no presenta ning\'un danglin node, la matriz de conectividad A tiene al 1 como autovalor mediante las siguientes preposiciones: \emph{La matriz A para alguna Web sin dangling nodes es estoc\'astica por columnas} (una matriz cuadrada es estoc\'astica por columnas si todos sus valores son no-negativos y los elementos de cada columna suman 1) y \emph{Toda matriz estoc\'astica por columnas tiene al 1 como autovalor}. Para asegurar la unicidad del ranking a armar es concluyente exigir que autovalor 1 tenga multiplicidad 1. \\
+\indent Al contar con la matriz A -matriz de conectividad-, nuestro problema a resolver se limita a encontrar un autovector de A con autovalor 1. En el trabajo de Bryan y Leise $[4]$ se demuestra que: Si la Web con la que trabajamos no presenta ning\'un danglin node, la matriz de conectividad A tiene al 1 como autovalor mediante las siguientes preposiciones: \emph{La matriz A para alguna Web sin dangling nodes es estoc\'astica por columnas} (una matriz cuadrada es estoc\'astica por columnas si todos sus valores son no-negativos y los elementos de cada columna suman 1) y \emph{Toda matriz estoc\'astica por columnas tiene al 1 como autovalor}. Para asegurar la unicidad del ranking a armar es concluyente exigir que autovalor 1 tenga multiplicidad 1. \\
 \indent Pero nosotros vamos a reemplazar A por M, la cual est\'a definida por la f\'ormula M = (1-m)A +  mS, con m la probabilidad de moverme entre p\'aginas no por medio de links y S una matriz con todos sus componentes iguales a 1/n. Donde as\'i no debe efectuarse ninguna hip\'otesis fuerte sobre A ya que M queda estoc\'astica por columnas y positiva la multiplicidad de $\lambda_1$ es 1. \\
-\indent A fines de emplear menos recursos de c\'omputo se opt\'o por llevar a cabo el algoritmo desarrollado por Kamvar \textcolor{red}{PONER NUMERO DE PAPER}:
+\indent A fines de emplear menos recursos de c\'omputo se opt\'o por llevar a cabo el algoritmo desarrollado por Kamvar $[5]$:
 
 \IncMargin{1em}
 \begin{algorithm}
@@ -314,26 +316,7 @@ Estudio de la convergencia de PageRank, analizando la evolución de la norma Man
 \indent Nuestra hip\'otesis se bas\'o en la ecuaci\'on $P_2= cP_1+(1-c)E$, la cual hace que los datos cobren sentido. Dado un c, el segundo t\'ermino queda constante; por lo tanto, podemos considerarlo despreciable para nuestros cálculos, restringiéndonos a analizar lo que pueda suceder s\'olo con el primero. $cP_1$ implica la multiplicación de una matriz por un valor c tal que $0 \leq c \leq 1$. No resulta relevante considerar los casos en que $c= 0$ \'o $c=1$, dado que esos valores no modelarían un aspecto de la realidad. Esto se debe a que si $c=0$, la probabilidad de teletransportarse es 1 por lo tanto se moldear\'ia una realidad donde nunca se viaja a trav\'es de Links. Y por otro lado, si $c=1$ no se estar\'ia considerando la \emph{teletransportaci\'on}. \\
 \indent Dado que c se encuentra entre $0$ y $1$, el resultado va a ser un vector de valores muy pequeños, que va a achicarse progresivamente. Es m\'as significativo lo que achica el c a $P_2$ que lo que aporta el segundo t\'ermino.   \\
 \\
-\textcolor{red}{INCLUIR EXPERIMENTOS SOBRE LA PROPORCION DEL LAMBDA. Cuanto mas se acerca a 1 (xq lambda uno es uno) mas tarda en converger.}\\
-
-
-\begin{figure}[h!]
-  \begin{center}
-	\includegraphics[scale=0.50]{imagenes/exp12/abortionPAGERANK.png}
-	\caption{Variaci\'on de la norma cambiando el C para la Red Abortion}
-	\label{nombreparareferenciar}
-  \end{center}
-\end{figure}
-En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
- \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
-\hline
- & C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
-\hline
-Cantidad &  & & & & & & \\ 
-de Iteraciones & 5 & 7 & 11 & 19 & 46 & 80 & 251 \\
-\hline
-	\end{tabular}\\\\
-\\
+Los siguientes gr\'aficos est\'an citados en orden creciente de tama\~no de las redes:\\
 
 \begin{figure}[h!]
   \begin{center}
@@ -353,6 +336,24 @@ de Iteraciones & 5 & 8 & 12 & 21 & 49 & 86 & 268 \\
 	\end{tabular}\\\\
 \newpage
 
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/abortionPAGERANK.png}
+	\caption{Variaci\'on de la norma cambiando el C para la Red Abortion}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
+ \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
+\hline
+ & C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
+\hline
+Cantidad &  & & & & & & \\ 
+de Iteraciones & 5 & 7 & 11 & 19 & 46 & 80 & 251 \\
+\hline
+	\end{tabular}\\\\
+\newpage
 
 
 \begin{figure}[h!]
@@ -375,6 +376,24 @@ de Iteraciones & 6 & 8 & 13 & 21 & 51 & 90 & 282 \\
 
 \begin{figure}[h!]
   \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/stanfordPAGERANK.png}
+	\caption{Variaci\'on de la norma cambiando el C para la Red Stanford}
+	\label{nombreparareferenciar}
+  \end{center}
+\end{figure}
+
+En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
+ \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
+\hline
+ & C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
+\hline
+Cantidad &  & & & & & & \\ 
+de Iteraciones & 6 & 9 & 14 & 25 & 59 & 104 & 329\\
+\hline
+	\end{tabular}\\\\	
+\\	
+\begin{figure}[h!]
+  \begin{center}
 	\includegraphics[scale=0.50]{imagenes/exp12/notredamePAGERANK.png}
 	\caption{Variaci\'on de la norma cambiando el C para la Red Notre Dame}
 	\label{nombreparareferenciar}
@@ -390,93 +409,77 @@ de Iteraciones & 6 & 10 & 15 & 25 & 56 & 96 & 295\\
 \hline
 	\end{tabular}\\\\
 \\
-
-\begin{figure}[h!]
-  \begin{center}
-	\includegraphics[scale=0.50]{imagenes/exp12/stanfordPAGERANK.png}
-	\caption{Variaci\'on de la norma cambiando el C para la Red Stanford}
-	\label{nombreparareferenciar}
-  \end{center}
-\end{figure}
-
-En la siguiente tabla se muestran la cantidad de iteraciones necesarias para distintos C bajo la misma Red: \\
- \begin{tabular}[c]{|c|c|c|c|c|c|c|c|}
-\hline
- & C=0.05 & C=0.15 & C=0.30 & C=0.50 & C=0.75 & C=0.85 & C=0.95 \\
-\hline
-Cantidad &  & & & & & & \\ 
-de Iteraciones & 6 & 9 & 14 & 25 & 59 & 104 & 329\\
-\hline
-	\end{tabular}\\\\
 \\
-\\
-\indent Experimentamos con Redes de distintos tama\~nos y podemos concluir que para todas ellas: Cuanto mayor es el C, se necesita una mayor cantidad de iteraciones para concluir algor\'itmicamente que ya convergi\'o el vector $x$ a $x\ast$. Es decir, que se aumenta la cantidad de veces que se ejecuta el ciclo hasta que la norma de la diferencia entre X actual y X anterior sea menor a la tolerancia. 
+\indent Experimentamos con Redes de distintos tama\~nos y podemos afimar que para todas ellas: \emph{Cuanto mayor es el C, se necesita una mayor cantidad de iteraciones para concluir algor\'itmicamente que ya convergi\'o el vector $x$ a $x\ast$}. Es decir, que se aumenta la cantidad de veces que se ejecuta el ciclo hasta que la norma de la diferencia entre X-actual y X-anterior sea menor a la tolerancia. Lo cual confirma nuestra hip\'otesis.
 \newpage
 
 \subsection{Convergencia de HITS}
-Creemos que converge a 0. \\
 
-Explicacion: es un algoritmo circular. Se trasladan los "pesos" al multiplicar un vector x grande por la matriz, y haciendo que el otro - que es chico - tome ese valor. EN la iteración sig x sera menor...\\ 
+\textbf{Hip\'otesis:} Nuestro planteo es que la norma 1 de la diferencia entre dos iteraciones consecutivas sobre el vector X y el vector Y va a converger al valor 0.\\
 \\
---podemos incluir acá la cosa intermedia: hacer una comparacion entre el tiempo de convergencia (o sea, ver cuál converge más rápido) de hits y PR para usarlo como fundamento en el exp 3.\\
+\indent Esta idea surge de que el algoritmo implementado por HITS sea circular, es decir para actualizar los valores del vector X se utilizan los valores de Y y viceverssa. Por este motivo, se podr\'ia decir que se ``trasladan'' los pesos de X e Y al multiplicar cada vector por la matriz, y como en cada iteraci\'on se normalizan los vectores esto lleva a que los valores a trabajar sean menores de iteraci\'on a iteraci\'on. \\
 \\
 
 
-\begin{figure}[h!]
-  \begin{center}
-	\includegraphics[scale=0.50]{imagenes/exp12/abortionHITS.png}
-	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Abortion}
-	\label{nombreparareferenciar}
-  \end{center}
-\end{figure}
-La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 56.\\
+Los siguientes gr\'aficos est\'an citados en orden creciente de tama\~no de las redes:\\
+
 
 \begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.50]{imagenes/exp12/complexityHITS.png}
 	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Complexity}
 	\label{nombreparareferenciar}
+	\textit{La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 121.}
   \end{center}
 \end{figure}
-La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 121.\\
-
-
+\newpage
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/abortionHITS.png}
+	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Abortion}
+	\label{nombreparareferenciar}
+	\textit{La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 56.}
+  \end{center}
+\end{figure}
 
 \begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.50]{imagenes/exp12/moviesHITS.png}
 	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Movies}
 	\label{nombreparareferenciar}
+	\textit{La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 29.}
   \end{center}
 \end{figure}
-La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 29.\\
-
+\newpage
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.50]{imagenes/exp12/stanfordHITS.png}
+	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Stanford}
+	\label{nombreparareferenciar}
+	\textit{La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 28.}
+  \end{center}
+\end{figure}
 
 \begin{figure}[h!]
   \begin{center}
 	\includegraphics[scale=0.50]{imagenes/exp12/notredameHITS.png}
 	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Notre Dame}
 	\label{nombreparareferenciar}
+	\textit{La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 31.}
   \end{center}
 \end{figure}
-La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 31.\\
+\indent En todos los gr\'aficos presentados se puede apreciar que la norma de los vectores X e Y converge a cero. Cabe destacar un suceso llamativo: en las primeras iteraciones los valores de la norma de la diferencia de X con los de Y son alternadamente muy cercanos y muy lejanos. No se puede unificar esta observaci\'on para todos los casos, ya que cada uno presenta sus propias anomal\'ias. \\
+\indent En el caso de red m\'as chica (\emph{Complexity}), si bien se puede apreciar esta alternancia entre la distancia del valor de X e Y, el vector X se ubica por encima del Y en las primeras iteraciones para luego situarse muy cercanos hasta converger a cero. En el caso de la segunda red (\emph{Abortion}), se puede apreciar un comportamiento parecido donde el vector X se sit\'ua por encima del Y, sin embargo alternadamente van adquiriendo un valor muy similar que hace que el valor de Y sea mayor al de X. La \'ultima red de tama\~no mediano (\emph{Movies}) reitera el comportamiento de las dos anteriores, s\'olo que en las iteraciones que los vectores X e Y antes estaban muy cerca ahora se cruzan ubic\'andose siempre el vector Y por encima del X en mayor proporci\'on que antes. \\
 
-
-\begin{figure}[h!]
-  \begin{center}
-	\includegraphics[scale=0.50]{imagenes/exp12/stanfordHITS.png}
-	\caption{Variaci\'on de la norma de X e Y en cada iteraci\'on para la Red Stanford}
-	\label{nombreparareferenciar}
-  \end{center}
-\end{figure}
-La cantidad de iteraciones llevadas a cabo por el algoritmo fue de 28.\\
-
+\indent En el caso de las redes grandes (\emph{Notre Dame y Stanford}), sus comportamientos son muy similares entre s\'i. El vector Y se sit\'ua en todo momento por encima del X, y luego de una mayor cantidad de iteraciones se observa que ambos vectores convergen a cero.\\
+\\
+\indent Algo notorio que se observa es que: cuanto m\'as grande sea la red, una mayor cantidad de iteraciones es necesaria para llegar al valor que converge.\\
+\newpage
 \subsection{Factor Temporal}
-\textcolor{red}{PONER ACA LOS EXPERIMENTOS SOBRE EL VECTOR INICIAL Y LA CANTIDAD DE ITERACIONES}
-
-*Trabajo a futuro*
-Ver si lo que influye en el tiempo que demora pr al lado de hits, es la dimension, la cantidad de elementos o la composicion de la red.
-Ver como dan los resultados para cada c, para la misma red y ver qué valor de c podría tener sentido. fruta++ \\
+\textcolor{red}{PONER ACA LOS EXPERIMENTOS SOBRE EL VECTOR INICIAL Y LA CANTIDAD DE ITERACIONES
+Y para el algoritmo de PageRank, ver como dan los resultados para cada c, para la misma red y ver qué valor de c podría tener sentido. fruta++ }
+\\
+\indent El factor tiempo en el uso es una caracter\'istica importante de los algoritmos si se van a computar online, ya que es tiempo que el usuario debe esperar hasta obtener su resultado. Si bien el algoritmo de PageRank es computado, generalmente, online; el de HITS no lo es ya que debe primero armar la red con la que va a trabajar.\\
 \\
 El siguiente gr\'afico mide el tiempo de c\'omputo para redes de tama\~no mediano.
 
@@ -497,7 +500,9 @@ El siguiente gr\'afico mide el tiempo de c\'omputo para redes de tama\~no grande
   \end{center}
 \end{figure}
 
-
+\textcolor{red}{Gus la tiene re clara aca, yo no tengo ni idea. perdon \\
+NOS QUEDO PENDIENTE? o es lo de gus?(lo que sigue aca abajo) ...} \\
+Un trabajo que nos qued\'o pendiente es experimentar cu\'ales son los factores que influyen en el aumento del tiempo para el algor\'itmo de HITS entre la dimensi\'on de la matriz, la cantidad de elementos o mismo la composici\'on del grafo de la red. \\
 \newpage
 
 \subsection{Ejemplos ilustrativos y comparaci\'on de los tres M\'etodos}
@@ -871,17 +876,23 @@ Links entrantes:0 \indent Links salientes: 68\\
 \\
 \newpage
 \section{Conclusiones}
-\textcolor{blue}{Esta secci\'on debe contener las conclusiones generales del trabajo. Se deben mencionar
-las relaciones de la discusi\'on sobre las que se tiene certeza, junto con comentarios
-y observaciones generales aplicables a todo el proceso. Mencionar tambi\'en posibles
-extensiones a los m\'etodos, experimentos que hayan quedado pendientes, etc.
-}
+A lo largo del presente trabajo hemos analizado distintos métodos cuyos propósitos consisten en jerarquizar un grupo de páginas interrelacionadas a partir de ciertos criterios y modelos de la realidad. \\
+\indent Habiendo formulado nuestras propias hipótesis acerca del comportamiento de dichos métodos y sus puntos fuertes y endebles y habiendo podido experimentar con ellos, nos proponemos en este momento aunar las interpretaciones de cada uno de los resultados obtenidos para elaborar una conclusión que sirva a la resolución del problema planteado.\\
+\indent Ante todo es importante destacar que la indicación sugerida por nosotros dependerá del método con el cual se ordenen las páginas web. Es por ello que se enumeran a continuación las estrategias sugeridas para cada uno de los métodos posibles:\\
 \\
+\indent \textbf{In-deg:} Como ya se vio, para puntuar alto en este modelo basta con conseguir que una gran cantidad de páginas apunten a la propia. Es por ello que en este caso nos remitimos a sugerir que se compren tantos links como sea posible, sin ahondar en profundidad en la importancia relativa de cada página dentro de la red.\\
+\\
+\indent \textbf{HITS:} En este caso, como la forma de presentar los resultados es devolviendo primero las p\'aginas con mayor puntaje de Autoridad y luego las que tengan mayor puntaje de Hub, nos situamos en aumentar su puntaje de Autoridad. A través de una serie de experimentaciones y análisis notamos que un factor de gran influencia a la hora de aumentar el valor de un nodo como autoridad está dado por la cantidad y calidad de los hubs que lo apuntan. Por este motivo, nuestra recomendación es que el cliente consiga que su página sea apuntada por la mayor cantidad de webs de este tipo, cuyo orden se encuentre entre los principales.\\
+\\
+\indent  \textbf{PageRank:} Considerando los distintos resultados obtenidos a partir de las pruebas y ensayos constituídos en torno a este método, concluímos que la forma más efectiva de garantizar que mejore la posición de la web del cliente en una red es realizando un análisis de la misma y consiguiendo que la apunten la mayor cantidad posible de sitios que poseen una posición destacada dentro de la misma y que a su vez no apuntan a demasiadas páginas. \\
+\indent Este criterio no es arbitrario, dado que el valor que una página transmite a otra depende no sólo de su propio valor sino también de la cantidad de sitios que también se están beneficiando de él. \\
+\indent Si esto no fuese posible (por ejemplo porque no existiera en la red una cantidad suficiente de páginas con las características mencionadas), entonces el criterio para discernir de qué manera proseguir debería ser lo suficientemente sutil y detallista como para escoger entre una serie de páginas cuyo peso no sea de una magnitud considerable pero satisfagan tener pocos links salientes, y otro grupo de mayor importancia pero con mayor cantidad de links salientes.\\
+
 \newpage
 \section{Ap\'endices}
 	\subsection{Ap\'endice A}
-%----LO COMENTO PARA QUE NO MOLESTE	
-%		\input{tp2}
+
+		\input{tp2}
 \newpage
 	\subsection{Ap\'endice B}
 Se adjunta aqu\'i el algoritmo realizado para insertar, de a un elemento, los valores distintos de cero de una matriz en nuestra matriz esparsa: \\
@@ -957,12 +968,24 @@ A^t = \left(
  En este ejemplo, se puede apreciar que al trasponer la matriz los arreglos conservan sus mismos valores, s\'olo que cambia la forma de interpretarlos. Es decir: ind_fil pasa a ser ind_col, ptr_col pasa a ser ptr_fil y viceversa.
 \newpage
 \section{Referencias}
-\textcolor{blue}{Es importante incluir referencias a libros, art\'iculos y p\'aginas de Internet consultados
-durante el desarrollo del trabajo, haciendo referencia a estos materiales a lo largo del
-informe. Se deben citar tambi\'en las comunicaciones personales con otros grupos.\\
-PONER ACA LOS PAPERSSSSSSSSSSS\\
-}
+\noindent
+$[1]$ \indent http://www.cs.toronto.edu/~tsap/experiments/datasets/. \\
 \\
+$[2]$ \indent Stanford large network dataset collection. http://snap.stanford.edu/data/\#web. \\
+\\
+$[3]$ \indent Sergey Brin and Lawrence Page. The anatomy of a large-scale hypertextual Web search
+engine. Computer Networks and ISDN Systems, 30(1-7):107{117, April 1998. \\
+\\
+$[4]$ \indent Kurt Bryan and Tanya Leise. The linear algebra behind google. SIAM Review, 48(3):569{
+581, 2006. \\
+\\
+$[5]$ \indent Sepandar D. Kamvar, Taher H. Haveliwala, Christopher D. Manning, and Gene H. Golub.
+Extrapolation methods for accelerating pagerank computations. In Proceedings of the 12th
+international conference on World Wide Web, WWW '03, pages 261{270, New York, NY,
+USA, 2003. ACM. \\
+\\
+$[6]$ \indent Jon M. Kleinberg. Authoritative sources in a hyperlinked environment. J. ACM,
+46(5):604{632, September 1999.
 
 \end{document}
 
