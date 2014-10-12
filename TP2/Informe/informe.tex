@@ -722,10 +722,6 @@ Los resultados obtenidos son los presentados en las figuras \ref{before3}, ~\ref
 
 \newpage
 
-\textbf{Hipótesis 5: \itshape{BLA }}\\
-\textcolor{red}{LA HIP 5 LA PENSAMOS INICIALMENTE PARA PROBAR MAS O MENOS COMO IBA TODO, SIN HIPOTESIS. QUE PONGO? (ES LA Q SE AGREGA "MATRIZ" A LO ULTIMO)}\\
-
-\newpage
 \subsection{Comparaci\'on de la calidad de los Resultados para distintos m\'etodos}
 A continuaci\'on se presentan los primeros 6 y 3 resultados de cada ranking.
 \subsection*{Abortion}
@@ -888,6 +884,35 @@ Links entrantes:0 \indent Links salientes: 68\\
 \indent En esta ocasi\'on, tambi\'en se puede apreciar que las p\'aginas con mayor puntaje de autoridad no son las m\'as acertadas para nuestro contexto. Sin embargo, lo m\'as llamativo de este caso es que las p\'aginas con mejor puntaje de Hub resultan ser p\'aginas acertadas para la b\'usqueda, p\'aginas que un usuario podr\'ia estar interesado en encontrarse al momento de buscar el string ``movie''. La p\'agina \emph{History of Classic Movies} queda en la posici\'on 3783 para PageRank y para In-Deg, con un puntaje de Autoridad que lo ubica en la posici\'on 2888. Por otro lado, la p\'agina \emph{Movie Reviews} se ubica en la posici\'on 3771 del ranking de PageRank, tambi\'en en la 3771 de In-Deg y ocupa la posici\'on 2876 con su puntaje de Autoridad.\\
 \indent De este modo, se puede concluir que -para la Web Movies- priorizar las p\'aginas con mayor puntaje de Hub por sobre las que tengan mejor puntaje de Autoridad es una buena idea, ya que los resultados obtenidos fueron m\'as cercanos a lo esperado de este modo.\\
 \\
+\newpage
+\subsection{Modificaciones en el sistema}
+
+\textbf{Experimento: \itshape{Evaluación de la modificación del sistema luego de forzar a una cantidad arbitraria de hubs a apuntar a una página cuyo peso como autoridad es bajo. }}
+
+Habiendo tomado un conjunto de páginas, calculamos el peso en cuanto a hub de cada una y lo graficamos. Como las páginas 2, 3 y 8 son las que mayor jerarquía tienen en este aspecto, las escogimos para apuntar a la página 7, cuyo peso de autoridad es escaso.\\
+Luego de realizar las modificaciones pertinentes obtuvimos los resultados que posteriormente graficamos y adjuntamos en este informe.\\
+Allí se puede observar que los cambios no sólo acrecentaron la importancia de la página que quisimos apuntalar, sino que incluso la situaron como la mejor autoridad de la red.
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.66]{imagenes/cambioshits.png}
+	\caption{}
+	\label{cambioshits}
+  \end{center}
+\end{figure}
+\newpage
+\textbf{Experimento: \itshape{Evaluación de la modificación del sistema luego de forzar a una cantidad arbitraria de nodos relevantes a apuntar a una página poco destacada.}}
+De manera similar al experimento anterior, quisimos evaluar cuál sería el modo equivalente en el método de PageRank para lograr que una página logre una mejor posición en el ranking.
+Para ello escogimos una red de 14 nodos, calculamos sus puntajes y forzamos a los tres más importantes (nodos 2, 8 y 9) a apuntar a una página con poca visibilidad (nodo 10). El resultado se puede apreciar en el gráfico adjunto: nuevamente se logró el objetivo que nos habíamos propuesto.
+
+\begin{figure}[h!]
+  \begin{center}
+	\includegraphics[scale=0.66]{imagenes/cambiospagerank.png}
+	\caption{}
+	\label{cambiospagerank}
+  \end{center}
+\end{figure}
+
 \newpage
 \section{Conclusiones}
 A lo largo del presente trabajo hemos analizado distintos métodos cuyos propósitos consisten en jerarquizar un grupo de páginas interrelacionadas a partir de ciertos criterios y modelos de la realidad. \\
