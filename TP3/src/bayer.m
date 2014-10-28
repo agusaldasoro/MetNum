@@ -34,5 +34,5 @@ for i=1:size(r,1)
         end
     end
 end
-        
+
 raw = r+g+b;
