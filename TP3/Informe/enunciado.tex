@@ -1,0 +1,208 @@
+\subsection{Filtro cropflip}
+
+Programar el filtro \textit{cropflip} en lenguaje C y luego en ASM haciendo 
+uso de las instrucciones vectoriales (\textbf{SSE}).
+
+% ******************************************************************************
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 1.1 - análisis el código generado}
+
+En este experimento vamos a utilizar la herramienta \verb|objdump| para 
+verificar como el compilador de C deja ensamblado el código C.
+
+Ejecutar 
+\begin{codesnippet}
+\begin{verbatim}
+objdump -Mintel -D cropflip_c.o
+\end{verbatim}
+\end{codesnippet}
+
+¿Cómo es el código generado? 
+Indicar
+\begin{inparaenum}[\itshape a\upshape)]
+    \item Por qué cree que hay otras funciones además de \verb|cropflip_c|
+    \item Cómo se manipulan las variables locales
+    \item Si le parece que ese código generado podría optimizarse
+\end{inparaenum}
+
+% ******************************************************************************
+%\newpage
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 1.2 - optimizaciones del compilador}
+
+Compile el código de C con flags de optimización. Por ejemplo, pasando el flag 
+\verb|-O1|\footnote{agregando este flag a \texttt{CCFLAGS64} en el makefile}. 
+Indicar
+\begin{inparaenum}
+    \item Qué optimizaciones observa que realizó el compilador
+    \item Qué otros flags de optimización brinda el compilador
+    \item Los nombres de tres optimizaciones que realizan los compiladores.
+\end{inparaenum}
+
+% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
+
+\subsection{Mediciones}
+
+Realizar una medición de performance \emph{rigurosa} es más difícil de lo 
+que parece. 
+En este experimento deberá realizar distintas mediciones de performance 
+para verificar que sean buenas mediciones.
+
+En un sistema ``ideal'' el proceso medido corre solo, sin ninguna 
+interferencia de agentes externos. 
+Sin embargo, una PC no es un sistema ideal. 
+Nuestro proceso corre junto con decenas de otros, tanto de usuarios como 
+del sistema operativo que compiten por el uso de la CPU. 
+Esto implica que al realizar mediciones aparezcan ``ruidos'' o 
+``interferencias'' que distorsionen los resultados.
+
+El primer paso para tener una idea de si la medición es buena o no, 
+es tomar varias muestras. 
+Es decir, repetir la misma medición varias veces.
+Luego de eso, es conveniente descartar los outliers
+\footnote{en español, valor atípico: \url{http://es.wikipedia.org/wiki/Valor_atípico}}, 
+que son los valores que más se alejan del promedio. 
+Con los valores de las mediciones resultantes se puede calcular el promedio 
+y también la varianza, que es algo similar el promedio de las distancias al 
+promedio\footnote{en realidad, elevadas al cuadrado en vez de tomar el módulo}.
+
+Las fórmulas para calcular el promedio $\mu$ y la varianza $\sigma^2$ son
+
+$$
+\mu = \frac{1}{n}\sum_{i=1}^{n} x_i \qquad \sigma^2 = \frac{\displaystyle\sum_{i=1}^{n}(x_i - \mu)^2} {n}
+$$
+
+% ******************************************************************************
+\newpage
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 1.3 - calidad de las mediciones}
+
+\begin{enumerate}
+    \item Medir el tiempo de ejecución de cropflip 10 veces. 
+    \item Implementar un programa en C que no haga más que ciclar 
+            infinitamente sumando 1 a una variable. 
+            Lanzar este programa tantas veces como \emph{cores lógicos} tenga 
+            su procesador. 
+            Medir otras 10 veces mientras estos programas corren de fondo.
+    \item Calcular el promedio y la varianza en ambos casos.
+    \item Consideraremos outliers a los 2 mayores tiempos
+     de ejecución de la medicion a) y también a los 2 menores,
+     por lo que los descartaremos. Recalcular el promedio y la varianza después de hacer este descarte.
+    \item Realizar un gráfico que presente estos dos últimos items.
+\end{enumerate}
+
+A partir de aquí todos los experimentos de mediciones deberán hacerse igual 
+que en el presente ejercicio: tomando 10 mediciones, luego descartando 
+outliers y finalmente calculando promedio y varianza.
+
+% ******************************************************************************
+%\newpage
+\noindent\textbf{Experimento 1.4 - secuencial vs. vectorial}
+
+En este experimento deberá realizar una medición de las diferencias de 
+performance entre las versiones de C y ASM (el primero con -O0, -O1, -O2 y -O3) 
+y graficar los resultados.
+
+% ******************************************************************************
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 1.5 - cpu vs. bus de memoria}
+
+Se desea conocer cual es el mayor limitante a la
+performance de este filtro en su versión ASM.
+
+¿Cuál es el factor que limita la performance en este caso?
+En caso de que el limitante fuera la intensidad de cómputo, entonces 
+podrían agregarse instrucciones que realicen accesos a memoria extra y la
+performance casi no debería sufrir. 
+La inversa puede aplicarse, si el limitante es la cantidad de accesos a memoria.
+\footnote{también podría pasar que estén más bien balanceados y que agregar
+cualquier tipo de instrucción afecte sensiblemente la performance}
+	
+Realizar un experimento, agregando 4, 8 y 16 instrucciones aritméticas 
+(por ej \verb|add rax, rbx|) analizando como varía el tiempo de ejecución.
+Hacer lo mismo ahora con instrucciones de acceso a memoria, haciendo 
+mitad lecturas y mitad escrituras (por ejemplo, agregando dos 
+\verb|mov rax, [rsp]| y dos \verb|mov [rsp+8], rax|).\footnote{Notar que en el caso de acceder a \texttt{[rbp]} o \texttt{[rsp+8]} probablemente haya siempre hits en la cache, por lo que la medición no será de buena calidad. Si se le ocurre la manera, realizar accesos a otras direcciones alternativas.}
+	
+Realizar un único gráfico que compare:
+\begin{inparaenum}
+    \item La versión original
+    \item Las versiones con más instrucciones aritméticas
+    \item Las versiones com más accesos a memoria
+\end{inparaenum}
+
+Acompañar al gráfico con una tabla que indique los valores graficados.  
+  
+%\vspace*{0.3cm} \noindent
+%\textbf{Experimento 1.6 (\textit{opcional}) - secuencial vs. vectorial (parte II)}
+%
+%
+%Si vemos a los pixeles como una tira muy larga de
+%bytes, este filtro en realidad no requiere \emph{casi}
+%ningún procesamiento de datos en paralelo. Esto podría
+%significar que la velocidad del filtro de C puede
+%aumentarse hasta casi alcanzar la del de ASM. ¿ocurre esto?
+%	
+%Modificar el filtro para que en vez de acceder
+%a los bytes de a uno a la vez se accedan como
+%tiras de 64 bits y analizar la performance.
+
+% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
+
+\subsection*{Filtro \textit{Sierpinski}}
+
+Programar el filtro \textit{Sierpinski} en lenguaje C y en en ASM haciendo 
+uso de las instrucciones vectoriales (\textbf{SSE}).
+
+% ******************************************************************************
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 2.1 - secuencial vs. vectorial}
+
+Analizar cuales son las diferencias de performace entre las versiones de C 
+y ASM de este filtro, de igual modo que para el experimento 1.4.
+
+% ******************************************************************************
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 2.1 - cpu vs. bus de memoria}
+
+¿Cuál es el factor que limita la performance en este filtro?
+Repetir el experimento 1.5 para este filtro.
+
+\subsection*{Filtro \textit{Bandas}}
+
+Programar el filtro \textit{Bandas} en lenguaje C y en en ASM haciendo uso de 
+las instrucciones vectoriales (\textbf{SSE}).
+
+% ******************************************************************************
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 3.1 - saltos condicionales}
+
+Se desea conocer que tanto impactan los saltos condicionales en el código 
+de filtro Bandas con \verb|-O1| (la versión en C).\\
+Para poder medir esto de manera aproximada, remover el código
+que detecta a que banda pertenece cada pixel, dejando
+sólo una banda.
+Por más que la imagen resultante no sea correcta, será posible tomar una
+medida aproximada del impacto de los saltos condicionales.
+Analizar como varía la performance. 
+
+% ******************************************************************************
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 3.2 - secuencial vs. vectorial}
+
+Repetir el experimento 1.4 para este filtro.
+
+% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
+
+\subsection*{Filtro \textit{Motion Blur}}
+Programar el filtro \textit{mblur} en lenguaje C y en ASM haciendo uso de 
+las instrucciones \textbf{SSE}.
+
+% ******************************************************************************
+\vspace*{0.3cm} \noindent
+\textbf{Experimento 4.1}
+
+Repetir el experimento 1.4 para este filtro

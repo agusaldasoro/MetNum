@@ -52,6 +52,10 @@ int main(int argc, char const *argv[])
 		}
 	}
 
+	cout << "Rojo: " << raw(23,43,0,0) << endl;
+	cout << "Verde: " << raw(23,43,0,1) << endl;
+	cout << "Azul: " << raw(23,43,0,2) << endl;
+
 	string nombre_raw = (imagen.substr(0,imagen.length()-4))+"-raw.bmp";
 	const char * c_nombre_raw = nombre_raw.c_str();
 	raw.save(c_nombre_raw);
