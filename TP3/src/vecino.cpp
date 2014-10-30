@@ -1,105 +1,58 @@
-/*#include <fstream>
-#include <stdlib.h>
-//#include <string>
-#include <iostream>
-//#include "sparse.h"
 #include "CImg.h"
-//#include <limits>
-#include <chrono>
+#include "vecino.h"
 
-using namespace std;
+//DECIDIR SI AGARRAMOS LOS ROJOS/AZULES DE ARRIBA O DE LA IZQUIERDA (codigo comentado)
 
-int main(int argc, char const *argv[])
-{
-	//std::chrono::time_point<std::chrono::system_clock> start, end;
+void vecino(cimg_library::CImg<unsigned int>& orig){
+	unsigned int ancho = orig.width();
+	unsigned int alto = orig.height();
 
-	cimg_library::CImg<unsigned int> raw(800,600,1,3,0);
-
-	ifstream main(argv[1]);
-	unsigned int valor;
-	for (int i = 0; i < 600; ++i)
+	if (ancho%2 != 0)
 	{
-		for (int j = 0; j < 800; ++j)
-		{
-			main >> valor;
-			if (i%2 == 0)
-			{
-				if (j%2 == 0)
-					raw(j,i,0,2) = valor;
-				else
-					raw(j,i,0,1) = valor;
-			}
-			else
-			{
-				if (j%2 == 0)
-					raw(j,i,0,1) = valor;
-				else
-					raw(j,i,0,0) = valor;
-			}
-		}
+		orig.crop(0,0,0,0,ancho-2,alto,0,2);
+		ancho--;
 	}
 
-	for (int i = 0; i < 600; ++i)
+	if (alto%2 != 0)
 	{
-		for (int j = 0; j < 800; ++j)
+		orig.crop(0,0,0,0,ancho,alto-2,0,2);
+		alto--;
+	}
+
+	for (int i = 0; i < alto; ++i)
+	{
+		for (int j = 0; j < ancho; ++j)
 		{
-			if (i%2 == 1)
+			if (i%2 == 1) //fila de rojos y verdes
 			{
-				if (j%2 == 1) //rojo
+				if (j%2 == 1) //pixel rojo
 				{
-					if (j<400)
-						raw(j,i,0,1) = raw(j+1,i,0,1);
-					else
-						raw(j,i,0,1) = raw(j-1,i,0,1);
+					orig(j,i,0,1) = orig(j-1,i,0,1);
+					//orig(j,i,0,1) = orig(j,i-1,0,1);
 
-					if (i<598 && j<798)
-						raw(j,i,0,2) = raw(j+1,i+1,0,2);
+					orig(j,i,0,2) = orig(j-1,i-1,0,2);
 				}
-				else //verde
+				else //pixel verde
 				{
-					if (j<400)
-						raw(j,i,0,0) = raw(j+1,i,0,0);
-					else
-						raw(j,i,0,0) = raw(j-1,i,0,0);
-
-					if (i<300)
-						raw(j,i,0,2) = raw(j,i+1,0,2);
-					else
-						raw(j,i,0,2) = raw(j,i-1,0,2);
+					orig(j,i,0,0) = orig(j+1,i,0,0);
+					orig(j,i,0,2) = orig(j,i-1,0,2);
 				}
 			}
-			else
+			else //fila de azules y verdes
 			{
-				if (j%2 == 1) //verde
+				if (j%2 == 1) //pixel verde
 				{
-					if (i<300)
-						raw(j,i,0,0) = raw(j,i+1,0,0);
-					else
-						raw(j,i,0,0) = raw(j,i-1,0,0);
-
-					if (j<400)
-						raw(j,i,0,2) = raw(j+1,i,0,2);
-					else
-						raw(j,i,0,2) = raw(j-1,i,0,2);
+					orig(j,i,0,0) = orig(j,i+1,0,0);
+					orig(j,i,0,2) = orig(j-1,i,0,2);
 				}
-				else //azul
+				else //pixel azul
 				{
-					if (j<798 && i<598)
-						raw(j,i,0,0) = raw(j+1,i+1,0,0);
+					orig(j,i,0,0) = orig(j+1,i+1,0,0);
 
-					if (j<400)
-						raw(j,i,0,1) = raw(j+1,i,0,1);
-					else
-						raw(j,i,0,1) = raw(j-1,i,0,1);
+					orig(j,i,0,1) = orig(j+1,i,0,1);
+					//orig(j,i,0,1) = orig(j,i+1,0,1);
 				}
 			}
 		}
 	}
-
-	raw.save("vecino.bmp");
-
-	// std::chrono::duration<double> elapsed_seconds = end-start;
-	// cout << "Tiempo: " << elapsed_seconds.count() << endl;
-
-	return 0;
-}*/
+}
