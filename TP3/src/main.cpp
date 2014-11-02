@@ -7,7 +7,7 @@
 #include "raw.h"
 #include "bilineal.h"
 #include "vecino.h"
-#include "MHC.h"
+#include "mhc.h"
 #include "sparse.h"
 #include "spline.h"
 
