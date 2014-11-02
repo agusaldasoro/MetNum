@@ -1,7 +1,7 @@
 #include "CImg.h"
 #include "raw.h"
 
-void generar_crudo(cimg_library::CImg<unsigned int>& orig){
+void generar_crudo(cimg_library::CImg<double>& orig){
 	unsigned int ancho = orig.width();
 	unsigned int alto = orig.height();
 

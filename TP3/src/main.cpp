@@ -7,7 +7,11 @@
 #include "raw.h"
 #include "bilineal.h"
 #include "vecino.h"
-//#include "MHC.h"
+#include "MHC.h"
+#include "sparse.h"
+#include "spline.h"
+
+//#include <algorithm>
 
 using namespace std;
 
@@ -21,7 +25,7 @@ int main(int argc, char const *argv[])
 	string imagen = argv[1];
 	const char * c_imagen = imagen.c_str();
 
-	cimg_library::CImg<unsigned int> raw(c_imagen);
+	cimg_library::CImg<double> raw(c_imagen);
 
 	generar_crudo(raw);
 
@@ -51,13 +55,58 @@ int main(int argc, char const *argv[])
 	}
 	else if (*argv[2] == '2')
 	{
+	/*	cout << "Verde: " << ((raw(6-1,4,0,1)+raw(6+1,4,0,1)+raw(6,4-1,0,1)+raw(6,4+1,0,1))/4) << endl;
+		cout << "Medio: " << raw(6,4,0,2) << endl;
+		cout << "Le resto: " << (raw(6-2,4,0,2)+raw(6+2,4,0,2)+raw(6,4-2,0,2)+raw(6,4+2,0,2))/4 << endl;
+		cout << "Resta: " << (raw(6,4,0,2)-(raw(6-2,4,0,2)+raw(6+2,4,0,2)+raw(6,4-2,0,2)+raw(6,4+2,0,2))/4) << endl;
+		cout << "Factor: " << ((double)1/2)*(raw(6,4,0,2)-(raw(6-2,4,0,2)+raw(6+2,4,0,2)+raw(6,4-2,0,2)+raw(6,4+2,0,2))/4) << endl;
+		cout << "Total: " << min(255.0,((raw(6-1,4,0,1)+raw(6+1,4,0,1)+raw(6,4-1,0,1)+raw(6,4+1,0,1))/4)+((double)1/2)*(raw(6,4,0,2)-(raw(6-2,4,0,2)+raw(6+2,4,0,2)+raw(6,4-2,0,2)+raw(6,4+2,0,2))/4)) << endl;*/
+
+		Matriz test(5);
+		test.Elem(0,0) = 1;
+		test.Elem(1,0) = 1;
+		test.Elem(1,1) = 2;
+		test.Elem(1,2) = 3;
+		test.Elem(2,1) = 4;
+		test.Elem(2,2) = 5;
+		test.Elem(2,3) = 2;
+		test.Elem(3,2) = 1;
+		test.Elem(3,3) = 3;
+		test.Elem(3,4) = 2;
+		test.Elem(4,4) = 1;
+
+		test.Res(0,0);
+		test.Res(1,5);
+		test.Res(2,4);
+		test.Res(3,3);
+		test.Res(4,0);
+
+		test.EG();
+		test.imprimir();
+
+		std::vector<double> res = test.ResolverSistema();
+		cout << "Resultado: ";
+		for (std::vector<double>::iterator i = res.begin(); i != res.end(); ++i)
+			cout << *i << ", ";
+
 		//start = std::chrono::system_clock::now();
 		//MHC(raw);
 		//end = std::chrono::system_clock::now();
 
-		string nombre_MHC = (imagen.substr(0,imagen.length()-4))+"-MHC.bmp";
-		const char * c_nombre_MHC = nombre_MHC.c_str();
-		raw.save(c_nombre_MHC);
+		// string nombre_MHC = (imagen.substr(0,imagen.length()-4))+"-MHC.bmp";
+		// const char * c_nombre_MHC = nombre_MHC.c_str();
+		// raw.save(c_nombre_MHC);
+	}
+	else if (*argv[2] == '3')
+	{
+		std::vector<double> fx;
+		fx.push_back(130);
+		fx.push_back(156);
+		fx.push_back(123);
+		fx.push_back(75);
+		fx.push_back(97);
+
+		std::vector<double> res = generar_spline(fx);
 	}
 
 	// std::chrono::duration<double> elapsed_seconds = end-start;

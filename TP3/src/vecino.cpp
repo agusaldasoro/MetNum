@@ -3,7 +3,7 @@
 
 //DECIDIR SI AGARRAMOS LOS ROJOS/AZULES DE ARRIBA O DE LA IZQUIERDA (codigo comentado)
 
-void vecino(cimg_library::CImg<unsigned int>& orig){
+void vecino(cimg_library::CImg<double>& orig){
 	unsigned int ancho = orig.width();
 	unsigned int alto = orig.height();
 
