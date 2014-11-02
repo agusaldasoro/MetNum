@@ -5,6 +5,8 @@
 
 std::vector<double> generar_spline(std::vector<double> fx);
 
+double evaluar(std::vector<double> spline, unsigned int x);
+
 void spline(cimg_library::CImg<double>& orig);
 
 #endif

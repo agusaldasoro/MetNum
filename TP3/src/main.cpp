@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 	const char * c_nombre_raw = nombre_raw.c_str();
 	raw.save(c_nombre_raw);
 
-	if (*argv[2] == '0')
+	if (*argv[2] == '0') //Vecino mas cercano
 	{
 		//start = std::chrono::system_clock::now();
 		vecino(raw);
@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
 		const char * c_nombre_vecino = nombre_vecino.c_str();
 		raw.save(c_nombre_vecino);
 	}
-	else if (*argv[2] == '1')
+	else if (*argv[2] == '1') //Bilineal
 	{
 		//start = std::chrono::system_clock::now();
 		int_bilineal(raw);
@@ -53,16 +53,19 @@ int main(int argc, char const *argv[])
 		const char * c_nombre_bilineal = nombre_bilineal.c_str();
 		raw.save(c_nombre_bilineal);
 	}
-	else if (*argv[2] == '2')
+	else if (*argv[2] == '2') //MHC
 	{
-	/*	cout << "Verde: " << ((raw(6-1,4,0,1)+raw(6+1,4,0,1)+raw(6,4-1,0,1)+raw(6,4+1,0,1))/4) << endl;
-		cout << "Medio: " << raw(6,4,0,2) << endl;
-		cout << "Le resto: " << (raw(6-2,4,0,2)+raw(6+2,4,0,2)+raw(6,4-2,0,2)+raw(6,4+2,0,2))/4 << endl;
-		cout << "Resta: " << (raw(6,4,0,2)-(raw(6-2,4,0,2)+raw(6+2,4,0,2)+raw(6,4-2,0,2)+raw(6,4+2,0,2))/4) << endl;
-		cout << "Factor: " << ((double)1/2)*(raw(6,4,0,2)-(raw(6-2,4,0,2)+raw(6+2,4,0,2)+raw(6,4-2,0,2)+raw(6,4+2,0,2))/4) << endl;
-		cout << "Total: " << min(255.0,((raw(6-1,4,0,1)+raw(6+1,4,0,1)+raw(6,4-1,0,1)+raw(6,4+1,0,1))/4)+((double)1/2)*(raw(6,4,0,2)-(raw(6-2,4,0,2)+raw(6+2,4,0,2)+raw(6,4-2,0,2)+raw(6,4+2,0,2))/4)) << endl;*/
+		//start = std::chrono::system_clock::now();
+		MHC(raw);
+		//end = std::chrono::system_clock::now();
 
-		Matriz test(5);
+		string nombre_MHC = (imagen.substr(0,imagen.length()-4))+"-MHC.bmp";
+		const char * c_nombre_MHC = nombre_MHC.c_str();
+		raw.save(c_nombre_MHC);
+	}
+	else if (*argv[2] == '3') //Spline: ESTO NO ANDA BIEN
+	{
+		/*Matriz test(5);
 		test.Elem(0,0) = 1;
 		test.Elem(1,0) = 1;
 		test.Elem(1,1) = 2;
@@ -87,19 +90,9 @@ int main(int argc, char const *argv[])
 		std::vector<double> res = test.ResolverSistema();
 		cout << "Resultado: ";
 		for (std::vector<double>::iterator i = res.begin(); i != res.end(); ++i)
-			cout << *i << ", ";
+			cout << *i << ", ";*/
 
-		//start = std::chrono::system_clock::now();
-		//MHC(raw);
-		//end = std::chrono::system_clock::now();
-
-		// string nombre_MHC = (imagen.substr(0,imagen.length()-4))+"-MHC.bmp";
-		// const char * c_nombre_MHC = nombre_MHC.c_str();
-		// raw.save(c_nombre_MHC);
-	}
-	else if (*argv[2] == '3')
-	{
-		std::vector<double> fx;
+		/*std::vector<double> fx;
 		fx.push_back(130);
 		fx.push_back(156);
 		fx.push_back(123);
@@ -107,6 +100,18 @@ int main(int argc, char const *argv[])
 		fx.push_back(97);
 
 		std::vector<double> res = generar_spline(fx);
+
+		cout << "Evaluado: " << evaluar(res,2) << endl;*/
+
+
+		//start = std::chrono::system_clock::now();
+		spline(raw);
+		//end = std::chrono::system_clock::now();
+
+		string nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline.bmp";
+		const char * c_nombre_spline = nombre_spline.c_str();
+		raw.save(c_nombre_spline);
+
 	}
 
 	// std::chrono::duration<double> elapsed_seconds = end-start;
