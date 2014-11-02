@@ -46,15 +46,16 @@ std::vector<double> generar_spline(std::vector<double> fx){ //hay tantos puntos 
 }
 
 double evaluar(std::vector<double> spline, unsigned int x){
-	unsigned int j = x;
-	x = floor(x/2)*4;
-	double a = spline[x];
-	double b = spline[x+1];
-	double c = spline[x+2];
-	double d = spline[x+3];
+	unsigned int j = floor(x/2);
+	unsigned int i = j*4;
+
+	double a = spline[i];
+	double b = spline[i+1];
+	double c = spline[i+2];
+	double d = spline[i+3];
 
 	//std::cout << "a: " << a << std::endl << "b: " << b << std::endl << "c: " << c << std::endl << "d: " << d << std::endl;
-
+	j *= 2;
 	return a+b*(x-j)+c*pow((x-j),2)+d*pow((x-j),3);
 }
 
@@ -122,41 +123,73 @@ void spline(cimg_library::CImg<double>& orig){
 	unsigned int ancho = orig.width();
 	unsigned int alto = orig.height();
 
-	std::vector<double> /*filaR(ancho), */filaG(ancho), /*filaB(ancho), colR(alto), */colG(alto)/*, colB(alto)*/;
+	std::vector<double> /*filaR(ancho), */filaG, /*filaB(ancho), colR(alto), */colG/*, colB(alto)*/;
 
 	std::vector<double> spline_col, spline_fila;
+	unsigned int r;
+
+	/*for (int i = 0; i < 5; ++i)
+	{
+		std::cout << orig(i,21,0,1) << ", ";
+	}
+
+	std::cout << std::endl;*/
+
+	/*for (int c = 0; c < ancho; c+=2)
+		filaG.push_back(orig(c,21,0,1));
+
+	for (std::vector<double>::iterator i = filaG.begin(); i != filaG.end(); ++i)
+			std::cout << *i << ", ";
+	std::cout << std::endl;*/
 
 	for (int i = 0; i < alto; ++i)
 	{
+		//std::cout << "Fila " << i << std::endl;
+
 		for (int c = ((i%2 == 0) ? 1 : 0); c < ancho; c+=2)
 		{
 			//filaR[c] = orig(c,i,0,0);
-			filaG[c] = orig(c,i,0,1);
+			filaG.push_back(orig(c,i,0,1));
 			//filaB[c] = orig(c,i,0,2);
 		}
 
 		spline_fila = generar_spline(filaG);
 
-		for (int f = ((i%2 == 0) ? 2 : 1); f < ancho-1; f+=2)
+		/*for (std::vector<double>::iterator i = spline_fila.begin(); i != spline_fila.end(); ++i)
+			std::cout << *i << ", ";
+		std::cout << std::endl;*/
+
+
+		for (int c = ((i%2 == 0) ? 2 : 1); c < ancho-1; c+=2)
 		{
-			orig(f,i,0,1) = evaluar(spline_fila,f);
+			orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila,c-((i%2 == 0) ? 1 : 0))));
 		}
+
+		/*for (int z = 0; z < 5; ++z)
+		{
+			std::cout << orig(z,21,0,1) << ", ";
+		}
+
+		std::cout << std::endl;*/
+
 	}
 
 	for (int j = 0; j < ancho; ++j)
 	{
+		std::cout << "Columna " << j << std::endl;
+
 		for (int f = ((j%2 == 0) ? 1 : 0); f < alto; f+=2)
 		{
 			//filaR[c] = orig(c,i,0,0);
-			filaG[f] = orig(j,f,0,1);
+			colG.push_back(orig(j,f,0,1));
 			//filaB[c] = orig(c,i,0,2);
 		}
 
 		spline_col = generar_spline(colG);
 
-		for (int c = ((j%2 == 0) ? 2 : 1); c < alto-1; c+=2)
+		for (int f = ((j%2 == 0) ? 2 : 1); f < alto-1; f+=2)
 		{
-			orig(j,c,0,1) = (orig(j,c,0,1)+evaluar(spline_col,c))/2;
+			orig(j,f,0,1) = (orig(j,f,0,1)+evaluar(spline_col,f-((j%2 == 0) ? 1 : 0)))/2;
 		}
 	}
 	orig.crop(2,2,0,0,ancho-3,alto-3,0,2); //no se si dejarlo aca o meterlo en el main

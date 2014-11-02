@@ -101,7 +101,11 @@ int main(int argc, char const *argv[])
 
 		std::vector<double> res = generar_spline(fx);
 
-		cout << "Evaluado: " << evaluar(res,2) << endl;*/
+		cout << "Resultado: ";
+		for (std::vector<double>::iterator i = res.begin(); i != res.end(); ++i)
+			cout << *i << ", ";
+
+		cout << "Evaluado: " << evaluar(res,3) << endl;*/
 
 
 		//start = std::chrono::system_clock::now();
