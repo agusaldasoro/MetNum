@@ -195,7 +195,7 @@ void spline(cimg_library::CImg<double>& orig){
 		{
 			for (int c = 3; c < ancho-1; c+=2)
 			{
-				//orig(c-1,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,c-2)));
+				orig(c-1,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,c-2)));
 				orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,c)));
 			//	std::cout << "4" << std::endl;
 			}
@@ -255,7 +255,7 @@ void spline(cimg_library::CImg<double>& orig){
 			{
 				orig(i,c,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-1)));
 				orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)+evaluar(spline_col_g,c-1))/2));
-				orig(i,c-1,0,2) = fmin(255.0,fmax(0,(orig(i,c-1,0,2)+evaluar(spline_col_b,c))/2));
+				orig(i,c-1,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
 			//	std::cout << "3" << std::endl;
 			}
 			//std::cout << "CHAU 3" << std::endl;
@@ -264,7 +264,7 @@ void spline(cimg_library::CImg<double>& orig){
 		{
 			for (int c = 3; c < alto-1; c+=2)
 			{
-				orig(i,c-1,0,0) = fmin(255.0,fmax(0,(orig(i,c-1,0,0)+evaluar(spline_col_r,c-2))/2));
+				orig(i,c-1,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-2)));
 				orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)+evaluar(spline_col_g,c))/2));
 				orig(i,c,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
 			//	std::cout << "4" << std::endl;
