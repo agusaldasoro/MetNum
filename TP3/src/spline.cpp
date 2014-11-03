@@ -123,10 +123,9 @@ void spline(cimg_library::CImg<double>& orig){
 	unsigned int ancho = orig.width();
 	unsigned int alto = orig.height();
 
-	std::vector<double> /*filaR(ancho), */filaG, /*filaB(ancho), colR(alto), */colG/*, colB(alto)*/;
+	std::vector<double> filaR, filaG, filaB, colR, colG, colB;
 
-	std::vector<double> spline_col, spline_fila;
-	unsigned int r;
+	std::vector<double> spline_col_r, spline_col_g, spline_col_b, spline_fila_r, spline_fila_g, spline_fila_b;
 
 	/*for (int i = 0; i < 5; ++i)
 	{
@@ -144,25 +143,62 @@ void spline(cimg_library::CImg<double>& orig){
 
 	for (int i = 0; i < alto; ++i)
 	{
-		std::cout << "Fila " << i << std::endl;
+		//std::cout << "Fila " << i << std::endl;
+		filaR.clear();
+		filaG.clear();
+		filaB.clear();
 
-		for (int c = ((i%2 == 0) ? 1 : 0); c < ancho; c+=2)
+		if (i%2==0)
 		{
-			//filaR[c] = orig(c,i,0,0);
-			filaG.push_back(orig(c,i,0,1));
-			//filaB[c] = orig(c,i,0,2);
+			for (int c = 1; c < ancho; c+=2)
+			{
+				filaG.push_back(orig(c,i,0,1));
+				filaB.push_back(orig(c-1,i,0,2));
+			//	std::cout << "1" << std::endl;
+			}
+			//std::cout << "CHAU 1" << std::endl;
+		}
+		else
+		{
+			for (int c = 0; c < ancho; c+=2)
+			{
+				filaG.push_back(orig(c,i,0,1));
+				filaR.push_back(orig(c+1,i,0,0));
+				//std::cout << "2" << std::endl;
+			}
 		}
 
-		spline_fila = generar_spline(filaG);
+		spline_fila_g = generar_spline(filaG);
+		if (i%2==0)
+			spline_fila_b = generar_spline(filaB);
+		else
+			spline_fila_r = generar_spline(filaR);
 
 		/*for (std::vector<double>::iterator i = spline_fila.begin(); i != spline_fila.end(); ++i)
 			std::cout << *i << ", ";
 		std::cout << std::endl;*/
 
 
-		for (int c = ((i%2 == 0) ? 2 : 1); c < ancho-1; c+=2)
+		if (i%2==0)
 		{
-			orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila,c-((i%2 == 0) ? 1 : 0))));
+			//std::cout << "HOLA 3" << std::endl;
+			for (int c = 2; c < ancho-1; c+=2)
+			{
+				orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,c-1)));
+			//	std::cout << "INTERMEDIO 3" << std::endl;
+				orig(c-1,i,0,2) = fmin(255.0,fmax(0,evaluar(spline_fila_b,c)));
+			//	std::cout << "3" << std::endl;
+			}
+			//std::cout << "CHAU 3" << std::endl;
+		}
+		else
+		{
+			for (int c = 3; c < ancho-1; c+=2)
+			{
+				//orig(c-1,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,c-2)));
+				orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,c)));
+			//	std::cout << "4" << std::endl;
+			}
 		}
 
 		/*for (int z = 0; z < 5; ++z)
@@ -174,23 +210,67 @@ void spline(cimg_library::CImg<double>& orig){
 
 	}
 
-	for (int j = 0; j < ancho; ++j)
+	for (int i = 0; i < ancho; ++i)
 	{
-		std::cout << "Columna " << j << std::endl;
+		//std::cout << "Columna " << i << std::endl;
+		colR.clear();
+		colG.clear();
+		colB.clear();
 
-		for (int f = ((j%2 == 0) ? 1 : 0); f < alto; f+=2)
+		if (i%2==0)
 		{
-			//filaR[c] = orig(c,i,0,0);
-			colG.push_back(orig(j,f,0,1));
-			//filaB[c] = orig(c,i,0,2);
+			for (int c = 1; c < alto; c+=2)
+			{
+				colR.push_back(orig(i,c,0,0));
+				colG.push_back(orig(i,c,0,1));
+				colB.push_back(orig(i,c-1,0,2));
+			//	std::cout << "1" << std::endl;
+			}
+			//std::cout << "CHAU 1" << std::endl;
+		}
+		else
+		{
+			for (int c = 0; c < alto; c+=2)
+			{
+				colB.push_back(orig(i,c,0,2));
+				colG.push_back(orig(i,c,0,1));
+				colR.push_back(orig(i,c+1,0,0));
+				//std::cout << "2" << std::endl;
+			}
 		}
 
-		spline_col = generar_spline(colG);
+		spline_col_g = generar_spline(colG);
+		spline_col_b = generar_spline(colB);
+		spline_col_r = generar_spline(colR);
 
-		for (int f = ((j%2 == 0) ? 2 : 1); f < alto-1; f+=2)
+		/*for (std::vector<double>::iterator i = spline_col.begin(); i != spline_col.end(); ++i)
+			std::cout << *i << ", ";
+		std::cout << std::endl;*/
+
+
+		if (i%2==0)
 		{
-			orig(j,f,0,1) = fmin(255.0,fmax(0,(orig(j,f,0,1)+evaluar(spline_col,f-((j%2 == 0) ? 1 : 0)))/2));
+			//std::cout << "HOLA 3" << std::endl;
+			for (int c = 2; c < alto-1; c+=2)
+			{
+				orig(i,c,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-1)));
+				orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)+evaluar(spline_col_g,c-1))/2));
+				orig(i,c-1,0,2) = fmin(255.0,fmax(0,(orig(i,c-1,0,2)+evaluar(spline_col_b,c))/2));
+			//	std::cout << "3" << std::endl;
+			}
+			//std::cout << "CHAU 3" << std::endl;
+		}
+		else
+		{
+			for (int c = 3; c < alto-1; c+=2)
+			{
+				orig(i,c-1,0,0) = fmin(255.0,fmax(0,(orig(i,c-1,0,0)+evaluar(spline_col_r,c-2))/2));
+				orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)+evaluar(spline_col_g,c))/2));
+				orig(i,c,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
+			//	std::cout << "4" << std::endl;
+			}
 		}
 	}
-	orig.crop(2,2,0,0,ancho-3,alto-3,0,2); //no se si dejarlo aca o meterlo en el main
+
+	orig.crop(3,3,0,0,ancho-4,alto-4,0,2); //no se si dejarlo aca o meterlo en el main
 }
