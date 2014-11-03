@@ -32,7 +32,7 @@ std::vector<double> generar_spline(std::vector<double> fx){ //hay tantos puntos 
 	for (int i = 0; i < n-1; ++i)
 	{
 		res[i*4] = fx[i]; //a
-		res[(i*4)+1] = (fx[i+1]-fx[i]-((4*sol[i+1]+8*sol[i])/3))/2; //b
+		res[(i*4)+1] = ((fx[i+1]-fx[i])/2)-(((2*sol[i+1])+(4*sol[i]))/3); //b
 		res[(i*4)+2] = sol[i]; //c
 		res[(i*4)+3] = (sol[i+1]-sol[i])/6; //d
 	}
@@ -144,7 +144,7 @@ void spline(cimg_library::CImg<double>& orig){
 
 	for (int i = 0; i < alto; ++i)
 	{
-		//std::cout << "Fila " << i << std::endl;
+		std::cout << "Fila " << i << std::endl;
 
 		for (int c = ((i%2 == 0) ? 1 : 0); c < ancho; c+=2)
 		{
@@ -189,7 +189,7 @@ void spline(cimg_library::CImg<double>& orig){
 
 		for (int f = ((j%2 == 0) ? 2 : 1); f < alto-1; f+=2)
 		{
-			orig(j,f,0,1) = (orig(j,f,0,1)+evaluar(spline_col,f-((j%2 == 0) ? 1 : 0)))/2;
+			orig(j,f,0,1) = fmin(255.0,fmax(0,(orig(j,f,0,1)+evaluar(spline_col,f-((j%2 == 0) ? 1 : 0)))/2));
 		}
 	}
 	orig.crop(2,2,0,0,ancho-3,alto-3,0,2); //no se si dejarlo aca o meterlo en el main
