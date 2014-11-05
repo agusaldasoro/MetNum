@@ -110,7 +110,8 @@ int main(int argc, char const *argv[])
 
 		//start = std::chrono::system_clock::now();
 		//spline(raw);
-		spline_der(raw);
+		//spline_der(raw);
+		spline_rango(raw);
 		//end = std::chrono::system_clock::now();
 
 		string nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline.bmp";

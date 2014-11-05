@@ -223,6 +223,32 @@ void spline(cimg_library::CImg<double>& orig){
 		}
 	}
 
+	//BETA:
+	/*for (int i = 0; i < alto; ++i)
+	{
+		filaR.clear();
+		filaB.clear();
+
+		if (i%2==0)
+			for (int c = 1; c < ancho; c+=2)
+				filaR.push_back(orig(c,i,0,0));
+		else
+			for (int c = 0; c < ancho; c+=2)
+				filaB.push_back(orig(c,i,0,2));
+
+		if (i%2==0)
+			spline_fila_r = generar_spline(filaR);
+		else
+			spline_fila_b = generar_spline(filaB);
+
+		if (i%2==0)
+			for (int c = 2; c < ancho-1; c+=2)
+				orig(c,i,0,0) = fmin(255.0,fmax(0,(orig(c,i,0,0)+evaluar(spline_fila_r,c-1))/2));
+		else
+			for (int c = 3; c < ancho-1; c+=2)
+				orig(c,i,0,2) = fmin(255.0,fmax(0,(orig(c,i,0,2)+evaluar(spline_fila_b,c))/2));
+	}*/
+
 	orig.crop(3,3,0,0,ancho-4,alto-4,0,2); //no se si dejarlo aca o meterlo en el main
 }
 
@@ -316,10 +342,10 @@ void spline_der(cimg_library::CImg<double>& orig){
 			for (int c = 2; c < alto-1; c+=2)
 			{
 				orig(i,c,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-1)));
-				if( (i>0 && i<ancho) && (fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1))) )
-					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*0.3)+(0.7*evaluar(spline_col_g,c-1))));
+				if( (i>0 && i<ancho) && ((fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1))) || (fabs(orig(i-1,c,0,0)-orig(i+1,c,0,0)) > fabs(orig(i,c-1,0,2)-orig(i,c+1,0,2)))) )
+					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*0)+(1*evaluar(spline_col_g,c-1))));
 				else
-					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*0.7)+(0.3*evaluar(spline_col_g,c-1))));
+					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*1)+(0*evaluar(spline_col_g,c-1))));
 				orig(i,c-1,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
 			}
 		}
@@ -328,14 +354,364 @@ void spline_der(cimg_library::CImg<double>& orig){
 			for (int c = 3; c < alto-1; c+=2)
 			{
 				orig(i,c-1,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-2)));
-				if( (i>0 && i<ancho) && (fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1))) )
-					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*0.3)+(0.7*evaluar(spline_col_g,c))));
+				if( (i>0 && i<ancho) && ((fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1))) || (fabs(orig(i-1,c,0,2)-orig(i+1,c,0,2)) > fabs(orig(i,c-1,0,0)-orig(i,c+1,0,0)))) )
+					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*0)+(1*evaluar(spline_col_g,c))));
 				else
-					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*0.7)+(0.3*evaluar(spline_col_g,c))));
+					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*1)+(0*evaluar(spline_col_g,c))));
 				orig(i,c,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
 			}
 		}
 	}
 
 	orig.crop(3,3,0,0,ancho-4,alto-4,0,2); //no se si dejarlo aca o meterlo en el main
+}
+
+void spline_rango(cimg_library::CImg<double>& orig){
+	unsigned int ancho = orig.width();
+	unsigned int alto = orig.height();
+
+	std::vector<double> filR, filG, filB, colR, colG, colB;
+
+	std::vector<double> spline_col_r, spline_col_g, spline_col_b, spline_fila_r, spline_fila_g, spline_fila_b;
+
+	for (int i = 5; i < alto-5; ++i)
+	{
+		std::cout << "Fila " << i << std::endl;
+
+		for (int j = 5; j < ancho-5; ++j)
+		{
+			if (i%2==0)
+			{
+				if (j%2==0) //pixel azul
+				{
+					filG.clear();
+					colG.clear();
+
+					filG.push_back(orig(j-5,i,0,1));
+					filG.push_back(orig(j-3,i,0,1));
+					filG.push_back(orig(j-1,i,0,1));
+					filG.push_back(orig(j+1,i,0,1));
+					filG.push_back(orig(j+3,i,0,1));
+					filG.push_back(orig(j+5,i,0,1));
+
+					colG.push_back(orig(j,i-5,0,1));
+					colG.push_back(orig(j,i-3,0,1));
+					colG.push_back(orig(j,i-1,0,1));
+					colG.push_back(orig(j,i+1,0,1));
+					colG.push_back(orig(j,i+3,0,1));
+					colG.push_back(orig(j,i+5,0,1));
+
+					spline_fila_g = generar_spline(filG);
+					spline_col_g = generar_spline(colG);
+
+					//orig(j,i,0,1) = fmin(255.0,fmax(0,(evaluar(spline_fila_g,5)+evaluar(spline_col_g,5))/2));
+
+					if( fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1)) )
+						orig(j,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_col_g,5)));
+					else
+						orig(j,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,5)));
+				}
+				else //pixel verde
+				{
+					filB.clear();
+
+					filB.push_back(orig(j-5,i,0,2));
+					filB.push_back(orig(j-3,i,0,2));
+					filB.push_back(orig(j-1,i,0,2));
+					filB.push_back(orig(j+1,i,0,2));
+					filB.push_back(orig(j+3,i,0,2));
+					filB.push_back(orig(j+5,i,0,2));
+
+					spline_fila_b = generar_spline(filB);
+
+					orig(j,i,0,2) = fmin(255.0,fmax(0,evaluar(spline_fila_b,5)));
+
+					colR.clear();
+
+					colR.push_back(orig(j,i-5,0,0));
+					colR.push_back(orig(j,i-3,0,0));
+					colR.push_back(orig(j,i-1,0,0));
+					colR.push_back(orig(j,i+1,0,0));
+					colR.push_back(orig(j,i+3,0,0));
+					colR.push_back(orig(j,i+5,0,0));
+
+					spline_col_r = generar_spline(colR);
+
+					orig(j,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,5)));
+				}
+			}
+			else
+			{
+				if (j%2==1) //pixel rojo
+				{
+					filG.clear();
+					colG.clear();
+
+					colG.push_back(orig(j,i-5,0,1));
+					colG.push_back(orig(j,i-3,0,1));
+					colG.push_back(orig(j,i-1,0,1));
+					colG.push_back(orig(j,i+1,0,1));
+					colG.push_back(orig(j,i+3,0,1));
+					colG.push_back(orig(j,i+5,0,1));
+
+					filG.push_back(orig(j-5,i,0,1));
+					filG.push_back(orig(j-3,i,0,1));
+					filG.push_back(orig(j-1,i,0,1));
+					filG.push_back(orig(j+1,i,0,1));
+					filG.push_back(orig(j+3,i,0,1));
+					filG.push_back(orig(j+5,i,0,1));
+
+					spline_fila_g = generar_spline(filG);
+					spline_col_g = generar_spline(colG);
+
+					//orig(j,i,0,1) = fmin(255.0,fmax(0,(evaluar(spline_fila_g,5)+evaluar(spline_col_g,5))/2));
+
+					if( fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1)) )
+						orig(j,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_col_g,5)));
+					else
+						orig(j,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,5)));
+				}
+				else //pixel verde
+				{
+					filR.clear();
+
+					filR.push_back(orig(j-5,i,0,0));
+					filR.push_back(orig(j-3,i,0,0));
+					filR.push_back(orig(j-1,i,0,0));
+					filR.push_back(orig(j+1,i,0,0));
+					filR.push_back(orig(j+3,i,0,0));
+					filR.push_back(orig(j+5,i,0,0));
+
+					spline_fila_r = generar_spline(filR);
+
+					orig(j,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,5)));
+
+					colB.clear();
+
+					colB.push_back(orig(j,i-5,0,2));
+					colB.push_back(orig(j,i-3,0,2));
+					colB.push_back(orig(j,i-1,0,2));
+					colB.push_back(orig(j,i+1,0,2));
+					colB.push_back(orig(j,i+3,0,2));
+					colB.push_back(orig(j,i+5,0,2));
+
+					spline_col_b = generar_spline(colB);
+
+					orig(j,i,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,5)));
+				}
+			}
+		}
+	}
+
+	for (int i = 5; i < alto-5; ++i)
+	{
+		std::cout << "Fila " << i << std::endl;
+
+		for (int j = 5; j < ancho-5; ++j)
+		{
+			if (i%2==0)
+			{
+				if (j%2==0) //pixel azul
+				{
+					filR.clear();
+					colR.clear();
+
+					colR.push_back(orig(j,i-5,0,0));
+					colR.push_back(orig(j,i-3,0,0));
+					colR.push_back(orig(j,i-1,0,0));
+					colR.push_back(orig(j,i+1,0,0));
+					colR.push_back(orig(j,i+3,0,0));
+					colR.push_back(orig(j,i+5,0,0));
+
+					filR.push_back(orig(j-5,i,0,0));
+					filR.push_back(orig(j-3,i,0,0));
+					filR.push_back(orig(j-1,i,0,0));
+					filR.push_back(orig(j+1,i,0,0));
+					filR.push_back(orig(j+3,i,0,0));
+					filR.push_back(orig(j+5,i,0,0));
+
+					spline_fila_r = generar_spline(filR);
+					spline_col_r = generar_spline(colR);
+
+					//orig(j,i,0,0) = fmin(255.0,fmax(0,(evaluar(spline_fila_r,5)+evaluar(spline_col_r,5))/2));
+
+					if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
+						orig(j,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,5)));
+					else
+						orig(j,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,5)));
+				}
+				/*else //pixel verde
+				{
+					filR.clear();
+
+					filR.push_back(orig(j-5,i,0,0));
+					filR.push_back(orig(j-3,i,0,0));
+					filR.push_back(orig(j-1,i,0,0));
+					filR.push_back(orig(j+1,i,0,0));
+					filR.push_back(orig(j+3,i,0,0));
+					filR.push_back(orig(j+5,i,0,0));
+
+					spline_fila_r = generar_spline(filR);
+
+					orig(j,i,0,0) = fmin(255.0,fmax(0,(orig(j,i,0,0)+evaluar(spline_fila_r,5))/2));
+
+					colB.clear();
+
+					colB.push_back(orig(j,i-5,0,2));
+					colB.push_back(orig(j,i-3,0,2));
+					colB.push_back(orig(j,i-1,0,2));
+					colB.push_back(orig(j,i+1,0,2));
+					colB.push_back(orig(j,i+3,0,2));
+					colB.push_back(orig(j,i+5,0,2));
+
+					spline_col_b = generar_spline(colB);
+
+					orig(j,i,0,2) = fmin(255.0,fmax(0,(orig(j,i,0,2)+evaluar(spline_col_b,5))/2));
+				}*/
+			}
+			else
+			{
+				if (j%2==1) //pixel rojo
+				{
+					filB.clear();
+					colB.clear();
+
+					colB.push_back(orig(j,i-5,0,2));
+					colB.push_back(orig(j,i-3,0,2));
+					colB.push_back(orig(j,i-1,0,2));
+					colB.push_back(orig(j,i+1,0,2));
+					colB.push_back(orig(j,i+3,0,2));
+					colB.push_back(orig(j,i+5,0,2));
+
+					filB.push_back(orig(j-5,i,0,2));
+					filB.push_back(orig(j-3,i,0,2));
+					filB.push_back(orig(j-1,i,0,2));
+					filB.push_back(orig(j+1,i,0,2));
+					filB.push_back(orig(j+3,i,0,2));
+					filB.push_back(orig(j+5,i,0,2));
+
+					spline_fila_b = generar_spline(filB);
+					spline_col_b = generar_spline(colB);
+
+					//orig(j,i,0,2) = fmin(255.0,fmax(0,(evaluar(spline_fila_b,5)+evaluar(spline_col_b,5))/2));
+
+					if( fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) > fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2)) )
+						orig(j,i,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,5)));
+					else
+						orig(j,i,0,2) = fmin(255.0,fmax(0,evaluar(spline_fila_b,5)));
+				}
+				/*else //pixel verde
+				{
+					filB.clear();
+
+					filB.push_back(orig(j-5,i,0,2));
+					filB.push_back(orig(j-3,i,0,2));
+					filB.push_back(orig(j-1,i,0,2));
+					filB.push_back(orig(j+1,i,0,2));
+					filB.push_back(orig(j+3,i,0,2));
+					filB.push_back(orig(j+5,i,0,2));
+
+					spline_fila_b = generar_spline(filB);
+
+					orig(j,i,0,2) = fmin(255.0,fmax(0,(orig(j,i,0,2)+evaluar(spline_fila_b,5))/2));
+
+					colR.clear();
+
+					colR.push_back(orig(j,i-5,0,0));
+					colR.push_back(orig(j,i-3,0,0));
+					colR.push_back(orig(j,i-1,0,0));
+					colR.push_back(orig(j,i+1,0,0));
+					colR.push_back(orig(j,i+3,0,0));
+					colR.push_back(orig(j,i+5,0,0));
+
+					spline_col_r = generar_spline(colR);
+
+					orig(j,i,0,0) = fmin(255.0,fmax(0,(orig(j,i,0,0)+evaluar(spline_col_r,5))/2));
+				}*/
+			}
+		}
+	}
+
+	//BETA:
+
+	for (int i = 5; i < alto-5; ++i)
+	{
+		std::cout << "Fila " << i << std::endl;
+
+		for (int j = 5; j < ancho-5; ++j)
+		{
+			if (i%2==0)
+			{
+				if (j%2==1) //pixel verde
+				{
+					filR.clear();
+
+					filR.push_back(orig(j-5,i,0,0));
+					filR.push_back(orig(j-3,i,0,0));
+					filR.push_back(orig(j-1,i,0,0));
+					filR.push_back(orig(j+1,i,0,0));
+					filR.push_back(orig(j+3,i,0,0));
+					filR.push_back(orig(j+5,i,0,0));
+
+					spline_fila_r = generar_spline(filR);
+
+					//orig(j,i,0,0) = fmin(255.0,fmax(0,(orig(j,i,0,0)+evaluar(spline_fila_r,5))/2));
+					if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) < fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
+						orig(j,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,5)));
+
+					colB.clear();
+
+					colB.push_back(orig(j,i-5,0,2));
+					colB.push_back(orig(j,i-3,0,2));
+					colB.push_back(orig(j,i-1,0,2));
+					colB.push_back(orig(j,i+1,0,2));
+					colB.push_back(orig(j,i+3,0,2));
+					colB.push_back(orig(j,i+5,0,2));
+
+					spline_col_b = generar_spline(colB);
+
+					//orig(j,i,0,2) = fmin(255.0,fmax(0,(orig(j,i,0,2)+evaluar(spline_col_b,5))/2));
+					if( fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) > fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2)) )
+						orig(j,i,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,5)));
+				}
+			}
+			else
+			{
+				if (j%2==0) //pixel verde
+				{
+					filB.clear();
+
+					filB.push_back(orig(j-5,i,0,2));
+					filB.push_back(orig(j-3,i,0,2));
+					filB.push_back(orig(j-1,i,0,2));
+					filB.push_back(orig(j+1,i,0,2));
+					filB.push_back(orig(j+3,i,0,2));
+					filB.push_back(orig(j+5,i,0,2));
+
+					spline_fila_b = generar_spline(filB);
+
+					//orig(j,i,0,2) = fmin(255.0,fmax(0,(orig(j,i,0,2)+evaluar(spline_fila_b,5))/2));
+					if( fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) < fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2)) )
+						orig(j,i,0,2) = fmin(255.0,fmax(0,evaluar(spline_fila_b,5)));
+
+					colR.clear();
+
+					colR.push_back(orig(j,i-5,0,0));
+					colR.push_back(orig(j,i-3,0,0));
+					colR.push_back(orig(j,i-1,0,0));
+					colR.push_back(orig(j,i+1,0,0));
+					colR.push_back(orig(j,i+3,0,0));
+					colR.push_back(orig(j,i+5,0,0));
+
+					spline_col_r = generar_spline(colR);
+
+					//orig(j,i,0,0) = fmin(255.0,fmax(0,(orig(j,i,0,0)+evaluar(spline_col_r,5))/2));
+					if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
+						orig(j,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,5)));
+				}
+			}
+		}
+	}
+
+	orig.crop(5,5,0,0,ancho-5,alto-5,0,2); //no se si dejarlo aca o meterlo en el main
 }

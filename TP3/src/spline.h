@@ -11,4 +11,6 @@ void spline(cimg_library::CImg<double>& orig);
 
 void spline_der(cimg_library::CImg<double>& orig);
 
+void spline_rango(cimg_library::CImg<double>& orig);
+
 #endif
