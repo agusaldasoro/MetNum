@@ -1,0 +1,14 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introducci\'on Te\'orica}{3}
+\contentsline {section}{\numberline {2}Desarrollo}{4}
+\contentsline {subsection}{\numberline {2.1}Vecino m\'as cercano}{4}
+\contentsline {subsection}{\numberline {2.2}Interpolaci\'on Bilineal}{4}
+\contentsline {subsection}{\numberline {2.3}Interpolaciones Direccionales}{4}
+\contentsline {subsection}{\numberline {2.4}Algoritmo de Malvar, He y Cutler}{4}
+\contentsline {section}{\numberline {3}Resultados y discusi\'on}{5}
+\contentsline {subsection}{\numberline {3.1}MHC}{5}
+\contentsline {section}{\numberline {4}Conclusiones y trabajo futuro}{6}
+\contentsline {section}{\numberline {5}Ap\'endices}{6}
+\contentsline {subsection}{\numberline {5.1}Ap\'endice A: Enunciado}{6}
+\contentsline {subsection}{\numberline {5.2}Ap\'endice B:}{13}
+\contentsline {section}{\numberline {6}Referencias}{14}
