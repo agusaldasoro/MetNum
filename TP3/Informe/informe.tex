@@ -26,21 +26,6 @@
 \usepackage{url}
 
 
-% ******************************************************** %
-%              TEMPLATE DE INFORME ORGA2 v0.1              %
-% ******************************************************** %
-% ******************************************************** %
-%                                                          %
-% ALGUNOS PAQUETES REQUERIDOS (EN UBUNTU):                 %
-% ========================================
-%                                                          %
-% texlive-latex-base                                       %
-% texlive-latex-recommended                                %
-% texlive-fonts-recommended                                %
-% texlive-latex-extra?                                     %
-% texlive-lang-spanish (en ubuntu 13.10)                   %
-% ******************************************************** %
-
 
 
 \begin{document}
@@ -61,7 +46,7 @@
 \thispagestyle{empty}
 \vfill
 \begin{abstract}
-En el presente trabajo se pretende analizar y comparar distintas alternativas que pretenden dar respuesta al problema de demosaicing. Para ello, las mismas serán implementadas y sometidas a experimentación sobre fotografías crudas sintéticas \textcolor{red}{(Sinteticas quiere decir que las armamos nosotros? si no es asi, habria que ponerlo)} específicamente seleccionadas para poner de manifiesto las ventajas e inconvenientes del empleo de cada método. \\
+En el presente trabajo se pretende analizar y comparar distintas alternativas que pretenden dar respuesta al problema de demosaicing. Para ello, las mismas serán implementadas y sometidas a experimentación sobre fotografías crudas sintéticas específicamente seleccionadas para poner de manifiesto las ventajas e inconvenientes del empleo de cada método. \\
 \end{abstract}
 
 \textbf{Palabras clave:} \\
@@ -88,35 +73,42 @@ Mientras que estas últimas capturaban la imagen de forma mecánica y sin interc
 
 En el presente trabajo nos interesará analizar un fragmento de dicha etapa conocido como \emph{demosaicing}. Para entender de qué consta, es menester comprender previamente la forma en que se capturan las imágenes al utilizar cámaras digitales.
 
-Las cámaras digitales poseen un sensor CCD compuesto de una matriz de elementos fotosensibles, cada uno de los cuales es capaz de captar la intensidad de la luz que llega a ese punto a través de la lente. 
+Este tipo de cámaras poseen un sensor CCD compuesto de una matriz de elementos fotosensibles, cada uno de los cuales es capaz de captar la intensidad de la luz que llega a ese punto a través de la lente. 
 
 La tarea de capturar todos los colores reflejados por el objetivo que se quiere fotografiar no está encomendada a ninguna posición en particular, sino que cada una de ellas tiene asignada – de acuerdo a algún patrón definido  – la captura de la información perteneciente a un solo color. Cada p\'ixel de la imagen va a estar dividido en tres canales ya que la vamos a almacenar mediante RGB (Red, Green, Blue).
 
 Ahora bien, esto genera una imagen que se aproxima a la realidad sólo en parte ya que para cada p\'ixel de la imagen tenemos la informaci\'on de s\'olo uno de sus tres canales. A causa de esto es que la misma debe ser reconstruida algorítmicamente, interpolando los valores de los colores que no fueron almacenados explícitamente para cada pixel.
 
-En este punto nos vemos obligados a elegir un patr\'on para establecer para cada fotosensor qu\'e color va a capturar. Esta elecci\'on no es para nada trivial. Estos patrones son denominados \emph{Color Filter Array} y var\'ian de acuerdo al fabricante de c\'amaras digitales. En nuestro trabajo nos vamos a centrar en el\emph{ Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda sobre el canal verde duplica a cada uno de los otros dos y el color verde es el m\'as sensible al ojo humano. 
+%El patr\'on que determina qué color será capturado por cada fotosensor es denominado \textbf{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras %%%%digitales. En nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda% sobre el canal verde - al cual el ojo humano es m\ás sensible, debido a que se encuentra en el centro de su espectro visual - duplica a cada uno de los otros dos. 
 
 \textcolor{blue}{*insertar imágenes por aquí y por allá*}
 
-En este punto adquieren relevancia las diferentes propuestas de reconstrucción, entre las cuales pueden mencionarse la interpolación por asignación de valores próximos, la interpolación bilineal y interpolación direccional. Cada una de ellas admite una serie de variaciones \\
+En este punto adquieren relevancia las diferentes propuestas de reconstrucción de la imagen original. Esto conlleva la ejecución de diversos procedimientos, entre los que se encuentran el demosaicing, el análisis del balance de blancos, la curva tonal, la saturación y el contraste y la compresión final de la imagen. Como nuestra propuesta se aboca al primer paso mencionado, exploraremos en el presente trabajo sólo un subconjunto de una serie de variaciones no finita que admiten métodos de debayering como ser la interpolación por asignación de valores próximos, la interpolación bilineal y interpolación direccional.\\
 
-\textcolor{red}{PONEMOS ALGO sobre eso de que hay otros pasos mas para acomodar la imagen? pero que no los vamos  a hacer. a mi me parece que va kcsho}
 
 \newpage
 \section{Desarrollo}
 
-Dada una \textit{imagen-crudo}, los valores que contiene en sus pixeles para cada canal los asumimos reales y ciertos. Por lo tanto, nos resta para cada p\'ixel averiguar sus dos canales faltantes. 
+Dada una \textit{imagen cruda}, los valores que contiene en sus píxeles para cada canal los asumimos reales y ciertos. Por lo tanto, resta averiguar para cada uno de ellos los valores de los dos canales para los cuales dicha información se encuentra ausente.
 
 \subsection{Vecino m\'as cercano}
-En este caso, para cada pixel le vamos a otorgar en sus dos canales faltantes el valor real m\'as pr\'oximo. Este m\'etodo es bastante simple algor\'itmicamente y adem\'as no tiene en cuenta dos factores: \\
+La implementación más sencilla para la estimación de los canales desconocidos de cada pixel consiste en otorgar a cada canal ``vacío'' el valor real m\'as pr\'oximo que corresponda a dicho color. Este m\'etodo es algor\'itmicamente asequible, pero no tiene en cuenta dos factores: \\
 \\
-$\triangleright$ Por un lado, se le otorga el valor de un s\'olo pixel cercano. Esto podr\'ia representar un problema ya que existen casos donde si busco al p\'ixel de distancia m\'inima para el canal deseado la respuesta no va a ser \'unica. De este modo, nos vemos obligados a determinar qu\'e p\'ixel va a ser el elegido, pudiendo variar as\'i los valores finales acorde a la elecci\'on. \textcolor{red}{Esto fue muy fumado? o esta bien? Ponemos dibujito al respecto?} \\ 
+$\triangleright$ Por un lado, al otorgar el valor de un sólo pixel cercano, surge la necesidad de definir arbitrariamente cuál se debe escoger como valor referencial en casos en que un conjunto de pixeles son equidistantes al analizado y no existe un criterio claro acerca de cuál de ellos debe ser considerado el ``más próximo''. Que esta decisión impacte en el resultado de forma inocua o parcial o totalmente nociva dependerá en cierta medida de la fotografía que se esté analizando.\\
+El ejemplo más trivial se encuentra en una imagen monocromática: al ser los valores reales idénticos para todos los pixeles, tomar las magnitudes de cualquier otra posición para cada canal correspondiente no afectará el resultado final. Sin embargo, si consideráramos una imagen formada por columnas alternadas de un pixel de ancho rojas (\#0000FF) y blancas (\#FFFFFF), entonces si para definir los canales verde y azul de un pixel rojo se tomara como posiciones más cercanas aquel que se encuentra debajo suyo y el que está a la derecha del mismo (respectivamente), el resultado sería un pixel fucsia (\#FF00FF). En cambio, si los pixeles elegidos fueran su inmediato derecho y en el que se encuentra a su diagonal inferior derecha, la posición analizada debería manifestar el color blanco (\#000000).\\
+Si bien se trata de un ejemplo de alcance limitado, resulta suficiente para ilustrar los potenciales problemas de la aplicación de este algoritmo.
 \\
-$\triangleright$ Por otro lado, al copiar el p\'ixel m\'as cercano arbitrariamente no existe ning\'un tipo de consideraci\'on sobre si es una posici\'on de un borde. \textcolor{red}{idem$\uparrow$}\\
-\\
-\textcolor{red}{Quedo muy corto? despues Agustin Montero nos reta..jajaj}\\
+$\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterior - este método no especifica ninguna distinción respecto de la forma de proceder en casos de borde o de superficies parejas. \\
 
 \subsection{Interpolaci\'on Bilineal}
+
+%La interpolación bilineal es una composición de interpolaciones lineales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más pr´ximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\
+Como la estructura del filtro Bayer sólo asegura para los pixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes , aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.\\
+Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de los valores de la columna o de la fila, respectivamente, puesto que la intersección entre las columnas que capturan el color rojo y el verde y las que toman este último junto al azul es vacía.\\
+Por otro lado, los valores del canal azul para un pixel rojo (y los del canal rojo para un pixel azul) se calcularían tomando en cuenta las posiciones diagonales a la analizada. Esto requeriría tomar dos pixels cercanos cuyo canal real sea el verde y cuyas filas/columnas resulten paralelas entre sí, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.\\
+En la ilustración se puede ver que esa cuenta equivale a hacer el promedio entre los valores diagonales más cercanos, puesto que ((a+b)/2 + (c+d)/2)/2 = (a+b+c+d)/4.
+
+
 \textcolor{blue}{Yo aca “copiar\'ia” lo del enunciado con el mismo dibujito y todo, esta mal?}
 \subsection{Interpolaciones Direccionales}
 \textcolor{blue}{Idem $\uparrow$}
