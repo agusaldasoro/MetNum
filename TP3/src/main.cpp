@@ -117,8 +117,8 @@ int main(int argc, char const *argv[])
 			start = std::chrono::system_clock::now();
 			//spline(raw);
 			//spline_der(raw);
-			spline_rango(raw);
-			//spline_rango_MHC(raw);
+			//spline_rango(raw);
+			spline_rango_MHC(raw);
 			//spline_diag(raw);
 			end = std::chrono::system_clock::now();
 
