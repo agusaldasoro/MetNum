@@ -106,13 +106,48 @@ $\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterio
 Como la estructura del filtro Bayer sólo asegura para los pixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes , aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.\\
 Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de los valores de la columna o de la fila, respectivamente, puesto que la intersección entre las columnas que capturan el color rojo y el verde y las que toman este último junto al azul es vacía.\\
 Por otro lado, los valores del canal azul para un pixel rojo (y los del canal rojo para un pixel azul) se calcularían tomando en cuenta las posiciones diagonales a la analizada. Esto requeriría tomar dos pixels cercanos cuyo canal real sea el verde y cuyas filas/columnas resulten paralelas entre sí, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.\\
-En la ilustración se puede ver que esa cuenta equivale a hacer el promedio entre los valores diagonales más cercanos, puesto que ((a+b)/2 + (c+d)/2)/2 = (a+b+c+d)/4.
+Tomando como referencia la ilustración \ref{bilineal} se puede ver que el cálculo recien descripto equivale a definir el promedio entre los valores diagonales más cercanos, puesto que ((a+b)/2 + (c+d)/2)/2 = (a+b+c+d)/4.
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/bilineal}
+	\label{bilineal}
+  \end{center}
+\end{figure}
 
 
-\textcolor{blue}{Yo aca “copiar\'ia” lo del enunciado con el mismo dibujito y todo, esta mal?}
 \subsection{Interpolaciones Direccionales}
-\textcolor{blue}{Idem $\uparrow$}
+Se trata de una gran cantidad de métodos que buscan comenzar a resolver el problema de demosaicing realizando inicialmente una interpolación en una dirección y combinando con algún criterio determinado el resultado estimado con el obtenido de una aproximación realizada en otra dirección.\\
+
+La implementación de este tipo de métodos exige tomar al menos dos decisiones de peso que distinguirán a unos de otros:\\
+
+\begin{itemize}
+    \item De qué forma se realizarán las interpolaciones (en qué direcciones y mediante qué mecanismo de interpolación)
+    \item Con qué criterio y consideraciones combinar la información proporcionada por las direcciones escogidas.
+\end{itemize}
+
+Para escoger alguna opción apropiada corresponde analizar las características del Color Filter Array con el que se va a trabajar, puesto que no todas las direcciones van a aportar en la totalidad de los casos la misma información. \\
+En cuanto a la combinación de los resultados de las distintas interpolaciones, es conveniente tener presente que el promedio de los mismos no es siempre una buena opción. Por ejemplo, supongamos que se analiza una imagen que presenta en un sector la siguiente característica:
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.26]{imagenes/direccional}
+	\label{direccional}
+  \end{center}
+\end{figure}
+
+Si se interpolara utilizando la dirección vertical el valor de la posición denotada con una estrella, todo indicaría que el resultado debería generar el color rojo. Al hacerlo horizontalmente se llegaría a la conclusión de que la posición en cuestión debería ser blanca. Promediando \#FF0000 con \#FFFFFF resultaría el valor \#FF8080, que expresa un color rosado. \\
+Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir este error. Uno de ellos consiste en calcular el gradiente del color para utilizarlo al combinar los resultados, de modo tal que si el mismo fuera de gran magnitud (es decir, la variación del color es considerable) entonces el peso que debe tener el valor calculado en el resultado final debería ser menor a aquel que fue calculado en una dirección cuyo gradiente fuera menor (es decir, que se tratara de una superficie más cromáticamente homogénea).
+
+\textcolor{red}{No sé qué más poner acá =/ re cortina.-}
+
+
 \subsection{Algoritmo de Malvar, He y Cutler}
+
+
+
 
 \newpage
 \section{Resultados y discusi\'on}
