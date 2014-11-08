@@ -89,8 +89,129 @@ Otros filtros (?
 En este punto adquieren relevancia las diferentes propuestas de reconstrucción de la imagen original. Esto conlleva la ejecución de diversos procedimientos, entre los que se encuentran el demosaicing, el análisis del balance de blancos, la curva tonal, la saturación y el contraste y la compresión final de la imagen. Como nuestra propuesta se aboca al primer paso mencionado, exploraremos en el presente trabajo sólo un subconjunto de una serie de variaciones no finita que admiten métodos de debayering como ser la interpolación por asignación de valores próximos, la interpolación bilineal y interpolación direccional.\\
 
 \subsection{Inconvenientes de aproximar mediante el Polinomio de Lagrange}
+Es nuestra intención exponer ahora el motivo que consideramos suficiente para decidir interpolar los valores ausentes a través de Splines en lugar de hacer uso del polinomio de Lagrange.\\
+Sea dado el siguiente espacio muestral: 
 
-\textcolor{blue}{Explicar aca porque no se usa, con eso del simulador}
+\textcolor{red}{cambiar todos los y's por 10}
+
+\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
+ \hline                 
+   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+ \hline    
+y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
+ \hline  
+ \end{tabular}
+
+\begin{tabular}{  | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
+ \hline                 
+   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
+ \hline    
+y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
+ \hline  
+ \end{tabular}
+
+El polinomio de Lagrange que interpola cada uno de esos valores tiene una expresión equivalente al Spline que lo hace, siendo su gráfico el cito a continuación:
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeSplinesCTE}
+	\label{LagrangeSplinesCTE}
+  \end{center}
+\end{figure}
+
+Supongamos ahora que el resultado de una medición - digamos $x_{12}$ - haya sido calculada con un ruido que represente el 1\% del valor real, modificándose la muestra de la siguiente forma:\\
+
+\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
+ \hline                 
+   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+ \hline    
+y & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10,1& 10 & 10\\
+ \hline  
+ \end{tabular}
+
+\begin{tabular}{  | c || c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+ \hline                 
+   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
+ \hline    
+y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
+ \hline  
+ \end{tabular}
+
+
+ En este caso se obtendría el gráfico representado en la Figura \ref{LagrangeX12a101} para el polinomio de Lagrange (escalado en la Figura \ref{LagrangeX12a101(zoomOut)})y el que se ilustra en la Figura \ref{SplinesX12a101} para el obtenido mediante Splines.
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/SplinesX12a101}
+	\label{SplinesX12a101}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeX12a101}
+	\label{LagrangeX12a101}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeX12a101(zoomOut)}
+	\label{LagrangeX12a101(zoomOut)}
+  \end{center}
+\end{figure}
+
+Como se puede observar, para la construcción del Spline el cambio en un valor de la imagen no impactó de una forma apreciable sobre el resto del polinomio. Sin embargo, el nuevo resultado generó un polinomio de Lagrange cuya diferencia con la Figura \ref{SplinesX12a101} es grosera en determinados intervalos.\\ 
+
+Si se profundizara el error de la medición de acuerdo con la tabla presentada a continuación, notaríamos que el polinomio de Lagrange comenzaría a presentar una mayor cantidad de intervalos con valores drásticamente alejados de los dados como referencia. Por otro lado, Splines únicamente presentará variaciones en un entorno de los intervalos cuyos valores hayan sido modificados. Esto se puede  constatar en las Figuras \ref{SplinesX12a20}, \ref{LagrangeX12a20} y  \ref{LagrangeX12a20(zoomOut)}.
+
+\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
+ \hline                 
+   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+ \hline    
+y & 10 & 10& 10& 20& 10& 10& 10& 10& 10& 10& 10& 20& 10 & 10\\
+ \hline  
+ \end{tabular}
+
+\begin{tabular}{  | c || c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+ \hline                 
+   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
+ \hline    
+y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
+ \hline  
+ \end{tabular}
+
+\begin{figure}
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/SplinesX12a20}
+	\label{SplinesX12a20}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeX12a20}
+	\label{LagrangeX12a20}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+	\caption{$Zoom \ out$ de la Figura \ref{LagrangeX12a20}}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeX12a20(zoomOut)}
+	\label{LagrangeX12a20(zoomOut)}
+  \end{center}
+\end{figure}
+
+
+En conclusión, el polinomio de Lagrange se comporta de una manera menos predecible \textcolor{red}{en realidad sí es predecible si tenés el polinomio y podés evauarlo, pero quiero decir q es menos intuitivo, menos "constante", como que hace cualquiera entre dos puntos cuya imagen no esté fijada de antemano} entre dos variables independientes y no garantiza que en esos intervalos el valor de la función sea cercano a los ya conocidos.\\
+La carencia de predictibilidad hace del polinomio de Lagrange una mala alternativa para la interpolación, en comparación con las ventajas proporcionadas por el empleo de Splines.\\
 
 \subsection{Artifacts}
 \textcolor{blue}{Aca explicar un poco que onda,  que son los artifacts}
