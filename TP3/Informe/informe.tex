@@ -81,10 +81,19 @@ Ahora bien, esto genera una imagen que se aproxima a la realidad sólo en parte 
 
 %El patr\'on que determina qué color será capturado por cada fotosensor es denominado \textbf{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras %%%%digitales. En nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda% sobre el canal verde - al cual el ojo humano es m\ás sensible, debido a que se encuentra en el centro de su espectro visual - duplica a cada uno de los otros dos. 
 
-\textcolor{blue}{*insertar imágenes por aquí y por allá*}
+\textcolor{blue}{*insertar imágenes por aquí y por allá*:\\
+Filtro Bayer \\
+Otros filtros (?
+}
 
 En este punto adquieren relevancia las diferentes propuestas de reconstrucción de la imagen original. Esto conlleva la ejecución de diversos procedimientos, entre los que se encuentran el demosaicing, el análisis del balance de blancos, la curva tonal, la saturación y el contraste y la compresión final de la imagen. Como nuestra propuesta se aboca al primer paso mencionado, exploraremos en el presente trabajo sólo un subconjunto de una serie de variaciones no finita que admiten métodos de debayering como ser la interpolación por asignación de valores próximos, la interpolación bilineal y interpolación direccional.\\
 
+\subsection{Inconvenientes de aproximar mediante el Polinomio de Lagrange}
+
+\textcolor{blue}{Explicar aca porque no se usa, con eso del simulador}
+
+\subsection{Artifacts}
+\textcolor{blue}{Aca explicar un poco que onda,  que son los artifacts}
 
 \newpage
 \section{Desarrollo}
@@ -94,19 +103,45 @@ Dada una \textit{imagen cruda}, los valores que contiene en sus píxeles para ca
 \subsection{Vecino m\'as cercano}
 La implementación más sencilla para la estimación de los canales desconocidos de cada pixel consiste en otorgar a cada canal ``vacío'' el valor real m\'as pr\'oximo que corresponda a dicho color. Este m\'etodo es algor\'itmicamente asequible, pero no tiene en cuenta dos factores: \\
 \\
-$\triangleright$ Por un lado, al otorgar el valor de un sólo pixel cercano, surge la necesidad de definir arbitrariamente cuál se debe escoger como valor referencial en casos en que un conjunto de pixeles son equidistantes al analizado y no existe un criterio claro acerca de cuál de ellos debe ser considerado el ``más próximo''. Que esta decisión impacte en el resultado de forma inocua o parcial o totalmente nociva dependerá en cierta medida de la fotografía que se esté analizando.\\
-El ejemplo más trivial se encuentra en una imagen monocromática: al ser los valores reales idénticos para todos los pixeles, tomar las magnitudes de cualquier otra posición para cada canal correspondiente no afectará el resultado final. Sin embargo, si consideráramos una imagen formada por columnas alternadas de un pixel de ancho rojas (\#0000FF) y blancas (\#FFFFFF), entonces si para definir los canales verde y azul de un pixel rojo se tomara como posiciones más cercanas aquel que se encuentra debajo suyo y el que está a la derecha del mismo (respectivamente), el resultado sería un pixel fucsia (\#FF00FF). En cambio, si los pixeles elegidos fueran su inmediato derecho y en el que se encuentra a su diagonal inferior derecha, la posición analizada debería manifestar el color blanco (\#000000).\\
-Si bien se trata de un ejemplo de alcance limitado, resulta suficiente para ilustrar los potenciales problemas de la aplicación de este algoritmo.
-\\
+
+$\triangleright$ Por un lado, al otorgar el valor de un sólo pixel cercano, surge la necesidad de definir arbitrariamente cuál se debe escoger como valor referencial en casos en que un conjunto de pixeles son equidistantes al analizado y no existe un criterio claro acerca de cuál de ellos debe ser considerado el ``más próximo''. Que esta decisión impacte en el resultado de forma inocua o parcial o totalmente nociva dependerá en cierta medida de la fotografía que se esté analizando.
+
+El ejemplo más trivial se encuentra en una imagen monocromática: al ser los valores reales idénticos para todos los pixeles, tomar las magnitudes de cualquier otra posición para cada canal correspondiente no afectará el resultado final. Sin embargo, si consideráramos una imagen formada por columnas alternadas de un pixel de ancho rojas (\#0000FF) y blancas (\#FFFFFF), entonces si para definir los canales verde y azul de un pixel rojo se tomara como posiciones más cercanas aquel que se encuentra debajo suyo y el que está a la derecha del mismo (respectivamente), el resultado sería un pixel fucsia (\#FF00FF). En cambio, si los pixeles elegidos fueran su inmediato derecho y en el que se encuentra a su diagonal inferior derecha, la posición analizada debería manifestar el color blanco (\#000000).
+
+Si bien se trata de un ejemplo de alcance limitado, resulta suficiente para ilustrar los potenciales problemas de la aplicación de este algoritmo.\\
+
+\textcolor{blue}{Aca va la fotito que tiene que armar Belu}\\
+
 $\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterior - este método no especifica ninguna distinción respecto de la forma de proceder en casos de borde o de superficies parejas. \\
+
+\subsection*{Decisiones tomadas en el Algoritmo de Vecino M\'as Cercano}
+\textcolor{blue}{Aca va todo eso de poner fotos de peor caso para cada mas cercano derecha izuqierda arriba abajo, y que elegimos irnos hacia la derecha.}
 
 \subsection{Interpolaci\'on Bilineal}
 
 %La interpolación bilineal es una composición de interpolaciones lineales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más pr´ximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\
-Como la estructura del filtro Bayer sólo asegura para los pixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes , aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.\\
-Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de los valores de la columna o de la fila, respectivamente, puesto que la intersección entre las columnas que capturan el color rojo y el verde y las que toman este último junto al azul es vacía.\\
-Por otro lado, los valores del canal azul para un pixel rojo (y los del canal rojo para un pixel azul) se calcularían tomando en cuenta las posiciones diagonales a la analizada. Esto requeriría tomar dos pixels cercanos cuyo canal real sea el verde y cuyas filas/columnas resulten paralelas entre sí, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.\\
-Tomando como referencia la ilustración \ref{bilineal} se puede ver que el cálculo recien descripto equivale a definir el promedio entre los valores diagonales más cercanos, puesto que ((a+b)/2 + (c+d)/2)/2 = (a+b+c+d)/4.
+
+Como la estructura del filtro Bayer sólo asegura para los p\'ixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes, aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.
+
+Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de sus dos valores m\'as cercanos ubicados a la derecha e izquierda o arriba y abajo dependiendo de la ubicaci\'on del p\'ixel. 
+
+%Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de los valores de la columna o de la fila, respectivamente, puesto que la intersección entre las columnas que capturan el color rojo y el verde y las que toman este último junto al azul es vacía.
+
+Por otro lado, los valores del canal azul para un pixel rojo (y los del canal rojo para un pixel azul) se calcularían tomando en cuenta las cuatro posiciones diagonales a la analizada. Este proceso no se realizar\'ia simplemente tomando el promedio de sus cuatro diagonales sino que requeriría tomar dos pixels cercanos que pertenezcan a la misma fila o columna, cuyo canal real sea el verde, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.
+
+Tomando como referencia la ilustración \ref{bilineal} se puede ver que el cálculo recien descripto equivale a calcular el valor en el canal rojo para el p\'ixel x. Lo cual consistir\'ia en: 
+
+Hacer el promedio entre \textit{a y b} y luego, ubicar ese valor para el canal rojo para el p\'ixel ubicado arriba de x.
+
+Hacer el promedio entre \textit{c y d} y luego, ubicar ese valor para el canal rojo para el p\'ixel ubicado debajo de x.
+
+Una vez obtenidos estos dos valores, promediarlos y ubicarlos en el canal rojo de x.\\
+
+Llegando as\'i a que realizar este c\'alculo es equivalente a realizar el promedio entre los valores de sus diagonales:
+
+\[
+ \frac{a+b}{2} + \frac{c+d}{2} = \frac{a+b+c+d}{4}
+\]
 
 \begin{figure}[h!]
 	\caption{}
@@ -127,7 +162,8 @@ La implementación de este tipo de métodos exige tomar al menos dos decisiones 
     \item Con qué criterio y consideraciones combinar la información proporcionada por las direcciones escogidas.
 \end{itemize}
 
-Para escoger alguna opción apropiada corresponde analizar las características del Color Filter Array con el que se va a trabajar, puesto que no todas las direcciones van a aportar en la totalidad de los casos la misma información. \\
+Para escoger alguna opción apropiada corresponde analizar las características del Color Filter Array con el que se va a trabajar, puesto que no todas las direcciones van a aportar en la totalidad de los casos la misma información.
+
 En cuanto a la combinación de los resultados de las distintas interpolaciones, es conveniente tener presente que el promedio de los mismos no es siempre una buena opción. Por ejemplo, supongamos que se analiza una imagen que presenta en un sector la siguiente característica:
 
 \begin{figure}[h!]
@@ -143,16 +179,52 @@ Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir es
 
 \textcolor{red}{No sé qué más poner acá =/ re cortina.-}
 
+\subsection*{Versiones de Splines}
 
+\textcolor{blue}{Hablar de todos sus tipos\\
+Decir que bilineal y poner 0.5 queda igual (o casi igual je), usar psnr.\\
+Y ver cual vamos a dejar\\
+Y que usamos NATURALES}
 \subsection{Algoritmo de Malvar, He y Cutler}
 
 
+\subsection{Exploraci\'on de Artifacts}
+
+\textcolor{blue}{Ver si hay otros artifacts mas para agregar.\\
+Ver como arreglar el de Moire y bla...\\
+Poner fotitos de ampliaciones donde se vean bien los artifacts.}
 
 
 \newpage
 \section{Resultados y discusi\'on}
+
 \subsection{MHC}
 Le da muchísima más definición/claridad a las fotos, y los bordes oscuros quedan prácticamente perfectos (comparando con bilineal, por ejemplo, aparecen colores fuertes alrededor de los bordes negros). Sigue pasando eso con los bordes blancos/mas claros, pero las zonas donde hay un salto grande entre claro y oscuro, mejora mucho.
+
+\subsection{An\'alisis cualitativo de los algoritmos}
+Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab (R) la diferencia entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro.\\
+
+\textcolor{blue}{Aca falta agregar todas las fotitos, Y HACERLO PARA SPLINES!!!!!!!!!!!!!!!!!}
+%ESTO PUEDE IR DE PIE DE IMAGEN O ALGO ASI...
+%De este modo, en los siguientes gr\'aficos se denotan los lugares con diferencia num\'erica de la imagen.
+
+
+En la "imagen 2"  se puede observar que, si bien al ejecutar el algoritmo de MHC disminuye abundantemente la diferencia con la imagen original, al tener una superficie en su mayor\'ia de agua se dificulta a niveles algor\'itmicos aproximar el agua de una manera m\'as real ya que esta no es para nada una superficie pareja. \textcolor{red}{(SI EXPLICO EL PORQUE PASA ESTO, MANDO FRUTA ASI QUE NO VOY A HACERLO)'.}\\
+
+En la "imagen 4" se puede apreciar el inconveniente de aproximar p\'ixeles que son borde cuando estos son dados en abundancia y en l\'ineas recta en su mayor\'ia. Inclusive en el mejor caso de esta imagen, (la imagen creada mediante el Algoritmo de MHC) se puede apreciar una notable diferencia con la original en lo que respecta a los bordes. \textcolor{red}{Esto es un ejemplo m\'as de la existencia de artifacts.}\\
+
+En cuanto a la "imagen 5" se aprecia el mismo inconveniente que en la "imagen 1" dado a la existencia de agua, pero a diferencia cuando se corre el algoritmo de MHC la mejor\'ia es notablemente mayor ya que la diferencia entre esta imagen y la foto original es muy peque\~na.\\
+
+En la "imagen 9" se puede ver un comportamiento similar a lo ya estudiado, lo interesante de destacar en cuanto a esta foto es que al poseer un letrero es una imagen menos abstracta que las anteriores y por lo tanto, se adquiere una definici\'on mayor cuando se tiene una diferencia menor con la original y as\'i facilitar la lectura del cartel.
+\textcolor{red}{aca pondria una fotito ahaciendo zoom en el cartel}\\
+
+La "imagen 12" es una imagen con muchas l\'ineas y dibujos con contornos esto se aprecia en la gran densidad que tiene la imagen que muestra las diferencias entre la imagen original y la imagen obtenida mediante el algoritmo de Vecino M\'as Cercano. Si observamos las im\'agenes obtenidas mediante la resta con sus respectivas originales se denota una gran diferencia entre el Algoritmo de Vecino M\'as Cercano y el Algoritmo de MHC.\\
+
+Como conclusi\'on, podemos inferir que los lugares donde se muestra una variaci\'on son siempre lugares pertencientes a contornos o bordes de objetos en las im\'agenes. En cambio, en p\'ixeles sobre superficies llanas o parejas del mismo cuerpo la diferencia entre la imagen original y nuestra imagen obtenida es nula.
+
+
+\subsection{An\'alisis de tiempos}
+\textcolor{blue}{Aca hay que comparar los tiempos de ejecucion entre todos los algoritmos dispuestos.}
 
 \newpage
 \section{Conclusiones y trabajo futuro}
@@ -163,7 +235,10 @@ Le da muchísima más definición/claridad a las fotos, y los bordes oscuros que
 
 \section{Ap\'endices}
 \subsection{Ap\'endice A: Enunciado} 
-\includepdf[pages={-}]{Enunciado.pdf}
+
+%ACORDARSE DE DESCOMENTARLO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\includepdf[pages={-}]{Enunciado.pdf}
 
 \subsection{Ap\'endice B:}
 \newpage

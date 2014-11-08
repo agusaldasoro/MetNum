@@ -1,14 +1,19 @@
 \select@language {spanish}
 \contentsline {section}{\numberline {1}Introducci\'on Te\'orica}{3}
+\contentsline {subsection}{\numberline {1.1}Inconvenientes de aproximar mediante el Polinomio de Lagrange}{3}
+\contentsline {subsection}{\numberline {1.2}Artifacts}{3}
 \contentsline {section}{\numberline {2}Desarrollo}{4}
 \contentsline {subsection}{\numberline {2.1}Vecino m\'as cercano}{4}
 \contentsline {subsection}{\numberline {2.2}Interpolaci\'on Bilineal}{4}
-\contentsline {subsection}{\numberline {2.3}Interpolaciones Direccionales}{4}
-\contentsline {subsection}{\numberline {2.4}Algoritmo de Malvar, He y Cutler}{5}
-\contentsline {section}{\numberline {3}Resultados y discusi\'on}{6}
-\contentsline {subsection}{\numberline {3.1}MHC}{6}
-\contentsline {section}{\numberline {4}Conclusiones y trabajo futuro}{7}
-\contentsline {section}{\numberline {5}Ap\'endices}{7}
-\contentsline {subsection}{\numberline {5.1}Ap\'endice A: Enunciado}{7}
-\contentsline {subsection}{\numberline {5.2}Ap\'endice B:}{14}
-\contentsline {section}{\numberline {6}Referencias}{15}
+\contentsline {subsection}{\numberline {2.3}Interpolaciones Direccionales}{5}
+\contentsline {subsection}{\numberline {2.4}Algoritmo de Malvar, He y Cutler}{6}
+\contentsline {subsection}{\numberline {2.5}Exploraci\'on de Artifacts}{6}
+\contentsline {section}{\numberline {3}Resultados y discusi\'on}{7}
+\contentsline {subsection}{\numberline {3.1}MHC}{7}
+\contentsline {subsection}{\numberline {3.2}An\'alisis cualitativo de los algoritmos}{7}
+\contentsline {subsection}{\numberline {3.3}An\'alisis de tiempos}{7}
+\contentsline {section}{\numberline {4}Conclusiones y trabajo futuro}{8}
+\contentsline {section}{\numberline {5}Ap\'endices}{8}
+\contentsline {subsection}{\numberline {5.1}Ap\'endice A: Enunciado}{8}
+\contentsline {subsection}{\numberline {5.2}Ap\'endice B:}{8}
+\contentsline {section}{\numberline {6}Referencias}{9}
