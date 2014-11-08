@@ -1,3 +1,25 @@
+img = imread('forestAndWater.bmp');
+img = imcrop(img, [1, 1, 499, 373]);
+vec = imread('forestAndWater-vecino.bmp');
+vec2 = imread('forestAndWater-vecino2.bmp');
+
+vec = imcrop(vec, [1, 1, 499, 374]);
+vec2 = imcrop(vec, [1, 1, 499, 374]);
+
+psnr1 = psnr(vec, img);
+psnr2 = psnr(vec2, img);
+
+ssim1 = ssim(vec, img);
+ssim2 = ssim(vec2, img);
+
+psnr1
+psnr2
+ssim1
+ssim2
+
+
+%% 
+
 img = imread('img12.bmp');
 imgVEC = imread('img12-vecino.bmp');
         %psnrVEC = psnr(imgVEC, img);

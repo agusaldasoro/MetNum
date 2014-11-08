@@ -233,10 +233,79 @@ Si bien se trata de un ejemplo de alcance limitado, resulta suficiente para ilus
 \textcolor{blue}{Aca va la fotito que tiene que armar Belu}\\
 
 $\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterior - este método no especifica ninguna distinción respecto de la forma de proceder en casos de borde o de superficies parejas. \\
-
+\newpage
 \subsection*{Decisiones tomadas en el Algoritmo de Vecino M\'as Cercano}
-\textcolor{blue}{Aca va todo eso de poner fotos de peor caso para cada mas cercano derecha izuqierda arriba abajo, y que elegimos irnos hacia la derecha.}
 
+A la hora de formular nuestro algoritmo de Vecino m\'as Cercano nos vimos obligados a determinar aspectos que conciernen al dise\~no del mismo. 
+
+La principal decisi\'on que debimos tomar fue con qu\'e criterio elegir al p\'ixel m\'as cercano cuando no es \'unico (esto ocurre en todos los casos). 
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/vecino1}
+	\label{Vecino1}
+  \end{center}
+\end{figure}
+
+Para determinar el valor del canal verde sobre un p\'ixel definido rojo\emph{(A)} o azul\emph{(B)} tenemos cuatro p\'ixeles a la misma distancia (1) que nos brindan informaci\'on sobre el canal verde. 
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/vecino2}
+	\label{Vecino2}
+  \end{center}
+\end{figure}
+
+Si nos situamos en un p\'ixel naturalmente verde, tanto para determinar su canal rojo\emph{(A)} como para determinar su canal azul\emph{(B)} sus p\'ixeles m\'as cercanos que nos brindan informaci\'on son dos (a 1 de distancia cada uno). 
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/vecino3}
+	\label{Vecino3}
+  \end{center}
+\end{figure}
+
+Y por \'ultimo para determinar el valor del canal azul sobre un p\'ixel de origen rojo\emph{(A)} (y viceversa\emph{(B)}) nos encontramos con cuatro p\'ixeles a la misma m\'inima distancia (2) en sus diagonales. \\
+
+Por este motivo, realizamos dos versiones de este algoritmo variando en ellas cu\'al p\'ixel elegir para rellenar el canal verde cuando se est\'a situado sobre un p\'ixel azul o rojo.
+
+En el \emph{\textbf{algoritmo 1}} si se est\'a en un p\'ixel rojo se elige al de arriba y si se est\'a en un p\'ixel azul se elige el de la derecha. En cambio, en el \emph{\textbf{algoritmo 2}} si se est\'a en un p\'ixel rojo se elige al de la izquierda y si se est\'a en un p\'ixel azul se elige al de abajo.
+
+Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algunos ejemplos:
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.60]{imagenes/Vecino/arbolitos}
+	\label{arbolitos}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.60]{imagenes/Vecino/zebraCara}
+	\label{zebraCara}
+  \end{center}
+\end{figure}
+
+\newpage
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.60]{imagenes/Vecino/zebra}
+	\label{Zebra}
+  \end{center}
+\end{figure}
+
+
+
+Se puede apreciar que el Algoritmo 1 es capaz de delimitar mejor bordes que poseen rayas en forma horizontal, en cambio el Algoritmo 2 le da una mejor definici\'on a los bordes verticales. Dada la forma de la implementaci\'on, las anomal\'ias observadas en las imagenes cobran sentido.
+
+
+
+Se adjuntan las fotos en tama\~no original. \textcolor{red}{ADJUNTARLAS!}
 \subsection{Interpolaci\'on Bilineal}
 
 %La interpolación bilineal es una composición de interpolaciones lineales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más pr´ximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\

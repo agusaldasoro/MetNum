@@ -1,14 +1,21 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.2)  8 NOV 2014 16:51
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  8 NOV 2014 18:05
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
 **informe.tex
-(./informe.tex
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 5 languages loaded.
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2012-05-30, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -23,38 +30,44 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2013/12/03 3.9h The Babel package
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2008/07/08 v3.8m The Babel package
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel-spanish/spanish.ldf
-Language: spanish.ldf 2014/01/29 v5.0m Spanish support from the babel system
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\spanish.ldf"
+Language: spanish.ldf 2009/01/02 v5.0h Spanish support from the babel system
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2013/12/03 3.9h Babel common definitions
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2008/07/08 v3.8m Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
 \es@datefmt=\count88
 \es@quottoks=\toks14
 \es@quotdepth=\count89
-Package babel Info: Making " an active character on input line 496.
-Package babel Info: Making . an active character on input line 599.
-Package babel Info: Making < an active character on input line 644.
-Package babel Info: Making > an active character on input line 644.
+Package babel Info: Making " an active character on input line 492.
+Package babel Info: Making . an active character on input line 585.
+Package babel Info: Making < an active character on input line 630.
+Package babel Info: Making > an active character on input line 630.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks15
 \inpenc@posthook=\toks16
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.dfu"
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -204,7 +217,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ot1enc.dfu"
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -235,7 +248,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\omsenc.dfu"
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -259,34 +272,34 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/charter.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\charter.sty"
 Package: charter 2005/04/12 PSNFSS-v9.2a (P.Dyballa) 
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks17
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+("C:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count90
@@ -294,7 +307,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-(/usr/share/texlive/texmf-dist/tex/latex/paralist/paralist.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\paralist\paralist.sty"
 Package: paralist 2013/06/09 v2.4 Extended list environments
 \pltopsep=\skip43
 \plpartopsep=\skip44
@@ -302,13 +315,13 @@ Package: paralist 2013/06/09 v2.4 Extended list environments
 \plparsep=\skip46
 \pl@lab=\toks18
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\pdfpages\pdfpages.sty"
 Package: pdfpages 2013/08/25 v0.4v Insert pages of external PDF documents (AM)
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\calc.sty"
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count91
 \calc@Bcount=\count92
@@ -321,20 +334,20 @@ LaTeX Info: Redefining \addtolength on input line 77.
 \calc@Ccount=\count93
 \calc@Cskip=\skip49
 )
-(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\eso-pic\eso-pic.sty"
 Package: eso-pic 2013/10/06 v2.0d eso-pic (RN)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\atbegshi.sty"
 Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 ))
-(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -348,7 +361,7 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+("C:\Program Files\MiKTeX 2.9\tex\latex\pdfpages\pppdftex.def"
 File: pppdftex.def 2013/08/25 v0.4v Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box26
@@ -356,8 +369,8 @@ File: pppdftex.def 2013/08/25 v0.4v Pdfpages driver for pdfTeX (AM)
 \c@AM@survey=\count94
 \AM@templatesizebox=\box27
 )
-(./codesnippet.tex
-(/usr/share/texlive/texmf-dist/tex/latex/fancybox/fancybox.sty
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\codesnippet.tex
+("C:\Program Files\MiKTeX 2.9\tex\latex\fancybox\fancybox.sty"
 Package: fancybox 2010/05/15 1.4
 
 Style option: `fancybox' v1.4 <2010/05/15> (tvz)
@@ -370,8 +383,8 @@ Style option: `fancybox' v1.4 <2010/05/15> (tvz)
 \EndVerbatimTokens=\toks23
 \Verbatim@Outfile=\write3
 \Verbatim@Infile=\read1
-)) (./page.layout.tex
-(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+)) (C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\page.layout.tex
+("C:\Program Files\MiKTeX 2.9\tex\latex\fancyhdr\fancyhdr.sty"
 \fancy@headwidth=\skip50
 \f@ncyO@elh=\skip51
 \f@ncyO@erh=\skip52
@@ -382,24 +395,20 @@ Style option: `fancybox' v1.4 <2010/05/15> (tvz)
 \f@ncyO@olf=\skip57
 \f@ncyO@orf=\skip58
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/underscore/underscore.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\underscore\underscore.sty"
 Package: underscore 2006/09/13
 LaTeX Info: Redefining \_ on input line 42.
 )
-(./caratula.sty
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\caratula.sty
 Package: caratula 2005/08/09 v0.3 Para componer caratulas de TPs del DC
 
 Cargando package 'caratula' v0.3 (2005/08/09)
 \intlist=\toks24
-) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\ltxmisc\url.sty"
 \Urlmuskip=\muskip10
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (./informe.aux
-LaTeX Info: Redefining \. on input line 7.
-LaTeX Info: Redefining \% on input line 7.
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-\openout1 = `informe.aux'.
-
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
@@ -414,13 +423,10 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
 LaTeX Font Info:    Try loading font information for OT1+bch on input line 31.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1bch.fd
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1bch.fd"
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
 )
-LaTeX Info: Redefining \. on input line 31.
-LaTeX Info: Redefining \% on input line 31.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count95
 \scratchdimen=\dimen109
@@ -433,55 +439,12 @@ LaTeX Info: Redefining \% on input line 31.
 \MPnumerator=\count99
 \makeMPintoPDFobject=\count100
 \everyMPtoPDFconversion=\toks26
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
 \AtBeginShipoutBox=\box31
-
-<imagenes/logodc.jpg, id=1, 215.6055pt x 83.5923pt>
+ <imagenes/logodc.jpg, id=1, 215.6055pt x 83.5923pt>
 File: imagenes/logodc.jpg Graphic file (type jpg)
- <use imagenes/logodc.jpg>
+
+<use imagenes/logodc.jpg>
 Package pdftex.def Info: imagenes/logodc.jpg used on input line 43.
 (pdftex.def)             Requested size: 215.60497pt x 83.59207pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -512,8 +475,9 @@ Overfull \hbox (22.76358pt too wide) in paragraph at lines 43--43
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./imagenes/logodc.jpg> <./
-imagenes/logouba.jpg>]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Agustina/Documen
+ts/GitHub/MetNum/TP3/Informe/imagenes/logodc.jpg> <C:/Users/Agustina/Documents/
+GitHub/MetNum/TP3/Informe/imagenes/logouba.jpg>]
 Underfull \hbox (badness 10000) in paragraph at lines 49--50
 
  []
@@ -523,13 +487,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--57
 
  []
 
-(./informe.toc
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-)
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.toc)
 \tf@toc=\write4
-\openout4 = `informe.toc'.
-
  [2]
 Underfull \hbox (badness 10000) in paragraph at lines 71--73
 
@@ -540,11 +499,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
-<imagenes/LagrangeSplinesCTE.png, id=16, 234.1247pt x 234.1247pt>
+<imagenes/LagrangeSplinesCTE.png, id=15, 234.1247pt x 234.1247pt>
 File: imagenes/LagrangeSplinesCTE.png Graphic file (type png)
 
 <use imagenes/LagrangeSplinesCTE.png>
-Package pdftex.def Info: imagenes/LagrangeSplinesCTE.png used on input line 118
+Package pdftex.def Info: imagenes/LagrangeSplinesCTE.png used on input line 117
 .
 (pdftex.def)             Requested size: 234.12411pt x 234.12411pt.
 
@@ -552,215 +511,248 @@ Package pdftex.def Info: imagenes/LagrangeSplinesCTE.png used on input line 118
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
 
  []
 
-LaTeX Info: Redefining \. on input line 143.
-LaTeX Info: Redefining \% on input line 143.
-[3] <imagenes/SplinesX12a101.png, id=23, 234.1247pt x 234.1247pt>
+<imagenes/SplinesX12a101.png, id=16, 234.1247pt x 234.1247pt>
 File: imagenes/SplinesX12a101.png Graphic file (type png)
 
 <use imagenes/SplinesX12a101.png>
-Package pdftex.def Info: imagenes/SplinesX12a101.png used on input line 147.
+Package pdftex.def Info: imagenes/SplinesX12a101.png used on input line 146.
 (pdftex.def)             Requested size: 234.12411pt x 234.12411pt.
-
-<imagenes/LagrangeX12a101.png, id=24, 235.63031pt x 234.1247pt>
+ [3]
+<imagenes/LagrangeX12a101.png, id=23, 235.63031pt x 234.1247pt>
 File: imagenes/LagrangeX12a101.png Graphic file (type png)
 
 <use imagenes/LagrangeX12a101.png>
-Package pdftex.def Info: imagenes/LagrangeX12a101.png used on input line 155.
+Package pdftex.def Info: imagenes/LagrangeX12a101.png used on input line 154.
 (pdftex.def)             Requested size: 235.62973pt x 234.12411pt.
 
-<imagenes/LagrangeX12a101(zoomOut).png, id=26, 233.37187pt x 233.37187pt>
+<imagenes/LagrangeX12a101(zoomOut).png, id=25, 233.37187pt x 233.37187pt>
 File: imagenes/LagrangeX12a101(zoomOut).png Graphic file (type png)
 
 <use imagenes/LagrangeX12a101(zoomOut).png>
 Package pdftex.def Info: imagenes/LagrangeX12a101(zoomOut).png used on input li
-ne 163.
+ne 162.
 (pdftex.def)             Requested size: 233.37129pt x 233.37129pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--169
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
 
  []
 
-LaTeX Info: Redefining \. on input line 171.
-LaTeX Info: Redefining \% on input line 171.
-[4 <./imagenes/LagrangeSplinesCTE.png> <./imagenes/SplinesX12a101.png>]
-LaTeX Info: Redefining \. on input line 171.
-LaTeX Info: Redefining \% on input line 171.
-
-[5 <./imagenes/LagrangeX12a101.png> <./imagenes/LagrangeX12a101(zoomOut).png>]
-<imagenes/SplinesX12a20.png, id=35, 234.8775pt x 234.1247pt>
+[4 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/LagrangeSpli
+nesCTE.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Spl
+inesX12a101.png>] [5 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/ima
+genes/LagrangeX12a101.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Infor
+me/imagenes/LagrangeX12a101(zoomOut).png>]
+<imagenes/SplinesX12a20.png, id=34, 234.8775pt x 234.1247pt>
 File: imagenes/SplinesX12a20.png Graphic file (type png)
 
 <use imagenes/SplinesX12a20.png>
-Package pdftex.def Info: imagenes/SplinesX12a20.png used on input line 191.
+Package pdftex.def Info: imagenes/SplinesX12a20.png used on input line 190.
 (pdftex.def)             Requested size: 234.87692pt x 234.12411pt.
 
-<imagenes/LagrangeX12a20.png, id=36, 234.1247pt x 234.1247pt>
+<imagenes/LagrangeX12a20.png, id=35, 234.1247pt x 234.1247pt>
 File: imagenes/LagrangeX12a20.png Graphic file (type png)
 
 <use imagenes/LagrangeX12a20.png>
-Package pdftex.def Info: imagenes/LagrangeX12a20.png used on input line 199.
+Package pdftex.def Info: imagenes/LagrangeX12a20.png used on input line 198.
 (pdftex.def)             Requested size: 234.12411pt x 234.12411pt.
 
-<imagenes/LagrangeX12a20(zoomOut).png, id=37, 234.1247pt x 234.1247pt>
+<imagenes/LagrangeX12a20(zoomOut).png, id=36, 234.1247pt x 234.1247pt>
 File: imagenes/LagrangeX12a20(zoomOut).png Graphic file (type png)
 
 <use imagenes/LagrangeX12a20(zoomOut).png>
 Package pdftex.def Info: imagenes/LagrangeX12a20(zoomOut).png used on input lin
-e 207.
+e 206.
 (pdftex.def)             Requested size: 234.12411pt x 234.12411pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--215
+Underfull \hbox (badness 10000) in paragraph at lines 212--214
 
  []
 
-LaTeX Info: Redefining \. on input line 219.
-LaTeX Info: Redefining \% on input line 219.
-[6 <./imagenes/SplinesX12a20.png>]
-LaTeX Info: Redefining \. on input line 219.
-LaTeX Info: Redefining \% on input line 219.
- [7 <./imagenes/LagrangeX12a20.png> <./imagenes/LagrangeX12a20(zoomOut).png>]
-Underfull \hbox (badness 10000) in paragraph at lines 225--227
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 225--227
+[6 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/SplinesX12a2
+0.png>] [7 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Lagr
+angeX12a20.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes
+/LagrangeX12a20(zoomOut).png>]
+Underfull \hbox (badness 10000) in paragraph at lines 224--226
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--233
+Underfull \hbox (badness 10000) in paragraph at lines 224--226
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 234--235
+Underfull \hbox (badness 10000) in paragraph at lines 231--232
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 236--237
+Underfull \hbox (badness 10000) in paragraph at lines 233--234
 
  []
 
-LaTeX Info: Redefining \. on input line 253.
-LaTeX Info: Redefining \% on input line 253.
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 259--260
+
+Underfull \hbox (badness 10000) in paragraph at lines 235--236
 
  []
 
-<imagenes/bilineal.png, id=49, 354.57469pt x 362.10281pt>
+[8] <imagenes/vecino1.png, id=48, 354.57469pt x 362.10281pt>
+File: imagenes/vecino1.png Graphic file (type png)
+
+<use imagenes/vecino1.png>
+Package pdftex.def Info: imagenes/vecino1.png used on input line 246.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+
+<imagenes/vecino2.png, id=49, 354.57469pt x 362.10281pt>
+File: imagenes/vecino2.png Graphic file (type png)
+
+<use imagenes/vecino2.png>
+Package pdftex.def Info: imagenes/vecino2.png used on input line 255.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+
+<imagenes/vecino3.png, id=50, 354.57469pt x 362.10281pt>
+File: imagenes/vecino3.png Graphic file (type png)
+
+<use imagenes/vecino3.png>
+Package pdftex.def Info: imagenes/vecino3.png used on input line 264.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
+
+ []
+
+[9 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino1.png>
+ <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino2.png> <
+C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino3.png>]
+<imagenes/Vecino/arbolitos.png, id=57, 581.17125pt x 218.31563pt>
+File: imagenes/Vecino/arbolitos.png Graphic file (type png)
+
+<use imagenes/Vecino/arbolitos.png>
+Package pdftex.def Info: imagenes/Vecino/arbolitos.png used on input line 280.
+(pdftex.def)             Requested size: 348.70544pt x 130.99037pt.
+
+<imagenes/Vecino/zebraCara.png, id=58, 697.8572pt x 375.65344pt>
+File: imagenes/Vecino/zebraCara.png Graphic file (type png)
+
+<use imagenes/Vecino/zebraCara.png>
+Package pdftex.def Info: imagenes/Vecino/zebraCara.png used on input line 288.
+(pdftex.def)             Requested size: 418.71754pt x 225.3938pt.
+ [10 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/arb
+olitos.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vec
+ino/zebraCara.png>]
+<imagenes/Vecino/zebra.png, id=64, 636.87938pt x 462.97969pt>
+File: imagenes/Vecino/zebra.png Graphic file (type png)
+
+<use imagenes/Vecino/zebra.png>
+Package pdftex.def Info: imagenes/Vecino/zebra.png used on input line 297.
+(pdftex.def)             Requested size: 382.13057pt x 277.78995pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--328
+
+ []
+
+[11 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/zebr
+a.png>] <imagenes/bilineal.png, id=68, 354.57469pt x 362.10281pt>
 File: imagenes/bilineal.png Graphic file (type png)
 
 <use imagenes/bilineal.png>
-Package pdftex.def Info: imagenes/bilineal.png used on input line 270.
+Package pdftex.def Info: imagenes/bilineal.png used on input line 338.
 (pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
+Underfull \hbox (badness 10000) in paragraph at lines 345--346
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--280
+Underfull \hbox (badness 10000) in paragraph at lines 347--348
 
  []
 
-<imagenes/direccional.png, id=50, 476.78125pt x 485.815pt>
+<imagenes/direccional.png, id=69, 476.78125pt x 485.815pt>
 File: imagenes/direccional.png Graphic file (type png)
 
 <use imagenes/direccional.png>
-Package pdftex.def Info: imagenes/direccional.png used on input line 293.
+Package pdftex.def Info: imagenes/direccional.png used on input line 361.
 (pdftex.def)             Requested size: 123.96019pt x 126.30891pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Info: Redefining \. on input line 300.
-LaTeX Info: Redefining \% on input line 300.
-[9 <./imagenes/bilineal.png>]
-LaTeX Info: Redefining \. on input line 319.
-LaTeX Info: Redefining \% on input line 319.
- [10 <./imagenes/direccional.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 326--327
+[12 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/bilineal.pn
+g>] [13 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/direcci
+onal.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 394--395
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 335--336
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 337--338
+Underfull \hbox (badness 10000) in paragraph at lines 405--406
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 339--341
+Underfull \hbox (badness 10000) in paragraph at lines 407--409
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 342--343
+Underfull \hbox (badness 10000) in paragraph at lines 410--411
 
  []
 
-LaTeX Info: Redefining \. on input line 350.
-LaTeX Info: Redefining \% on input line 350.
-[11]
-LaTeX Info: Redefining \. on input line 365.
-LaTeX Info: Redefining \% on input line 365.
- [12]
-Underfull \hbox (badness 10000) in paragraph at lines 368--370
+[14] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 436--438
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 368--370
+Underfull \hbox (badness 10000) in paragraph at lines 436--438
 
  []
 
-LaTeX Info: Redefining \. on input line 375.
-LaTeX Info: Redefining \% on input line 375.
-[13] (./informe.aux
-LaTeX Info: Redefining \. on input line 7.
-LaTeX Info: Redefining \% on input line 7.
-)
+[16] (C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 4324 strings out of 494966
- 59045 string characters out of 6179559
- 142234 words of memory out of 5000000
- 7440 multiletter control sequences out of 15000+600000
- 23124 words of font info for 37 fonts, out of 8000000 for 9000
- 40 hyphenation exceptions out of 8191
- 38i,13n,43p,838b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/bitstrea/charter/bchri8a.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (13 pages, 619148 bytes).
+ 3952 strings out of 493921
+ 53166 string characters out of 3147274
+ 130999 words of memory out of 3000000
+ 7162 multiletter control sequences out of 15000+200000
+ 25144 words of font info for 39 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 37i,13n,43p,838b,363s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
+s/MiKTeX 2.9/fonts/type1/bitstrea/charter/bchb8a.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/bitstrea/charter/bchbi8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/bitstrea/charter/bchr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/bits
+trea/charter/bchri8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+r10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on informe.pdf (16 pages, 2045414 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 121 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 
