@@ -90,8 +90,9 @@ En este punto adquieren relevancia las diferentes propuestas de reconstrucción 
 
 \subsection{Inconvenientes de aproximar mediante el Polinomio de Lagrange}
 Es nuestra intención exponer ahora el motivo que consideramos suficiente para decidir interpolar los valores ausentes a través de Splines en lugar de hacer uso del polinomio de Lagrange.\\
-Sea dada la siguiente muestra: 
+Sea dado el siguiente espacio muestral: 
 
+\textcolor{red}{cambiar todos los y's por 10}
 
 \begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
  \hline                 
