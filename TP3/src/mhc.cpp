@@ -39,6 +39,5 @@ void MHC(cimg_library::CImg<double>& orig){
 			}
 		}
 	}
-
-	orig.crop(2,2,0,0,ancho-3,alto-3,0,2); //no se si dejarlo aca o meterlo en el main
+	orig.crop(2,2,0,0,ancho-3,alto-3,0,2);
 }
