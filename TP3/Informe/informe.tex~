@@ -89,10 +89,11 @@ Otros filtros (?
 En este punto adquieren relevancia las diferentes propuestas de reconstrucción de la imagen original. Esto conlleva la ejecución de diversos procedimientos, entre los que se encuentran el demosaicing, el análisis del balance de blancos, la curva tonal, la saturación y el contraste y la compresión final de la imagen. Como nuestra propuesta se aboca al primer paso mencionado, exploraremos en el presente trabajo sólo un subconjunto de una serie de variaciones no finita que admiten métodos de debayering como ser la interpolación por asignación de valores próximos, la interpolación bilineal y interpolación direccional.\\
 
 \subsection{Inconvenientes de aproximar mediante el Polinomio de Lagrange}
-Es nuestra intención exponer ahora el motivo que consideramos suficiente para decidir interpolar los valores ausentes a través de Splines en lugar de hacer uso del polinomio de Lagrange.\\
-Sea dado el siguiente espacio muestral: 
 
-\textcolor{red}{cambiar todos los y's por 10}
+Es nuestra intención exponer ahora el motivo que consideramos suficiente para decidir interpolar los valores ausentes a través de Splines en lugar de hacer uso del polinomio de Lagrange.\\
+Sea dada la siguiente muestra: \\
+\smallskip
+
 
 \begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
  \hline                 
@@ -102,6 +103,8 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
  \hline  
  \end{tabular}
 
+\smallskip
+
 \begin{tabular}{  | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
  \hline                 
    x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
@@ -109,8 +112,10 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
 y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
  \hline  
  \end{tabular}
-
+\smallskip
+\\
 El polinomio de Lagrange que interpola cada uno de esos valores tiene una expresión equivalente al Spline que lo hace, siendo su gráfico el cito a continuación:
+\smallskip
 
 \begin{figure}[h!]
 	\caption{}
@@ -122,6 +127,8 @@ El polinomio de Lagrange que interpola cada uno de esos valores tiene una expres
 
 Supongamos ahora que el resultado de una medición - digamos $x_{12}$ - haya sido calculada con un ruido que represente el 1\% del valor real, modificándose la muestra de la siguiente forma:\\
 
+\smallskip
+
 \begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
  \hline                 
    x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
@@ -129,6 +136,8 @@ Supongamos ahora que el resultado de una medición - digamos $x_{12}$ - haya sid
 y & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10,1& 10 & 10\\
  \hline  
  \end{tabular}
+
+ \smallskip
 
 \begin{tabular}{  | c || c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
  \hline                 
@@ -138,8 +147,8 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
  \hline  
  \end{tabular}
 
-
- En este caso se obtendría el gráfico representado en la Figura \ref{LagrangeX12a101} para el polinomio de Lagrange (escalado en la Figura \ref{LagrangeX12a101(zoomOut)})y el que se ilustra en la Figura \ref{SplinesX12a101} para el obtenido mediante Splines.
+\smallskip
+ En este caso se obtendría el gráfico representado en la Figura \ref{LagrangeX12a101} para el polinomio de Lagrange (escalado en la Figura \ref{LagrangeX12a101(zoomOut)})y el que se ilustra en la Figura \ref{SplinesX12a101} para el obtenido mediante Splines.\\
 
 \begin{figure}[h!]
 	\caption{}
@@ -167,7 +176,8 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
 
 Como se puede observar, para la construcción del Spline el cambio en un valor de la imagen no impactó de una forma apreciable sobre el resto del polinomio. Sin embargo, el nuevo resultado generó un polinomio de Lagrange cuya diferencia con la Figura \ref{SplinesX12a101} es grosera en determinados intervalos.\\ 
 
-Si se profundizara el error de la medición de acuerdo con la tabla presentada a continuación, notaríamos que el polinomio de Lagrange comenzaría a presentar una mayor cantidad de intervalos con valores drásticamente alejados de los dados como referencia. Por otro lado, Splines únicamente presentará variaciones en un entorno de los intervalos cuyos valores hayan sido modificados. Esto se puede  constatar en las Figuras \ref{SplinesX12a20}, \ref{LagrangeX12a20} y  \ref{LagrangeX12a20(zoomOut)}.
+Si se profundizara el error de la medición de acuerdo con la tabla presentada a continuación, notaríamos que el polinomio de Lagrange comenzaría a presentar una mayor cantidad de intervalos con valores drásticamente alejados de los dados como referencia. Por otro lado, Splines únicamente presentará variaciones en un entorno de los intervalos cuyos valores hayan sido modificados. Esto se puede  constatar en las Figuras \ref{SplinesX12a20}, \ref{LagrangeX12a20} y  \ref{LagrangeX12a20(zoomOut)}.\\
+
 
 \begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
  \hline                 
@@ -176,6 +186,8 @@ Si se profundizara el error de la medición de acuerdo con la tabla presentada a
 y & 10 & 10& 10& 20& 10& 10& 10& 10& 10& 10& 10& 20& 10 & 10\\
  \hline  
  \end{tabular}
+
+\smallskip
 
 \begin{tabular}{  | c || c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
  \hline                 
@@ -235,18 +247,89 @@ Si bien se trata de un ejemplo de alcance limitado, resulta suficiente para ilus
 
 $\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterior - este método no especifica ninguna distinción respecto de la forma de proceder en casos de borde o de superficies parejas. \\
 
+
+\newpage
 \subsection*{Decisiones tomadas en el Algoritmo de Vecino M\'as Cercano}
-\textcolor{blue}{Aca va todo eso de poner fotos de peor caso para cada mas cercano derecha izuqierda arriba abajo, y que elegimos irnos hacia la derecha.}
+
+A la hora de formular nuestro algoritmo de Vecino m\'as Cercano nos vimos obligados a determinar aspectos que conciernen al dise\~no del mismo. 
+
+La principal decisi\'on que debimos tomar fue con qu\'e criterio elegir al p\'ixel m\'as cercano cuando no es \'unico (esto ocurre en todos los casos). 
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/vecino1}
+	\label{Vecino1}
+  \end{center}
+\end{figure}
+
+Para determinar el valor del canal verde sobre un p\'ixel definido rojo\emph{(A)} o azul\emph{(B)} tenemos cuatro p\'ixeles a la misma distancia (1) que nos brindan informaci\'on sobre el canal verde. 
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/vecino2}
+	\label{Vecino2}
+  \end{center}
+\end{figure}
+
+Si nos situamos en un p\'ixel naturalmente verde, tanto para determinar su canal rojo\emph{(A)} como para determinar su canal azul\emph{(B)} sus p\'ixeles m\'as cercanos que nos brindan informaci\'on son dos (a 1 de distancia cada uno). 
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/vecino3}
+	\label{Vecino3}
+  \end{center}
+\end{figure}
+
+Y por \'ultimo para determinar el valor del canal azul sobre un p\'ixel de origen rojo\emph{(A)} (y viceversa\emph{(B)}) nos encontramos con cuatro p\'ixeles a la misma m\'inima distancia (2) en sus diagonales. \\
+
+Por este motivo, realizamos dos versiones de este algoritmo variando en ellas cu\'al p\'ixel elegir para rellenar el canal verde cuando se est\'a situado sobre un p\'ixel azul o rojo.
+
+En el \emph{\textbf{algoritmo 1}} si se est\'a en un p\'ixel rojo se elige al de arriba y si se est\'a en un p\'ixel azul se elige el de la derecha. En cambio, en el \emph{\textbf{algoritmo 2}} si se est\'a en un p\'ixel rojo se elige al de la izquierda y si se est\'a en un p\'ixel azul se elige al de abajo.
+
+Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algunos ejemplos:
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.60]{imagenes/Vecino/arbolitos}
+	\label{arbolitos}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.60]{imagenes/Vecino/zebraCara}
+	\label{zebraCara}
+  \end{center}
+\end{figure}
+
+\newpage
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.60]{imagenes/Vecino/zebra}
+	\label{Zebra}
+  \end{center}
+\end{figure}
+
+Se puede apreciar que el Algoritmo 1 es capaz de delimitar mejor bordes que poseen rayas en forma horizontal, en cambio el Algoritmo 2 le da una mejor definici\'on a los bordes verticales. Dada la forma de la implementaci\'on, las anomal\'ias observadas en las imagenes cobran sentido.\\
+
+\textcolor{blue}{ACA falta poner el psnr y el ssim}
+
+Dado a que no se puede establecer con un criterio cu\'al es m\'as correcta que la otra, ya que la veracidad de la imagen obtenida var\'ia depende la imagen inicial y su estructura. Nosotros optamos por utilizar el \emph{\textbf{Algoritmo 1}}.
+
+Se adjuntan las im\'agenes en su tama\~no original. \textcolor{red}{ADJUNTARLAS!!!!!!!!}
+
 
 \subsection{Interpolaci\'on Bilineal}
 
-%La interpolación bilineal es una composición de interpolaciones lineales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más pr´ximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\
+La interpolación bilineal es una composición de interpolaciones lineales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más próximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\
 
 Como la estructura del filtro Bayer sólo asegura para los p\'ixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes, aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.
 
 Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de sus dos valores m\'as cercanos ubicados a la derecha e izquierda o arriba y abajo dependiendo de la ubicaci\'on del p\'ixel. 
-
-%Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de los valores de la columna o de la fila, respectivamente, puesto que la intersección entre las columnas que capturan el color rojo y el verde y las que toman este último junto al azul es vacía.
 
 Por otro lado, los valores del canal azul para un pixel rojo (y los del canal rojo para un pixel azul) se calcularían tomando en cuenta las cuatro posiciones diagonales a la analizada. Este proceso no se realizar\'ia simplemente tomando el promedio de sus cuatro diagonales sino que requeriría tomar dos pixels cercanos que pertenezcan a la misma fila o columna, cuyo canal real sea el verde, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.
 
@@ -285,20 +368,42 @@ La implementación de este tipo de métodos exige tomar al menos dos decisiones 
 
 Para escoger alguna opción apropiada corresponde analizar las características del Color Filter Array con el que se va a trabajar, puesto que no todas las direcciones van a aportar en la totalidad de los casos la misma información.
 
-En cuanto a la combinación de los resultados de las distintas interpolaciones, es conveniente tener presente que el promedio de los mismos no es siempre una buena opción. Por ejemplo, supongamos que se analiza una imagen que presenta en un sector la siguiente característica:
+En cuanto a la combinación de los resultados de las distintas interpolaciones, es conveniente tener presente que el promedio de los mismos no es siempre una buena opción. Por ejemplo, supongamos que se analiza una imagen que presenta en un sector las características observables en la Imagen original de la ilustración \ref{apxl1}.
+
 
 \begin{figure}[h!]
 	\caption{}
 	\begin{center}
-	\includegraphics[scale=0.26]{imagenes/direccional}
-	\label{direccional}
+	\includegraphics[scale=0.36]{imagenes/apxl1}
+	\label{apxl1}
   \end{center}
 \end{figure}
 
-Si se interpolara utilizando la dirección vertical el valor de la posición denotada con una estrella, todo indicaría que el resultado debería generar el color rojo. Al hacerlo horizontalmente se llegaría a la conclusión de que la posición en cuestión debería ser blanca. Promediando \#FF0000 con \#FFFFFF resultaría el valor \#FF8080, que expresa un color rosado. \\
+En dicha figura se analiza la información de la misma que sería captada por los fotosensores respondiendo al Bayer Filter Array. \\
+En el esquema \ref{apxl2} se puede observar que para varios pixeles la interpolación horizontal retorna valores distintos a la realizada verticalmente (esto tiene sentido, pues se trata de un área homogénea atravesada por una fila de distinto color). \\
+El resultado de empleo del promedio como estrategia de nivelacion de dichos valores queda expuesto en la Figura \ref{apxl3}, en la cual se puede observar el causante del artifact \"zipping\", producto de un algoritmo indiferente ante los cambios de color abruptos.\\
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+\includegraphics[scale=0.26]{imagenes/apxl2}
+	\label{apxl2}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/apxl3}
+	\label{apxl3}
+  \end{center}
+\end{figure}
+
 Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir este error. Uno de ellos consiste en calcular el gradiente del color para utilizarlo al combinar los resultados, de modo tal que si el mismo fuera de gran magnitud (es decir, la variación del color es considerable) entonces el peso que debe tener el valor calculado en el resultado final debería ser menor a aquel que fue calculado en una dirección cuyo gradiente fuera menor (es decir, que se tratara de una superficie más cromáticamente homogénea).
 
-\textcolor{red}{No sé qué más poner acá =/ re cortina.-}
+
+
+\pagebreak
 
 \subsection*{Versiones de Splines}
 
