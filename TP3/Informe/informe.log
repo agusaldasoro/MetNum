@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.8.22)  8 NOV 2014 21:38
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  9 NOV 2014 13:10
 entering extended mode
-**C:/Users/Belen/MetNum-master/TP3/Informe/informe.tex
-(C:/Users/Belen/MetNum-master/TP3/Informe/informe.tex
+**informe.tex
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
 croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+lician, german, german-x-2012-05-30, greek, gujarati, hindi, hungarian, iceland
 ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
  lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
-german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
@@ -369,7 +369,7 @@ File: pppdftex.def 2013/08/25 v0.4v Pdfpages driver for pdfTeX (AM)
 \c@AM@survey=\count94
 \AM@templatesizebox=\box27
 )
-(C:\Users\Belen\MetNum-master\TP3\Informe\codesnippet.tex
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\codesnippet.tex
 ("C:\Program Files\MiKTeX 2.9\tex\latex\fancybox\fancybox.sty"
 Package: fancybox 2010/05/15 1.4
 
@@ -383,7 +383,7 @@ Style option: `fancybox' v1.4 <2010/05/15> (tvz)
 \EndVerbatimTokens=\toks23
 \Verbatim@Outfile=\write3
 \Verbatim@Infile=\read1
-)) (C:\Users\Belen\MetNum-master\TP3\Informe\page.layout.tex
+)) (C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\page.layout.tex
 ("C:\Program Files\MiKTeX 2.9\tex\latex\fancyhdr\fancyhdr.sty"
 \fancy@headwidth=\skip50
 \f@ncyO@elh=\skip51
@@ -399,16 +399,16 @@ Style option: `fancybox' v1.4 <2010/05/15> (tvz)
 Package: underscore 2006/09/13
 LaTeX Info: Redefining \_ on input line 42.
 )
-(C:\Users\Belen\MetNum-master\TP3\Informe\caratula.sty
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\caratula.sty
 Package: caratula 2005/08/09 v0.3 Para componer caratulas de TPs del DC
 
 Cargando package 'caratula' v0.3 (2005/08/09)
 \intlist=\toks24
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty"
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\ltxmisc\url.sty"
 \Urlmuskip=\muskip10
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-(C:\Users\Belen\MetNum-master\TP3\Informe\informe.aux)
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
@@ -475,9 +475,9 @@ Overfull \hbox (22.76358pt too wide) in paragraph at lines 43--43
 
 [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Belen/MetNum-mas
-ter/TP3/Informe/imagenes/logodc.jpg> <C:/Users/Belen/MetNum-master/TP3/Informe/
-imagenes/logouba.jpg>]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Agustina/Documen
+ts/GitHub/MetNum/TP3/Informe/imagenes/logodc.jpg> <C:/Users/Agustina/Documents/
+GitHub/MetNum/TP3/Informe/imagenes/logouba.jpg>]
 Underfull \hbox (badness 10000) in paragraph at lines 49--50
 
  []
@@ -487,7 +487,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--57
 
  []
 
-(C:\Users\Belen\MetNum-master\TP3\Informe\informe.toc)
+(C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.toc)
 \tf@toc=\write4
  [2]
 Underfull \hbox (badness 10000) in paragraph at lines 71--73
@@ -551,10 +551,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
  []
 
-[4 <C:/Users/Belen/MetNum-master/TP3/Informe/imagenes/LagrangeSplinesCTE.png> <
-C:/Users/Belen/MetNum-master/TP3/Informe/imagenes/SplinesX12a101.png>] [5 <C:/U
-sers/Belen/MetNum-master/TP3/Informe/imagenes/LagrangeX12a101.png> <C:/Users/Be
-len/MetNum-master/TP3/Informe/imagenes/LagrangeX12a101(zoomOut).png>]
+[4 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/LagrangeSpli
+nesCTE.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Spl
+inesX12a101.png>] [5 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/ima
+genes/LagrangeX12a101.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Infor
+me/imagenes/LagrangeX12a101(zoomOut).png>]
 <imagenes/SplinesX12a20.png, id=34, 234.8775pt x 234.1247pt>
 File: imagenes/SplinesX12a20.png Graphic file (type png)
 
@@ -581,9 +582,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 225--227
 
  []
 
-[6 <C:/Users/Belen/MetNum-master/TP3/Informe/imagenes/SplinesX12a20.png>]
-[7 <C:/Users/Belen/MetNum-master/TP3/Informe/imagenes/LagrangeX12a20.png> <C:/U
-sers/Belen/MetNum-master/TP3/Informe/imagenes/LagrangeX12a20(zoomOut).png>]
+[6 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/SplinesX12a2
+0.png>] [7 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Lagr
+angeX12a20.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes
+/LagrangeX12a20(zoomOut).png>]
 Underfull \hbox (badness 10000) in paragraph at lines 237--239
 
  []
@@ -608,137 +610,163 @@ Underfull \hbox (badness 10000) in paragraph at lines 248--249
 
  []
 
+[8] <imagenes/vecino1.png, id=48, 354.57469pt x 362.10281pt>
+File: imagenes/vecino1.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--256
+<use imagenes/vecino1.png>
+Package pdftex.def Info: imagenes/vecino1.png used on input line 261.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+
+<imagenes/vecino2.png, id=49, 354.57469pt x 362.10281pt>
+File: imagenes/vecino2.png Graphic file (type png)
+
+<use imagenes/vecino2.png>
+Package pdftex.def Info: imagenes/vecino2.png used on input line 270.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+
+<imagenes/vecino3.png, id=50, 354.57469pt x 362.10281pt>
+File: imagenes/vecino3.png Graphic file (type png)
+
+<use imagenes/vecino3.png>
+Package pdftex.def Info: imagenes/vecino3.png used on input line 279.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 284--285
 
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 271--272
+[9 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino1.png>
+ <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino2.png> <
+C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino3.png>]
+<imagenes/Vecino/arbolitos.png, id=57, 581.17125pt x 218.31563pt>
+File: imagenes/Vecino/arbolitos.png Graphic file (type png)
+
+<use imagenes/Vecino/arbolitos.png>
+Package pdftex.def Info: imagenes/Vecino/arbolitos.png used on input line 295.
+(pdftex.def)             Requested size: 348.70544pt x 130.99037pt.
+
+<imagenes/Vecino/zebraCara.png, id=58, 697.8572pt x 375.65344pt>
+File: imagenes/Vecino/zebraCara.png Graphic file (type png)
+
+<use imagenes/Vecino/zebraCara.png>
+Package pdftex.def Info: imagenes/Vecino/zebraCara.png used on input line 303.
+(pdftex.def)             Requested size: 418.71754pt x 225.3938pt.
+ [10 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/arb
+olitos.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vec
+ino/zebraCara.png>]
+<imagenes/Vecino/zebra.png, id=64, 636.87938pt x 462.97969pt>
+File: imagenes/Vecino/zebra.png Graphic file (type png)
+
+<use imagenes/Vecino/zebra.png>
+Package pdftex.def Info: imagenes/Vecino/zebra.png used on input line 312.
+(pdftex.def)             Requested size: 382.13057pt x 277.78995pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 317--318
 
  []
 
-<imagenes/bilineal.png, id=48, 354.57469pt x 362.10281pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--329
+
+ []
+
+[11 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/zebr
+a.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 342--343
+
+ []
+
+<imagenes/bilineal.png, id=68, 354.57469pt x 362.10281pt>
 File: imagenes/bilineal.png Graphic file (type png)
 
 <use imagenes/bilineal.png>
-Package pdftex.def Info: imagenes/bilineal.png used on input line 282.
+Package pdftex.def Info: imagenes/bilineal.png used on input line 353.
 (pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 289--290
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
-
- []
-
-[9 <C:/Users/Belen/MetNum-master/TP3/Informe/imagenes/bilineal.png>]
-<imagenes/apxl1.png, id=53, 1918.91907pt x 329.73187pt>
-File: imagenes/apxl1.png Graphic file (type png)
-
-<use imagenes/apxl1.png>
-Package pdftex.def Info: imagenes/apxl1.png used on input line 306.
-(pdftex.def)             Requested size: 690.81035pt x 118.70337pt.
-
-Overfull \hbox (235.56627pt too wide) in paragraph at lines 306--308
- [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 311--314
-
- []
-
-<imagenes/apxl2.png, id=54, 1940.75063pt x 654.94687pt>
-File: imagenes/apxl2.png Graphic file (type png)
-
-<use imagenes/apxl2.png>
-Package pdftex.def Info: imagenes/apxl2.png used on input line 318.
-(pdftex.def)             Requested size: 504.58327pt x 170.28217pt.
-
-Overfull \hbox (49.33919pt too wide) in paragraph at lines 318--320
- [] 
- []
-
-<imagenes/apxl3.png, id=55, 1187.18532pt x 428.35031pt>
-File: imagenes/apxl3.png Graphic file (type png)
-
-<use imagenes/apxl3.png>
-Package pdftex.def Info: imagenes/apxl3.png used on input line 326.
-(pdftex.def)             Requested size: 427.38638pt x 154.206pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[10 <C:/Users/Belen/MetNum-master/TP3/Informe/imagenes/apxl1.png> <C:/Users/Bel
-en/MetNum-master/TP3/Informe/imagenes/apxl2.png>] [11 <C:/Users/Belen/MetNum-ma
-ster/TP3/Informe/imagenes/apxl3.png>] [12]
 Underfull \hbox (badness 10000) in paragraph at lines 360--361
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 367--368
+Underfull \hbox (badness 10000) in paragraph at lines 362--363
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 369--370
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 382--385
+
+ []
+
+[12 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/bilineal.pn
+g>] [13] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 431--432
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 371--372
+Underfull \hbox (badness 10000) in paragraph at lines 438--439
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--375
+Underfull \hbox (badness 10000) in paragraph at lines 440--441
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--377
-
- []
-
-[13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 402--404
+Underfull \hbox (badness 10000) in paragraph at lines 442--443
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--404
+Underfull \hbox (badness 10000) in paragraph at lines 444--446
 
  []
 
-[15] (C:\Users\Belen\MetNum-master\TP3\Informe\informe.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 447--448
+
+ []
+
+[15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 473--475
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 473--475
+
+ []
+
+[17] (C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 3925 strings out of 493921
- 52288 string characters out of 3147282
- 129963 words of memory out of 3000000
- 7142 multiletter control sequences out of 15000+200000
- 23124 words of font info for 37 fonts, out of 3000000 for 9000
+ 3951 strings out of 493921
+ 53060 string characters out of 3147274
+ 130019 words of memory out of 3000000
+ 7162 multiletter control sequences out of 15000+200000
+ 25144 words of font info for 39 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 37i,13n,43p,879b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,13n,43p,838b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/bitstrea/charter/bchb8a.pfb><C:/Program Files/MiKTeX 2
-.9/fonts/type1/bitstrea/charter/bchr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/bitstrea/charter/bchri8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-r7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (15 pages, 747229 bytes).
+.9/fonts/type1/bitstrea/charter/bchbi8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/bitstrea/charter/bchr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/bits
+trea/charter/bchri8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+r10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on informe.pdf (17 pages, 2045167 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
+ 122 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
