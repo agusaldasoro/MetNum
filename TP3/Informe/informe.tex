@@ -304,13 +304,21 @@ Por este motivo, realizamos dos versiones de este algoritmo variando en ellas cu
 
 En el \emph{\textbf{algoritmo 1}} si se est\'a en un p\'ixel rojo se elige al de arriba y si se est\'a en un p\'ixel azul se elige el de la derecha. En cambio, en el \emph{\textbf{algoritmo 2}} si se est\'a en un p\'ixel rojo se elige al de la izquierda y si se est\'a en un p\'ixel azul se elige al de abajo.
 
-Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algunos ejemplos:
+Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algunos ejemplos que contienen detallado el valor de psnr y ssim para cada imagen respecto de la original.
 
 \begin{figure}[h!]
 	\caption{}
 	\begin{center}
 	\includegraphics[scale=0.60]{imagenes/Vecino/arbolitos}
 	\label{arbolitos}
+	
+	psnr1 =   14.3119
+
+psnr2 =   14.3533
+
+ssim1 =    0.3819
+
+ssim2 =    0.3856
   \end{center}
 \end{figure}
 
@@ -319,6 +327,14 @@ Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algun
 	\begin{center}
 	\includegraphics[scale=0.60]{imagenes/Vecino/zebraCara}
 	\label{zebraCara}
+	
+	psnr1 =   19.8295
+
+psnr2 =   20.0706
+
+ssim1 =    0.8806
+
+ssim2 =    0.8841
   \end{center}
 \end{figure}
 
@@ -328,16 +344,77 @@ Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algun
 	\begin{center}
 	\includegraphics[scale=0.60]{imagenes/Vecino/zebra}
 	\label{Zebra}
+	
+	psnr1 =   21.1167
+
+psnr2 =   21.3368
+
+ssim1 =    0.8374
+
+ssim2 =    0.8417
   \end{center}
 \end{figure}
 
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.06]{imagenes/Vecino/hawaiicmp}
+	\label{Zebra}
+	
+	psnr1 =   23.2721
+
+psnr2 =   23.2371
+
+ssim1 =    0.8560
+
+ssim2 =    0.8553
+  \end{center}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.06]{imagenes/Vecino/piramides3cmp}
+	\label{Zebra}
+	
+	psnr1 =   23.8518
+
+psnr2 =   23.8270
+
+ssim1 =    0.7514
+
+ssim2 =    0.7515
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.70]{imagenes/Vecino/piramides2cmp}
+	\label{Zebra}
+	
+	psnr1 =   21.7691
+
+psnr2 =   21.7494
+
+ssim1 =    0.9508
+
+ssim2 =    0.9506
+  \end{center}
+\end{figure}
+
+
+
+
 Se puede apreciar que el Algoritmo 1 es capaz de delimitar mejor bordes que poseen rayas en forma horizontal, en cambio el Algoritmo 2 le da una mejor definici\'on a los bordes verticales. Dada la forma de la implementaci\'on, las anomal\'ias observadas en las imagenes cobran sentido.\\
 
-\textcolor{blue}{ACA falta poner el psnr y el ssim}
 
-Dado a que no se puede establecer con un criterio cu\'al es m\'as correcta que la otra, ya que la veracidad de la imagen obtenida var\'ia depende la imagen inicial y su estructura. Nosotros optamos por utilizar el \emph{\textbf{Algoritmo 1}}.
+Debido a que no se puede establecer con un criterio cu\'al es m\'as correcta que la otra, ya que la veracidad de la imagen obtenida var\'ia depende la imagen inicial y su estructura. Nosotros optamos por utilizar el \emph{\textbf{Algoritmo 1}}.\\
 
-Se adjuntan las im\'agenes en su tama\~no original. \textcolor{red}{ADJUNTARLAS!!!!!!!!}
+\textit{Se adjuntan las im\'agenes en su tama\~no original.}
 
 \newpage
 \subsection{Interpolaci\'on Bilineal}
