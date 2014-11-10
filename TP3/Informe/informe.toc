@@ -1,19 +1,19 @@
 \select@language {spanish}
 \contentsline {section}{\numberline {1}Introducci\'on Te\'orica}{3}
-\contentsline {subsection}{\numberline {1.1}Inconvenientes de aproximar mediante el Polinomio de Lagrange}{3}
-\contentsline {subsection}{\numberline {1.2}Artifacts}{6}
-\contentsline {section}{\numberline {2}Desarrollo}{8}
-\contentsline {subsection}{\numberline {2.1}Vecino m\'as cercano}{8}
-\contentsline {subsection}{\numberline {2.2}Interpolaci\'on Bilineal}{11}
-\contentsline {subsection}{\numberline {2.3}Interpolaciones Direccionales}{12}
-\contentsline {subsection}{\numberline {2.4}Algoritmo de Malvar, He y Cutler}{14}
-\contentsline {subsection}{\numberline {2.5}Exploraci\'on de Artifacts}{14}
-\contentsline {section}{\numberline {3}Resultados y discusi\'on}{15}
-\contentsline {subsection}{\numberline {3.1}MHC}{15}
-\contentsline {subsection}{\numberline {3.2}An\'alisis cualitativo de los algoritmos}{15}
-\contentsline {subsection}{\numberline {3.3}An\'alisis de tiempos}{15}
-\contentsline {section}{\numberline {4}Conclusiones y trabajo futuro}{16}
-\contentsline {section}{\numberline {5}Ap\'endices}{16}
-\contentsline {subsection}{\numberline {5.1}Ap\'endice A: Enunciado}{16}
-\contentsline {subsection}{\numberline {5.2}Ap\'endice B:}{16}
-\contentsline {section}{\numberline {6}Referencias}{17}
+\contentsline {subsection}{\numberline {1.1}Inconvenientes de aproximar mediante el Polinomio de Lagrange}{4}
+\contentsline {subsection}{\numberline {1.2}Artifacts}{8}
+\contentsline {section}{\numberline {2}Desarrollo}{9}
+\contentsline {subsection}{\numberline {2.1}Vecino m\'as cercano}{9}
+\contentsline {subsection}{\numberline {2.2}Interpolaci\'on Bilineal}{13}
+\contentsline {subsection}{\numberline {2.3}Interpolaciones Direccionales}{14}
+\contentsline {subsection}{\numberline {2.4}Algoritmo de Malvar, He y Cutler}{16}
+\contentsline {subsection}{\numberline {2.5}Exploraci\'on de Artifacts}{17}
+\contentsline {section}{\numberline {3}Resultados y discusi\'on}{18}
+\contentsline {subsection}{\numberline {3.1}MHC}{19}
+\contentsline {subsection}{\numberline {3.2}An\'alisis cualitativo de los algoritmos}{20}
+\contentsline {subsection}{\numberline {3.3}An\'alisis de tiempos}{20}
+\contentsline {section}{\numberline {4}Conclusiones y trabajo futuro}{21}
+\contentsline {section}{\numberline {5}Ap\'endices}{21}
+\contentsline {subsection}{\numberline {5.1}Ap\'endice A: Enunciado}{21}
+\contentsline {subsection}{\numberline {5.2}Ap\'endice B:}{21}
+\contentsline {section}{\numberline {6}Referencias}{22}

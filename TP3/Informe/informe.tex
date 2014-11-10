@@ -77,18 +77,33 @@ Este tipo de cámaras poseen un sensor CCD compuesto de una matriz de elementos 
 
 La tarea de capturar todos los colores reflejados por el objetivo que se quiere fotografiar no está encomendada a ninguna posición en particular, sino que cada una de ellas tiene asignada – de acuerdo a algún patrón definido  – la captura de la información perteneciente a un solo color. Cada p\'ixel de la imagen va a estar dividido en tres canales ya que la vamos a almacenar mediante RGB (Red, Green, Blue).
 
-Ahora bien, esto genera una imagen que se aproxima a la realidad sólo en parte ya que para cada p\'ixel de la imagen tenemos la informaci\'on de s\'olo uno de sus tres canales. A causa de esto es que la misma debe ser reconstruida algorítmicamente, interpolando los valores de los colores que no fueron almacenados explícitamente para cada pixel.
-
-%El patr\'on que determina qué color será capturado por cada fotosensor es denominado \textbf{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras %%%%digitales. En nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda% sobre el canal verde - al cual el ojo humano es m\ás sensible, debido a que se encuentra en el centro de su espectro visual - duplica a cada uno de los otros dos. 
+El patr\'on que determina qué color será capturado por cada fotosensor es denominado \emph{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras. Existen diversos patrones, en nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda sobre el canal verde - al cual el ojo humano es más sensible -.
 
 \textcolor{blue}{*insertar imágenes por aquí y por allá*:\\
 Filtro Bayer \\
 Otros filtros (?
 }
 
+\begin{figure}[h!]
+	\caption{Bayer CFA}
+	\begin{center}
+	\includegraphics[scale=0.36]{imagenes/BayerFilter}
+	\label{Bayer}
+  \end{center}
+\end{figure}
+
+
+%, a causa de que se encuentra en el centro de su espectro visual - duplica a cada uno de los otros dos. 
+
+Ahora bien, esto genera una imagen que se aproxima a la realidad sólo en parte ya que para cada p\'ixel de la imagen tenemos la informaci\'on de s\'olo uno de sus tres canales. A causa de esto es que la misma debe ser reconstruida algorítmicamente, interpolando los valores de los colores que no fueron almacenados explícitamente para cada pixel.
+
+
 En este punto adquieren relevancia las diferentes propuestas de reconstrucción de la imagen original. Esto conlleva la ejecución de diversos procedimientos, entre los que se encuentran el demosaicing, el análisis del balance de blancos, la curva tonal, la saturación y el contraste y la compresión final de la imagen. Como nuestra propuesta se aboca al primer paso mencionado, exploraremos en el presente trabajo sólo un subconjunto de una serie de variaciones no finita que admiten métodos de debayering como ser la interpolación por asignación de valores próximos, la interpolación bilineal y interpolación direccional.\\
 
+\newpage
 \subsection{Inconvenientes de aproximar mediante el Polinomio de Lagrange}
+
+\textcolor{blue}{Arreglar un poco las refs}
 
 Es nuestra intención exponer ahora el motivo que consideramos suficiente para decidir interpolar los valores ausentes a través de Splines en lugar de hacer uso del polinomio de Lagrange.\\
 Sea dada la siguiente muestra: \\
@@ -114,7 +129,7 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
  \end{tabular}
 \smallskip
 \\
-El polinomio de Lagrange que interpola cada uno de esos valores tiene una expresión equivalente al Spline que lo hace, siendo su gráfico el cito a continuación:
+El polinomio de Lagrange que interpola cada uno de esos valores tiene una expresión equivalente al Spline que lo hace, siendo su gráfico el citado a continuación:
 \smallskip
 
 \begin{figure}[h!]
@@ -225,6 +240,8 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
 En conclusión, el polinomio de Lagrange se comporta de una manera menos predecible \textcolor{red}{en realidad sí es predecible si tenés el polinomio y podés evauarlo, pero quiero decir q es menos intuitivo, menos "constante", como que hace cualquiera entre dos puntos cuya imagen no esté fijada de antemano} entre dos variables independientes y no garantiza que en esos intervalos el valor de la función sea cercano a los ya conocidos.\\
 La carencia de predictibilidad hace del polinomio de Lagrange una mala alternativa para la interpolación, en comparación con las ventajas proporcionadas por el empleo de Splines.\\
 
+
+\newpage
 \subsection{Artifacts}
 \textcolor{blue}{Aca explicar un poco que onda,  que son los artifacts}
 
@@ -322,7 +339,7 @@ Dado a que no se puede establecer con un criterio cu\'al es m\'as correcta que l
 
 Se adjuntan las im\'agenes en su tama\~no original. \textcolor{red}{ADJUNTARLAS!!!!!!!!}
 
-
+\newpage
 \subsection{Interpolaci\'on Bilineal}
 
 La interpolación bilineal es una composición de interpolaciones lineales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más próximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\
@@ -355,7 +372,7 @@ Llegando as\'i a que realizar este c\'alculo es equivalente a realizar el promed
   \end{center}
 \end{figure}
 
-
+\newpage
 \subsection{Interpolaciones Direccionales}
 Se trata de una gran cantidad de métodos que buscan comenzar a resolver el problema de demosaicing realizando inicialmente una interpolación en una dirección y combinando con algún criterio determinado el resultado estimado con el obtenido de una aproximación realizada en otra dirección.\\
 
@@ -379,8 +396,10 @@ En cuanto a la combinación de los resultados de las distintas interpolaciones, 
   \end{center}
 \end{figure}
 
-En dicha figura se analiza la información de la misma que sería captada por los fotosensores respondiendo al Bayer Filter Array. \\
-En el esquema \ref{apxl2} se puede observar que para varios pixeles la interpolación horizontal retorna valores distintos a la realizada verticalmente (esto tiene sentido, pues se trata de un área homogénea atravesada por una fila de distinto color). \\
+En dicha figura se analiza la información de la misma que sería captada por los fotosensores respondiendo al Bayer Filter Array. 
+
+En el esquema \ref{apxl2} se puede observar que para varios pixeles la interpolación horizontal retorna valores distintos a la realizada verticalmente (esto tiene sentido, pues se trata de un área homogénea atravesada por una fila de distinto color).
+
 El resultado de empleo del promedio como estrategia de nivelacion de dichos valores queda expuesto en la Figura \ref{apxl3}, en la cual se puede observar el causante del artifact \"zipping\", producto de un algoritmo indiferente ante los cambios de color abruptos.\\
 
 \begin{figure}[h!]
@@ -411,9 +430,11 @@ Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir es
 Decir que bilineal y poner 0.5 queda igual (o casi igual je), usar psnr.\\
 Y ver cual vamos a dejar\\
 Y que usamos NATURALES}
+
+\newpage
 \subsection{Algoritmo de Malvar, He y Cutler}
-
-
+\textcolor{blue}{Hablar un poco aca del paper...}
+\newpage
 \subsection{Exploraci\'on de Artifacts}
 
 \textcolor{blue}{Ver si hay otros artifacts mas para agregar.\\
@@ -424,11 +445,13 @@ Poner fotitos de ampliaciones donde se vean bien los artifacts.}
 \newpage
 \section{Resultados y discusi\'on}
 
+\newpage
 \subsection{MHC}
 Le da muchísima más definición/claridad a las fotos, y los bordes oscuros quedan prácticamente perfectos (comparando con bilineal, por ejemplo, aparecen colores fuertes alrededor de los bordes negros). Sigue pasando eso con los bordes blancos/mas claros, pero las zonas donde hay un salto grande entre claro y oscuro, mejora mucho.
 
+\newpage
 \subsection{An\'alisis cualitativo de los algoritmos}
-Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab (R) la diferencia entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro.\\
+Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab$\textregistered$  la diferencia entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro.\\
 
 \textcolor{blue}{Aca falta agregar todas las fotitos, Y HACERLO PARA SPLINES!!!!!!!!!!!!!!!!!}
 %ESTO PUEDE IR DE PIE DE IMAGEN O ALGO ASI...
@@ -442,7 +465,16 @@ En la "imagen 4" se puede apreciar el inconveniente de aproximar p\'ixeles que s
 En cuanto a la "imagen 5" se aprecia el mismo inconveniente que en la "imagen 1" dado a la existencia de agua, pero a diferencia cuando se corre el algoritmo de MHC la mejor\'ia es notablemente mayor ya que la diferencia entre esta imagen y la foto original es muy peque\~na.\\
 
 En la "imagen 9" se puede ver un comportamiento similar a lo ya estudiado, lo interesante de destacar en cuanto a esta foto es que al poseer un letrero es una imagen menos abstracta que las anteriores y por lo tanto, se adquiere una definici\'on mayor cuando se tiene una diferencia menor con la original y as\'i facilitar la lectura del cartel.
-\textcolor{red}{aca pondria una fotito ahaciendo zoom en el cartel}\\
+
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.05]{imagenes/comparacion/cartel}
+	\label{cartel}
+  \end{center}
+\end{figure}
+
 
 La "imagen 12" es una imagen con muchas l\'ineas y dibujos con contornos esto se aprecia en la gran densidad que tiene la imagen que muestra las diferencias entre la imagen original y la imagen obtenida mediante el algoritmo de Vecino M\'as Cercano. Si observamos las im\'agenes obtenidas mediante la resta con sus respectivas originales se denota una gran diferencia entre el Algoritmo de Vecino M\'as Cercano y el Algoritmo de MHC.\\
 
