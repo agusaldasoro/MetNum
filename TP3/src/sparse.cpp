@@ -8,12 +8,10 @@ Matriz::Matriz(const Nat& dim) : _dim(dim), _mtrx(dim)
 	};
 }
 
-//solo puedo preguntar por elementos que esten en alguna de las tres diagonales
+//PRE: solo puedo preguntar por elementos que esten en alguna de las tres diagonales (dentro del contexto de uso del TP, esto siempre se cumple)
 double& Matriz::Elem(const Nat& fila, const Nat& columna)
 {
-	//double res;
-	return /*res = (abs(columna-fila)>1) ? 0 : */_mtrx[fila][columna-fila+1];
-	//return res;
+	return _mtrx[fila][columna-fila+1];
 };
 
 void Matriz::Res(const Nat& fila, const double& res){
@@ -47,7 +45,7 @@ std::vector<double> Matriz::ResolverSistema()
 	return res;
 }
 
-void Matriz::imprimir(){
+/*void Matriz::imprimir(){
 	for (int i = 0; i < _dim; ++i)
 	{
 		for (int j = 0; j < 4; ++j)
@@ -55,4 +53,4 @@ void Matriz::imprimir(){
 
 		std::cout << std::endl;
 	}
-}
+}*/

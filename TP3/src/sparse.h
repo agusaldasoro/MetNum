@@ -22,7 +22,7 @@ public:
 
 	std::vector<double> ResolverSistema();
 
-	void imprimir();
+	//void imprimir();
 
 private:
 	Nat _dim;

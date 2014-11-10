@@ -11,8 +11,6 @@
 #include "sparse.h"
 #include "spline.h"
 
-//#include <algorithm>
-
 using namespace std;
 
 //Como ejecutar: ./tp path_imagen tipo
@@ -20,9 +18,10 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	if (argc != 3)
+	if (argc < 3)
 	{
-		cout << "\nUso del programa: ./tp path_imagen algoritmo \n\nDonde algoritmo puede ser \n \t 0 para Vecino Mas Cercano \n \t 1 para Bilineal \n \t 2 para el algoritmo de Malvar, He y Cutler (MHC) \n \t 3 para interpolacion mediante splines\n" << endl;
+		cout << "\nUso del programa: ./tp path_imagen algoritmo \n\nDonde algoritmo puede ser: \n [0] para Vecino Mas Cercano \n [1] para Bilineal \n [2] para el algoritmo de Malvar, He y Cutler (MHC) \n [3] para interpolacion mediante splines, seguida de alguna de las siguiente opciones:" << endl;
+		cout << "\t 's' -metodo standard, interpolando una fila y una columna \n\t 'p' -interpolacion otorgando pesos en base a las derivadas direccionales \n\t 'r' -interpolacion tomando un rango de 3 pixeles \n\t 'm' -interpolacion utilizando las mejoras basadas en el algoritmo de Malvar, He y Cutler \n\t 'd' -interpolacion utilizando diagonales en lugar de filas y columnas \n" << endl;
 	}
 	else
 	{
@@ -41,6 +40,7 @@ int main(int argc, char const *argv[])
 
 		if (*argv[2] == '0') //Vecino mas cercano
 		{
+			cout << "Aplicando demosaicing mediante vecino mas cercano..." << endl;
 			start = std::chrono::system_clock::now();
 			vecino(raw);
 			end = std::chrono::system_clock::now();
@@ -51,6 +51,7 @@ int main(int argc, char const *argv[])
 		}
 		else if (*argv[2] == '1') //Bilineal
 		{
+			cout << "Aplicando demosaicing mediante interpolacion bilineal..." << endl;
 			start = std::chrono::system_clock::now();
 			int_bilineal(raw);
 			end = std::chrono::system_clock::now();
@@ -61,6 +62,7 @@ int main(int argc, char const *argv[])
 		}
 		else if (*argv[2] == '2') //MHC
 		{
+			cout << "Aplicando demosaicing mediante el algoritmo de Malvar, He y Cutler..." << endl;
 			start = std::chrono::system_clock::now();
 			MHC(raw);
 			end = std::chrono::system_clock::now();
@@ -69,67 +71,59 @@ int main(int argc, char const *argv[])
 			const char * c_nombre_MHC = nombre_MHC.c_str();
 			raw.save(c_nombre_MHC);
 		}
-		else if (*argv[2] == '3') //Spline: ESTO NO ANDA BIEN
+		else if (*argv[2] == '3') //Spline
 		{
-			/*Matriz test(5);
-			test.Elem(0,0) = 1;
-			test.Elem(1,0) = 1;
-			test.Elem(1,1) = 2;
-			test.Elem(1,2) = 3;
-			test.Elem(2,1) = 4;
-			test.Elem(2,2) = 5;
-			test.Elem(2,3) = 2;
-			test.Elem(3,2) = 1;
-			test.Elem(3,3) = 3;
-			test.Elem(3,4) = 2;
-			test.Elem(4,4) = 1;
+			if (argc != 4)
+			{
+				cout << "Es necesario especificar el tipo de spline a aplicar: \n\t 's' -metodo standard, interpolando una fila y una columna \n\t 'p' -interpolacion otorgando pesos en base a las derivadas direccionales \n\t 'r' -interpolacion tomando un rango de 3 pixeles \n\t 'm' -interpolacion utilizando las mejoras basadas en el algoritmo de Malvar, He y Cutler \n\t 'd' -interpolacion utilizando diagonales en lugar de filas y columnas \n" << endl;
+				return 0;
+			}
 
-			test.Res(0,0);
-			test.Res(1,5);
-			test.Res(2,4);
-			test.Res(3,3);
-			test.Res(4,0);
+			string nombre_spline;
+			switch(*argv[3]){
+				case 's': //standard
+					cout << "Aplicando demosaicing mediante splines de una fila y una columna..." << endl;
+					start = std::chrono::system_clock::now();
+					spline(raw);
+					end = std::chrono::system_clock::now();
+					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline.bmp";
+					break;
+				case 'p': //peso mediante derivadas
+					cout << "Aplicando demosaicing mediante splines: peso mediante derivadas direccionales..." << endl;
+					start = std::chrono::system_clock::now();
+					spline_der(raw);
+					end = std::chrono::system_clock::now();
+					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-derivadas.bmp";
+					break;
+				case 'r': //rango
+					cout << "Aplicando demosaicing mediante splines: rango..." << endl;
+					start = std::chrono::system_clock::now();
+					spline_rango(raw);
+					end = std::chrono::system_clock::now();
+					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-rango.bmp";
+					break;
+				case 'm': //MHC
+					cout << "Aplicando demosaicing mediante splines: rango con mejoras basadas en MHC..." << endl;
+					start = std::chrono::system_clock::now();
+					spline_rango_MHC(raw);
+					end = std::chrono::system_clock::now();
+					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-MHC.bmp";
+					break;
+				case 'd': //diagonal
+					cout << "Aplicando demosaicing mediante splines: diagonales..." << endl;
+					start = std::chrono::system_clock::now();
+					spline_diag(raw);
+					end = std::chrono::system_clock::now();
+					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-diag.bmp";
+					break;
+			}
 
-			test.EG();
-			test.imprimir();
-
-			std::vector<double> res = test.ResolverSistema();
-			cout << "Resultado: ";
-			for (std::vector<double>::iterator i = res.begin(); i != res.end(); ++i)
-				cout << *i << ", ";*/
-
-			/*std::vector<double> fx;
-			fx.push_back(130);
-			fx.push_back(156);
-			fx.push_back(123);
-			fx.push_back(75);
-			fx.push_back(97);
-
-			std::vector<double> res = generar_spline(fx);
-
-			cout << "Resultado: ";
-			for (std::vector<double>::iterator i = res.begin(); i != res.end(); ++i)
-				cout << *i << ", ";
-
-			cout << "Evaluado: " << evaluar(res,3) << endl;*/
-
-
-			start = std::chrono::system_clock::now();
-			//spline(raw);
-			//spline_der(raw);
-			//spline_rango(raw);
-			spline_rango_MHC(raw);
-			//spline_diag(raw);
-			end = std::chrono::system_clock::now();
-
-			string nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline.bmp";
 			const char * c_nombre_spline = nombre_spline.c_str();
 			raw.save(c_nombre_spline);
-
 		}
 
 		std::chrono::duration<double> elapsed_seconds = end-start;
-		cout << "Tiempo: " << elapsed_seconds.count() << endl;
+		cout << "Tiempo transcurrido: " << elapsed_seconds.count() << " segundos" << endl;
 	}
 	return 0;
 }
