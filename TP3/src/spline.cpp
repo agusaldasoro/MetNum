@@ -74,24 +74,10 @@ void spline(cimg_library::CImg<double>& orig){
 				filaG.push_back(orig(c,i,0,1));
 				filaB.push_back(orig(c-1,i,0,2));
 			}
-		}
-		else
-		{
-			for (int c = 0; c < ancho; c+=2)
-			{
-				filaG.push_back(orig(c,i,0,1));
-				filaR.push_back(orig(c+1,i,0,0));
-			}
-		}
-
-		spline_fila_g = generar_spline(filaG);
-		if (i%2==0)
+			
+			spline_fila_g = generar_spline(filaG);
 			spline_fila_b = generar_spline(filaB);
-		else
-			spline_fila_r = generar_spline(filaR);
 
-		if (i%2==0)
-		{
 			for (int c = 2; c < ancho-1; c+=2)
 			{
 				orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,c-1)));
@@ -100,6 +86,15 @@ void spline(cimg_library::CImg<double>& orig){
 		}
 		else
 		{
+			for (int c = 0; c < ancho; c+=2)
+			{
+				filaG.push_back(orig(c,i,0,1));
+				filaR.push_back(orig(c+1,i,0,0));
+			}
+			
+			spline_fila_g = generar_spline(filaG);
+			spline_fila_r = generar_spline(filaR);
+
 			for (int c = 3; c < ancho-1; c+=2)
 			{
 				orig(c-1,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,c-2)));
@@ -179,24 +174,10 @@ void spline_der(cimg_library::CImg<double>& orig){
 				filaG.push_back(orig(c,i,0,1));
 				filaB.push_back(orig(c-1,i,0,2));
 			}
-		}
-		else
-		{
-			for (int c = 0; c < ancho; c+=2)
-			{
-				filaG.push_back(orig(c,i,0,1));
-				filaR.push_back(orig(c+1,i,0,0));
-			}
-		}
 
-		spline_fila_g = generar_spline(filaG);
-		if (i%2==0)
+			spline_fila_g = generar_spline(filaG);
 			spline_fila_b = generar_spline(filaB);
-		else
-			spline_fila_r = generar_spline(filaR);
 
-		if (i%2==0)
-		{
 			for (int c = 2; c < ancho-1; c+=2)
 			{
 				orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,c-1)));
@@ -205,6 +186,15 @@ void spline_der(cimg_library::CImg<double>& orig){
 		}
 		else
 		{
+			for (int c = 0; c < ancho; c+=2)
+			{
+				filaG.push_back(orig(c,i,0,1));
+				filaR.push_back(orig(c+1,i,0,0));
+			}
+
+			spline_fila_g = generar_spline(filaG);
+			spline_fila_r = generar_spline(filaR);
+
 			for (int c = 3; c < ancho-1; c+=2)
 			{
 				orig(c-1,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,c-2)));
@@ -257,9 +247,8 @@ void spline_der(cimg_library::CImg<double>& orig){
 				// 	orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*(1-factorF))+((1-factorC)*evaluar(spline_col_g,c-1))));
 				// }
 
-				unsigned int color = (c%2==0) ? 2 : 1;
 				orig(i,c,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-1)));
-				if( (i>2 && i<ancho-2) && ((fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1))) || (fabs(orig(i-2,c,0,color)+orig(i+2,c,0,color)) > fabs(orig(i,c-2,0,color)+orig(i,c+2,0,color)) )))
+				if( (i>2 && i<ancho-2) && ((fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1))) || (fabs(orig(i-2,c,0,2)+orig(i+2,c,0,2)) > fabs(orig(i,c-2,0,2)+orig(i,c+2,0,2)) )))
 					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*0)+(1*evaluar(spline_col_g,c-1))));
 				else
 					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*1)+(0*evaluar(spline_col_g,c-1))));
@@ -280,18 +269,17 @@ void spline_der(cimg_library::CImg<double>& orig){
 
 				// 	orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*(1-factorF))+((1-factorC)*evaluar(spline_col_g,c-1))));
 				// }
-				unsigned int color = (c%2==0) ? 1 : 0;
+
 				orig(i,c-1,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-2)));
-				if( (i>2 && i<ancho-2) && ((fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1))) || (fabs(orig(i-2,c,0,color)+orig(i+2,c,0,color)) > fabs(orig(i,c-2,0,color)+orig(i,c+2,0,color)) )))
+				if( (i>2 && i<ancho-2) && ((fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1))) || (fabs(orig(i-2,c,0,0)+orig(i+2,c,0,0)) > fabs(orig(i,c-2,0,0)+orig(i,c+2,0,0)) )))
 					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*0)+(1*evaluar(spline_col_g,c))));
 				else
 					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*1)+(0*evaluar(spline_col_g,c))));
 				orig(i,c,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
 			}
-		}
+		}		
 	}
-
-	orig.crop(3,3,0,0,ancho-4,alto-4,0,2); //no se si dejarlo aca o meterlo en el main
+	orig.crop(3,3,0,0,ancho-4,alto-4,0,2);
 }
 
 void generar_rango_fila(unsigned int fila, unsigned int columna, unsigned int rango, unsigned int canal, cimg_library::CImg<double>& orig, std::vector<double>& x){
@@ -316,6 +304,7 @@ void generar_rango_col(unsigned int fila, unsigned int columna, unsigned int ran
 		x.push_back(orig(columna,fila+(rango-i),0,canal));
 }
 
+//FIJARSE SI DEJAR LOS IFS ("MULTIPLICAR POR 1 Y 0") O EL PROMEDIO/DARLE PESOS: decidir en base a PSNR y SSIM de spline_der (cual es mejor? 1y0 o pesos?)
 void spline_rango(cimg_library::CImg<double>& orig){
 	unsigned int ancho = orig.width();
 	unsigned int alto = orig.height();
@@ -332,8 +321,8 @@ void spline_rango(cimg_library::CImg<double>& orig){
 				{
 					//orig(j,i,0,1) = fmin(255.0,fmax(0,(evaluar(spline_fila_g,5)+evaluar(spline_col_g,5))/2));
 
-					//if( fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1)) )
-					if( (fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1))) || (orig(j-2,i,0,2)+orig(j+2,i,0,2) > orig(j,i-2,0,2)+orig(j,i+2,0,2)) )
+					if( fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1)) )
+					//if( (fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1))) || (orig(j-2,i,0,2)+orig(j+2,i,0,2) > orig(j,i-2,0,2)+orig(j,i+2,0,2)) )
 					{
 						generar_rango_col(i,j,3,1,orig,colG);
 						spline_col_g = generar_spline(colG);
@@ -364,8 +353,8 @@ void spline_rango(cimg_library::CImg<double>& orig){
 				{
 					//orig(j,i,0,1) = fmin(255.0,fmax(0,(evaluar(spline_fila_g,5)+evaluar(spline_col_g,5))/2));
 
-					//if( fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1)) )
-					if( (fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1))) || (orig(j-2,i,0,0)+orig(j+2,i,0,0) > orig(j,i-2,0,0)+orig(j,i+2,0,0)) )
+					if( fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1)) )
+					//if( (fabs(orig(j-1,i,0,1)-orig(j+1,i,0,1)) > fabs(orig(j,i-1,0,1)-orig(j,i+1,0,1))) || (orig(j-2,i,0,0)+orig(j+2,i,0,0) > orig(j,i-2,0,0)+orig(j,i+2,0,0)) )
 					{
 						generar_rango_col(i,j,3,1,orig,colG);
 						spline_col_g = generar_spline(colG);
@@ -402,8 +391,8 @@ void spline_rango(cimg_library::CImg<double>& orig){
 				{
 					//orig(j,i,0,0) = fmin(255.0,fmax(0,(evaluar(spline_fila_r,5)+evaluar(spline_col_r,5))/2));
 
-					//if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
-					if( ((fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0))) || (fabs(orig(j-2,i,0,2)+orig(j+2,i,0,2)) > fabs(orig(j,i-2,0,2)+orig(j,i+2,0,2)) )))
+					if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
+					//if( ((fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0))) || (fabs(orig(j-2,i,0,2)+orig(j+2,i,0,2)) > fabs(orig(j,i-2,0,2)+orig(j,i+2,0,2)) )))
 					{
 						generar_rango_col(i,j,3,0,orig,colR);
 						spline_col_r = generar_spline(colR);
@@ -423,8 +412,8 @@ void spline_rango(cimg_library::CImg<double>& orig){
 				{
 					//orig(j,i,0,2) = fmin(255.0,fmax(0,(evaluar(spline_fila_b,5)+evaluar(spline_col_b,5))/2));
 
-					//if( fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) > fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2)) )
-					if( ((fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) > fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2))) || (fabs(orig(j-2,i,0,0)+orig(j+2,i,0,0)) > fabs(orig(j,i-2,0,0)+orig(j,i+2,0,0)) )))
+					if( fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) > fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2)) )
+					//if( ((fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) > fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2))) || (fabs(orig(j-2,i,0,0)+orig(j+2,i,0,0)) > fabs(orig(j,i-2,0,0)+orig(j,i+2,0,0)) )))
 					{
 						generar_rango_col(i,j,3,2,orig,colB);
 						spline_col_b = generar_spline(colB);
@@ -450,8 +439,8 @@ void spline_rango(cimg_library::CImg<double>& orig){
 				if (j%2==1) //pixel verde
 				{
 					//orig(j,i,0,0) = fmin(255.0,fmax(0,(orig(j,i,0,0)+evaluar(spline_fila_r,5))/2));
-					//if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) < fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
-					if( ((fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) < fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0))) || (fabs(orig(j-2,i,0,1)+orig(j+2,i,0,1)) < fabs(orig(j,i-2,0,1)+orig(j,i+2,0,1)) )))
+					if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) < fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
+					//if( ((fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) < fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0))) || (fabs(orig(j-2,i,0,1)+orig(j+2,i,0,1)) < fabs(orig(j,i-2,0,1)+orig(j,i+2,0,1)) )))
 					{
 						generar_rango_fila(i,j,3,0,orig,filR);
 						spline_fila_r = generar_spline(filR);
@@ -473,8 +462,8 @@ void spline_rango(cimg_library::CImg<double>& orig){
 				if (j%2==0) //pixel verde
 				{
 					//orig(j,i,0,2) = fmin(255.0,fmax(0,(orig(j,i,0,2)+evaluar(spline_fila_b,5))/2));
-					//if( fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) < fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2)) )
-					if( ((fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) < fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2))) || (fabs(orig(j-2,i,0,1)+orig(j+2,i,0,1)) < fabs(orig(j,i-2,0,1)+orig(j,i+2,0,1)) )))
+					if( fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) < fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2)) )
+					//if( ((fabs(orig(j-1,i,0,2)-orig(j+1,i,0,2)) < fabs(orig(j,i-1,0,2)-orig(j,i+1,0,2))) || (fabs(orig(j-2,i,0,1)+orig(j+2,i,0,1)) < fabs(orig(j,i-2,0,1)+orig(j,i+2,0,1)) )))
 					{
 						generar_rango_fila(i,j,3,2,orig,filB);
 						spline_fila_b = generar_spline(filB);
@@ -482,8 +471,8 @@ void spline_rango(cimg_library::CImg<double>& orig){
 					}
 
 					//orig(j,i,0,0) = fmin(255.0,fmax(0,(orig(j,i,0,0)+evaluar(spline_col_r,5))/2));
-					//if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
-					if( ((fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0))) || (fabs(orig(j-2,i,0,1)+orig(j+2,i,0,1)) > fabs(orig(j,i-2,0,1)+orig(j,i+2,0,1)) )))
+					if( fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0)) )
+					//if( ((fabs(orig(j-1,i,0,0)-orig(j+1,i,0,0)) > fabs(orig(j,i-1,0,0)-orig(j,i+1,0,0))) || (fabs(orig(j-2,i,0,1)+orig(j+2,i,0,1)) > fabs(orig(j,i-2,0,1)+orig(j,i+2,0,1)) )))
 					{
 						generar_rango_col(i,j,3,0,orig,colR);
 						spline_col_r = generar_spline(colR);
@@ -494,9 +483,10 @@ void spline_rango(cimg_library::CImg<double>& orig){
 		}
 	}
 
-	orig.crop(5,5,0,0,ancho-5,alto-5,0,2);
+	orig.crop(5,5,0,0,ancho-6,alto-6,0,2);
 }
 
+//IDEM
 void spline_rango_MHC(cimg_library::CImg<double>& orig){
 	unsigned int ancho = orig.width();
 	unsigned int alto = orig.height();
@@ -674,21 +664,17 @@ void spline_rango_MHC(cimg_library::CImg<double>& orig){
 		}
 	}
 
-	orig.crop(5,5,0,0,ancho-5,alto-5,0,2); //no se si dejarlo aca o meterlo en el main
+	orig.crop(5,5,0,0,ancho-6,alto-6,0,2); //no se si dejarlo aca o meterlo en el main
 }
 
 void spline_diag(cimg_library::CImg<double>& orig){
 	unsigned int ancho = orig.width();
 	unsigned int alto = orig.height();
-
 	std::vector<double> diagCrecR, filG, diagCrecB, diagDecR, colG, diagDecB, colR, filR, colB, filB;
-
 	std::vector<double> spline_diagc_r, spline_col_g, spline_diagc_b, spline_diagd_r, spline_fila_g, spline_diagd_b, spline_fila_b, spline_fila_r, spline_col_r, spline_col_b;
 
 	for (int i = 5; i < alto-5; ++i)
 	{
-		//std::cout << "Fila " << i << std::endl;
-
 		for (int j = 5; j < ancho-5; ++j)
 		{
 			if (i%2==0)
