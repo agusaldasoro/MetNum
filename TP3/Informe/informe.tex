@@ -69,19 +69,17 @@ $\bullet$ Artifacts \\
 \section{Introducci\'on Te\'orica}
 
 Promediando la década de 1990 comenzaron a introducirse al mercado las cámaras digitales de uso hogareño, empezando a sustituir desde entonces a las ampliamente difundidas cámaras de film. 
-Mientras que estas últimas capturaban la imagen de forma mecánica y sin intercesión de un procesamiento digital (\textcolor{red}{¿? Asegurarse cómo es y explayarse. Estuve buscando y no entendi o no encontre nada. me parece que asi esta bien}), las cámaras electrónicas emplearon una nueva tecnología. Esta tecnolog\'ia distingue entre en el momento de obtención de un conjunto de datos cerca del objetivo – donde se obtiene una imagen que llamaremos “\textit{cruda}” – y una etapa de procesamiento automático conjunto a la reconstrucción de la imagen final. \\
+Mientras que estas últimas capturaban la imagen de forma mecánica y sin intercesión de un procesamiento digital, las cámaras electrónicas emplearon una nueva tecnología. Esta tecnolog\'ia distingue entre en el momento de obtención de un conjunto de datos cerca del objetivo – donde se obtiene una imagen que llamaremos “\textit{cruda}” – y una etapa de procesamiento automático conjunto a la reconstrucción de la imagen final. \\
 
 En el presente trabajo nos interesará analizar un fragmento de dicha etapa conocido como \emph{demosaicing}. Para entender de qué consta, es menester comprender previamente la forma en que se capturan las imágenes al utilizar cámaras digitales.
 
 Este tipo de cámaras poseen un sensor CCD compuesto de una matriz de elementos fotosensibles, cada uno de los cuales es capaz de captar la intensidad de la luz que llega a ese punto a través de la lente. 
 
-La tarea de capturar todos los colores reflejados por el objetivo que se quiere fotografiar no está encomendada a ninguna posición en particular, sino que cada una de ellas tiene asignada – de acuerdo a algún patrón definido  – la captura de la información perteneciente a un solo color. Cada p\'ixel de la imagen va a estar dividido en tres canales ya que la vamos a almacenar mediante RGB (Red, Green, Blue).
+La tarea de capturar todos los colores reflejados por el objetivo que se quiere fotografiar no está encomendada a ninguna posición en particular, sino que cada una de ellas tiene asignada – de acuerdo a algún patrón definido  – la captura de la información perteneciente a un solo color. Cada p\'ixel de la imagen va a estar dividido en tres canales ya que la vamos a almacenar, en nuestro caso de estudio, mediante RGB (Red, Green, Blue).
 
-El patr\'on que determina qué color será capturado por cada fotosensor es denominado \emph{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras. Existen diversos patrones, en nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda sobre el canal verde - al cual el ojo humano es más sensible por encontrarse en el centro de su espectro visual-  duplica a cada uno de los otros dos.
+El patr\'on que determina qué color será capturado por cada fotosensor es denominado \emph{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras. Existen diversos patrones, en nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda sobre el canal verde - al cual el ojo humano es más sensible por encontrarse en el centro de su espectro visual y es el canal que brinda mayor informaci\'on sobre la luminiscencia -  duplica a cada uno de los otros dos.
 
-\textcolor{blue}{*insertar imágenes por aquí y por allá*:\\
-Filtro Bayer \\
-Otros filtros (?
+\textcolor{red}{*insertar imágenes por aquí y por allá* (?
 }
 
 \begin{figure}[h!]
@@ -98,10 +96,11 @@ Ahora bien, esto genera una imagen que se aproxima a la realidad sólo en parte 
 
 En este punto adquieren relevancia las diferentes propuestas de reconstrucción de la imagen original. Esto conlleva la ejecución de diversos procedimientos, entre los que se encuentran el demosaicing, el análisis del balance de blancos, la curva tonal, la saturación y el contraste y la compresión final de la imagen. Como nuestra propuesta se aboca al primer paso mencionado, exploraremos en el presente trabajo sólo un subconjunto de una serie de variaciones no finita que admiten métodos de debayering como ser la interpolación por asignación de valores próximos, la interpolación bilineal y interpolación direccional.\\
 
+A efectos de nuestro caso de estudio, la imagen bajo el Color Filter Array Bayer la vamos a generar sint\'eticamente, es decir mediante un algoritmo que tome una imagen original y devuelva una imagen de este formato. Esto nos permitir\'a hacer comparaciones entre los m\'etodos y la imagen original, teniendo as\'i un punto de referencia en cuanto a la correctitud de la imagen.
+
 \newpage
 \subsection{Inconvenientes de aproximar mediante el Polinomio de Lagrange}
 
-\textcolor{blue}{Arreglar un poco las refs}
 
 Es nuestra intención exponer ahora el motivo que consideramos suficiente para decidir interpolar los valores ausentes a través de Splines en lugar de hacer uso del polinomio de Lagrange.\\
 Sea dada la siguiente muestra: \\
@@ -257,8 +256,6 @@ Existen dos m\'etodos dentro de los mecanismos usados:
 
 Las métricas subjetivas u objetivas se pueden usar con comparación respecto a una referencia o sin considerarla.\\
 
-\textcolor{red}{Pusimos en alg\'un lado que agarramos una imagen original y hacemos el crudo nosotros asi tenemos la orishinal para comparar? ya estoy quemada jajajaajaj}\\
-
 En nuestro caso de estudio, nos vamos a centrar en la comparaci\'on de la imagen original y la obtenida a trav\'es de los distintos m\'etodos. Por esto mismo, vamos a usar m\'etricas que cuenten con una imagen de referencia.\\
 
  Dos de las m\'etricas m\'as sencillas son el \emph{\textbf{Error cuadr\'atico Medio}} (mse) y \emph{\textbf{Peak signal-to-noise ratio}} (psnr). Ambas cuentan con la capacidad de an\'alisis p\'ixel por p\'ixel.\\
@@ -302,6 +299,7 @@ Las m\'etricas que vamos a utilizar nosotros como m\'etodo de comparacion de im\
 
 \newpage
 \subsection{Artifacts}
+\textcolor{red}{Explicar cada artifact y agregar grid}
 
 Como se explicó anteriormente, dos de los tres canales de cada p\'ixel son interpolados algorítmicamente. Si bien los métodos que pueden proponerse a tal fin no son limitados, un subconjunto de ellos producirá imágenes que diferirán considerablemente de las que quisieron ser capturadas originalmente. 
 
@@ -383,7 +381,7 @@ El ejemplo más trivial se encuentra en una imagen monocromática: al ser los va
 
 Si bien se trata de un ejemplo de alcance limitado, resulta suficiente para ilustrar los potenciales problemas de la aplicación de este algoritmo.\\
 
-\textcolor{blue}{Aca va la fotito que tiene que armar Belu}\\
+\textcolor{red}{Aca va la fotito que tiene que armar Belu}\\
 
 $\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterior - este método no especifica ninguna distinción respecto de la forma de proceder en casos de borde o de superficies parejas. \\
 
@@ -534,7 +532,6 @@ ssim2 =    0.9506
 
 Se puede apreciar que el Algoritmo 1 es capaz de delimitar mejor bordes que poseen rayas en forma horizontal, en cambio el Algoritmo 2 le da una mejor definici\'on a los bordes verticales. Dada la forma de la implementaci\'on, las anomal\'ias observadas en las imagenes cobran sentido.\\
 
-\textcolor{red}{HOLA, SOY BELU (?) PROPONGO QUE NOS PONGAMOS DE ACUERDO CON EL PLURAL DE PIXEL Y LO ESCRIBAMOS SIEMPRE IGUAL: PIXELS O PIXELES? XQ APARECE DE LAS DOS FORMAS JAJAJ}
 
 Debido a que no se puede establecer con un criterio cu\'al es m\'as correcta que la otra, ya que la veracidad de la imagen obtenida var\'ia depende la imagen inicial y su estructura. Nosotros optamos por utilizar el \emph{\textbf{Algoritmo 1}}.\\
 
@@ -547,9 +544,9 @@ La interpolación bilineal es una composición de interpolaciones lineales en do
 
 Como la estructura del filtro Bayer sólo asegura para los p\'ixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes, aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.\\
 
-Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de sus dos valores m\'as cercanos ubicados a la derecha e izquierda o arriba y abajo dependiendo de la ubicaci\'on del p\'ixel. \\
+Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un p\'ixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de sus dos valores m\'as cercanos ubicados a la derecha e izquierda o arriba y abajo dependiendo de la ubicaci\'on del p\'ixel. \\
 
-Por otro lado, los valores del canal azul para un pixel rojo (y los del canal rojo para un pixel azul) se calcularían tomando en cuenta las cuatro posiciones diagonales a la analizada. Este proceso no se realizar\'ia simplemente tomando el promedio de sus cuatro diagonales sino que requeriría tomar dos pixels cercanos que pertenezcan a la misma fila o columna, cuyo canal real sea el verde, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.\\
+Por otro lado, los valores del canal azul para un p\'ixel rojo (y los del canal rojo para un p\'ixel azul) se calcularían tomando en cuenta las cuatro posiciones diagonales a la analizada. Este proceso no se realizar\'ia simplemente tomando el promedio de sus cuatro diagonales sino que requeriría tomar dos p\'ixels cercanos que pertenezcan a la misma fila o columna, cuyo canal real sea el verde, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.\\
 
 Tomando como referencia la ilustración \ref{bilineal} se puede ver que el cálculo recien descripto equivale a calcular el valor en el canal rojo para el p\'ixel x. Lo cual consistir\'ia en: 
 
@@ -601,7 +598,7 @@ En cuanto a la combinación de los resultados de las distintas interpolaciones, 
 
 En dicha figura se analiza la información de la misma que sería captada por los fotosensores respondiendo al Bayer Filter Array. 
 
-En el esquema \ref{apxl2} se puede observar que para varios pixeles la interpolación horizontal retorna valores distintos a la realizada verticalmente (esto tiene sentido, pues se trata de un área homogénea atravesada por una fila de distinto color).
+En el esquema \ref{apxl2} se puede observar que para varios p\'ixeles la interpolación horizontal retorna valores distintos a la realizada verticalmente (esto tiene sentido, pues se trata de un área homogénea atravesada por una fila de distinto color).
 
 El resultado de empleo del promedio como estrategia de nivelacion de dichos valores queda expuesto en la Figura \ref{apxl3}, en la cual se puede observar el causante del artifact ``zipping'', producto de un algoritmo indiferente ante los cambios de color abruptos.\\
 
@@ -650,7 +647,7 @@ Conseguir el Spline interpolador dado un conjunto de $N$ puntos $X_j$ consiste e
 
 \noindent Donde $h_j$ es igual a la distancia entre los puntos $X_j$ y $X_{j+1}$. \\
 
-Para nuestro problema en particular, vamos a considerar las funciones a interpolar como el valor de un canal de RGB en alguna porción de la imagen. Dada la fisonomía del Bayer Filter Array, puede observarse con facilidad que, tomando una fila o una columna cualesquiera, la distancia que hay entre dos píxeles del mismo color es de 2 unidades (es decir, para un pixel azul en la posición $j$ de una fila, el siguiente pixel azul se va a encontrar en la posición $j+2$). Esto incluso aplica a si tomamos diagonales (no las que contienen exclusivamente verde, aunque dicho caso no nos es de interés ya que no se interpolaría el verde sobre la misma). \\
+Para nuestro problema en particular, vamos a considerar las funciones a interpolar como el valor de un canal de RGB en alguna porción de la imagen. Dada la fisonomía del Bayer Filter Array, puede observarse con facilidad que, tomando una fila o una columna cualesquiera, la distancia que hay entre dos píxeles del mismo color es de 2 unidades (es decir, para un p\'ixel azul en la posición $j$ de una fila, el siguiente p\'ixel azul se va a encontrar en la posición $j+2$). Esto incluso aplica a si tomamos diagonales (no las que contienen exclusivamente verde, aunque dicho caso no nos es de interés ya que no se interpolaría el verde sobre la misma). \\
 Por esta razón, podemos reemplazar $h_j$ por 2, para todo $j$, y obtener la siguiente matriz: \\
 
 \textcolor{red}{La otra matriz con 2-8-2\\}
@@ -665,7 +662,7 @@ Este sistema tiene la particularidad de ser estrictamente diagonal dominante, y 
 
 Una vez resuelto el problema de la implementación de los algoritmos que generan el spline e interpolan valores en el mismo, el siguiente paso fue pensar c\'omo aplicarlo al problema que nos concierne: el Demosaicing de imágenes. Diversos métodos fueron considerados y estudiados, y a continuación presentaremos los que creemos que son más representativos de la experimentación que realizamos. \\
 
-El primer acercamiento que tuvimos con Splines fue simple: para cada pixel, interpolar su fila y su columna por completo para los canales faltantes, y asignar el promedio entre ambos valores obtenidos. \\
+El primer acercamiento que tuvimos con Splines fue simple: para cada p\'ixel, interpolar su fila y su columna por completo para los canales faltantes, y asignar el promedio entre ambos valores obtenidos. \\
 A primera vista, este método aparenta ser muy parecido a la interpolación bilineal, razón por la cual decidimos comparar cualitativamente los outputs de ambos algoritmos:
 \begin{itemize}
 \item Subjetivamente, las imágenes son prácticamente idénticas para ambos métodos. Las diferencias son demasiado mínimas como para ser realmente apreciadas.
@@ -680,7 +677,7 @@ En vista de estos resultados, decidimos descartar (o mejor dicho, intentar mejor
 
 El primer aspecto con el que decidimos experimentar fue la manera de combinar la información obtenida a través de las interpolaciones. En el caso anterior, simplemente realizábamos el promedio de los valores obtenidos al interpolar una fila y una columna. Sin embargo, este acercamiento no es siempre bueno, ya que puede traer resultados no deseados en los bordes. Es por esta razón que decidimos proponer una idea más sofisticada, detallada brevemente en la sección de interpolación bilineal: el uso del gradiente. \\
 
-A modo de ejemplo, la derivada horizontal en el canal verde del pixel puede estimarse de la siguiente manera:
+A modo de ejemplo, la derivada horizontal en el canal verde del p\'ixel puede estimarse de la siguiente manera:
 
 \[|\partial_xG(x,y)| \approx |G(x-1,y) - G(x+1,y)|\]
 
@@ -692,7 +689,7 @@ Utilizando este concepto, modificamos nuestro algoritmo para que, en lugar de co
 \textcolor{red}{(ver de poner pseudocodigo aca en lugar de esto)}
 \begin{itemize}
 \item Interpolar por filas 
-\item Al realizar la interpolación por columnas, para los pixeles rojos y azules tenemos ahora dos valores posibles de verde. Comparamos los valores de las derivadas horizonal y vertical para el color verde:
+\item Al realizar la interpolación por columnas, para los p\'ixeles rojos y azules tenemos ahora dos valores posibles de verde. Comparamos los valores de las derivadas horizonal y vertical para el color verde:
 \begin{itemize}
 \item Si la derivada horizontal es mayor que la vertical, entonces le asignamos el valor de verde dado por la interpolación de la columna
 \item Si la derivada vertical es mayor que la horizontal, entonces le asignamos el valor de verde dado por la interpolación de la fila
