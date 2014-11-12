@@ -501,12 +501,60 @@ Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir es
 
 \pagebreak
 
-\subsection*{Versiones de Splines}
+\subsection{Splines}
+\subsubsection*{Generación de los Splines}
+\textcolor{red}{No se si estan de acuerdo, pero no me pareceria mal dividir un poco la intro teórica en este TP, y hablar acá de por qué no usamos Lagrange. Si no les parece da igual, acá se puede hacer referencia a eso. Y listo (es lo que voy a dejar escrito ahora) pero hay que meditar qué queda mejor.}
 
 \textcolor{blue}{Hablar de todos sus tipos\\
 Decir que bilineal y poner 0.5 queda igual (o casi igual je), usar psnr.\\
 Y ver cual vamos a dejar\\
 Y que usamos NATURALES}
+
+Yendo un paso más allá de la interpolación bilineal, podemos preguntarnos qué otros métodos existen que nos permitan obtener mejores resultados. Una buena primera idea sería analizar qué sucede con los Splines. \\
+
+Los Splines (o trazadores cúbicos) son un tipo particular de interpoladores fragmentarios: funciones partidas que interpolan a través de polinomios un conjunto de puntos. En el caso de los Splines, se interpola entre dos puntos mediante un polinomio cúbico.\\
+
+Como fue explicado anteriormente, los Splines son una opción muy buena a la hora de interpolar funciones: en el análisis realizado contra el Polinomio de Lagrange pudimos observar que este último puede llegar a ser excesívamente malo en ciertos casos. Considerando la superioridad de los Splines, entonces, nos propusimos encontrar un algoritmo que los utilice para conseguir buenas interpolaciones que generen imagenes de calidad superior a la hora de realizar el demosaicing.\\
+
+Conseguir el Spline interpolador dado un conjunto de $N$ puntos $X_j$ consiste en resolver un sistema tridiagonal de $NxN$(\textcolor{red}{ACA PONER ALGUNA CITA DEL BURDEN O ALGO DE DONDE SACAR TODO EL TEMA DEL ARMADO DEL SISTEMA DEL SPLINE. No creo que sea correcto copiar acá la teorica entera sobre el tema (que encima fue eterna)}) que posea el siguiente aspecto (si trabajamos con splines naturales): \\
+
+\textcolor{red}{Aca poner matriz, no se como se hace\\}
+
+\noindent Donde $h_j$ es igual a la distancia entre los puntos $X_j$ y $X_{j+1}$. \\
+
+Para nuestro problema en particular, vamos a considerar las funciones a interpolar como el valor de un canal de RGB en alguna porción de la imagen. Dada la fisonomía del Bayer Filter Array, puede observarse con facilidad que, tomando una fila o una columna cualesquiera, la distancia que hay entre dos píxeles del mismo color es de 2 unidades (es decir, para un pixel azul en la posición $j$ de una fila, el siguiente pixel azul se va a encontrar en la posición $j+2$). Esto incluso aplica a si tomamos diagonales (no las que contienen exclusivamente verde, aunque dicho caso no nos es de interés ya que no se interpolaría el verde sobre la misma). \\
+Por esta razón, podemos reemplazar $h_j$ por 2, para todo $j$, y obtener la siguiente matriz: \\
+
+\textcolor{red}{La otra matriz con 2-8-2\\}
+
+Este sistema tiene la particularidad de ser estrictamente diagonal dominante, y por lo tanto va a tener solución única, con lo cual sabemos que el método interpolador funcionará correctamente. \\
+
+
+\textcolor{red}{Poner los pseudocodigos y explicar brevemente la implementación (que se usó matriz esparsa, bla)\\}
+
+
+\subsubsection*{Aplicación de Splines al problema de Demosaicing}
+
+Una vez resuelto el problema de la implementación de los algoritmos que generan el spline e interpolan valores en el mismo, el siguiente paso fue pensar como aplicarlo al problema que nos concierne: el Demosaicing de imágenes. Diversos métodos fueron considerados y estudiados, y a continuación presentaremos los que creemos que son más representativos de la experimentación que realizamos. \\
+
+El primer acercamiento que tuvimos con Splines fue simple: para cada pixel, interpolar su fila y su columna por completo para los canales faltantes, y asignar el promedio entre ambos valores obtenidos. \\
+A primera vista, este método aparenta ser muy parecido a la interpolación bilineal, razón por la cual decidimos comparar cualitativamente los outputs de ambos algoritmos:
+\begin{itemize}
+\item Subjetivamente, las imágenes son prácticamente idénticas para ambos métodos. Las diferencias son demasiado mínimas como para ser realmente apreciadas.
+\item Objetivamente, mediciones de PSNR para distintas imágenes arrojaron valores sorpresivamente distintos (alrededor de 1 punto de diferencia), favoreciendo a la interpolación bilineal. \textcolor{red}{VER DE PONER MEDICIONES DE SSIM. No se si poner imagenes aca o en exploracion de artifacts?}
+\end{itemize}
+
+También fueron medidos los tiempos de ejecución para ambos algoritmos:\\
+
+\textcolor{red}{tabla de tiempos?\\}
+
+En vista de estos resultados, decidimos descartar (o mejor dicho, intentar mejorar) el algoritmo mediante Splines, ya que ni en tiempo ni en calidad lo encontramos superior.\\
+
+El primer aspecto con el que decidimos experimentar fue la manera de combinar la información obtenida a través de las interpolaciones. En el caso anterior, simplemente realizábamos el promedio de los valores obtenidos al interpolar una fila y una columna. Ahora, sin embargo, decidimos proponer una idea más sofisticada: el gradiente. \\
+
+\textcolor{red}{Decir algo (si es que no esta dicho en algun lugar) acerca del gradiente y por que es bueno para detectar bordes, bla....\\}
+
+Utilizando estos conceptos, entonces, 
 
 \newpage
 \subsection{Algoritmo de Malvar, He y Cutler}

@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
 			const char * c_nombre_bilineal = nombre_bilineal.c_str();
 			raw.save(c_nombre_bilineal);
 
-			original.crop(1,1,0,0,ancho-2,alto-2,0,2);
+			original.crop(1,1,0,0,original.width()-2,original.height()-2,0,2);
 		}
 		else if (*argv[2] == '2') //MHC
 		{
@@ -92,7 +92,7 @@ int main(int argc, char const *argv[])
 					spline(raw);
 					end = std::chrono::system_clock::now();
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline.bmp";
-					original.crop(3,3,0,0,ancho-4,alto-4,0,2);
+					original.crop(3,3,0,0,original.width()-4,original.height()-4,0,2);
 					break;
 				case 'p': //peso mediante derivadas
 					cout << "Aplicando demosaicing mediante splines: peso mediante derivadas direccionales..." << endl;
@@ -100,6 +100,7 @@ int main(int argc, char const *argv[])
 					spline_der(raw);
 					end = std::chrono::system_clock::now();
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-derivadas.bmp";
+					original.crop(3,3,0,0,original.width()-4,original.height()-4,0,2);
 					break;
 				case 'r': //rango
 					cout << "Aplicando demosaicing mediante splines: rango..." << endl;
@@ -107,6 +108,7 @@ int main(int argc, char const *argv[])
 					spline_rango(raw);
 					end = std::chrono::system_clock::now();
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-rango.bmp";
+					original.crop(5,5,0,0,original.width()-6,original.height()-6,0,2);
 					break;
 				case 'm': //MHC
 					cout << "Aplicando demosaicing mediante splines: rango con mejoras basadas en MHC..." << endl;
@@ -114,6 +116,7 @@ int main(int argc, char const *argv[])
 					spline_rango_MHC(raw);
 					end = std::chrono::system_clock::now();
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-MHC.bmp";
+					original.crop(5,5,0,0,original.width()-6,original.height()-6,0,2);
 					break;
 				case 'd': //diagonal
 					cout << "Aplicando demosaicing mediante splines: diagonales..." << endl;
