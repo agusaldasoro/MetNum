@@ -377,11 +377,70 @@ La implementación más sencilla para la estimación de los canales desconocidos
 
 $\triangleright$ Por un lado, al otorgar el valor de un sólo pixel cercano, surge la necesidad de definir arbitrariamente cuál se debe escoger como valor referencial en casos en que un conjunto de pixeles son equidistantes al analizado y no existe un criterio claro acerca de cuál de ellos debe ser considerado el ``más próximo''. Que esta decisión impacte en el resultado de forma inocua o parcial o totalmente nociva dependerá en cierta medida de la fotografía que se esté analizando.
 
-El ejemplo más trivial se encuentra en una imagen monocromática: al ser los valores reales idénticos para todos los pixeles, tomar las magnitudes de cualquier otra posición para cada canal correspondiente no afectará el resultado final. Sin embargo, si consideráramos una imagen formada por columnas alternadas de un pixel de ancho rojas (\#0000FF) y blancas (\#FFFFFF), entonces si para definir los canales verde y azul de un pixel rojo se tomara como posiciones más cercanas aquel que se encuentra debajo suyo y el que está a la derecha del mismo (respectivamente), el resultado sería un pixel fucsia (\#FF00FF). En cambio, si los pixeles elegidos fueran su inmediato derecho y en el que se encuentra a su diagonal inferior derecha, la posición analizada debería manifestar el color blanco (\#000000).
+El ejemplo más trivial se encuentra en una imagen monocromática: al ser los valores reales idénticos para todos los pixeles, tomar las magnitudes de cualquier otra posición para cada canal correspondiente no afectará el resultado final. Sin embargo, si consideráramos una imagen formada por columnas alternadas de un pixel de ancho rojas (\#0000FF) y blancas (\#FFFFFF), entonces podríamos analizar cómo sería procesada si se resolviera:
+
+\begin{itemize}
+\item \textbf{Caso 1}: 
+    Adjudicar:
+\begin{itemize}
+\item   A los valores nativos verdes: Los valores nativos - rojo y azul - que se encuentren a la derecha y por debajo de su posición.
+\item   A los valores nativos azules: El valor verde de la posición inferior y el del rojo  cuya ubicación se encuentra en su diagonal inferior derecha.
+\item   A los valores nativos rojos: El valor verde de la posición inferior y el del azul cuya ubicación se encuentra en su diagonal inferior derecha.  
+\end{itemize}
+
+\item \textbf{Caso 2}: 
+    Adjudicar:
+\begin{itemize}
+\item   A los valores nativos verdes: Los valores nativos - rojo y azul - que se encuentren a la derecha y por debajo de su posición.
+\item   A los valores nativos azules: El valor verde de la posición derecha y el del rojo cuya ubicación se encuentra en su diagonal inferior derecha.
+\item   A los valores nativos rojos: El valor verde de la posición derecha y el del azul  cuya ubicación se encuentra en su diagonal inferior derecha.
+\end{itemize}
+
+    
+\end{itemize}
+
+Los procedimientos y resultados de las experimentaciones realizadas con estos dos criterios se encuentran respectivamente en las Figuras \ref{apxlvecino0}, \ref{apxlvecino1} y \ref{apxlvecino2} para el \textbf{Caso 1} y en las ilustraciones \ref{apxlvecino0}, \ref{apxlvecino1} y \ref{apxlvecinoOTRO2} para el \textbf{Caso 2}.
+
+\begin{figure}[h!]
+    \caption{}
+    \begin{center}
+    \includegraphics[scale=0.35]{imagenes/apxlvecino0}
+    \label{apxlvecino0}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+    \caption{}
+    \begin{center}
+    \includegraphics[scale=0.45]{imagenes/apxlvecino1}
+    \label{apxlvecino1}
+  \end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \caption{Valores para todos los canales luego de la interpolación realizada con un algoritmo de ``vecino más cercano'', \textbf{Caso 1}}
+    \begin{center}
+    \includegraphics[scale=0.45]{imagenes/apxlvecino2}
+    \label{apxlvecino2}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+    \caption{ Valores para todos los canales luego de la interpolación realizada con un algoritmo de ``vecino más cercano'', \textbf{Caso 2}}
+    \begin{center}
+    \includegraphics[scale=0.45]{imagenes/apxlvecinoOTRO2}
+    \label{apxlvecinoOTRO2}
+  \end{center}
+\end{figure}
+
+Como se ve, en ninguno de los dos casos se logró reconstruir la imagen original, pero sin duda alguna el error en el primer caso fue menor al segundo.\\
+
+El algoritmo planteado evidencia que los resultados proporcionados serán acordes a la imagen que se procesa y a las decisiones arbitrarias que se tomen al implementarlo. \\
 
 Si bien se trata de un ejemplo de alcance limitado, resulta suficiente para ilustrar los potenciales problemas de la aplicación de este algoritmo.\\
 
-\textcolor{red}{Aca va la fotito que tiene que armar Belu}\\
+
 
 $\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterior - este método no especifica ninguna distinción respecto de la forma de proceder en casos de borde o de superficies parejas. \\
 

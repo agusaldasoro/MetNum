@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  12 NOV 2014 15:45
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  12 NOV 2014 20:03
 entering extended mode
 **informe.tex
 (C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.tex
@@ -418,6 +418,12 @@ LaTeX Warning: Label `Zebra' multiply defined.
 
 LaTeX Warning: Label `Zebra' multiply defined.
 
+
+LaTeX Warning: Label `cartel' multiply defined.
+
+
+LaTeX Warning: Label `cartel' multiply defined.
+
 )
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
@@ -507,10 +513,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 71--73
 File: imagenes/BayerFilter.png Graphic file (type png)
 
 <use imagenes/BayerFilter.png>
-Package pdftex.def Info: imagenes/BayerFilter.png used on input line 90.
+Package pdftex.def Info: imagenes/BayerFilter.png used on input line 88.
 (pdftex.def)             Requested size: 108.4049pt x 108.4049pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
 
@@ -519,16 +525,16 @@ png>] <imagenes/LagrangeSplinesCTE.png, id=21, 234.1247pt x 234.1247pt>
 File: imagenes/LagrangeSplinesCTE.png Graphic file (type png)
 
 <use imagenes/LagrangeSplinesCTE.png>
-Package pdftex.def Info: imagenes/LagrangeSplinesCTE.png used on input line 136
+Package pdftex.def Info: imagenes/LagrangeSplinesCTE.png used on input line 135
 .
 (pdftex.def)             Requested size: 234.12411pt x 234.12411pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--142
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
 
  []
 
@@ -536,7 +542,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 165--166
 File: imagenes/SplinesX12a101.png Graphic file (type png)
 
 <use imagenes/SplinesX12a101.png>
-Package pdftex.def Info: imagenes/SplinesX12a101.png used on input line 170.
+Package pdftex.def Info: imagenes/SplinesX12a101.png used on input line 169.
 (pdftex.def)             Requested size: 234.12411pt x 234.12411pt.
 
 
@@ -546,7 +552,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: imagenes/LagrangeX12a101.png Graphic file (type png)
 
 <use imagenes/LagrangeX12a101.png>
-Package pdftex.def Info: imagenes/LagrangeX12a101.png used on input line 178.
+Package pdftex.def Info: imagenes/LagrangeX12a101.png used on input line 177.
 (pdftex.def)             Requested size: 235.62973pt x 234.12411pt.
 
 <imagenes/LagrangeX12a101(zoomOut).png, id=25, 233.37187pt x 233.37187pt>
@@ -554,15 +560,15 @@ File: imagenes/LagrangeX12a101(zoomOut).png Graphic file (type png)
 
 <use imagenes/LagrangeX12a101(zoomOut).png>
 Package pdftex.def Info: imagenes/LagrangeX12a101(zoomOut).png used on input li
-ne 186.
+ne 185.
 (pdftex.def)             Requested size: 233.37129pt x 233.37129pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
+Underfull \hbox (badness 10000) in paragraph at lines 190--191
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--194
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
  []
 
@@ -571,14 +577,14 @@ nesCTE.png>] <imagenes/SplinesX12a20.png, id=31, 234.8775pt x 234.1247pt>
 File: imagenes/SplinesX12a20.png Graphic file (type png)
 
 <use imagenes/SplinesX12a20.png>
-Package pdftex.def Info: imagenes/SplinesX12a20.png used on input line 217.
+Package pdftex.def Info: imagenes/SplinesX12a20.png used on input line 216.
 (pdftex.def)             Requested size: 234.87692pt x 234.12411pt.
 
 <imagenes/LagrangeX12a20.png, id=32, 234.1247pt x 234.1247pt>
 File: imagenes/LagrangeX12a20.png Graphic file (type png)
 
 <use imagenes/LagrangeX12a20.png>
-Package pdftex.def Info: imagenes/LagrangeX12a20.png used on input line 225.
+Package pdftex.def Info: imagenes/LagrangeX12a20.png used on input line 224.
 (pdftex.def)             Requested size: 234.12411pt x 234.12411pt.
 
 <imagenes/LagrangeX12a20(zoomOut).png, id=33, 234.1247pt x 234.1247pt>
@@ -586,7 +592,7 @@ File: imagenes/LagrangeX12a20(zoomOut).png Graphic file (type png)
 
 <use imagenes/LagrangeX12a20(zoomOut).png>
 Package pdftex.def Info: imagenes/LagrangeX12a20(zoomOut).png used on input lin
-e 233.
+e 232.
 (pdftex.def)             Requested size: 234.12411pt x 234.12411pt.
  [5 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/SplinesX12a
 101.png>] [6 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/La
@@ -595,65 +601,60 @@ nes/LagrangeX12a101(zoomOut).png>]
 [7 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/SplinesX12a2
 0.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Lagrange
 X12a20.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 241--243
+Underfull \hbox (badness 10000) in paragraph at lines 240--242
 
  []
 
 [8 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/LagrangeX12a
 20(zoomOut).png>]
-Underfull \hbox (badness 10000) in paragraph at lines 250--251
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 256--257
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 258--259
+Underfull \hbox (badness 10000) in paragraph at lines 257--258
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 259--260
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 262--263
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--265
+Underfull \hbox (badness 10000) in paragraph at lines 296--297
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 299--300
-
- []
+LaTeX Warning: Command \textregistered invalid in math mode on input line 298.
 
 
-LaTeX Warning: Command \textregistered invalid in math mode on input line 301.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 298.
 
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 301.
-
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 301.
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 298.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsbch.fd"
 File: omsbch.fd 
 )
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 301.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 298.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 301.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 298.
 
 [9]
-LaTeX Font Info:    Try loading font information for U+lasy on input line 312.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 310.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
@@ -661,14 +662,14 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 File: imagenes/blurring.png Graphic file (type png)
 
 <use imagenes/blurring.png>
-Package pdftex.def Info: imagenes/blurring.png used on input line 318.
+Package pdftex.def Info: imagenes/blurring.png used on input line 316.
 (pdftex.def)             Requested size: 257.37233pt x 192.7808pt.
 
 <imagenes/false.png, id=59, 389.95688pt x 290.58563pt>
 File: imagenes/false.png Graphic file (type png)
 
 <use imagenes/false.png>
-Package pdftex.def Info: imagenes/false.png used on input line 326.
+Package pdftex.def Info: imagenes/false.png used on input line 324.
 (pdftex.def)             Requested size: 257.37233pt x 191.7871pt.
  [10 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/blurring.p
 ng> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/false.png>]
@@ -677,14 +678,14 @@ ng> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/false.png>]
 File: imagenes/zipper.png Graphic file (type png)
 
 <use imagenes/zipper.png>
-Package pdftex.def Info: imagenes/zipper.png used on input line 336.
+Package pdftex.def Info: imagenes/zipper.png used on input line 334.
 (pdftex.def)             Requested size: 388.45029pt x 402.7537pt.
 
 <imagenes/jaggies.png, id=65, 551.81157pt x 180.675pt>
 File: imagenes/jaggies.png Graphic file (type png)
 
 <use imagenes/jaggies.png>
-Package pdftex.def Info: imagenes/jaggies.png used on input line 344.
+Package pdftex.def Info: imagenes/jaggies.png used on input line 342.
 (pdftex.def)             Requested size: 275.9051pt x 90.33727pt.
  [11 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/zipper.png
 > <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/jaggies.png>]
@@ -693,364 +694,541 @@ Package pdftex.def Info: imagenes/jaggies.png used on input line 344.
 File: imagenes/moire.jpg Graphic file (type jpg)
 
 <use imagenes/moire.jpg>
-Package pdftex.def Info: imagenes/moire.jpg used on input line 354.
+Package pdftex.def Info: imagenes/moire.jpg used on input line 352.
 (pdftex.def)             Requested size: 269.1298pt x 131.74185pt.
  [12 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/moire.jpg>
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 377--379
+Underfull \hbox (badness 10000) in paragraph at lines 375--377
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--379
+Underfull \hbox (badness 10000) in paragraph at lines 375--377
 
  []
 
+<imagenes/apxlvecino0.png, id=74, 1394.20876pt x 325.215pt>
+File: imagenes/apxlvecino0.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 384--385
+<use imagenes/apxlvecino0.png>
+Package pdftex.def Info: imagenes/apxlvecino0.png used on input line 407.
+(pdftex.def)             Requested size: 487.98038pt x 113.82695pt.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--387
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 388--389
-
- []
-
-[13] <imagenes/vecino1.png, id=78, 354.57469pt x 362.10281pt>
-File: imagenes/vecino1.png Graphic file (type png)
-
-<use imagenes/vecino1.png>
-Package pdftex.def Info: imagenes/vecino1.png used on input line 401.
-(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
-
-<imagenes/vecino2.png, id=79, 354.57469pt x 362.10281pt>
-File: imagenes/vecino2.png Graphic file (type png)
-
-<use imagenes/vecino2.png>
-Package pdftex.def Info: imagenes/vecino2.png used on input line 410.
-(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
-
-<imagenes/vecino3.png, id=80, 354.57469pt x 362.10281pt>
-File: imagenes/vecino3.png Graphic file (type png)
-
-<use imagenes/vecino3.png>
-Package pdftex.def Info: imagenes/vecino3.png used on input line 419.
-(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 424--425
-
- []
-
-[14 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino1.png
-> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino2.png> 
-<C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino3.png>]
-<imagenes/Vecino/arbolitos.png, id=87, 581.17125pt x 218.31563pt>
-File: imagenes/Vecino/arbolitos.png Graphic file (type png)
-
-<use imagenes/Vecino/arbolitos.png>
-Package pdftex.def Info: imagenes/Vecino/arbolitos.png used on input line 435.
-(pdftex.def)             Requested size: 348.70544pt x 130.99037pt.
-
-<imagenes/Vecino/zebraCara.png, id=88, 697.8572pt x 375.65344pt>
-File: imagenes/Vecino/zebraCara.png Graphic file (type png)
-
-<use imagenes/Vecino/zebraCara.png>
-Package pdftex.def Info: imagenes/Vecino/zebraCara.png used on input line 451.
-(pdftex.def)             Requested size: 418.71754pt x 225.3938pt.
- [15 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/arb
-olitos.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vec
-ino/zebraCara.png>]
-<imagenes/Vecino/zebra.png, id=93, 636.87938pt x 462.97969pt>
-File: imagenes/Vecino/zebra.png Graphic file (type png)
-
-<use imagenes/Vecino/zebra.png>
-Package pdftex.def Info: imagenes/Vecino/zebra.png used on input line 468.
-(pdftex.def)             Requested size: 382.13057pt x 277.78995pt.
-
-<imagenes/Vecino/hawaiicmp.png, id=94, 7598.67429pt x 2880.47571pt>
-File: imagenes/Vecino/hawaiicmp.png Graphic file (type png)
-
-<use imagenes/Vecino/hawaiicmp.png>
-Package pdftex.def Info: imagenes/Vecino/hawaiicmp.png used on input line 485.
-(pdftex.def)             Requested size: 455.90079pt x 172.82109pt.
-
-Overfull \hbox (0.65671pt too wide) in paragraph at lines 485--487
+Overfull \hbox (32.7363pt too wide) in paragraph at lines 407--409
  [] 
  []
 
-[16 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/zebr
-a.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/h
-awaiicmp.png>]
-<imagenes/Vecino/piramides3cmp.png, id=99, 6266.84143pt x 2570.74715pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imagenes/apxlvecino1.png, id=75, 1178.15157pt x 316.93407pt>
+File: imagenes/apxlvecino1.png Graphic file (type png)
+
+<use imagenes/apxlvecino1.png>
+Package pdftex.def Info: imagenes/apxlvecino1.png used on input line 415.
+(pdftex.def)             Requested size: 530.16331pt x 142.619pt.
+
+Overfull \hbox (74.91924pt too wide) in paragraph at lines 415--417
+ [] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imagenes/apxlvecino2.png, id=76, 1166.85938pt x 280.79906pt>
+File: imagenes/apxlvecino2.png Graphic file (type png)
+
+<use imagenes/apxlvecino2.png>
+Package pdftex.def Info: imagenes/apxlvecino2.png used on input line 424.
+(pdftex.def)             Requested size: 525.08188pt x 126.3584pt.
+
+Overfull \hbox (69.8378pt too wide) in paragraph at lines 424--426
+ [] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imagenes/apxlvecinoOTRO2.png, id=77, 1186.4325pt x 283.0575pt>
+File: imagenes/apxlvecinoOTRO2.png Graphic file (type png)
+
+<use imagenes/apxlvecinoOTRO2.png>
+Package pdftex.def Info: imagenes/apxlvecinoOTRO2.png used on input line 432.
+(pdftex.def)             Requested size: 533.8897pt x 127.37468pt.
+
+Overfull \hbox (78.64561pt too wide) in paragraph at lines 432--434
+ [] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 437--438
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 439--440
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 441--442
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 445--446
+
+ []
+
+[13] [14 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/apxlve
+cino0.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/apxl
+vecino1.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/ap
+xlvecino2.png>] <imagenes/vecino1.png, id=87, 354.57469pt x 362.10281pt>
+File: imagenes/vecino1.png Graphic file (type png)
+
+<use imagenes/vecino1.png>
+Package pdftex.def Info: imagenes/vecino1.png used on input line 458.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+
+<imagenes/vecino2.png, id=88, 354.57469pt x 362.10281pt>
+File: imagenes/vecino2.png Graphic file (type png)
+
+<use imagenes/vecino2.png>
+Package pdftex.def Info: imagenes/vecino2.png used on input line 467.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+
+<imagenes/vecino3.png, id=89, 354.57469pt x 362.10281pt>
+File: imagenes/vecino3.png Graphic file (type png)
+
+<use imagenes/vecino3.png>
+Package pdftex.def Info: imagenes/vecino3.png used on input line 476.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+ [15 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/apxlvecino
+OTRO2.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/veci
+no1.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino
+2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 481--482
+
+ []
+
+<imagenes/Vecino/arbolitos.png, id=96, 581.17125pt x 218.31563pt>
+File: imagenes/Vecino/arbolitos.png Graphic file (type png)
+
+<use imagenes/Vecino/arbolitos.png>
+Package pdftex.def Info: imagenes/Vecino/arbolitos.png used on input line 492.
+(pdftex.def)             Requested size: 348.70544pt x 130.99037pt.
+
+<imagenes/Vecino/zebraCara.png, id=97, 697.8572pt x 375.65344pt>
+File: imagenes/Vecino/zebraCara.png Graphic file (type png)
+
+<use imagenes/Vecino/zebraCara.png>
+Package pdftex.def Info: imagenes/Vecino/zebraCara.png used on input line 508.
+(pdftex.def)             Requested size: 418.71754pt x 225.3938pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[16 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/vecino3.png
+> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/arboli
+tos.png>] <imagenes/Vecino/zebra.png, id=103, 636.87938pt x 462.97969pt>
+File: imagenes/Vecino/zebra.png Graphic file (type png)
+
+<use imagenes/Vecino/zebra.png>
+Package pdftex.def Info: imagenes/Vecino/zebra.png used on input line 525.
+(pdftex.def)             Requested size: 382.13057pt x 277.78995pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imagenes/Vecino/hawaiicmp.png, id=104, 7598.67429pt x 2880.47571pt>
+File: imagenes/Vecino/hawaiicmp.png Graphic file (type png)
+
+<use imagenes/Vecino/hawaiicmp.png>
+Package pdftex.def Info: imagenes/Vecino/hawaiicmp.png used on input line 542.
+(pdftex.def)             Requested size: 455.90079pt x 172.82109pt.
+
+Overfull \hbox (0.65671pt too wide) in paragraph at lines 542--544
+ [] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imagenes/Vecino/piramides3cmp.png, id=105, 6266.84143pt x 2570.74715pt>
 File: imagenes/Vecino/piramides3cmp.png Graphic file (type png)
 
 <use imagenes/Vecino/piramides3cmp.png>
 Package pdftex.def Info: imagenes/Vecino/piramides3cmp.png used on input line 5
-03.
+60.
 (pdftex.def)             Requested size: 375.99426pt x 154.23817pt.
 
-<imagenes/Vecino/piramides2cmp.png, id=100, 590.95781pt x 191.21437pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imagenes/Vecino/piramides2cmp.png, id=106, 590.95781pt x 191.21437pt>
 File: imagenes/Vecino/piramides2cmp.png Graphic file (type png)
 
 <use imagenes/Vecino/piramides2cmp.png>
 Package pdftex.def Info: imagenes/Vecino/piramides2cmp.png used on input line 5
-19.
+76.
 (pdftex.def)             Requested size: 413.66765pt x 133.84914pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 535--536
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 592--593
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 539--540
+Underfull \hbox (badness 10000) in paragraph at lines 595--596
 
  []
 
-[17 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/pira
-mides3cmp.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/
-Vecino/piramides2cmp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 546--547
+[17 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/zebr
+aCara.png>]
 
- []
+LaTeX Warning: Text page 18 contains only floats.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 548--549
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 550--551
+[18 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/zebr
+a.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/h
+awaiicmp.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 602--603
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 552--553
+Underfull \hbox (badness 10000) in paragraph at lines 604--605
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 562--563
-
- []
-
-<imagenes/bilineal.png, id=106, 354.57469pt x 362.10281pt>
-File: imagenes/bilineal.png Graphic file (type png)
-
-<use imagenes/bilineal.png>
-Package pdftex.def Info: imagenes/bilineal.png used on input line 573.
-(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
- [18 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/bilineal.p
-ng>]
-Underfull \hbox (badness 10000) in paragraph at lines 580--581
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 582--583
-
- []
-
-<imagenes/apxl1.png, id=110, 1918.91907pt x 329.73187pt>
-File: imagenes/apxl1.png Graphic file (type png)
-
-<use imagenes/apxl1.png>
-Package pdftex.def Info: imagenes/apxl1.png used on input line 597.
-(pdftex.def)             Requested size: 441.3421pt x 75.83673pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 606--607
 
  []
 
-<imagenes/apxl2.png, id=111, 1940.75063pt x 654.94687pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 608--609
+
+ []
+
+[19 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/Vecino/pira
+mides3cmp.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/
+Vecino/piramides2cmp.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 618--619
+
+ []
+
+<imagenes/bilineal.png, id=120, 354.57469pt x 362.10281pt>
+File: imagenes/bilineal.png Graphic file (type png)
+
+<use imagenes/bilineal.png>
+Package pdftex.def Info: imagenes/bilineal.png used on input line 629.
+(pdftex.def)             Requested size: 127.64679pt x 130.3569pt.
+ [20 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/bilineal.p
+ng>]
+Underfull \hbox (badness 10000) in paragraph at lines 636--637
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 638--639
+
+ []
+
+<imagenes/apxl1.png, id=124, 1918.91907pt x 329.73187pt>
+File: imagenes/apxl1.png Graphic file (type png)
+
+<use imagenes/apxl1.png>
+Package pdftex.def Info: imagenes/apxl1.png used on input line 653.
+(pdftex.def)             Requested size: 441.3421pt x 75.83673pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 662--663
+
+ []
+
+<imagenes/apxl2.png, id=125, 1940.75063pt x 654.94687pt>
 File: imagenes/apxl2.png Graphic file (type png)
 
 <use imagenes/apxl2.png>
-Package pdftex.def Info: imagenes/apxl2.png used on input line 611.
+Package pdftex.def Info: imagenes/apxl2.png used on input line 667.
 (pdftex.def)             Requested size: 504.58327pt x 170.28217pt.
 
-Overfull \hbox (49.33919pt too wide) in paragraph at lines 611--613
+Overfull \hbox (49.33919pt too wide) in paragraph at lines 667--669
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<imagenes/apxl3.png, id=112, 1187.18532pt x 428.35031pt>
+<imagenes/apxl3.png, id=126, 1187.18532pt x 428.35031pt>
 File: imagenes/apxl3.png Graphic file (type png)
 
 <use imagenes/apxl3.png>
-Package pdftex.def Info: imagenes/apxl3.png used on input line 619.
+Package pdftex.def Info: imagenes/apxl3.png used on input line 675.
 (pdftex.def)             Requested size: 427.38638pt x 154.206pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[19 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/apxl1.png>]
-[20 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/apxl2.png> 
+[21 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/apxl1.png>]
+[22 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/apxl2.png> 
 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/apxl3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 641--642
+Underfull \hbox (badness 10000) in paragraph at lines 697--698
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 643--644
+Underfull \hbox (badness 10000) in paragraph at lines 699--700
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 645--646
+Underfull \hbox (badness 10000) in paragraph at lines 701--702
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 647--648
+Underfull \hbox (badness 10000) in paragraph at lines 703--704
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 651--652
+Underfull \hbox (badness 10000) in paragraph at lines 707--708
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 653--655
+Underfull \hbox (badness 10000) in paragraph at lines 709--711
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 658--659
+Underfull \hbox (badness 10000) in paragraph at lines 714--715
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 666--667
-
- []
-
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 675--676
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 679--680
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 681--682
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 702--703
-
- []
-
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 712--714
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 715--716
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 717--718
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 719--720
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 721--722
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 723--724
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 725--726
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 727--728
+Underfull \hbox (badness 10000) in paragraph at lines 722--723
 
  []
 
 [23]
-Underfull \hbox (badness 10000) in paragraph at lines 737--738
+Underfull \hbox (badness 10000) in paragraph at lines 731--732
 
  []
 
-[24]
 
-LaTeX Warning: Command \textregistered invalid in math mode on input line 758.
+Underfull \hbox (badness 10000) in paragraph at lines 735--736
 
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 758.
+ []
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 758.
+Underfull \hbox (badness 10000) in paragraph at lines 737--738
+
+ []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 758--759
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 765--766
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 767--768
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 768--770
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 769--770
+Underfull \hbox (badness 10000) in paragraph at lines 771--772
 
  []
 
-<imagenes/comparacion/cartel.png, id=134, 7113.43286pt x 1682.85857pt>
-File: imagenes/comparacion/cartel.png Graphic file (type png)
 
-<use imagenes/comparacion/cartel.png>
-Package pdftex.def Info: imagenes/comparacion/cartel.png used on input line 777
-.
-(pdftex.def)             Requested size: 355.69247pt x 84.14786pt.
+Underfull \hbox (badness 10000) in paragraph at lines 773--774
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 775--776
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 777--778
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 779--780
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 781--782
+
+ []
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 783--784
 
  []
 
-[25 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/comparacion
-/cartel.png>] [26] [27]
-Underfull \hbox (badness 10000) in paragraph at lines 809--811
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 793--794
+
+ []
+
+[26]
+
+LaTeX Warning: Command \textregistered invalid in math mode on input line 814.
+
+
+LaTeX Warning: Command \textcircled invalid in math mode on input line 814.
+
+
+LaTeX Warning: Command \textcircled invalid in math mode on input line 814.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 814--815
+
+ []
+
+<imagenes/comparacion/02/collage.png, id=148, 1171.37625pt x 900.36375pt>
+File: imagenes/comparacion/02/collage.png Graphic file (type png)
+
+<use imagenes/comparacion/02/collage.png>
+Package pdftex.def Info: imagenes/comparacion/02/collage.png used on input line
+ 825.
+(pdftex.def)             Requested size: 468.5422pt x 360.13911pt.
+
+Overfull \hbox (13.29813pt too wide) in paragraph at lines 825--827
+ [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 830--831
+
+ []
+
+[27 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/comparacion
+/02/collage.png>]
+<imagenes/comparacion/04/collage.png, id=152, 1201.48875pt x 891.33pt>
+File: imagenes/comparacion/04/collage.png Graphic file (type png)
+
+<use imagenes/comparacion/04/collage.png>
+Package pdftex.def Info: imagenes/comparacion/04/collage.png used on input line
+ 837.
+(pdftex.def)             Requested size: 480.58699pt x 356.52568pt.
+
+Overfull \hbox (25.34291pt too wide) in paragraph at lines 837--839
+ [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 842--843
+
+ []
+
+[28 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/comparacion
+/04/collage.png>]
+<imagenes/comparacion/05/collage.png, id=156, 1197.72469pt x 911.65594pt>
+File: imagenes/comparacion/05/collage.png Graphic file (type png)
+
+<use imagenes/comparacion/05/collage.png>
+Package pdftex.def Info: imagenes/comparacion/05/collage.png used on input line
+ 850.
+(pdftex.def)             Requested size: 479.08139pt x 364.65591pt.
+
+Overfull \hbox (23.83731pt too wide) in paragraph at lines 850--852
+ [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 856--857
+
+ []
+
+[29 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/comparacion
+/05/collage.png>]
+<imagenes/comparacion/09/collage.png, id=160, 1183.42125pt x 912.40875pt>
+File: imagenes/comparacion/09/collage.png Graphic file (type png)
+
+<use imagenes/comparacion/09/collage.png>
+Package pdftex.def Info: imagenes/comparacion/09/collage.png used on input line
+ 864.
+(pdftex.def)             Requested size: 473.36012pt x 364.95703pt.
+
+Overfull \hbox (18.11604pt too wide) in paragraph at lines 864--866
+ [] 
+ []
+
+<imagenes/comparacion/cartel.png, id=161, 7113.43286pt x 1682.85857pt>
+File: imagenes/comparacion/cartel.png Graphic file (type png)
+
+<use imagenes/comparacion/cartel.png>
+Package pdftex.def Info: imagenes/comparacion/cartel.png used on input line 875
+.
+(pdftex.def)             Requested size: 355.69247pt x 84.14786pt.
+ [30 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/comparacio
+n/09/collage.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagen
+es/comparacion/cartel.png>]
+<imagenes/comparacion/12/collage.png, id=166, 1195.46625pt x 909.3975pt>
+File: imagenes/comparacion/12/collage.png Graphic file (type png)
+
+<use imagenes/comparacion/12/collage.png>
+Package pdftex.def Info: imagenes/comparacion/12/collage.png used on input line
+ 886.
+(pdftex.def)             Requested size: 478.17802pt x 363.75256pt.
+
+Overfull \hbox (22.93394pt too wide) in paragraph at lines 886--888
+ [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 891--892
+
+ []
+
+[31 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/comparacion
+/12/collage.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 896--897
+
+ []
+
+[32] <imagenes/graficos/psnr.png, id=174, 660.96938pt x 362.10281pt>
+File: imagenes/graficos/psnr.png Graphic file (type png)
+
+<use imagenes/graficos/psnr.png>
+Package pdftex.def Info: imagenes/graficos/psnr.png used on input line 906.
+(pdftex.def)             Requested size: 495.72581pt x 271.57643pt.
+
+Overfull \hbox (40.48174pt too wide) in paragraph at lines 906--908
+ [] 
+ []
+
+<imagenes/graficos/ssim.png, id=175, 554.07pt x 331.99031pt>
+File: imagenes/graficos/ssim.png Graphic file (type png)
+
+<use imagenes/graficos/ssim.png>
+Package pdftex.def Info: imagenes/graficos/ssim.png used on input line 914.
+(pdftex.def)             Requested size: 415.55148pt x 248.99211pt.
+ [33 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/graficos/p
+snr.png> <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/grafic
+os/ssim.png>] [34] [35]
+Underfull \hbox (badness 10000) in paragraph at lines 941--943
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 809--811
+Underfull \hbox (badness 10000) in paragraph at lines 941--943
 
  []
 
-[28] (C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.aux)
+[36] (C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1059,13 +1237,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4060 strings out of 493921
- 55422 string characters out of 3147274
- 127130 words of memory out of 3000000
- 7250 multiletter control sequences out of 15000+200000
+ 4125 strings out of 493921
+ 57271 string characters out of 3147274
+ 127220 words of memory out of 3000000
+ 7302 multiletter control sequences out of 15000+200000
  25250 words of font info for 40 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 37i,12n,43p,838b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,12n,43p,686b,342s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/bitstrea/charter/bchb8a.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/bitstrea/charter/bchbi8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/
@@ -1080,9 +1258,9 @@ iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX 2.
 type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
 onts/latxfont/lasy10.pfb>
-Output written on informe.pdf (28 pages, 6041198 bytes).
+Output written on informe.pdf (36 pages, 7707090 bytes).
 PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
+ 233 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 
