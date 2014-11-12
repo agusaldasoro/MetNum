@@ -678,11 +678,32 @@ También fueron medidos los tiempos de ejecución para ambos algoritmos:\\
 
 En vista de estos resultados, decidimos descartar (o mejor dicho, intentar mejorar) el algoritmo mediante Splines, ya que ni en tiempo ni en calidad lo encontramos superior.\\
 
-El primer aspecto con el que decidimos experimentar fue la manera de combinar la información obtenida a través de las interpolaciones. En el caso anterior, simplemente realizábamos el promedio de los valores obtenidos al interpolar una fila y una columna. Ahora, sin embargo, decidimos proponer una idea más sofisticada: el gradiente. \\
+El primer aspecto con el que decidimos experimentar fue la manera de combinar la información obtenida a través de las interpolaciones. En el caso anterior, simplemente realizábamos el promedio de los valores obtenidos al interpolar una fila y una columna. Sin embargo, este acercamiento no es siempre bueno, ya que puede traer resultados no deseados en los bordes. Es por esta razón que decidimos proponer una idea más sofisticada, detallada brevemente en la sección de interpolación bilineal: el uso del gradiente. \\
 
-\textcolor{red}{Decir algo (si es que no esta dicho en algun lugar) acerca del gradiente y por que es bueno para detectar bordes, bla....\\}
+A modo de ejemplo, la derivada horizontal en el canal verde del pixel puede estimarse de la siguiente manera:
 
-Utilizando estos conceptos, entonces, 
+\[|\partial_xG(x,y)| \approx |G(x-1,y) - G(x+1,y)|\]
+
+Y, análogamente, la vertical:
+
+\[|\partial_yG(x,y)| \approx |G(x,y-1) - G(x,y+1)|\]
+
+Utilizando este concepto, modificamos nuestro algoritmo para que, en lugar de combinar la información obtenida mediante el promedio, haga lo siguiente:
+\textcolor{red}{(ver de poner pseudocodigo aca en lugar de esto)}
+\begin{itemize}
+\item Interpolar por filas 
+\item Al realizar la interpolación por columnas, para los pixeles rojos y azules tenemos ahora dos valores posibles de verde. Comparamos los valores de las derivadas horizonal y vertical para el color verde:
+\begin{itemize}
+\item Si la derivada horizontal es mayor que la vertical, entonces le asignamos el valor de verde dado por la interpolación de la columna
+\item Si la derivada vertical es mayor que la horizontal, entonces le asignamos el valor de verde dado por la interpolación de la fila
+\end{itemize}
+\end{itemize}
+
+Aplicando este método, pudimos observar mejoras en varios de los bordes de nuestras imágenes: los mismos ahora son más suaves, y en algunos casos se disminuyó la visibilidad de los artifacts.\\
+
+\textcolor{red}{poner fotitos}
+
+A pesar de haber 
 
 
 \newpage
