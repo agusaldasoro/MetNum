@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  12 NOV 2014 14:27
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.9.2)  12 NOV 2014 15:45
 entering extended mode
 **informe.tex
 (C:\Users\Agustina\Documents\GitHub\MetNum\TP3\Informe\informe.tex
@@ -635,6 +635,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 299--300
 
  []
 
+
+LaTeX Warning: Command \textregistered invalid in math mode on input line 301.
+
+
+LaTeX Warning: Command \textcircled invalid in math mode on input line 301.
+
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 301.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsbch.fd"
+File: omsbch.fd 
+)
+LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 301.
+
+
+LaTeX Warning: Command \textcircled invalid in math mode on input line 301.
+
 [9]
 LaTeX Font Info:    Try loading font information for U+lasy on input line 312.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ulasy.fd"
@@ -930,86 +947,83 @@ Underfull \hbox (badness 10000) in paragraph at lines 681--682
 
  []
 
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 691--693
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 694--695
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 696--697
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 698--699
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 700--701
-
- []
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 702--703
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 704--705
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 712--714
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 706--707
+Underfull \hbox (badness 10000) in paragraph at lines 715--716
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 717--718
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 719--720
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 721--722
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 723--724
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 725--726
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 727--728
 
  []
 
 [23]
-Underfull \hbox (badness 10000) in paragraph at lines 716--717
+Underfull \hbox (badness 10000) in paragraph at lines 737--738
 
  []
 
 [24]
 
-LaTeX Warning: Command \textregistered invalid in math mode on input line 737.
+LaTeX Warning: Command \textregistered invalid in math mode on input line 758.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 737.
-
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 737.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsbch.fd"
-File: omsbch.fd 
-)
-LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 737.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 758.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 737.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 758.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 737--738
+Underfull \hbox (badness 10000) in paragraph at lines 758--759
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 744--745
+Underfull \hbox (badness 10000) in paragraph at lines 765--766
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 746--747
+Underfull \hbox (badness 10000) in paragraph at lines 767--768
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 748--749
+Underfull \hbox (badness 10000) in paragraph at lines 769--770
 
  []
 
@@ -1017,22 +1031,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 748--749
 File: imagenes/comparacion/cartel.png Graphic file (type png)
 
 <use imagenes/comparacion/cartel.png>
-Package pdftex.def Info: imagenes/comparacion/cartel.png used on input line 756
+Package pdftex.def Info: imagenes/comparacion/cartel.png used on input line 777
 .
 (pdftex.def)             Requested size: 355.69247pt x 84.14786pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 762--763
+Underfull \hbox (badness 10000) in paragraph at lines 783--784
 
  []
 
 [25 <C:/Users/Agustina/Documents/GitHub/MetNum/TP3/Informe/imagenes/comparacion
 /cartel.png>] [26] [27]
-Underfull \hbox (badness 10000) in paragraph at lines 788--790
+Underfull \hbox (badness 10000) in paragraph at lines 809--811
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 788--790
+Underfull \hbox (badness 10000) in paragraph at lines 809--811
 
  []
 
@@ -1045,10 +1059,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4059 strings out of 493921
- 55408 string characters out of 3147274
+ 4060 strings out of 493921
+ 55422 string characters out of 3147274
  127130 words of memory out of 3000000
- 7249 multiletter control sequences out of 15000+200000
+ 7250 multiletter control sequences out of 15000+200000
  25250 words of font info for 40 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,12n,43p,838b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1066,7 +1080,7 @@ iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX 2.
 type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
 onts/latxfont/lasy10.pfb>
-Output written on informe.pdf (28 pages, 6038564 bytes).
+Output written on informe.pdf (28 pages, 6041198 bytes).
 PDF statistics:
  194 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
