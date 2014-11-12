@@ -1,0 +1,43 @@
+/**Cherry Blossom*/
+
+psnrVEC =   33.7941
+
+ssimVEC =    0.9807
+
+psnrBIL =   41.8690
+
+ssimBIL =    0.9954
+
+psnrMHC =   43.4739
+
+ssimMHC =    0.9955
+
+
+/** Crater Lake*/
+
+psnrVEC =   26.9158
+
+ssimVEC =    0.8910
+
+psnrBIL =   30.7094
+
+ssimBIL =    0.9432
+
+psnrMHC =   34.7001
+
+ssimMHC =    0.9776
+
+
+/** Tosho Gu*/  
+
+psnrVEC =   21.0781
+
+ssimVEC =    0.8273
+
+psnrBIL =   24.1056
+
+ssimBIL =    0.8908
+
+psnrMHC =   28.8718
+
+ssimMHC =    0.9639
