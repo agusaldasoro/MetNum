@@ -77,7 +77,7 @@ Este tipo de cámaras poseen un sensor CCD compuesto de una matriz de elementos 
 
 La tarea de capturar todos los colores reflejados por el objetivo que se quiere fotografiar no está encomendada a ninguna posición en particular, sino que cada una de ellas tiene asignada – de acuerdo a algún patrón definido  – la captura de la información perteneciente a un solo color. Cada p\'ixel de la imagen va a estar dividido en tres canales ya que la vamos a almacenar mediante RGB (Red, Green, Blue).
 
-El patr\'on que determina qué color será capturado por cada fotosensor es denominado \emph{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras. Existen diversos patrones, en nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda sobre el canal verde - al cual el ojo humano es más sensible -.
+El patr\'on que determina qué color será capturado por cada fotosensor es denominado \emph{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras. Existen diversos patrones, en nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda sobre el canal verde - al cual el ojo humano es más sensible por encontrarse en el centro de su espectro visual-  duplica a cada uno de los otros dos.
 
 \textcolor{blue}{*insertar imágenes por aquí y por allá*:\\
 Filtro Bayer \\
@@ -92,8 +92,6 @@ Otros filtros (?
   \end{center}
 \end{figure}
 
-
-%, a causa de que se encuentra en el centro de su espectro visual - duplica a cada uno de los otros dos. 
 
 Ahora bien, esto genera una imagen que se aproxima a la realidad sólo en parte ya que para cada p\'ixel de la imagen tenemos la informaci\'on de s\'olo uno de sus tres canales. A causa de esto es que la misma debe ser reconstruida algorítmicamente, interpolando los valores de los colores que no fueron almacenados explícitamente para cada pixel.
 
@@ -127,9 +125,9 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
 y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
  \hline  
  \end{tabular}
-\smallskip
+\bigskip
 \\
-El polinomio de Lagrange que interpola cada uno de esos valores tiene una expresión equivalente al Spline que lo hace, siendo su gráfico el citado a continuación:
+El polinomio de Lagrange que interpola cada uno de esos valores tiene una expresión equivalente al Spline que lo hace, siendo su gráfico el que se muestra a continuación:
 \smallskip
 
 \begin{figure}[h!]
@@ -162,7 +160,8 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
  \hline  
  \end{tabular}
 
-\smallskip
+\bigskip
+
  En este caso se obtendría el gráfico representado en la Figura \ref{LagrangeX12a101} para el polinomio de Lagrange (escalado en la Figura \ref{LagrangeX12a101(zoomOut)})y el que se ilustra en la Figura \ref{SplinesX12a101} para el obtenido mediante Splines.\\
 
 \begin{figure}[h!]
@@ -236,18 +235,137 @@ y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
   \end{center}
 \end{figure}
 
+\bigskip
 
-En conclusión, el polinomio de Lagrange se comporta de una manera menos predecible \textcolor{red}{en realidad sí es predecible si tenés el polinomio y podés evauarlo, pero quiero decir q es menos intuitivo, menos "constante", como que hace cualquiera entre dos puntos cuya imagen no esté fijada de antemano} entre dos variables independientes y no garantiza que en esos intervalos el valor de la función sea cercano a los ya conocidos.\\
+\newpage
+En conclusión, el polinomio de Lagrange se comporta de una manera menos predecible estable entre dos variables independientes y no garantiza que en esos intervalos el valor de la función sea cercano a los ya conocidos.\\
 La carencia de predictibilidad hace del polinomio de Lagrange una mala alternativa para la interpolación, en comparación con las ventajas proporcionadas por el empleo de Splines.\\
+
+
 
 
 \newpage
 \subsection{M\'etricas de comparaci\'on de im\'agenes}
 
-\textcolor{blue}{PSNR, ssim, error cuadratico (que no lo usamos)}
+Con el fin de establecer una relaci\'on entre las im\'agenes obtenidas con los distintos m\'etodos y la imagen original es que nace la necesidad de contar con \emph{M\'etricas de comparaci\'on de im\'agenes}.\\
 
+Existen dos m\'etodos dentro de los mecanismos usados:
+
+\emph{Subjetivos:} Son los conceptos que una persona puede detectar visualmente.
+
+\emph{Objetivos:} Son operaciones matem\'aticas en el dominio bidimensional o tridimensional de im\'agenes orientados a determinar la variaci\'on presente en una imagen.\\
+
+Las métricas subjetivas u objetivas se pueden usar con comparación respecto a una referencia o sin considerarla.\\
+
+\textcolor{red}{Pusimos en alg\'un lado que agarramos una imagen original y hacemos el crudo nosotros asi tenemos la orishinal para comparar? ya estoy quemada jajajaajaj}\\
+
+En nuestro caso de estudio, nos vamos a centrar en la comparaci\'on de la imagen original y la obtenida a trav\'es de los distintos m\'etodos. Por esto mismo, vamos a usar m\'etricas que cuenten con una imagen de referencia.\\
+
+ Dos de las m\'etricas m\'as sencillas son el \emph{\textbf{Error cuadr\'atico Medio}} (mse) y \emph{\textbf{Peak signal-to-noise ratio}} (psnr). Ambas cuentan con la capacidad de an\'alisis p\'ixel por p\'ixel.\\
+
+\[
+ \textbf{mse} = \frac{1}{mn} \sum_{i=0}^{m-1} \sum_{j=0}^{n-1} [I(x,y) - K(x,y)]^2
+\]
+  \indent \indent \indent \textit{Donde I y K son imágenes a comparar de tamaño $mxn$.}
+
+
+
+\[
+ \textbf{psnr} = 10 \log \frac{(2^n-1)^2}{mse} = 10 \log \frac{255^2}{mse}
+\]
+
+Otro tipo de medidas a tener en cuenta son las que utilizan indicadores de la imagen similares a los presentes en la visi\'on humana, como es el caso de \emph{\textbf{Structural similarity}} (ssim) que es una funci\'on que depende de la luminiscencia, el contraste y la similaridad estructural.
+
+\[
+ \textbf{ssim}(x,y) = \frac{(2\mu_x\mu_y+c_1)(2\sigma_{xy}+c_2)}{(\mu_x^2+\mu_y^2+c_1)(\sigma_x^2+\sigma_y^2+c_2)}
+\]
+
+\noindent Donde, 
+
+$\mu_x$ es la esperanza de $x$
+
+$\mu_y$ es la esperanza de $y$
+
+$\sigma_x^2$ es la varianza de $x$
+
+$\sigma_y^2$ es la varianza de $y$
+
+$\sigma_{xy}$ es la covarianza entre $x$ e $y$
+
+$c_1 = (k_1L)^2$ ; $c_2 = (k_2L)^2$ son dos variables que estabilizan la divisi\'on con un denominador chico
+
+$L$ es el rango din\'amico de los valores de los p\'ixeles (com\'unmente es $2^{\#bitsPorPixel}-1$)
+
+$k_1 = 0,01$ y $k_2 = 0,03$ por default\\
+
+Las m\'etricas que vamos a utilizar nosotrs como m\'etodo de comparacion de im\'agenes son \emph{psnr} y \emph{ssim}.
+
+\newpage
 \subsection{Artifacts}
-\textcolor{blue}{Aca explicar un poco que onda,  que son los artifacts}
+
+Como se explicó anteriormente, dos de los tres canales de cada p\'ixel son interpolados algorítmicamente. Si bien los métodos que pueden proponerse a tal fin no son limitados, un subconjunto de ellos producirá imágenes que diferirán considerablemente de las que quisieron ser capturadas originalmente. 
+
+Para evaluar el peso de estas diferencias  existen mecanismos cuantitativos (como los mencionados en el apartado \emph{M\'etricas de comparaci\'on de im\'agenes}) y otros de tipo cualitativo. Un grupo de estos últimos está constituido por la exploración de \textit{artifacts}.
+
+Los \textit{artifacts} son efectos visuales indeseados frecuentes que se producen sobre la imagen procesada a causa de una interpolación poco conveniente. 
+
+Ejemplos de artifacts son el efecto <<\emph{Blurring}>>(Figura \ref{blurring}), el <<\emph{False color}>>(Figura \ref{false}), el <<\emph{Jaggies}>>(Figura \ref{jaggies}),   el <<\emph{efecto Moiré}>>(Figura \ref{moire}) y el <<\emph{Zipper}>>(Figura \ref{zipper}).
+
+
+\begin{figure}[h!]
+	\caption{A la izquierda, la imagen original. A la derecha, la que presenta <<blurring>>.}
+	\begin{center}
+	\includegraphics[scale=0.66]{imagenes/blurring}
+	\label{blurring}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\caption{A la izquierda, la imagen original. A la derecha, la que presenta <<false color>>.}
+	\begin{center}
+	\includegraphics[scale=0.66]{imagenes/false}
+	\label{false}
+  \end{center}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h!]
+	\caption{A la izquierda, la imagen original. A la derecha, la que presenta <<zipper>>.}
+	\begin{center}
+	\includegraphics[scale=0.50]{imagenes/zipper}
+	\label{zipper}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\caption{A la izquierda, la imagen original. A la derecha, la que presenta <<jaggies>>.}
+	\begin{center}
+	\includegraphics[scale=0.50]{imagenes/jaggies}
+	\label{jaggies}
+  \end{center}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h!]
+	\caption{A la izquierda, la imagen original. A la derecha, la que presenta el efecto <<moiré>>.}
+	\begin{center}
+	\includegraphics[scale=0.50]{imagenes/moire}
+	\label{moire}
+  \end{center}
+\end{figure}
+
+
+
+
+
+
+
+\textcolor{red}{ESTARÍA BUENO AGREGAR TIPO ANECDÓTICO LOS ARTIFACTS DEL OJO HUMANO (?) PERO NO SÉ EN PRINCIPIO CÓMO MECHARLO ACÁ}
+
+
+
 
 
 \newpage
@@ -416,6 +534,7 @@ ssim2 =    0.9506
 
 Se puede apreciar que el Algoritmo 1 es capaz de delimitar mejor bordes que poseen rayas en forma horizontal, en cambio el Algoritmo 2 le da una mejor definici\'on a los bordes verticales. Dada la forma de la implementaci\'on, las anomal\'ias observadas en las imagenes cobran sentido.\\
 
+\textcolor{red}{HOLA, SOY BELU (?) PROPONGO QUE NOS PONGAMOS DE ACUERDO CON EL PLURAL DE PIXEL Y LO ESCRIBAMOS SIEMPRE IGUAL: PIXELS O PIXELES? XQ APARECE DE LAS DOS FORMAS JAJAJ}
 
 Debido a que no se puede establecer con un criterio cu\'al es m\'as correcta que la otra, ya que la veracidad de la imagen obtenida var\'ia depende la imagen inicial y su estructura. Nosotros optamos por utilizar el \emph{\textbf{Algoritmo 1}}.\\
 
@@ -426,24 +545,26 @@ Debido a que no se puede establecer con un criterio cu\'al es m\'as correcta que
 
 La interpolación bilineal es una composición de interpolaciones lineales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más próximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\
 
-Como la estructura del filtro Bayer sólo asegura para los p\'ixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes, aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.
+Como la estructura del filtro Bayer sólo asegura para los p\'ixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes, aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.\\
 
-Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de sus dos valores m\'as cercanos ubicados a la derecha e izquierda o arriba y abajo dependiendo de la ubicaci\'on del p\'ixel. 
+Sin embargo, si se quisiera obtener el valor de azul o rojo que correspondería asignar a un pixel nativamente verde, el entramado de Bayer obligaría a estimarlo a partir de sus dos valores m\'as cercanos ubicados a la derecha e izquierda o arriba y abajo dependiendo de la ubicaci\'on del p\'ixel. \\
 
-Por otro lado, los valores del canal azul para un pixel rojo (y los del canal rojo para un pixel azul) se calcularían tomando en cuenta las cuatro posiciones diagonales a la analizada. Este proceso no se realizar\'ia simplemente tomando el promedio de sus cuatro diagonales sino que requeriría tomar dos pixels cercanos que pertenezcan a la misma fila o columna, cuyo canal real sea el verde, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.
+Por otro lado, los valores del canal azul para un pixel rojo (y los del canal rojo para un pixel azul) se calcularían tomando en cuenta las cuatro posiciones diagonales a la analizada. Este proceso no se realizar\'ia simplemente tomando el promedio de sus cuatro diagonales sino que requeriría tomar dos pixels cercanos que pertenezcan a la misma fila o columna, cuyo canal real sea el verde, calcular sus valores de azul/rojo promediando los de las casillas nativas azules/rojas más próximas y posteriormente realizar un nuevo promedio entre los valores resultantes.\\
 
 Tomando como referencia la ilustración \ref{bilineal} se puede ver que el cálculo recien descripto equivale a calcular el valor en el canal rojo para el p\'ixel x. Lo cual consistir\'ia en: 
 
-Hacer el promedio entre \textit{a y b} y luego, ubicar ese valor para el canal rojo para el p\'ixel ubicado arriba de x.
+\begin{itemize}
+ 
+\item Hacer el promedio entre \textit{a y b} y luego, ubicar ese valor para el canal rojo para el p\'ixel ubicado arriba de x.
 
-Hacer el promedio entre \textit{c y d} y luego, ubicar ese valor para el canal rojo para el p\'ixel ubicado debajo de x.
+\item Hacer el promedio entre \textit{c y d} y luego, ubicar ese valor para el canal rojo para el p\'ixel ubicado debajo de x.
 
-Una vez obtenidos estos dos valores, promediarlos y ubicarlos en el canal rojo de x.\\
-
+\item Una vez obtenidos estos dos valores, promediarlos y ubicarlos en el canal rojo de x.\\
+\end{itemize}
 Llegando as\'i a que realizar este c\'alculo es equivalente a realizar el promedio entre los valores de sus diagonales:
 
 \[
- \frac{a+b}{2} + \frac{c+d}{2} = \frac{a+b+c+d}{4}
+ \frac{\frac{a+b}{2} + \frac{c+d}{2}}{2} = \frac{a+b+c+d}{4}
 \]
 
 \begin{figure}[h!]
@@ -473,7 +594,7 @@ En cuanto a la combinación de los resultados de las distintas interpolaciones, 
 \begin{figure}[h!]
 	\caption{}
 	\begin{center}
-	\includegraphics[scale=0.36]{imagenes/apxl1}
+	\includegraphics[scale=0.23]{imagenes/apxl1}
 	\label{apxl1}
   \end{center}
 \end{figure}
@@ -482,7 +603,7 @@ En dicha figura se analiza la información de la misma que sería captada por lo
 
 En el esquema \ref{apxl2} se puede observar que para varios pixeles la interpolación horizontal retorna valores distintos a la realizada verticalmente (esto tiene sentido, pues se trata de un área homogénea atravesada por una fila de distinto color).
 
-El resultado de empleo del promedio como estrategia de nivelacion de dichos valores queda expuesto en la Figura \ref{apxl3}, en la cual se puede observar el causante del artifact \"zipping\", producto de un algoritmo indiferente ante los cambios de color abruptos.\\
+El resultado de empleo del promedio como estrategia de nivelacion de dichos valores queda expuesto en la Figura \ref{apxl3}, en la cual se puede observar el causante del artifact ``zipping'', producto de un algoritmo indiferente ante los cambios de color abruptos.\\
 
 \begin{figure}[h!]
 	\caption{}
@@ -500,6 +621,7 @@ El resultado de empleo del promedio como estrategia de nivelacion de dichos valo
   \end{center}
 \end{figure}
 
+\newpage
 Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir este error. Uno de ellos consiste en calcular el gradiente del color para utilizarlo al combinar los resultados, de modo tal que si el mismo fuera de gran magnitud (es decir, la variación del color es considerable) entonces el peso que debe tener el valor calculado en el resultado final debería ser menor a aquel que fue calculado en una dirección cuyo gradiente fuera menor (es decir, que se tratara de una superficie más cromáticamente homogénea).
 
 
@@ -541,7 +663,7 @@ Este sistema tiene la particularidad de ser estrictamente diagonal dominante, y 
 
 \subsubsection*{Aplicación de Splines al problema de Demosaicing}
 
-Una vez resuelto el problema de la implementación de los algoritmos que generan el spline e interpolan valores en el mismo, el siguiente paso fue pensar como aplicarlo al problema que nos concierne: el Demosaicing de imágenes. Diversos métodos fueron considerados y estudiados, y a continuación presentaremos los que creemos que son más representativos de la experimentación que realizamos. \\
+Una vez resuelto el problema de la implementación de los algoritmos que generan el spline e interpolan valores en el mismo, el siguiente paso fue pensar c\'omo aplicarlo al problema que nos concierne: el Demosaicing de imágenes. Diversos métodos fueron considerados y estudiados, y a continuación presentaremos los que creemos que son más representativos de la experimentación que realizamos. \\
 
 El primer acercamiento que tuvimos con Splines fue simple: para cada pixel, interpolar su fila y su columna por completo para los canales faltantes, y asignar el promedio entre ambos valores obtenidos. \\
 A primera vista, este método aparenta ser muy parecido a la interpolación bilineal, razón por la cual decidimos comparar cualitativamente los outputs de ambos algoritmos:
@@ -562,9 +684,28 @@ El primer aspecto con el que decidimos experimentar fue la manera de combinar la
 
 Utilizando estos conceptos, entonces, 
 
+
 \newpage
 \subsection{Algoritmo de Malvar, He y Cutler}
-\textcolor{blue}{Hablar un poco aca del paper...}
+
+Luego de la lectura y estudio de la publicaci\'on \textit{HIGH-QUALITY LINEAR INTERPOLATION
+FOR DEMOSAICING OF BAYER-PATTERNED COLOR IMAGES} \textbf{[2]}, nos decidimos por experimentar con el algoritmo planteado y as\'i observar las mejoras planteadas en este trabajo.\\
+
+Malvar, He y Cutler presentan una cr\'itica a los m\'etodos que no utilizan los tres canales RGB en su conjunto, como por ej. la \emph{interpolaci\'on Bilineal} a la cual le adjudica la generaci\'on de significantes \textit{artifacts}. Y presentan un m\'etodo de Demosaicing en el cual el estudio de cada canal no se hace de manera independiente a los otros dos, que mejora en aspectos de tiempo de c\'omputo a algoritmos similares.\\
+
+Los tres canales en su conjunto contienen informaci\'on sobre la luminiscencia de la imagen, es por esto que al calcular por ej. el valor verde de un p\'ixel orginalmente rojo, se utiliza la informaci\'on contenida en el rojo para la nueva asignaci\'on. Si el valor del p\'ixel rojo difiere de una cantidad significante con sus estimaciones mediante la interpolaci\'on bilineal con sus vecinos, esto significa que hay un cambio abrupto en la luminiscencia y por esto se debe corregir el valor calculado en el canal verde de este p\'ixel a\~nadi\'endole, en proporci\'on, este cambio de luminiscencia.\\
+
+El m\'etodo se basa en una interpolaci\'on bilineal con una correcci\'on respecto al gradiente usando un par\'ametro deseable para controlar cuanta correcci\'on es aplicada.\\
+
+El algoritmo consiste en utilizar una ventana de 5x5, es decir para estimar el valor de un p\'ixel se utilizan los p\'ixeles cercanos dentro del cuadrante con ancho de tama\~no 5 p\'ixeles. Siendo el que est\'a situado en el centro el p\'ixel que va a ser estimado.\\
+
+El algoritmo se comporta de la siguiente manera: situado en un p\'ixel a estimar, se calcula la derivada en su color nativo y luego al calcular los dos canales faltantes se suma esta derivada multiplicada por una constante. De este modo es como se nivela la luminiscencia.\\
+
+Luego de programar el algoritmo y realizar casos de prueba, los resultados arrojados fueron mejores que para los algoritmos anteriores.\\
+
+\textcolor{red}{Poner fotitos y mediciones... no?}\\
+
+
 \newpage
 \subsection{Exploraci\'on de Artifacts}
 
@@ -572,15 +713,26 @@ Utilizando estos conceptos, entonces,
 Ver como arreglar el de Moire y bla...\\
 Poner fotitos de ampliaciones donde se vean bien los artifacts.}
 
+EN MHC:\\
+
+Visualmente, podemos definir que las fotos adquirien una mayor definici\'on con contornos menos borrosos e imperfectos. Este algoritmo optimiza la detecci\'on de bordes cuando la diferencia de colores es muy fuerte, por ej. un borde oscuro sobre un fondo claro. Si se comparara con el algoritmo de interpolaci\'on bilineal, en el mismo caso se produc\'ian colores fuertes alrededor de los bordes negros (artifact).
+
+Sim embargo, para los bordes con un menor contraste o bordes m\'as claros, sigue vi\'endose este artifact donde aparecen colores artificiales muy fuertes en la zona de los mismos.
+
+\textcolor{red}{Poner recortes de bordes como estos nombrados arriba}
+
+
+
 
 \newpage
 \section{Resultados y discusi\'on}
 
-\newpage
-\subsection{MHC}
-Le da muchísima más definición/claridad a las fotos, y los bordes oscuros quedan prácticamente perfectos (comparando con bilineal, por ejemplo, aparecen colores fuertes alrededor de los bordes negros). Sigue pasando eso con los bordes blancos/mas claros, pero las zonas donde hay un salto grande entre claro y oscuro, mejora mucho.
+%\newpage
+%\subsection{MHC}
+%Le da una definición/claridad mucho mayor a las fotos, y los bordes oscuros quedan prácticamente perfectos (comparando con bilineal, por ejemplo, aparecen colores fuertes alrededor de los bordes negros). Sigue pasando eso con los bordes blancos/mas claros, pero las zonas donde hay un salto grande entre claro y oscuro, mejora mucho.
+%\textcolor{red}{está medio informal?}
 
-\newpage
+%\newpage
 \subsection{An\'alisis cualitativo de los algoritmos}
 Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab$\textregistered$  la diferencia entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro.\\
 
@@ -607,11 +759,11 @@ En la "imagen 9" se puede ver un comportamiento similar a lo ya estudiado, lo in
 \end{figure}
 
 
-La "imagen 12" es una imagen con muchas l\'ineas y dibujos con contornos esto se aprecia en la gran densidad que tiene la imagen que muestra las diferencias entre la imagen original y la imagen obtenida mediante el algoritmo de Vecino M\'as Cercano. Si observamos las im\'agenes obtenidas mediante la resta con sus respectivas originales se denota una gran diferencia entre el Algoritmo de Vecino M\'as Cercano y el Algoritmo de MHC.\\
+La <<Imagen 12>> es una figura con muchas l\'ineas y dibujos con contornos. Esto se aprecia en la gran densidad que tiene la imagen que muestra las diferencias entre la imagen original y la imagen obtenida \textcolor{red}{What?} mediante el algoritmo de Vecino M\'as Cercano. Si observamos las im\'agenes obtenidas mediante la resta con sus respectivas originales se denota una gran diferencia entre el Algoritmo de Vecino M\'as Cercano y el Algoritmo de MHC.\\
 
 Como conclusi\'on, podemos inferir que los lugares donde se muestra una variaci\'on son siempre lugares pertencientes a contornos o bordes de objetos en las im\'agenes. En cambio, en p\'ixeles sobre superficies llanas o parejas del mismo cuerpo la diferencia entre la imagen original y nuestra imagen obtenida es nula.
 
-
+\newpage
 \subsection{An\'alisis de tiempos}
 \textcolor{blue}{Aca hay que comparar los tiempos de ejecucion entre todos los algoritmos dispuestos.}
 
