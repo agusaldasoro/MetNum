@@ -752,20 +752,62 @@ Sim embargo, para los bordes con un menor contraste o bordes m\'as claros, sigue
 
 %\newpage
 \subsection{An\'alisis cualitativo de los algoritmos}
-Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab$\textregistered$  la diferencia entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro.\\
+Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab$\textregistered$  la diferencia entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro con el objetivo de distinguir id\'oneamente las regiones de la imagen donde exista un error contundente.\\
 
 \textcolor{blue}{Aca falta agregar todas las fotitos, Y HACERLO PARA SPLINES!!!!!!!!!!!!!!!!!}
 %ESTO PUEDE IR DE PIE DE IMAGEN O ALGO ASI...
 %De este modo, en los siguientes gr\'aficos se denotan los lugares con diferencia num\'erica de la imagen.
 
 
-En la "imagen 2"  se puede observar que, si bien al ejecutar el algoritmo de MHC disminuye abundantemente la diferencia con la imagen original, al tener una superficie en su mayor\'ia de agua se dificulta a niveles algor\'itmicos aproximar el agua de una manera m\'as real ya que esta no es para nada una superficie pareja. \textcolor{red}{(SI EXPLICO EL PORQUE PASA ESTO, MANDO FRUTA ASI QUE NO VOY A HACERLO)'.}\\
 
-En la "imagen 4" se puede apreciar el inconveniente de aproximar p\'ixeles que son borde cuando estos son dados en abundancia y en l\'ineas recta en su mayor\'ia. Inclusive en el mejor caso de esta imagen, (la imagen creada mediante el Algoritmo de MHC) se puede apreciar una notable diferencia con la original en lo que respecta a los bordes. \textcolor{red}{Esto es un ejemplo m\'as de la existencia de artifacts.}\\
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.40]{imagenes/comparacion/02/collage}
+	\label{imagen2}
+  \end{center}
+\end{figure}
 
-En cuanto a la "imagen 5" se aprecia el mismo inconveniente que en la "imagen 1" dado a la existencia de agua, pero a diferencia cuando se corre el algoritmo de MHC la mejor\'ia es notablemente mayor ya que la diferencia entre esta imagen y la foto original es muy peque\~na.\\
+En la Figura \ref{imagen2}  se puede observar que, si bien al ejecutar el algoritmo de MHC disminuye abundantemente la diferencia con la imagen original, al tener una superficie en su mayor\'ia de agua se dificulta a niveles algor\'itmicos aproximar el agua de una manera m\'as real ya que esta no es para nada una superficie pareja. \textcolor{red}{(SI EXPLICO EL PORQUE PASA ESTO, MANDO FRUTA ASI QUE NO VOY A HACERLO)'.}\\
 
-En la "imagen 9" se puede ver un comportamiento similar a lo ya estudiado, lo interesante de destacar en cuanto a esta foto es que al poseer un letrero es una imagen menos abstracta que las anteriores y por lo tanto, se adquiere una definici\'on mayor cuando se tiene una diferencia menor con la original y as\'i facilitar la lectura del cartel.
+\newpage
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.40]{imagenes/comparacion/04/collage}
+	\label{imagen4}
+  \end{center}
+\end{figure}
+
+En la Figura \ref{imagen4} se puede apreciar el inconveniente de aproximar p\'ixeles que son borde cuando estos son dados en abundancia y en l\'ineas recta en su mayor\'ia. Inclusive en el mejor caso de esta imagen, (la imagen creada mediante el Algoritmo de MHC) se puede apreciar una notable diferencia con la original en lo que respecta a los bordes. \textcolor{red}{Esto es un ejemplo m\'as de la existencia de artifacts.}\\
+
+\newpage
+
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.40]{imagenes/comparacion/05/collage}
+	\label{imagen5}
+  \end{center}
+\end{figure}
+
+
+En cuanto a la Figura \ref{imagen5} se aprecia el mismo inconveniente que en la "imagen 1" dado a la existencia de agua, pero a diferencia cuando se corre el algoritmo de MHC la mejor\'ia es notablemente mayor ya que la diferencia entre esta imagen y la foto original es muy peque\~na.\\
+
+\newpage
+
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.40]{imagenes/comparacion/09/collage}
+	\label{imagen9}
+  \end{center}
+\end{figure}
+
+En la Figura \ref{imagen9} se puede ver un comportamiento similar a lo ya estudiado, lo interesante de destacar en cuanto a esta foto es que al poseer un letrero es una imagen menos abstracta que las anteriores y por lo tanto, se adquiere una definici\'on mayor cuando se tiene una diferencia menor con la original y as\'i facilitar la lectura del cartel.
 
 
 \begin{figure}[h!]
@@ -776,10 +818,44 @@ En la "imagen 9" se puede ver un comportamiento similar a lo ya estudiado, lo in
   \end{center}
 \end{figure}
 
+\newpage
 
-La <<Imagen 12>> es una figura con muchas l\'ineas y dibujos con contornos. Esto se aprecia en la gran densidad que tiene la imagen que muestra las diferencias entre la imagen original y la imagen obtenida \textcolor{red}{What?} mediante el algoritmo de Vecino M\'as Cercano. Si observamos las im\'agenes obtenidas mediante la resta con sus respectivas originales se denota una gran diferencia entre el Algoritmo de Vecino M\'as Cercano y el Algoritmo de MHC.\\
 
-Como conclusi\'on, podemos inferir que los lugares donde se muestra una variaci\'on son siempre lugares pertencientes a contornos o bordes de objetos en las im\'agenes. En cambio, en p\'ixeles sobre superficies llanas o parejas del mismo cuerpo la diferencia entre la imagen original y nuestra imagen obtenida es nula.
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.40]{imagenes/comparacion/12/collage}
+	\label{imagen12}
+  \end{center}
+\end{figure}
+
+La Figura \ref{imagen12} es una imagen con muchas l\'ineas y dibujos con contornos. Esto se aprecia en la gran densidad que tiene la imagen que muestra las diferencias entre la imagen original y la imagen obtenida \textcolor{red}{What?} mediante el algoritmo de Vecino M\'as Cercano. Si observamos las im\'agenes obtenidas mediante la resta con sus respectivas originales se denota una gran diferencia entre el Algoritmo de Vecino M\'as Cercano y el Algoritmo de MHC.\\
+
+\newpage
+
+
+Como conclusi\'on, podemos inferir que los lugares donde se muestra una variaci\'on son siempre lugares pertencientes a contornos o bordes de objetos en las im\'agenes. En cambio, en p\'ixeles sobre superficies llanas o parejas del mismo cuerpo la diferencia entre la imagen original y nuestra imagen obtenida es nula.\\
+
+\textit{Se adjuntan las im\'agenes en su tama\~no original.}
+
+
+\newpage
+En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, los valores de psnr y ssim.
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.75]{imagenes/graficos/psnr}
+	\label{cartel}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.75]{imagenes/graficos/ssim}
+	\label{cartel}
+  \end{center}
+\end{figure}
 
 \newpage
 \subsection{An\'alisis de tiempos}
