@@ -1,4 +1,3 @@
-//#include <fstream>
 #include <stdlib.h>
 #include <string>
 #include <iostream>
@@ -94,12 +93,20 @@ int main(int argc, char const *argv[])
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline.bmp";
 					original.crop(3,3,0,0,original.width()-4,original.height()-4,0,2);
 					break;
-				case 'p': //peso mediante derivadas
+				case 'd': //peso mediante derivadas
 					cout << "Aplicando demosaicing mediante splines: peso mediante derivadas direccionales..." << endl;
 					start = std::chrono::system_clock::now();
 					spline_der(raw);
 					end = std::chrono::system_clock::now();
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-derivadas.bmp";
+					original.crop(3,3,0,0,original.width()-4,original.height()-4,0,2);
+					break;
+				case 'p': //peso mediante derivadas: proporcional
+					cout << "Aplicando demosaicing mediante splines: peso proporcional mediante derivadas direccionales..." << endl;
+					start = std::chrono::system_clock::now();
+					spline_der_prop(raw);
+					end = std::chrono::system_clock::now();
+					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-derivadas-proporcional.bmp";
 					original.crop(3,3,0,0,original.width()-4,original.height()-4,0,2);
 					break;
 				case 'r': //rango
@@ -118,13 +125,13 @@ int main(int argc, char const *argv[])
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-MHC.bmp";
 					original.crop(5,5,0,0,original.width()-6,original.height()-6,0,2);
 					break;
-				case 'd': //diagonal
+				/*case 'd': //diagonal
 					cout << "Aplicando demosaicing mediante splines: diagonales..." << endl;
 					start = std::chrono::system_clock::now();
 					spline_diag(raw);
 					end = std::chrono::system_clock::now();
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-diag.bmp";
-					break;
+					break;*/
 			}
 
 			const char * c_nombre_spline = nombre_spline.c_str();

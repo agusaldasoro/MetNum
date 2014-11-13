@@ -6,7 +6,8 @@
 %\usepackage{makeidx}
 \usepackage{paralist} %itemize inline
 \usepackage{pdfpages}
-
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{amsmath}
 
 %\usepackage{float}
 %\usepackage{amsmath, amsthm, amssymb}
@@ -700,68 +701,427 @@ Yendo un paso más allá de la interpolación bilineal, podemos preguntarnos qu�
 
 Los Splines (o trazadores cúbicos) son un tipo particular de interpoladores fragmentarios: funciones partidas que interpolan a través de polinomios un conjunto de puntos. En el caso de los Splines, se interpola entre dos puntos mediante un polinomio cúbico.\\
 
-Como fue explicado anteriormente, los Splines son una opción muy buena a la hora de interpolar funciones: en el análisis realizado contra el Polinomio de Lagrange pudimos observar que este último puede llegar a ser excesívamente malo en ciertos casos. Considerando la superioridad de los Splines, entonces, nos propusimos encontrar un algoritmo que los utilice para conseguir buenas interpolaciones que generen imagenes de calidad superior a la hora de realizar el demosaicing.\\
+Como fue explicado anteriormente, los Splines son una opción muy buena a la hora de interpolar funciones: en el análisis realizado contra el Polinomio de Lagrange pudimos observar que este último puede llegar a ser excesivamente malo en ciertos casos. Considerando la superioridad de los Splines, entonces, nos propusimos encontrar un algoritmo que los utilice para conseguir buenas interpolaciones que generen imágenes de calidad superior a la hora de realizar el demosaicing.\\
 
-Conseguir el Spline interpolador dado un conjunto de $N$ puntos $X_j$ consiste en resolver un sistema tridiagonal de $NxN$(\textcolor{red}{ACA PONER ALGUNA CITA DEL BURDEN O ALGO DE DONDE SACAR TODO EL TEMA DEL ARMADO DEL SISTEMA DEL SPLINE. No creo que sea correcto copiar acá la teorica entera sobre el tema (que encima fue eterna)}) que posea el siguiente aspecto (si trabajamos con splines naturales): \\
+Conseguir el Spline interpolador de una función $f$ dado un conjunto de puntos \{\(X_0, ..., X_n\)\} y sus respectivos valores de $f(x_j)$ consiste en resolver un sistema \(Ax = b\) que nos permita encontrar los 4 coeficientes de cada uno de los $n-1$ polinomios que lo conformen. Siguiendo la lógica presentada en [\textcolor{red}{referencia al Burden}], donde se despeja el coeficiente que acompaña al término de grado 2 en cada polinomio, se puede llegar a ver que $A$ resulta ser una matriz tridiagonal de $(n+1)\times(n+1)$ que posee el siguiente aspecto (trabajando con splines naturales): \\
 
-\textcolor{red}{Aca poner matriz, no se como se hace\\}
+\[
+A = \left(
+\begin{array}{cccccccccc}
+1 &  &  &  &  &  &  & &  & \\
+h_0 & 2\cdot(h_0+h_1) & h_1 &   & & & & &  & \\
+ & h_1 & 2\cdot(h_1+h_2) & h_2 & & & & &  & \\
+ &  &  & \ddots &  &  &  &  &  &  \\
+ &  &  &  & h_j & 2\cdot(h_j+h_{j+1}) & h_{j+1} & &  & \\
+ &  &  &  &  &  & \ddots &  &  &  \\
+ &  &  &  &  & & & h_{n-2} & 2\cdot(h_{n-2}+h_{n-1}) &h_{n-1}\\
+ &  &  &  &  &  &  &  &  & 1
+\end{array}
+\right)
+\]
 
+\bigskip
 \noindent Donde $h_j$ es igual a la distancia entre los puntos $X_j$ y $X_{j+1}$. \\
+Mientras tanto, $b$ será un vector de la forma:
 
-Para nuestro problema en particular, vamos a considerar las funciones a interpolar como el valor de un canal de RGB en alguna porción de la imagen. Dada la fisonomía del Bayer Filter Array, puede observarse con facilidad que, tomando una fila o una columna cualesquiera, la distancia que hay entre dos píxeles del mismo color es de 2 unidades (es decir, para un p\'ixel azul en la posición $j$ de una fila, el siguiente p\'ixel azul se va a encontrar en la posición $j+2$). Esto incluso aplica a si tomamos diagonales (no las que contienen exclusivamente verde, aunque dicho caso no nos es de interés ya que no se interpolaría el verde sobre la misma). \\
-Por esta razón, podemos reemplazar $h_j$ por 2, para todo $j$, y obtener la siguiente matriz: \\
+\[
+b_i =
+\begin{cases}
+0 & i = 0 \lor i = n \\
+\frac{3\cdot(f(x_{i+1})-f(x_i))}{h_i} - \frac{3\cdot(f(x_i)-f(x_{i-1}))}{h_{i-1}} & 1 \leq i \leq n-1
+\end{cases}
+\]
 
-\textcolor{red}{La otra matriz con 2-8-2\\}
+\bigskip
+Para nuestro problema en particular, vamos a considerar las funciones a interpolar como el valor de un canal de RGB en alguna porción de la imagen. Dada la fisonomía del Bayer Filter Array, puede observarse con facilidad que, tomando una fila o una columna cualesquiera, la distancia que hay entre dos píxeles del mismo color es de 2 unidades (es decir, para un pixel azul en la posición $j$ de una fila, el siguiente pixel azul se va a encontrar en la posición $j+2$). Esto incluso aplica a si tomamos diagonales (no las que contienen exclusivamente verde, aunque dicho caso no nos es de interés ya que no se interpolaría el verde sobre la misma). \\
+Por esta razón, podemos reemplazar $h_j$ por 2, para todo $j$, y obtener: \\
 
-Este sistema tiene la particularidad de ser estrictamente diagonal dominante, y por lo tanto va a tener solución única, con lo cual sabemos que el método interpolador funcionará correctamente. \\
+\[
+A = \left(
+\begin{array}{cccccccccc}
+1 &  &  &  &  &  &  & &  & \\
+2 & 8 & 2 &   & & & & &  & \\
+ &  & \ddots &  &  &  &  &  &  &  \\
+ &  &  &  & 2 & 8 & 2 & &  & \\
+ &  &  &  &  &  & \ddots &  &  &  \\
+ &  &  &  &  & & & 2 & 8 & 2\\
+ &  &  &  &  &  &  &  &  & 1
+\end{array}
+\right)
+\]
 
+\bigskip
 
-\textcolor{red}{Poner los pseudocodigos y explicar brevemente la implementación (que se usó matriz esparsa, bla)\\}
+\[
+b_i =
+\begin{cases}
+0 & i = 0 \lor i = n \\
+\frac{3\cdot(f(x_{i+1})-2\cdot f(x_i)+f(x_{i-1}))}{2} & 1 \leq i \leq n-1
+\end{cases}
+\]
 
+\bigskip
+Este sistema tiene la particularidad de que $A$ es estrictamente diagonal dominante, y por lo tanto va a tener solución única, con lo cual sabemos que el método interpolador funcionará correctamente. \\
 
-\subsubsection*{Aplicación de Splines al problema de Demosaicing}
+Una vez resuelto el mismo, sólo queda despejar los coeficientes principales y el de grado 1 de cada polinomio. El algoritmo en su totalidad se describe a continuación:
 
-Una vez resuelto el problema de la implementación de los algoritmos que generan el spline e interpolan valores en el mismo, el siguiente paso fue pensar c\'omo aplicarlo al problema que nos concierne: el Demosaicing de imágenes. Diversos métodos fueron considerados y estudiados, y a continuación presentaremos los que creemos que son más representativos de la experimentación que realizamos. \\
+\IncMargin{1em}
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo generar_spline}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
 
-El primer acercamiento que tuvimos con Splines fue simple: para cada p\'ixel, interpolar su fila y su columna por completo para los canales faltantes, y asignar el promedio entre ambos valores obtenidos. \\
-A primera vista, este método aparenta ser muy parecido a la interpolación bilineal, razón por la cual decidimos comparar cualitativamente los outputs de ambos algoritmos:
+\Input{Vector F}
+\Output{Vector S}
+\bigskip
+
+n = size(F)\\
+Matriz A(n)\\
+Vector S($4\cdot(n-1)$)\\
+\bigskip
+A($0,0$) = 1\\
+A($n-1,n-1$) = 1\\
+b($0$) = $0$\\
+b($n-1$) = $0$\\
+\bigskip
+\For{cada fila i de la matriz A}{
+A($i,i-1$) = 2\\
+A($i,i$) = 8\\
+A($i,i+1$) = 2\\
+b($i$) = $\frac{3\cdot(F(x_{i+1})-2\cdot F(x_i)+F(x_{i-1}))}{2}$
+}
+\bigskip
+Resolver el sistema $Ax=b$ y guardarlo en el vector $sol$\\
+\bigskip
+\For{cada elemento i del vector sol}{
+S($i$) = F($i$)\\
+S($(i \cdot 4)+1$) = $\frac{f(x_{i+1})-f(x_i)}{2}-\frac{2\cdot sol(i+1)+ 4\cdot sol(i)}{3}$\\
+S($(i \cdot 4)+2$) = $sol(i)$\\
+S($(i \cdot 4)+3$) = $\frac{sol(i+1)-sol(i)}{6}$\\
+}
+\bigskip
+Retornar S
+\end{algorithm}\DecMargin{1em}
+
+\bigskip
+Notar que $F$ representa un vector que contiene los valores de $f(X_j)$ que queremos interpolar. Por otro lado, el conjunto de puntos \{\(X_0, ..., X_n\)\} está implícito, ya que, como la distancia entre ellos es siempre 2, no es necesario saber su valor para realizar la interpolación: los consideramos enumerados de 0 a $n$. \\
+\indent Por su parte, $S$ es un vector que contiene los cuatro coeficientes de cada polinomio, de corrido, ordenados de término independiente a coeficiente principal. \\
+
+Creemos importante comentar acerca de la estructura elegida para las matrices utilizadas: como las matrices que resuelven el problema de la interpolación son siempre matrices tridiagonales, nos pareció una buena idea aprovechar el hecho de que son esparsas para poder trabajar con ellas más eficientemente en términos de memoria y complejidad algorítmica. Para lograr dicho objetivo, procedimos a reutilizar, haciendo algunas modificaciones menores, los algoritmos utilizados en el primer Trabajo Práctico.\\
+\indent La estructura elegida, entonces, es un simple vector de vectores, que sólo almacena 4 columnas: las 3 diagonales y el vector resultado. \\
+
+Ya generado el Spline, sólo resta evaluar los puntos que nos interesen para conseguir una estimación de $f$ en los mismos. Para ello, primero se localiza el polinomio cúbico $S_j$ correspondiente en el vector $S$ generado (de acuerdo al intervalo que pertenezca el $X_i$ que se quiere estimar) y se resuelve:
+
+\[f(X_i) \approx a+b\cdot (X_i - X_j)+c \cdot (X_i - X_j)^{2} + d \cdot (X_i - X_j)^{3}\]
+
+\bigskip
+Donde $a, b, c$ y $d$ son los coeficientes conseguidos a través del algoritmo \texttt{generar_spline}, y $X_j$ es el valor del punto que se corresponde con el polinomio $S_j$ a utilizar. \\
+\indent El algoritmo que resuelve este problema fue implementado de la siguiente manera:
+
+\IncMargin{1em}
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo evaluar}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+\Input{Vector S, Int x}
+\Output{Double y}
+\bigskip
+
+Int j = $\lfloor \frac{x}{2} \rfloor$ \\
+Int i = $4 \cdot j$ \\
+\bigskip
+Double a = S($i$)\\
+Double b = S($i+1$)\\
+Double c = S($i+2$)\\
+Double d = S($i+3$)\\
+\bigskip
+j = $2 \cdot j$\\
+\bigskip
+Retornar $a+b\cdot (x - j)+c \cdot (x - j)^{2} + d \cdot (x - j)^{3}$
+\end{algorithm}\DecMargin{1em}
+
+\bigskip
+\textcolor{red}{Ver de explicar un poco mejor el tema de las cuentas con los indices\\}
+Vale la pena aclarar que el algoritmo recibe como input un entero ya que cada uno de nuestros $X_i$ es un pixel, y no tendría sentido trabajar con fracciones de los mismos. \\
+
+\subsubsection*{Aplicación de Splines al problema de demosaicing}
+
+Una vez resuelto el problema de la implementación de los algoritmos que generan el spline e interpolan valores en el mismo, el siguiente paso fue pensar c\'omo aplicarlo al problema que nos concierne: el \textit{demosaicing} de imágenes. Diversos métodos fueron considerados y estudiados, y serán presentados a continuación. \\
+\pagebreak
+\begin{figure}[h!]
+	\caption{cómo se realiza la interpolación}
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/splines1.png}
+	\end{center}
+	\label{splines1}
+\end{figure}
+
+El primer acercamiento que tuvimos con Splines fue simple: para cada pixel, interpolar su fila y su columna (por completo) para los canales faltantes, y asignarle el promedio entre ambos valores obtenidos. \\
+Este método aparenta ser muy similar a la interpolación bilineal, donde se asigna el promedio de los valores de sus vecinos, razón por la cual decidimos comparar cualitativamente los outputs de ambos algoritmos:
 \begin{itemize}
-\item Subjetivamente, las imágenes son prácticamente idénticas para ambos métodos. Las diferencias son demasiado mínimas como para ser realmente apreciadas.
-\item Objetivamente, mediciones de PSNR para distintas imágenes arrojaron valores sorpresivamente distintos (alrededor de 1 punto de diferencia), favoreciendo a la interpolación bilineal. \textcolor{red}{VER DE PONER MEDICIONES DE SSIM. No se si poner imagenes aca o en exploracion de artifacts?}
+\item A simple vista, las imágenes son prácticamente idénticas para ambos métodos. Las diferencias son demasiado mínimas como para ser realmente apreciadas. La versión con splines mostró una mayor presencia de artifacts (principalmente \textit{false colors}) pero no muy notable.
+\item Objetivamente, las mediciones de PSNR arrojaron valores sorpresivamente distintos (alrededor de 1 punto de diferencia), favoreciendo a la interpolación bilineal.
 \end{itemize}
 
-También fueron medidos los tiempos de ejecución para ambos algoritmos:\\
+\begin{figure}[h!]
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/promedio/barcos.png}\\
+	    PSNR: 28.5901 \ \ \ \ \ \ \ \ \ \ \ \ \ PSNR: 27.6018
+	\end{center}
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/promedio/arbol.png}\\
+	    PSNR: 27.4478 \ \ \ \ \ \ \ \ \ \ \ \ \ PSNR: 26.154
+	\end{center}
+	\caption{Interpolación bilineal (izquierda), y mediante esta implementación de Splines (derecha)}
+	\label{splines2}
+\end{figure}
 
-\textcolor{red}{tabla de tiempos?\\}
+Respecto al tiempo de ejecución de ambos algoritmos, \textcolor{red}{MEDIR TIEMPOS POR SSH\\}
 
-En vista de estos resultados, decidimos descartar (o mejor dicho, intentar mejorar) el algoritmo mediante Splines, ya que ni en tiempo ni en calidad lo encontramos superior.\\
+En vista de estos resultados, decidimos descartar (o mejor dicho, intentar mejorar) el algoritmo mediante Splines, ya que ni en tiempo ni en calidad lo encontramos superior que los métodos anteriores.\\
 
 El primer aspecto con el que decidimos experimentar fue la manera de combinar la información obtenida a través de las interpolaciones. En el caso anterior, simplemente realizábamos el promedio de los valores obtenidos al interpolar una fila y una columna. Sin embargo, este acercamiento no es siempre bueno, ya que puede traer resultados no deseados en los bordes. Es por esta razón que decidimos proponer una idea más sofisticada, detallada brevemente en la sección de interpolación bilineal: el uso del gradiente. \\
 
-A modo de ejemplo, la derivada horizontal en el canal verde del p\'ixel puede estimarse de la siguiente manera:
-
+A modo de ejemplo, la derivada horizontal en el canal verde del pixel puede estimarse de la siguiente manera:
 \[|\partial_xG(x,y)| \approx |G(x-1,y) - G(x+1,y)|\]
 
-Y, análogamente, la vertical:
 
+Y, análogamente, la vertical:
 \[|\partial_yG(x,y)| \approx |G(x,y-1) - G(x,y+1)|\]
 
+
 Utilizando este concepto, modificamos nuestro algoritmo para que, en lugar de combinar la información obtenida mediante el promedio, haga lo siguiente:
-\textcolor{red}{(ver de poner pseudocodigo aca en lugar de esto)}
+
 \begin{itemize}
 \item Interpolar por filas 
-\item Al realizar la interpolación por columnas, para los p\'ixeles rojos y azules tenemos ahora dos valores posibles de verde. Comparamos los valores de las derivadas horizonal y vertical para el color verde:
+\item Al realizar la interpolación por columnas, para los pixeles rojos y azules tenemos ahora dos valores posibles de verde. Comparamos los valores de las derivadas horizontal y vertical para el color verde:
 \begin{itemize}
 \item Si la derivada horizontal es mayor que la vertical, entonces le asignamos el valor de verde dado por la interpolación de la columna
 \item Si la derivada vertical es mayor que la horizontal, entonces le asignamos el valor de verde dado por la interpolación de la fila
 \end{itemize}
 \end{itemize}
 
-Aplicando este método, pudimos observar mejoras en varios de los bordes de nuestras imágenes: los mismos ahora son más suaves, y en algunos casos se disminuyó la visibilidad de los artifacts.\\
+El algoritmo que resuelve esto fue implementado de la siguiente manera:
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo spline_der}
+\For{cada fila de la imagen}{
+\eIf{la fila es par}{
+Generar el spline de toda la fila para el canal azul e interpolar para los píxeles verdes \\
+Generar el spline de toda la fila para el canal verde e interpolar para los píxeles azules \\
+}{
+Generar el spline de toda la fila para el canal rojo e interpolar para los píxeles verdes \\
+Generar el spline de toda la fila para el canal verde e interpolar para los píxeles rojos \\
+}
+}
+\bigskip
+\For{cada columna de la imagen}{
+\eIf{la columna es par}{
+Generar el spline de toda la columna para el canal rojo e interpolar para los píxeles azules \\
+Generar el spline de toda la columna para el canal azul e interpolar para los píxeles verdes \\
+\If{$\partial_xG > \partial_yG$}{
+Generar el spline de toda la columna para el canal verde e interpolar para los píxeles azules, reemplazando el valor que había sido asignado en el primer ciclo
+}
+}{
+Generar el spline de toda la columna para el canal azul e interpolar para los píxeles rojos \\
+Generar el spline de toda la columna para el canal rojo e interpolar para los píxeles verdes \\
+\If{$\partial_xG > \partial_yG$}{
+Generar el spline de toda la columna para el canal verde e interpolar para los píxeles rojos, reemplazando el valor que había sido asignado en el primer ciclo
+}
+}
+}
+\end{algorithm}
 
-\textcolor{red}{poner fotitos}
+\bigskip
 
-A pesar de haber 
+Aplicando este método, pudimos observar mejoras en varios de los bordes de nuestras imágenes: los mismos ahora son más suaves, eliminando casi por completo la presencia de varios artifacts, como por ejemplo zipper.\\
+\indent Sin embargo, también hubo algunos aspectos en los cuales la imagen final empeoró: algunas de las lineas más finas mostraron \textit{false colors}, muchas veces con la presencia de algunos píxeles de colores muy fuertes.\\
+
+Respecto a las mediciones de calidad objetivas, los resultados arrojados por PSNR fueron totalmente inesperados: a pesar de ser una diferencia muy chica, PSNR siempre fue superior para la imagen procesada con el método del promedio. Creemos que esto puede deberse a la anormalidad de los colores para ciertos píxeles mencionada en el párrafo anterior, ya que PSNR mide cuánto ``ruido'' hay entre la imagen original y la procesada. \\
+
+De todas maneras, consideramos al método de Splines pesados mediante las derivadas como superior al del promedio, ya que, a la vista, es más notorio que los bordes sean suaves, a que haya algunos pocos píxeles dispersos con colores no muy fieles. \\
+
+Respecto al tiempo de cómputo, \textcolor{red}{MEDIR TIEMPOS POR SSH\\}
+
+\begin{figure}[h!]
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/pesos1y0/barco2.png}\\
+	    PSNR: 27.6018 \ \ \ \ \ \ \ \ \ \ \ \ \ PSNR: 27.5186
+	\end{center}
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/pesos1y0/ventana.png}\\
+	    PSNR: 26.154 \ \ \ \ \ \ \ \ \ \ \ \ \ PSNR: 25.9947
+	\end{center}
+	\caption{Combinación de datos mediante promedio (izquierda), y mediante el presente método (derecha)}
+	\label{splines3}
+\end{figure}
+
+En estas imágenes se evidencia la mejora que brinda el método de las derivadas sobre los bordes de las imágenes. En el primer caso, el texto aparece mucho más nítido, y el \textit{zipper effect} que se podía percibir en los bordes de la franja marrón del barco es mucho menos visible.\\
+\indent La segunda imagen, por su parte, también muestra notables mejoras en la ventana: combinando los datos mediante el promedio, podía observarse claramente \textit{zipper effect} y \textit{jaggies} en los bordes internos de la misma; pero al procesar la imagen con el algoritmo que hace uso de las derivadas, las líneas ahora aparecen mucho más suaves y definidas. \\
+De todas formas, sigue siendo visible el artifact de Moiré, y pueden verse algunos de los píxeles anormalmente fuertes de los que hablamos antes. \\
+
+\begin{figure}[h!]
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/pesos1y0/barco1.png}\\
+	\end{center}
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/pesos1y0/arbol.png}\\
+	\end{center}
+	\caption{Combinación de datos mediante promedio (izquierda), y mediante el presente método (derecha)}
+	\label{splines3}
+\end{figure}
+\pagebreak
+En estas otras dos imágenes pretendemos dejar en evidencia el problema de los píxeles con colores incorrectos. Como puede verse en ambas, las lineas en el caso del segundo método parecen más definidas y con una alta reducción del \textit{zipper effect} y \textit{jaggies}. Sin embargo, puede observarse la presencia de píxeles, sobre todo verdes y rojos, prácticamente saturados, sobre los bordes más finos. \\
+
+Intentando encontrar explicaciones para este fenómeno, concluímos que podía deberse a que estábamos dejando de lado información valiosa a la hora de componer la imagen: sólo usábamos una dirección.\\
+\indent Por esta razón, decidimos no arrojar una de las direcciones, sino buscar alguna manera de utilizar ambas para obtener mejoras en la composición.\\
+El siguiente método surgió entonces como un intento de mejorar el anterior algoritmo.\\
+
+El mismo consiste en, para cada pixel que no sea verde, calcular los valores resultantes de ambas interpolaciones para el canal verde: tanto la de la fila, como la de la columna, y luego multiplicar a cada uno por algún factor relacionado con las derivadas direccionales de ese mismo canal, en el pixel a estimar.\\
+
+Luego de un análisis sobre qué factor era más conveniente usar, llegamos a la conclusión de que uno inversamente proporcional al valor que tenga cada derivada sería una buena idea. Por lo tanto, definimos:
+
+\[\sigma_G = \partial_xG + \partial_yG \]
+\smallskip
+\[\alpha_G = 
+\begin{cases}
+0.5 & \sigma_G = 0 \\
+  &  \\
+1-\frac{\partial_xG}{\sigma_G} & \sigma_G \neq 0
+\end{cases}
+\]
+\medskip
+\[\beta_G = 
+\begin{cases}
+0.5 & \sigma_G = 0 \\
+  &  \\
+1-\frac{\partial_yG}{\sigma_G} & \sigma_G \neq 0
+\end{cases}
+\]
+\pagebreak
+
+En términos implementativos, el algoritmo que resuelve este problema es el siguiente:
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo spline_der (proporcional)}
+\For{cada fila de la imagen}{
+\eIf{la fila es par}{
+\begin{itemize}
+\item Generar el spline de toda la fila para el canal azul e interpolar para los píxeles verdes
+\item Generar el spline de toda la fila para el canal verde e interpolar para los píxeles azules
+\item Multiplicar al resultado de la interpolación anterior por $\alpha$
+\end{itemize}
+}{
+\begin{itemize}
+\item Generar el spline de toda la fila para el canal rojo e interpolar para los píxeles verdes
+\item Generar el spline de toda la fila para el canal verde e interpolar para los píxeles rojos
+\item Multiplicar al resultado de la interpolación anterior por $\alpha$
+\end{itemize}
+}
+}
+\bigskip
+\For{cada columna de la imagen}{
+\eIf{la columna es par}{
+\begin{itemize}
+\item Generar el spline de toda la columna para el canal rojo e interpolar para los píxeles azules
+\item Generar el spline de toda la columna para el canal azul e interpolar para los píxeles verdes
+\item Generar el spline de toda la columna para el canal verde e interpolar para los píxeles azules
+\item Multiplicar al resultado de la interpolación anterior por $\beta$
+\item Sumarlo al valor previo del pixel en el canal verde
+\end{itemize}
+}{
+\begin{itemize}
+\item Generar el spline de toda la columna para el canal azul e interpolar para los píxeles rojos
+\item Generar el spline de toda la columna para el canal rojo e interpolar para los píxeles verdes
+\item Generar el spline de toda la columna para el canal verde e interpolar para los píxeles rojos
+\item Multiplicar al resultado de la interpolación anterior por $\beta$
+\item Sumarlo al valor previo del pixel en el canal verde
+\end{itemize}
+}
+}
+\end{algorithm}
+
+Las imágenes resultantes luego de ser procesadas con el presente algoritmo no produjeron los resultados esperados: las mejoras fueron extremadamente sutiles, al borde de ser indetectables a simple vista, y arrojando resultados de PSNR y SSIM prácticamente idénticos. \\
+
+\textcolor{red}{IMAGENES\\}
+
+Aún más, este algoritmo es considerablemente más lento que el anterior. Teniendo en cuenta el contexto de aplicación, esto no es para nada aceptable: idealmente, un algoritmo de demosaicing debería ser lo suficienteme rápido -o al menos producir imágenes de calidad realmente superior- para justificar el tiempo de cómputo extra requerido.\\
+
+\textcolor{red}{GRAFICO TIEMPO\\}
+
+En conclusión, decidimos descartar este algoritmo: las mejoras eran demasiado sutiles y el tiempo inaceptablemente mayor como para preferirlo.\\
+
+Ya habiendo probado distintas formas de mejorar el algoritmo original (interpolación de una fila y columnas completas, combinando los resultados mediante promedio) y sin obtener resultados considerablemente mejores, decidimos cambiar, no sólo la forma de combinar los resultados, sino también la manera de obtenerlos: nos propusimos dejar de interpolar una fila y columnas completas, y optar por tomar ``rangos'' alrededor de cada pixel sobre los cuales hacer la interpolación. \\
+
+Nuestra hipótesis al plantear esto fue la siguiente: el color de un píxel está definido por un entorno del mismo, es decir, habrá todo un entorno del pixel en donde los colores serán similares (excepto en los bordes). Tiene más sentido estimar el color de un píxel sólo tomando los valores que nos brindan información ``cierta'', y no estimar mediante un polinomio que tiene en cuenta la variación del color a lo largo y ancho de toda la imagen, que puede contener muchos bordes y cambios cromáticos. \\
+
+Para este método seguiremos utilizando la información que nos brindan las derivadas direccionales, más especificamente, utilizar sólo la interpolación de una fila o una columna (en lugar de la técnica proporcional de los pesos), dado que la experimentación antes realizada demostró que el \textit{trade-off} calidad-tiempo beneficia al primero. \\
+
+Además, dado que este método realiza interpolaciones en rangos mucho más chicos (y, por ende, genera Splines mucho más pequeños), esto nos permitió repensar la manera en la que se recorre la imagen, para así intentar realizar una interpolación de mejor calidad para todos los canales: notar que en los métodos explicados hasta el momento, los canales rojo y azul de los píxeles originalmente verdes sólo eran interpolados con la información de las filas (para el canal rojo) o las columnas (para el canal azul), es decir, sólo se interpolaba en una dirección para los colores distintos al verde. Esto se debe a que hubiera sido muy costoso volver a recorrer la imagen, interpolando nuevamente filas y columnas enteras, para interpolar estos canales en las direcciones faltantes.\\
+
+Aún más, dado que ahora le daremos peso a las direcciones de los tres canales por igual, se aplicará el mismo concepto del gradiente para los canales faltantes, notando \(\partial_xB\) y \(\partial_yB\) a las derivadas horizontal y vertical para el canal azul, y \(\partial_xR\) y \(\partial_yR\) a las derivadas horizontal y vertical para el canal rojo.\\
+
+El algoritmo que implementa esta idea se presenta a continuación:
+\pagebreak
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo spline_rango}
+\For{cada fila de la imagen}{
+\If{el pixel actual es azul o rojo}{
+Generar un spline de rango $r$ para el canal verde de acuerdo a \(\partial_xG\) y \(\partial_yG\) e interpolar
+}
+\ElseIf{el pixel actual es verde}{
+\eIf{es una fila de verdes y rojos}{
+Generar un spline horizontal de rango $r$ para el canal rojo e interpolar\\
+
+Generar un spline vertical de rango $r$ para el canal azul e interpolar
+}{
+Generar un spline horizontal de rango $r$ para el canal azul e interpolar\\
+
+Generar un spline vertical de rango $r$ para el canal rojo e interpolar
+}
+}
+}
+\bigskip
+\For{cada fila de la imagen}{
+\If{el pixel actual es azul}{
+Generar un spline de rango $r$ para el canal rojo de acuerdo a \(\partial_xR\) y \(\partial_yR\) e interpolar
+}
+\ElseIf{el pixel actual es rojo}{
+Generar un spline de rango $r$ para el canal azul de acuerdo a \(\partial_xB\) y \(\partial_yB\) e interpolar}
+}
+\bigskip
+\For{cada fila de la imagen}{
+\If{es una fila de verdes y azules, y el pixel actual es verde}{
+\If{\(\partial_yR > \partial_xR\)}{
+Generar un spline horizontal de rango $r$ para el canal rojo e interpolar
+}
+\If{\(\partial_xB > \partial_yB\)}{
+Generar un spline vertical de rango $r$ para el canal azul e interpolar
+}
+}
+\ElseIf{es una fila de verdes y rojos, y el pixel actual es verde}{
+\If{\(\partial_yB > \partial_xB\)}{
+Generar un spline horizontal de rango $r$ para el canal azul e interpolar
+}
+\If{\(\partial_xR > \partial_yR\)}{
+Generar un spline vertical de rango $r$ para el canal rojo e interpolar
+}
+}
+}
+\end{algorithm}
+
+Donde ``generar un spline de rango $r$ para el canal $C$ de acuerdo a \(\partial_xC\) y \(\partial_yC\) e interpolar'' significa ``calcular la dirección cuya derivada es mayor y generar el spline correspondiente para usar en la interpolación'', como en los métodos anteriores.
+
+\begin{itemize}
+\item La primera iteración sobre la imagen se encarga de completar el canal verde para los píxeles distintos del verde, y, para los verdes, completar los canales rojo y azul, sólo en la dirección que tenga información acerca de ese canal (dependerá de la fila en la que se encuentre el pixel verde en cuestión).
+\item La segunda iteración se encargará de completar el canal rojo para los píxeles originalmente azules, y el canal azul para los píxeles originalmente rojos. Notar que podemos utilizar las derivadas direccionales también para estos colores porque en el ciclo anterior nos encargamos de que haya información acerca del rojo y el azul en todos los píxeles verdes.
+\item Por último, el tercer ciclo se encarga de mejorar la interpolación de los canales rojo y azul para los píxeles verdes. En principio, a los píxeles verdes se les había asignado información del rojo y el azul en una sola dirección, pero ahora, aprovechando que tenemos información del rojo y el azul en todos los píxeles, podemos utilizar el criterio del gradiente para mejorar la estimación.
+\end{itemize}
+
 
 
 \newpage

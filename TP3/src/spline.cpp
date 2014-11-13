@@ -14,18 +14,15 @@ std::vector<double> generar_spline(std::vector<double> fx){
 	sist.Elem(n-1,n-1) = 1;
 	sist.Res(n-1,0);
 
-	//double h;
 	double b;
-	for (int i = 1; i < n-1; ++i) // i=0:n si h no llega a ser siempre 2
+	for (int i = 1; i < n-1; ++i)
 	{
-		//h = 2;
 		b = ((double)3/2)*(fx[i+1]+fx[i-1]-2*fx[i]);
 		sist.Elem(i,i-1) = 2;
 		sist.Elem(i,i) = 8;
 		sist.Elem(i,i+1) = 2;
 		sist.Res(i,b);
 	}
-	//sist.imprimir();
 
 	std::vector<double> sol = sist.ResolverSistema();
 
@@ -236,17 +233,6 @@ void spline_der(cimg_library::CImg<double>& orig){
 		{
 			for (int c = 2; c < alto-2; c+=2)
 			{
-				// if (i>0 && i<ancho)
-				// {
-				// 	double derF = fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1));
-				// 	double derC = fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1));
-				// 	double fact = derF+derC;
-				// 	double factorF = (fact==0) ? 0.5 : derF/fact;
-				// 	double factorC = (fact==0) ? 0.5 : derC/fact;
-
-				// 	orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*(1-factorF))+((1-factorC)*evaluar(spline_col_g,c-1))));
-				// }
-
 				orig(i,c,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-1)));
 
 				if( (i>2 && i<ancho-2) && ((fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1)))))
@@ -259,22 +245,130 @@ void spline_der(cimg_library::CImg<double>& orig){
 		{
 			for (int c = 3; c < alto-2; c+=2)
 			{
-				// if (i>0 && i<ancho)
-				// {
-				// 	double derF = fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1));
-				// 	double derC = fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1));
-				// 	double fact = derF+derC;
-				// 	double factorF = (fact==0) ? 0.5 : derF/fact;
-				// 	double factorC = (fact==0) ? 0.5 : derC/fact;
-
-				// 	orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*(1-factorF))+((1-factorC)*evaluar(spline_col_g,c-1))));
-				// }
-
 				orig(i,c-1,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-2)));
 
 				if( (i>2 && i<ancho-2) && ((fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1)) > fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1)))))
 					orig(i,c,0,1) = fmin(255.0,fmax(0,evaluar(spline_col_g,c)));
 
+				orig(i,c,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
+			}
+		}
+	}
+	orig.crop(3,3,0,0,ancho-4,alto-4,0,2);
+}
+
+void spline_der_prop(cimg_library::CImg<double>& orig){
+	unsigned int ancho = orig.width();
+	unsigned int alto = orig.height();
+	std::vector<double> filaR, filaG, filaB, colR, colG, colB;
+	std::vector<double> spline_col_r, spline_col_g, spline_col_b, spline_fila_r, spline_fila_g, spline_fila_b;
+
+	for (int i = 0; i < alto; ++i)
+	{
+		filaR.clear();
+		filaG.clear();
+		filaB.clear();
+
+		if (i%2==0)
+		{
+			for (int c = 1; c < ancho; c+=2)
+			{
+				filaG.push_back(orig(c,i,0,1));
+				filaB.push_back(orig(c-1,i,0,2));
+			}
+
+			spline_fila_g = generar_spline(filaG);
+			spline_fila_b = generar_spline(filaB);
+
+			for (int c = 2; c < ancho-1; c+=2)
+			{
+				orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,c-1)));
+				orig(c-1,i,0,2) = fmin(255.0,fmax(0,evaluar(spline_fila_b,c)));
+			}
+		}
+		else
+		{
+			for (int c = 0; c < ancho; c+=2)
+			{
+				filaG.push_back(orig(c,i,0,1));
+				filaR.push_back(orig(c+1,i,0,0));
+			}
+
+			spline_fila_g = generar_spline(filaG);
+			spline_fila_r = generar_spline(filaR);
+
+			for (int c = 3; c < ancho-1; c+=2)
+			{
+				orig(c-1,i,0,0) = fmin(255.0,fmax(0,evaluar(spline_fila_r,c-2)));
+				orig(c,i,0,1) = fmin(255.0,fmax(0,evaluar(spline_fila_g,c)));
+			}
+		}
+	}
+
+	for (int i = 0; i < ancho; ++i)
+	{
+		colR.clear();
+		colG.clear();
+		colB.clear();
+
+		if (i%2==0)
+		{
+			for (int c = 1; c < alto; c+=2)
+			{
+				colR.push_back(orig(i,c,0,0));
+				colG.push_back(orig(i,c,0,1));
+				colB.push_back(orig(i,c-1,0,2));
+			}
+		}
+		else
+		{
+			for (int c = 0; c < alto; c+=2)
+			{
+				colB.push_back(orig(i,c,0,2));
+				colG.push_back(orig(i,c,0,1));
+				colR.push_back(orig(i,c+1,0,0));
+			}
+		}
+
+		spline_col_g = generar_spline(colG);
+		spline_col_b = generar_spline(colB);
+		spline_col_r = generar_spline(colR);
+
+		if (i%2==0)
+		{
+			for (int c = 2; c < alto-2; c+=2)
+			{
+				if (i>0 && i<ancho)
+				{
+					double derF = fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1));
+					double derC = fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1));
+					double fact = derF+derC;
+					double factorF = (fact==0) ? 0.5 : derF/fact;
+					double factorC = (fact==0) ? 0.5 : derC/fact;
+
+					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*(1-factorF))+((1-factorC)*evaluar(spline_col_g,c-1))));
+				}
+
+				orig(i,c,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-1)));
+				orig(i,c-1,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
+			}
+		}
+		else
+		{
+			for (int c = 3; c < alto-2; c+=2)
+			{
+				if (i>0 && i<ancho)
+				{
+					double derF = fabs(orig(i-1,c,0,1)-orig(i+1,c,0,1));
+					double derC = fabs(orig(i,c-1,0,1)-orig(i,c+1,0,1));
+					double fact = derF+derC;
+					double factorF = (fact==0) ? 0.5 : derF/fact;
+					double factorC = (fact==0) ? 0.5 : derC/fact;
+
+					orig(i,c,0,1) = fmin(255.0,fmax(0,(orig(i,c,0,1)*(1-factorF))+((1-factorC)*evaluar(spline_col_g,c-1))));
+				}
+
+				orig(i,c-1,0,0) = fmin(255.0,fmax(0,evaluar(spline_col_r,c-2)));
 				orig(i,c,0,2) = fmin(255.0,fmax(0,evaluar(spline_col_b,c)));
 			}
 		}
