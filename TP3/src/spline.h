@@ -15,8 +15,6 @@ void spline_der_prop(cimg_library::CImg<double>& orig);
 
 void spline_rango(cimg_library::CImg<double>& orig);
 
-void spline_diag(cimg_library::CImg<double>& orig);
-
 void spline_rango_MHC(cimg_library::CImg<double>& orig);
 
 #endif

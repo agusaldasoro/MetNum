@@ -1,20 +1,23 @@
 \select@language {spanish}
 \contentsline {section}{\numberline {1}Introducci\'on Te\'orica}{3}
-\contentsline {subsection}{\numberline {1.1}Inconvenientes de aproximar mediante el Polinomio de Lagrange}{4}
-\contentsline {subsection}{\numberline {1.2}M\'etricas de comparaci\'on de im\'agenes}{9}
-\contentsline {subsection}{\numberline {1.3}Artifacts}{10}
-\contentsline {section}{\numberline {2}Desarrollo}{13}
-\contentsline {subsection}{\numberline {2.1}Vecino m\'as cercano}{13}
-\contentsline {subsection}{\numberline {2.2}Interpolaci\'on Bilineal}{20}
-\contentsline {subsection}{\numberline {2.3}Interpolaciones Direccionales}{21}
-\contentsline {subsection}{\numberline {2.4}Splines}{23}
-\contentsline {subsection}{\numberline {2.5}Algoritmo de Malvar, He y Cutler}{25}
-\contentsline {section}{\numberline {3}Resultados y discusi\'on}{26}
-\contentsline {subsection}{\numberline {3.1}Exploraci\'on de Artifacts}{26}
-\contentsline {subsection}{\numberline {3.2}An\'alisis cualitativo de los M\'etodos}{27}
-\contentsline {subsection}{\numberline {3.3}An\'alisis de tiempos}{40}
-\contentsline {section}{\numberline {4}Conclusiones y trabajo futuro}{41}
-\contentsline {section}{\numberline {5}Ap\'endices}{41}
-\contentsline {subsection}{\numberline {5.1}Ap\'endice A: Enunciado}{41}
-\contentsline {subsection}{\numberline {5.2}Ap\'endice B:}{41}
-\contentsline {section}{\numberline {6}Referencias}{42}
+\contentsline {subsection}{\numberline {1.1}M\'etricas de comparaci\'on de im\'agenes}{5}
+\contentsline {subsection}{\numberline {1.2}Artifacts}{6}
+\contentsline {section}{\numberline {2}Desarrollo}{9}
+\contentsline {subsection}{\numberline {2.1}Vecino m\'as cercano}{9}
+\contentsline {subsection}{\numberline {2.2}Interpolaci\'on Bilineal}{16}
+\contentsline {subsection}{\numberline {2.3}Interpolaciones Direccionales}{17}
+\contentsline {subsection}{\numberline {2.4}Splines}{19}
+\contentsline {subsection}{\numberline {2.5}Algoritmo de Malvar, He y Cutler}{33}
+\contentsline {section}{\numberline {3}Resultados y discusi\'on}{34}
+\contentsline {subsection}{\numberline {3.1}Exploraci\'on de Artifacts}{34}
+\contentsline {subsubsection}{\numberline {3.1.1}Vecino m\IeC {\'a}s cercano}{34}
+\contentsline {subsubsection}{\numberline {3.1.2}Interpolaci\IeC {\'o}n Bilineal}{34}
+\contentsline {subsubsection}{\numberline {3.1.3}Malvar-He-Cutler demosaicing}{36}
+\contentsline {subsubsection}{\numberline {3.1.4}Splines con Malvar-He-Cutler demosaicing}{37}
+\contentsline {subsection}{\numberline {3.2}An\'alisis cualitativo de los M\'etodos}{39}
+\contentsline {subsection}{\numberline {3.3}An\'alisis de tiempos}{53}
+\contentsline {section}{\numberline {4}Conclusiones y trabajo futuro}{54}
+\contentsline {section}{\numberline {5}Ap\'endices}{54}
+\contentsline {subsection}{\numberline {5.1}Ap\'endice A: Enunciado}{54}
+\contentsline {subsection}{\numberline {5.2}Ap\'endice B: Algoritmos}{61}
+\contentsline {section}{\numberline {6}Referencias}{63}

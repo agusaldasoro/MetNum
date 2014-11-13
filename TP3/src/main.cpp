@@ -12,15 +12,14 @@
 
 using namespace std;
 
-//Como ejecutar: ./tp path_imagen tipo
-//Donde tipo: 0=vecino, 1=bilineal, 2=MHC, 3,4,...,n=direccionales??
+//Como ejecutar: leer README
 
 int main(int argc, char const *argv[])
 {
 	if (argc < 3)
 	{
 		cout << "\nUso del programa: ./tp path_imagen algoritmo \n\nDonde algoritmo puede ser: \n [0] para Vecino Mas Cercano \n [1] para Bilineal \n [2] para el algoritmo de Malvar, He y Cutler (MHC) \n [3] para interpolacion mediante splines, seguida de alguna de las siguiente opciones:" << endl;
-		cout << "\t 's' -metodo standard, interpolando una fila y una columna \n\t 'p' -interpolacion otorgando pesos en base a las derivadas direccionales \n\t 'r' -interpolacion tomando un rango de 3 pixeles \n\t 'm' -interpolacion utilizando las mejoras basadas en el algoritmo de Malvar, He y Cutler \n\t 'd' -interpolacion utilizando diagonales en lugar de filas y columnas \n" << endl;
+		cout << "\t 's' -metodo standard, interpolando una fila y una columna enteras \n\t 'd' -interpolacion descartando direcciones en base a las derivadas direccionales \n\t 'p' -interpolacion otorgando pesos proporcionales en base a las derivadas direccionales \n\t 'r' -interpolacion tomando un rango de 3 pixeles del mismo color \n\t 'm' -interpolacion utilizando las mejoras basadas en el algoritmo de Malvar, He y Cutler \n" << endl;
 	}
 	else
 	{
@@ -79,7 +78,7 @@ int main(int argc, char const *argv[])
 		{
 			if (argc != 4)
 			{
-				cout << "Es necesario especificar el tipo de spline a aplicar: \n\t 's' -metodo standard, interpolando una fila y una columna \n\t 'p' -interpolacion otorgando pesos en base a las derivadas direccionales \n\t 'r' -interpolacion tomando un rango de 3 pixeles \n\t 'm' -interpolacion utilizando las mejoras basadas en el algoritmo de Malvar, He y Cutler \n\t 'd' -interpolacion utilizando diagonales en lugar de filas y columnas \n" << endl;
+				cout << "Es necesario especificar el tipo de spline a aplicar: \t 's' -metodo standard, interpolando una fila y una columna enteras \n\t 'd' -interpolacion descartando direcciones en base a las derivadas direccionales \n\t 'p' -interpolacion otorgando pesos proporcionales en base a las derivadas direccionales \n\t 'r' -interpolacion tomando un rango de 3 pixeles del mismo color \n\t 'm' -interpolacion utilizando las mejoras basadas en el algoritmo de Malvar, He y Cutler \n" << endl;
 				return 0;
 			}
 
@@ -93,15 +92,15 @@ int main(int argc, char const *argv[])
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline.bmp";
 					original.crop(3,3,0,0,original.width()-4,original.height()-4,0,2);
 					break;
-				case 'd': //peso mediante derivadas
+				case 'd': //descarte mediante derivadas
 					cout << "Aplicando demosaicing mediante splines: peso mediante derivadas direccionales..." << endl;
 					start = std::chrono::system_clock::now();
 					spline_der(raw);
 					end = std::chrono::system_clock::now();
-					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-derivadas.bmp";
+					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-derivadas-descarte.bmp";
 					original.crop(3,3,0,0,original.width()-4,original.height()-4,0,2);
 					break;
-				case 'p': //peso mediante derivadas: proporcional
+				case 'p': //peso proporcional mediante derivadas
 					cout << "Aplicando demosaicing mediante splines: peso proporcional mediante derivadas direccionales..." << endl;
 					start = std::chrono::system_clock::now();
 					spline_der_prop(raw);
@@ -125,13 +124,6 @@ int main(int argc, char const *argv[])
 					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-MHC.bmp";
 					original.crop(5,5,0,0,original.width()-6,original.height()-6,0,2);
 					break;
-				/*case 'd': //diagonal
-					cout << "Aplicando demosaicing mediante splines: diagonales..." << endl;
-					start = std::chrono::system_clock::now();
-					spline_diag(raw);
-					end = std::chrono::system_clock::now();
-					nombre_spline = (imagen.substr(0,imagen.length()-4))+"-spline-diag.bmp";
-					break;*/
 			}
 
 			const char * c_nombre_spline = nombre_spline.c_str();

@@ -1,0 +1,21 @@
+Para compilar el TP, correr:
+
+-En Linux:
+g++ *.cpp -o tp -std=c++11 -lpthread -lX11
+
+-En OSX:
+g++ -o tp *.cpp -I/usr/X11/include -L/usr/X11/lib -lX11
+
+Para correrlo:
+./tp path_imagen algoritmo
+
+Donde algoritmo puede ser:
+[0] para Vecino Mas Cercano
+[1] para Bilineal
+[2] para el algoritmo de Malvar, He y Cutler (MHC)
+[3] para interpolacion mediante splines, seguida de alguna de las siguiente opciones:
+	's' -metodo standard, interpolando una fila y una columna enteras
+	'd' -interpolacion descartando direcciones en base a las derivadas direccionales
+	'p' -interpolacion otorgando pesos proporcionales en base a las derivadas direccionales
+	'r' -interpolacion tomando un rango de 3 pixeles del mismo color
+	'm' -interpolacion utilizando las mejoras basadas en el algoritmo de Malvar, He y Cutler

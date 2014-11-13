@@ -22,8 +22,6 @@ public:
 
 	std::vector<double> ResolverSistema();
 
-	//void imprimir();
-
 private:
 	Nat _dim;
 	std::vector< std::vector<double> > _mtrx;

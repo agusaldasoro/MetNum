@@ -44,13 +44,3 @@ std::vector<double> Matriz::ResolverSistema()
 
 	return res;
 }
-
-/*void Matriz::imprimir(){
-	for (int i = 0; i < _dim; ++i)
-	{
-		for (int j = 0; j < 4; ++j)
-			std::cout << this->_mtrx[i][j] << ", ";
-
-		std::cout << std::endl;
-	}
-}*/

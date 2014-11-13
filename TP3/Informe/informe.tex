@@ -80,7 +80,8 @@ La tarea de capturar todos los colores reflejados por el objetivo que se quiere 
 
 El patr\'on que determina qué color será capturado por cada fotosensor es denominado \emph{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras. Existen diversos patrones, en nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda sobre el canal verde - al cual el ojo humano es más sensible por encontrarse en el centro de su espectro visual y es el canal que brinda mayor informaci\'on sobre la luminiscencia -  duplica a cada uno de los otros dos.
 
-\textcolor{red}{*insertar imágenes por aquí y por allá* (?
+\textcolor{red}{*insertar imágenes por aquí y por allá* (?\\
+AGREGAR IMGS DE OTROS FILTROS
 }
 
 \begin{figure}[h!]
@@ -100,148 +101,6 @@ En este punto adquieren relevancia las diferentes propuestas de reconstrucción 
 A efectos de nuestro caso de estudio, la imagen bajo el Color Filter Array Bayer la vamos a generar sint\'eticamente, es decir mediante un algoritmo que tome una imagen original y devuelva una imagen de este formato. Esto nos permitir\'a hacer comparaciones entre los m\'etodos y la imagen original, teniendo as\'i un punto de referencia en cuanto a la correctitud de la imagen.
 
 \newpage
-\subsection{Inconvenientes de aproximar mediante el Polinomio de Lagrange}
-
-
-Es nuestra intención exponer ahora el motivo que consideramos suficiente para decidir interpolar los valores ausentes a través de Splines en lugar de hacer uso del polinomio de Lagrange.\\
-Sea dada la siguiente muestra: \\
-\smallskip
-
-
-\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
- \hline                 
-   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
- \hline    
-y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
- \hline  
- \end{tabular}
-
-\smallskip
-
-\begin{tabular}{  | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
- \hline                 
-   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
- \hline    
-y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
- \hline  
- \end{tabular}
-\bigskip
-\\
-El polinomio de Lagrange que interpola cada uno de esos valores tiene una expresión equivalente al Spline que lo hace, siendo su gráfico el que se muestra a continuación:
-\smallskip
-
-\begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=1]{imagenes/LagrangeSplinesCTE}
-	\label{LagrangeSplinesCTE}
-  \end{center}
-\end{figure}
-
-Supongamos ahora que el resultado de una medición - digamos $x_{12}$ - haya sido calculada con un ruido que represente el 1\% del valor real, modificándose la muestra de la siguiente forma:\\
-
-\smallskip
-
-\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
- \hline                 
-   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
- \hline    
-y & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10,1& 10 & 10\\
- \hline  
- \end{tabular}
-
- \smallskip
-
-\begin{tabular}{  | c || c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
- \hline                 
-   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
- \hline    
-y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
- \hline  
- \end{tabular}
-
-\bigskip
-
- En este caso se obtendría el gráfico representado en la Figura \ref{LagrangeX12a101} para el polinomio de Lagrange (escalado en la Figura \ref{LagrangeX12a101(zoomOut)})y el que se ilustra en la Figura \ref{SplinesX12a101} para el obtenido mediante Splines.\\
-
-\begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=1]{imagenes/SplinesX12a101}
-	\label{SplinesX12a101}
-  \end{center}
-\end{figure}
-
-\begin{figure}
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=1]{imagenes/LagrangeX12a101}
-	\label{LagrangeX12a101}
-  \end{center}
-\end{figure}
-
-\begin{figure}
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=1]{imagenes/LagrangeX12a101(zoomOut)}
-	\label{LagrangeX12a101(zoomOut)}
-  \end{center}
-\end{figure}
-
-Como se puede observar, para la construcción del Spline el cambio en un valor de la imagen no impactó de una forma apreciable sobre el resto del polinomio. Sin embargo, el nuevo resultado generó un polinomio de Lagrange cuya diferencia con la Figura \ref{SplinesX12a101} es grosera en determinados intervalos.\\ 
-
-Si se profundizara el error de la medición de acuerdo con la tabla presentada a continuación, notaríamos que el polinomio de Lagrange comenzaría a presentar una mayor cantidad de intervalos con valores drásticamente alejados de los dados como referencia. Por otro lado, Splines únicamente presentará variaciones en un entorno de los intervalos cuyos valores hayan sido modificados. Esto se puede  constatar en las Figuras \ref{SplinesX12a20}, \ref{LagrangeX12a20} y  \ref{LagrangeX12a20(zoomOut)}.\\
-
-
-\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
- \hline                 
-   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
- \hline    
-y & 10 & 10& 10& 20& 10& 10& 10& 10& 10& 10& 10& 20& 10 & 10\\
- \hline  
- \end{tabular}
-
-\smallskip
-
-\begin{tabular}{  | c || c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
- \hline                 
-   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
- \hline    
-y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
- \hline  
- \end{tabular}
-
-\begin{figure}
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=1]{imagenes/SplinesX12a20}
-	\label{SplinesX12a20}
-  \end{center}
-\end{figure}
-
-\begin{figure}
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=1]{imagenes/LagrangeX12a20}
-	\label{LagrangeX12a20}
-  \end{center}
-\end{figure}
-
-\begin{figure}
-	\caption{$Zoom \ out$ de la Figura \ref{LagrangeX12a20}}
-	\begin{center}
-	\includegraphics[scale=1]{imagenes/LagrangeX12a20(zoomOut)}
-	\label{LagrangeX12a20(zoomOut)}
-  \end{center}
-\end{figure}
-
-\bigskip
-
-\newpage
-En conclusión, el polinomio de Lagrange se comporta de una manera menos predecible estable entre dos variables independientes y no garantiza que en esos intervalos el valor de la función sea cercano a los ya conocidos.\\
-La carencia de predictibilidad hace del polinomio de Lagrange una mala alternativa para la interpolación, en comparación con las ventajas proporcionadas por el empleo de Splines.\\
-
-
 
 
 \newpage
@@ -272,7 +131,7 @@ En nuestro caso de estudio, nos vamos a centrar en la comparaci\'on de la imagen
  \textbf{psnr} = 10 \log \frac{(2^n-1)^2}{mse} = 10 \log \frac{255^2}{mse}
 \]
 
-Otro tipo de medidas a tener en cuenta son las que utilizan indicadores de la imagen similares a los presentes en la visi\'on humana, como es el caso de \emph{\textbf{Structural similarity}} (ssim) que es una funci\'on que depende de la luminiscencia, el contraste y la similaridad estructural.
+Otro tipo de medidas a tener en cuenta son las que utilizan indicadores de la imagen similares a los presentes en la visi\'on humana, como es el caso de \emph{\textbf{Structural similarity}} (ssim) que es una funci\'on que depende de la luminiscencia, el contraste y la similitud estructural.
 
 \[
  \textbf{ssim}(x,y) = \frac{(2\mu_x\mu_y+c_1)(2\sigma_{xy}+c_2)}{(\mu_x^2+\mu_y^2+c_1)(\sigma_x^2+\sigma_y^2+c_2)}
@@ -308,8 +167,19 @@ Para evaluar el peso de estas diferencias  existen mecanismos cuantitativos (com
 
 Los \textit{artifacts} son efectos visuales indeseados frecuentes que se producen sobre la imagen procesada a causa de una interpolación poco conveniente. 
 
-Ejemplos de artifacts son el efecto <<\emph{Blurring}>>(Figura \ref{blurring}), el <<\emph{False color}>>(Figura \ref{false}), el <<\emph{Jaggies}>>(Figura \ref{jaggies}),   el <<\emph{efecto Moiré}>>(Figura \ref{moire}) y el <<\emph{Zipper}>>(Figura \ref{zipper}).
+Ejemplos de artifacts son el efecto <<\emph{Blurring}>>, el <<\emph{False color}>>, el <<\emph{Jaggies}>>,   el <<\emph{efecto Moiré}>> y el <<\emph{Zipper}>>(Figura \ref{zipper}).
 
+El efecto blurring consiste en la formación de una imagen más difusa que de lo esperado y con menos definición (Ver Figura \ref{blurring}). 
+
+El efecto False color, como su nombre lo indica, es la presencia de pixels con valores notoriamente distintos a los reales (Ver Figura \ref{false}). 
+
+El artifact <<jaggies>> se produce en ciertos casos en los bordes, dándoles un aspecto escalonado (Ver Figura \ref{jaggies}).
+
+El efecto Moiré - conocido en castellano como <<muaré>> y pronunciado de esta forma - produce en un área de la imagen un patrón que no existe en la imagen real, generado por la interferencia entre el patrón real y la matriz de píxeles en el sensor de la cámara digital (Ver Figura \ref{moire}).
+
+La consecuencia del efecto Zipper, por otro lado, es la formación en los contornos de un patrón similar a un cierre éclair (Ver Figura \ref{zipper}).
+
+Por último, el artifact grid es aquel por el cual se puede notar la formación de una textura de red en una o más zonas de la fotografía procesada. (Ver Figura \ref{grid}). 
 
 \begin{figure}[h!]
 	\caption{A la izquierda, la imagen original. A la derecha, la que presenta <<blurring>>.}
@@ -355,16 +225,13 @@ Ejemplos de artifacts son el efecto <<\emph{Blurring}>>(Figura \ref{blurring}), 
   \end{center}
 \end{figure}
 
-
-
-
-
-
-
-\textcolor{red}{ESTARÍA BUENO AGREGAR TIPO ANECDÓTICO LOS ARTIFACTS DEL OJO HUMANO (?) PERO NO SÉ EN PRINCIPIO CÓMO MECHARLO ACÁ}
-
-
-
+\begin{figure}[h!]
+	\caption{A la izquierda, la imagen original. A la derecha, aquella en lla que se observa <<Grid>>.}
+	\begin{center}
+	\includegraphics[scale=0.66]{imagenes/grid}
+	\label{grid}
+  \end{center}
+\end{figure}
 
 
 \newpage
@@ -373,7 +240,7 @@ Ejemplos de artifacts son el efecto <<\emph{Blurring}>>(Figura \ref{blurring}), 
 Dada una \textit{imagen cruda}, los valores que contiene en sus píxeles para cada canal los asumimos reales y ciertos. Por lo tanto, resta averiguar para cada uno de ellos los valores de los dos canales para los cuales dicha información se encuentra ausente.
 
 \subsection{Vecino m\'as cercano}
-La implementación más sencilla para la estimación de los canales desconocidos de cada pixel consiste en otorgar a cada canal ``vacío'' el valor real m\'as pr\'oximo que corresponda a dicho color. Este m\'etodo es algor\'itmicamente asequible, pero no tiene en cuenta dos factores: \\
+La implementación más sencilla para la estimación de los canales desconocidos de cada pixel consiste en otorgar a cada canal <<vacío>> el valor real m\'as pr\'oximo que corresponda a dicho color. Este m\'etodo es algor\'itmicamente asequible, pero no tiene en cuenta dos factores: \\
 \\
 
 $\triangleright$ Por un lado, al otorgar el valor de un sólo pixel cercano, surge la necesidad de definir arbitrariamente cuál se debe escoger como valor referencial en casos en que un conjunto de pixeles son equidistantes al analizado y no existe un criterio claro acerca de cuál de ellos debe ser considerado el ``más próximo''. Que esta decisión impacte en el resultado de forma inocua o parcial o totalmente nociva dependerá en cierta medida de la fotografía que se esté analizando.
@@ -449,7 +316,7 @@ $\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterio
 
 
 \newpage
-\subsection*{Decisiones tomadas en el Algoritmo de Vecino M\'as Cercano}
+\subsubsection*{Decisiones tomadas en el Algoritmo de Vecino M\'as Cercano}
 
 A la hora de formular nuestro algoritmo de Vecino m\'as Cercano nos vimos obligados a determinar aspectos que conciernen al dise\~no del mismo. 
 
@@ -681,7 +548,7 @@ El resultado de empleo del promedio como estrategia de nivelacion de dichos valo
 \end{figure}
 
 \newpage
-Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir este error. Uno de ellos consiste en calcular el gradiente del color para utilizarlo al combinar los resultados, de modo tal que si el mismo fuera de gran magnitud (es decir, la variación del color es considerable) entonces el peso que debe tener el valor calculado en el resultado final debería ser menor a aquel que fue calculado en una dirección cuyo gradiente fuera menor (es decir, que se tratara de una superficie más cromáticamente homogénea).
+Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir este error. Uno de ellos consiste en calcular el gradiente del color para utilizarlo al combinar los resultados, de modo tal que si el mismo fuera de gran magnitud (es decir, la variación del color es considerable) entonces el peso que debe tener el valor calculado en el resultado final debería ser menor a aquel que fue calculado en una dirección cuyo gradiente fuera menor (es decir, que se tratara de una superficie cromáticamente homogénea).
 
 
 
@@ -690,20 +557,150 @@ Ciertamente esto no es lo esperado y existen mecanismos que permiten corregir es
 \newpage
 \subsection{Splines}
 \subsubsection*{Generación de los Splines}
-\textcolor{red}{No se si estan de acuerdo, pero no me pareceria mal dividir un poco la intro teórica en este TP, y hablar acá de por qué no usamos Lagrange. Si no les parece da igual, acá se puede hacer referencia a eso. Y listo (es lo que voy a dejar escrito ahora) pero hay que meditar qué queda mejor.}
-
-\textcolor{blue}{Hablar de todos sus tipos\\
-Decir que bilineal y poner 0.5 queda igual (o casi igual je), usar psnr.\\
-Y ver cual vamos a dejar\\
-Y que usamos NATURALES}
-
 Yendo un paso más allá de la interpolación bilineal, podemos preguntarnos qué otros métodos existen que nos permitan obtener mejores resultados. Una buena primera idea sería analizar qué sucede con los Splines. \\
 
 Los Splines (o trazadores cúbicos) son un tipo particular de interpoladores fragmentarios: funciones partidas que interpolan a través de polinomios un conjunto de puntos. En el caso de los Splines, se interpola entre dos puntos mediante un polinomio cúbico.\\
 
-Como fue explicado anteriormente, los Splines son una opción muy buena a la hora de interpolar funciones: en el análisis realizado contra el Polinomio de Lagrange pudimos observar que este último puede llegar a ser excesivamente malo en ciertos casos. Considerando la superioridad de los Splines, entonces, nos propusimos encontrar un algoritmo que los utilice para conseguir buenas interpolaciones que generen imágenes de calidad superior a la hora de realizar el demosaicing.\\
+Es nuestra intención exponer ahora el motivo que consideramos suficiente para decidir interpolar los valores ausentes a través de Splines en lugar de hacer uso del polinomio de Lagrange:\\
+Sea dada la siguiente muestra: \\
+\smallskip
 
-Conseguir el Spline interpolador de una función $f$ dado un conjunto de puntos \{\(X_0, ..., X_n\)\} y sus respectivos valores de $f(x_j)$ consiste en resolver un sistema \(Ax = b\) que nos permita encontrar los 4 coeficientes de cada uno de los $n-1$ polinomios que lo conformen. Siguiendo la lógica presentada en [\textcolor{red}{referencia al Burden}], donde se despeja el coeficiente que acompaña al término de grado 2 en cada polinomio, se puede llegar a ver que $A$ resulta ser una matriz tridiagonal de $(n+1)\times(n+1)$ que posee el siguiente aspecto (trabajando con splines naturales): \\
+
+\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
+ \hline                 
+   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+ \hline    
+y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
+ \hline  
+ \end{tabular}
+
+\smallskip
+
+\begin{tabular}{  | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
+ \hline                 
+   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
+ \hline    
+y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
+ \hline  
+ \end{tabular}
+\bigskip
+\\
+El polinomio de Lagrange que interpola cada uno de esos valores tiene una expresión equivalente al Spline que lo hace, siendo su gráfico el que se muestra a continuación:
+\smallskip
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeSplinesCTE}
+	\label{LagrangeSplinesCTE}
+  \end{center}
+\end{figure}
+
+Supongamos ahora que el resultado de una medición - digamos $x_{12}$ - haya sido calculada con un ruido que represente el 1\% del valor real, modificándose la muestra de la siguiente forma:\\
+
+\smallskip
+
+\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
+ \hline                 
+   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+ \hline    
+y & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10,1& 10 & 10\\
+ \hline  
+ \end{tabular}
+
+ \smallskip
+
+\begin{tabular}{  | c || c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+ \hline                 
+   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
+ \hline    
+y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
+ \hline  
+ \end{tabular}
+
+\bigskip
+
+ En este caso se obtendría el gráfico representado en la Figura \ref{LagrangeX12a101} para el polinomio de Lagrange (escalado en la Figura \ref{LagrangeX12a101(zoomOut)})y el que se ilustra en la Figura \ref{SplinesX12a101} para el obtenido mediante Splines.\\
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/SplinesX12a101}
+	\label{SplinesX12a101}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeX12a101}
+	\label{LagrangeX12a101}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeX12a101(zoomOut)}
+	\label{LagrangeX12a101(zoomOut)}
+  \end{center}
+\end{figure}
+
+Como se puede observar, para la construcción del Spline el cambio en un valor de la imagen no impactó de una forma apreciable sobre el resto del polinomio. Sin embargo, el nuevo resultado generó un polinomio de Lagrange cuya diferencia con la Figura \ref{SplinesX12a101} es grosera en determinados intervalos.\\ 
+
+Si se profundizara el error de la medición de acuerdo con la tabla presentada a continuación, notaríamos que el polinomio de Lagrange comenzaría a presentar una mayor cantidad de intervalos con valores drásticamente alejados de los dados como referencia. Por otro lado, Splines únicamente presentará variaciones en un entorno de los intervalos cuyos valores hayan sido modificados. Esto se puede  constatar en las Figuras \ref{SplinesX12a20}, \ref{LagrangeX12a20} y  \ref{LagrangeX12a20(zoomOut)}.\\
+
+
+\begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
+ \hline                 
+   x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+ \hline    
+y & 10 & 10& 10& 20& 10& 10& 10& 10& 10& 10& 10& 20& 10 & 10\\
+ \hline  
+ \end{tabular}
+
+\smallskip
+
+\begin{tabular}{  | c || c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+ \hline                 
+   x&15& 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28\\
+ \hline    
+y & 10 & 10 & 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10& 10 \\
+ \hline  
+ \end{tabular}
+
+\begin{figure}
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/SplinesX12a20}
+	\label{SplinesX12a20}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeX12a20}
+	\label{LagrangeX12a20}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+	\caption{$Zoom \ out$ de la Figura \ref{LagrangeX12a20}}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/LagrangeX12a20(zoomOut)}
+	\label{LagrangeX12a20(zoomOut)}
+  \end{center}
+\end{figure}
+
+\bigskip
+
+En conclusión, el polinomio de Lagrange se comporta de una manera menos predecible estable entre dos variables independientes y no garantiza que en esos intervalos el valor de la función sea cercano a los ya conocidos. Esto se debe a que, cuantos más puntos se deseen interpolar, el grado del polinomio de Lagrange será potencialmente mayor.\\
+La carencia de predictibilidad hace del polinomio de Lagrange una mala alternativa para la interpolación, en comparación con las ventajas proporcionadas por el empleo de Splines.\\
+
+Considerando su superioridad, entonces, nos propusimos encontrar un algoritmo que los utilice para conseguir buenas interpolaciones que generen imágenes de calidad superior a la hora de realizar el demosaicing.\\
+
+Conseguir el Spline interpolador de una función $f$ dado un conjunto de puntos \{\(X_0, ..., X_n\)\} y sus respectivos valores de $f(x_j)$ consiste en resolver un sistema \(Ax = b\) que nos permita encontrar los 4 coeficientes de cada uno de los $n-1$ polinomios que lo conformen. Siguiendo la lógica presentada en [\textbf{3}], donde se despeja el coeficiente que acompaña al término de grado 2 en cada polinomio, se puede llegar a ver que $A$ resulta ser una matriz tridiagonal de $(n+1)\times(n+1)$ que posee el siguiente aspecto (trabajando con splines naturales): \\
 
 \[
 A = \left(
@@ -733,6 +730,9 @@ b_i =
 \]
 
 \bigskip
+Antes de continuar: más arriba se mencionó que la presente matriz $A$ tiene dicha forma cuando estamos trabajando con splines naturales.\\
+Existen dos tipos de Splines: los naturales, y los sujetos. Los sujetos requieren que $S'(X_0)$ sea igual a $f'(X_0)$, y que $S'(X_n)$ sea igual a $f'(X_n)$, mientras que los naturales piden que $S''(X_0) = S''(X_n) = 0$. Ciertamente, no nos es posible utilizar Splines sujetos, ya que necesitaríamos saber la derivada de nuestra función a interpolar, pero eso no es conocido.\\
+
 Para nuestro problema en particular, vamos a considerar las funciones a interpolar como el valor de un canal de RGB en alguna porción de la imagen. Dada la fisonomía del Bayer Filter Array, puede observarse con facilidad que, tomando una fila o una columna cualesquiera, la distancia que hay entre dos píxeles del mismo color es de 2 unidades (es decir, para un pixel azul en la posición $j$ de una fila, el siguiente pixel azul se va a encontrar en la posición $j+2$). Esto incluso aplica a si tomamos diagonales (no las que contienen exclusivamente verde, aunque dicho caso no nos es de interés ya que no se interpolaría el verde sobre la misma). \\
 Por esta razón, podemos reemplazar $h_j$ por 2, para todo $j$, y obtener: \\
 
@@ -842,8 +842,14 @@ Retornar $a+b\cdot (x - j)+c \cdot (x - j)^{2} + d \cdot (x - j)^{3}$
 \end{algorithm}\DecMargin{1em}
 
 \bigskip
-\textcolor{red}{Ver de explicar un poco mejor el tema de las cuentas con los indices\\}
-Vale la pena aclarar que el algoritmo recibe como input un entero ya que cada uno de nuestros $X_i$ es un pixel, y no tendría sentido trabajar con fracciones de los mismos. \\
+Creemos pertinente hacer una aclaración acerca del manejo de los índices en este algoritmo:
+\begin{itemize}
+\item Por empezar, definimos $j$ como $\lfloor \frac{x}{2} \rfloor$. Como 2 es la distancia $h$ entre los puntos $X_j$, esta cuenta nos permite encontrar cuál es el polinomio cúbico $S_j$ perteneciente al Spline, que hay que utilizar para realizar la estimación.
+\item Una vez que sabemos cuál es el polinomio $S_j$ que necesitamos, debemos encontrar el índice $i$ en el cual se encuentra dentro de nuestro vector $S$: como cada polinomio se guarda como un conjunto de 4 elementos seguidos en el vector, multiplicamos a $j$ por 4.
+\item Finalmente, para calcular la estimación en cuestión del valor de $f(X_i)$, multiplicamos a $j$ por 2. Esto, otra vez, se debe a que la distancia entre los $X_j$ es 2, y, como se dijo antes, los enumeramos ``implícitamente'' desde 0 a $n$, es necesario multiplicar por 2 para poder saber el valor del mismo.
+\end{itemize}
+
+Vale la pena mencionar también que el algoritmo recibe como input un entero ya que cada uno de nuestros $X_i$ es un pixel, y no tendría sentido trabajar con fracciones de los mismos. \\
 
 \subsubsection*{Aplicación de Splines al problema de demosaicing}
 
@@ -1042,12 +1048,27 @@ En términos implementativos, el algoritmo que resuelve este problema es el sigu
 }
 }
 \end{algorithm}
-
+\pagebreak
 Las imágenes resultantes luego de ser procesadas con el presente algoritmo no produjeron los resultados esperados: las mejoras fueron extremadamente sutiles, al borde de ser indetectables a simple vista, y arrojando resultados de PSNR y SSIM prácticamente idénticos. \\
 
-\textcolor{red}{IMAGENES\\}
+\begin{figure}[h!]
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/prop/cerco.png}\\
+	    PSNR: 27.9308 \ \ \ \ \ \ \ \ \ \ \ \ \ PSNR: 27.9623\\
+	    SSIM: 0.9186 \ \ \ \ \ \ \ \ \ \ \ \ \ SSIM: 0.9191
+	\end{center}
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/prop/balcon.png}\\
+	    PSNR: 25.9947 \ \ \ \ \ \ \ \ \ \ \ \ \ PSNR: 26.0737\\
+	    SSIM: 0.8789 \ \ \ \ \ \ \ \ \ \ \ \ \ SSIM: 0.8795
+	\end{center}
+	\caption{Selección de datos de acuerdo a las derivadas (izquierda), y combinación mediante los pesos proporcionales (derecha)}
+	\label{splines4}
+\end{figure}
 
-Aún más, este algoritmo es considerablemente más lento que el anterior. Teniendo en cuenta el contexto de aplicación, esto no es para nada aceptable: idealmente, un algoritmo de demosaicing debería ser lo suficienteme rápido -o al menos producir imágenes de calidad realmente superior- para justificar el tiempo de cómputo extra requerido.\\
+Las diferencias entre las imágenes resultantes están acotadas a detalles menores como, por ejemplo, un patrón de Moiré levemente distinto en la primer imagen (el artifact sigue estando igual de presente de todos modos), o un \textit{zipper effect} apenas menos notorio en el balcón de la segunda.\\
+
+Aún más, este algoritmo es considerablemente más lento que el anterior. Teniendo en cuenta el contexto de aplicación, esto no es para nada aceptable: idealmente, un algoritmo de demosaicing debería ser rápido -o al menos producir imágenes de calidad realmente superior que justifiquen el tiempo de cómputo extra requerido.\\
 
 \textcolor{red}{GRAFICO TIEMPO\\}
 
@@ -1122,7 +1143,61 @@ Donde ``generar un spline de rango $r$ para el canal $C$ de acuerdo a \(\partial
 \item Por último, el tercer ciclo se encarga de mejorar la interpolación de los canales rojo y azul para los píxeles verdes. En principio, a los píxeles verdes se les había asignado información del rojo y el azul en una sola dirección, pero ahora, aprovechando que tenemos información del rojo y el azul en todos los píxeles, podemos utilizar el criterio del gradiente para mejorar la estimación.
 \end{itemize}
 
+El valor de $r$ utilizado fue 3, es decir, se tomaron 3 píxeles del mismo color a ambos lados de cada píxel para realizar la interpolación. Esta selección se debió a que con rangos mucho mayores el algoritmo se volvía más lento, y con rangos más pequeños, los resultados no eran tan buenos.\\
 
+Al analizar la imágenes generadas, nos sorprendió ver que, a simple vista, la diferencia con el método de las derivadas era imperceptible. De hecho, fue necesario un muy profundo análisis de las imágenes para encontrar diferencias.\\
+
+\begin{figure}[h!]
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/rango/asta.png}\\
+	\end{center}
+	\begin{center}
+	    \includegraphics[scale=0.47]{imagenes/Splines/RecortesSplines/rango/flor.png}\\
+	\end{center}
+	\caption{Combinación de datos mediante peso en base a las derivadas (izquierda), y mediante el presente método (derecha)}
+	\label{splines5}
+\end{figure}
+
+Haciendo una cantidad considerable de zoom sobre las imágenes, puede verse que los colores en los bordes son ``menos saturados'' en las que fueron procesadas con el presente algoritmo: disminuye la presencia de \textit{false colors}.\\
+
+Sin embargo, esas diferencias imperceptibles para nuestros ojos, claramente incidieron en las medidas cualitativas: el método de Splines con rango fue superior que el método de Splines con derivadas, por una cantidad bastante considerable, al medir las imágenes resultantes con PSNR y SSIM:
+
+\begin{center}
+\begin{tabular}{  | c || c | c | c | c | }
+ \hline
+ Imagen & PSNR Rango & PSNR Derivadas & SSIM Rango & SSIM Derivadas\\
+\hline
+\hline
+ img1 & 36.4779 & 34.3011 & 0.9853 & 0.9791\\
+ \hline
+ img2 & 28.1638 & 27.5097 & 0.8856 & 0.8742\\
+ \hline  
+  img3 & 34.8590 & 32.3575 & 0.9819 & 0.9686\\
+ \hline  
+  img4 & 24.1320 & 23.1856 & 0.8399 & 0.8173\\
+ \hline  
+  img5 & 33.5429 & 32.2398 & 0.9314 & 0.9185\\
+ \hline  
+  img6 & 29.6600 & 28.7684 & 0.9114 & 0.8984\\
+ \hline  
+  img7 & 31.5406 & 30.9837 & 0.8849 & 0.8755\\
+ \hline  
+  img8 & 28.8612 & 27.9308 & 0.9301 & 0.9186\\
+ \hline  
+  img9 & 32.2907 & 30.9909 & 0.9579 & 0.9489\\
+ \hline  
+  img10 & 29.0031 & 28.1350 & 0.9203 & 0.9073\\
+ \hline  
+  img11 & 31.0301 & 29.9840 & 0.9448 & 0.9329\\
+ \hline  
+  img12 & 27.0040 & 25.9870 & 0.9017 & 0.8789\\
+ \hline  
+\end{tabular}
+\end{center}
+
+La mayor diferencia respecto a los métodos anteriores fue la velocidad de cómputo: este método fue claramente superior en todos los casos, sin sacrificar calidad:
+
+\textcolor{red}{GRAFICO DE TIEMPOS\\}
 
 \newpage
 \subsection{Algoritmo de Malvar, He y Cutler}
@@ -1154,6 +1229,126 @@ Luego de programar el algoritmo y realizar casos de prueba, los resultados arroj
 \textcolor{blue}{Ver si hay otros artifacts mas para agregar.\\
 Ver como arreglar el de Moire y bla...\\
 Poner fotitos de ampliaciones donde se vean bien los artifacts.}
+
+
+En este apartado nos proponemos analizar inicialmente los artifacts observables en una selección de imágenes luego de la ejecución de cada método mencionado para posteriormente poder realizar una comparación entre ellos a nivel visual.
+
+\subsubsection{Vecino más cercano}
+
+En la imagen de la figura \ref{lorovecino} se pueden apreciar varios de los artifacts previamente mencionados: 
+El borde que delimita el pico del mentón del ave presenta el efecto Zipper, mientras que entre las líneas que se encuentran por encima de su ojo se puede observar la aparición de colores falsos y en la parte superior de su pico se hace evidente la trama escalonada propia del artifact <<jaggies>>.
+
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/lorovecino}
+	\label{lorovecino}
+  \end{center}
+\end{figure}
+
+
+Del mismo modo, en la Figura \ref{barcovecino}  puede verse la forma en que tanto el efecto ``false color" como el ``zipper" tienen lugar en el mástil de la nave, estando presente este último también en la proa junto con el artifact ``jaggies" - por sólo hacer referencia a algunos sectores de la imagen.\\
+Es interesante remarcar que la calidad del fondo no empeoró demasiado en relación  a otros sectores. Esto se debe a que los bordes que presenta son escasos y el área es lo suficientemente homogénea.
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.7]{imagenes/barcovecino}
+	\label{barcovecino}
+  \end{center}
+\end{figure}
+
+En la Figura \ref{alemaniavecino} puede verse la forma en que los artifacts ``false color",  ``zipper" y ``jaggies" vuelven a aparecer, 
+acompañados en esta oportunidad del efecto ``moiré" que se advierte en el frente de la casa blanca.
+
+Por la forma en que se implementó el algoritmo, parece coherente que las líneas horizontales de la imagen no hayan presentado distorciones de gran magnitud.
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.06]{imagenes/alemaniavecino}
+	\label{alemaniavecino}
+  \end{center}
+\end{figure}
+
+Por último, en la Figura \ref{casafarovecino} estos efectos continúan siendo recurrentes. En particular se destaca el efecto moiré generado en el cerco y en la pared de la casa.
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=1]{imagenes/casafarovecino}
+	\label{casafarovecino}
+  \end{center}
+\end{figure}
+
+
+\subsubsection{Interpolación Bilineal}
+
+En todas las imágenes analizadas luego de aplicarles interpolación bilineal notamos la presencia del artifact ``burring" extendido por toda la superficie.
+
+En particular se pueden mencionar otros casos representativos de interés, condensados en las Figuras \ref{vecinobilineal}y \ref{barcobilineal}.
+
+
+Luego del procesamiento con este algoritmo, los efectos ``morié" y ``zipper" continúan apareciendo en el frente de la casa blanca y se produce en el toldo una inesperada distorsión de sus colores originales. 
+
+\begin{figure}[h!]
+	\caption{Interpolación bilineal}
+	\begin{center}
+	\includegraphics[scale=0.05]{imagenes/vecinobilineal}
+	\label{vecinobilineal}
+  \end{center}
+\end{figure}
+
+En el caso del velero se observa tanto la aparición de colores falsos como del efecto ``zipper" en el mástil y principalmente en la proa se hace visible el artifact ``jaggies".
+
+\begin{figure}[h!]
+	\caption{Interpolación bilineal}
+	\begin{center}
+	\includegraphics[scale=0.06]{imagenes/barcobilineal}
+	\label{barcobilineal}
+  \end{center}
+\end{figure}
+
+\subsubsection{Malvar-He-Cutler demosaicing}
+
+Al interpolar los valores de los canales desconocidos para cada pixel a partir de este método, analizamos las imágenes obtenidas y citamos como referencia la Figura \ref{mhczoom}, considerando que en las tres imágenes expuestas se evidencian los artifacts más frecuentemente encontrados para este caso.\\
+En ella se puede ver por primera vez la aparición del efecto ``Grid" que tiene lugar en un cerco. También se puede ver la injerencia de los artifacts ``false colors" y ``zipper" en zonas que para las imagenes que se muestran resultaron conflictivas luego del empleo de más de un método.
+
+
+\begin{figure}[h!]
+	\caption{Artifacts en imágenes reconstruidas a partir del demosaicing Malvar-He-Cutler}
+	\begin{center}
+	\includegraphics[scale=0.7]{imagenes/mhczoom}
+	\label{mhczoom}
+  \end{center}
+\end{figure}
+
+\subsubsection{Splines con Malvar-He-Cutler demosaicing}
+
+El principal problema para este método que se aprecia en la Figura \ref{barcosplineMHC} es la distorsión de los colores originales tanto en el área del mástil como en la de los árboles del fondo. Por otro lado, en la primera zona mencionada parece haberse atenuado - si bien no desaparecido - el efecto causado por el ``zipper".
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.06]{imagenes/barcosplineMHC}
+	\label{cercosplineMHC}
+  \end{center}
+\end{figure}
+
+
+En cuanto a la Figura \ref{cercosplineMHC}, la misma presenta en el área del cerco un entramado de Moiré que hasta el momento no había sido observado, así como también un fuerte impacto del artifact ``false colors" - presente la mayor parte de las imágenes analizadas luego de la aplicación de este método.
+
+
+\begin{figure}[h!]
+	\caption{}
+	\begin{center}
+	\includegraphics[scale=0.1]{imagenes/cercosplineMHC}
+	\label{cercosplineMHC}
+  \end{center}
+\end{figure}
+
+
 
 EN MHC:\\
 
@@ -1425,11 +1620,104 @@ No hay que perder de vista que la implementaci\'on deber\'a ser ejecutada en tie
 \section{Ap\'endices}
 \subsection{Ap\'endice A: Enunciado} 
 
-%ACORDARSE DE DESCOMENTARLO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\includepdf[pages={-}]{Enunciado.pdf}
+\includepdf[pages={-}]{Enunciado.pdf}
 
-\subsection{Ap\'endice B:}
+\subsection{Ap\'endice B: Algoritmos}
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo Vecino m\'as cercano}
+\For{cada fila de la imagen}{
+	\For{cada columna de la imagen}{
+		\eIf{es una fila de rojos y verdes}{
+			\eIf{es un p\'ixel rojo}{
+				canal verde $\leftarrow$ canal verde del p\'ixel de arriba\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de arriba a la izquierda			
+			}{
+				//Pixel Verde\\
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de la derecha\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de arriba			
+			}
+		}{
+			//Fila de azules y verdes \\
+			\eIf{es un p\'ixel verde}{
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de arriba\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de la izquierda			
+			}{
+				//P\'ixel Azul\\
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de abajo a la derecha\\
+				canal verde $\leftarrow$ canal verde del p\'ixel de la derecha			
+			}
+		}
+	}
+}
+\end{algorithm}
+
+
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo Interpolaci\'on Bilineal}
+\For{cada fila de la imagen}{
+	\For{cada columna de la imagen}{
+		\eIf{es una fila de rojos y verdes}{
+			\eIf{es un p\'ixel rojo}{
+				canal verde $\leftarrow$ promedio de los cuatro de los costados\\
+				canal azul $\leftarrow$ promedio de los cuatro de las diagonales			
+			}{
+				//Pixel Verde\\
+				canal rojo $\leftarrow$ promedio de los dos de los costados\\
+				canal azul $\leftarrow$ promedio entre el de arriba y el de abajo			
+			}
+		}{
+			//Fila de azules y verdes \\
+			\eIf{es un p\'ixel verde}{
+				canal rojo $\leftarrow$ promedio entre el de arriba y el de abajo\\
+				canal azul $\leftarrow$ promedio de los dos de los costados			
+			}{
+				//P\'ixel Azul\\
+				canal rojo $\leftarrow$ promedio de los cuatro de las diagonales			\\
+				canal verde $\leftarrow$ promedio de los cuatro de los costados
+			}
+		}
+	}
+}
+\end{algorithm}
+
+\newpage
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo Malvar, He and Cutler}
+\For{cada fila de la imagen}{
+	\For{cada columna de la imagen}{
+		\eIf{es una fila de rojos y verdes}{
+			\eIf{es un p\'ixel rojo}{
+				canal verde $\leftarrow$ promedio de los cuatro verdes de al lado + 1/2 ( valor actual - promedio de las diagonales )\\
+				canal azul $\leftarrow$  promedio de las diagonales (azules) + 3/4 (actual - promedio de los cuatro rojos de al lado a 2 de distancia)
+			
+			}{
+				//Pixel Verde\\
+				canal rojo $\leftarrow$ el promedio de los de los costados + 5/8 ( actual - 1/5 (suma de los dos del costado a dos de distancia + sumatoria de las diagonales - 1/2(suma arriba y abajo)))\\
+				canal azul $\leftarrow$ promedio entre arriba y abajo + 5/8 (actual - 1/5(suma de arriba y abajo a dos de distancia + suma de las diagonales - promedio de los costados a dos de distancia))		
+			}
+		}{
+			//Fila de azules y verdes \\
+			\eIf{es un p\'ixel verde}{
+				canal rojo $\leftarrow$ promedio entre arriba y abajo + 5/8 (actual - 1/5(suma de arriba y abajo a dos de distancia + suma de las diagonales - promedio de los costados a dos de distancia))\\
+				canal azul $\leftarrow$ el promedio de los de los costados + 5/8 ( actual - 1/5 (suma de los dos del costado a dos de distancia + sumatoria de las diagonales - 1/2(suma arriba y abajo)))		
+			}{
+				//P\'ixel Azul\\
+				canal rojo $\leftarrow$  promedio de las diagonales (azules) + 3/4 (actual - promedio de los cuatro rojos de al lado a 2 de distancia)			\\
+				canal verde $\leftarrow$ promedio de los cuatro verdes de al lado + 1/2 ( valor actual - promedio de las diagonales )
+			}
+		}
+	}
+}
+\end{algorithm}
+
+
 \newpage
 \section{Referencias}
  
@@ -1438,33 +1726,9 @@ No hay que perder de vista que la implementaci\'on deber\'a ser ejecutada en tie
 
 \textbf{[2]} Henrique S. Malvar, Li wei He, and Ross Cutler. High-quality linear interpolation for
 demosaicing of bayer-patterned color images. In \textit{Proceedings of the IEEE International
-Conference on Speech, Acoustics, and Signal Processing}, 2004.
+Conference on Speech, Acoustics, and Signal Processing}, 2004.\\
+\\
+
+\textbf{[3]} R. Burden y J.D.Faires, \textit{An\'alisis num\'erico}, International Thomson Editors, 1998
 
 \end{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
-  \begin{center}
-	\includegraphics[scale=0.66]{imagenes/logouba.jpg}
-	\caption{Descripcion de la figura}
-	\label{nombreparareferenciar}
-  \end{center}
-\end{figure}
-
-
-\paragraph{\textbf{Titulo del parrafo} } Bla bla bla bla.
-Esto se muestra en la figura~\ref{nombreparareferenciar}.
-
-
-
-\begin{codesnippet}
-\begin{verbatim}
-
-struct Pepe {
-
-    ...
-
-};
-
-\end{verbatim}
-\end{codesnippet}
