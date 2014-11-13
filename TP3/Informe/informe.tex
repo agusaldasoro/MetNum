@@ -272,7 +272,7 @@ En nuestro caso de estudio, nos vamos a centrar en la comparaci\'on de la imagen
  \textbf{psnr} = 10 \log \frac{(2^n-1)^2}{mse} = 10 \log \frac{255^2}{mse}
 \]
 
-Otro tipo de medidas a tener en cuenta son las que utilizan indicadores de la imagen similares a los presentes en la visi\'on humana, como es el caso de \emph{\textbf{Structural similarity}} (ssim) que es una funci\'on que depende de la luminiscencia, el contraste y la similaridad estructural.
+Otro tipo de medidas a tener en cuenta son las que utilizan indicadores de la imagen similares a los presentes en la visi\'on humana, como es el caso de \emph{\textbf{Structural similarity}} (ssim) que es una funci\'on que depende de la luminiscencia, el contraste y la similitud estructural.
 
 \[
  \textbf{ssim}(x,y) = \frac{(2\mu_x\mu_y+c_1)(2\sigma_{xy}+c_2)}{(\mu_x^2+\mu_y^2+c_1)(\sigma_x^2+\sigma_y^2+c_2)}
@@ -703,7 +703,7 @@ Los Splines (o trazadores cúbicos) son un tipo particular de interpoladores fra
 
 Como fue explicado anteriormente, los Splines son una opción muy buena a la hora de interpolar funciones: en el análisis realizado contra el Polinomio de Lagrange pudimos observar que este último puede llegar a ser excesivamente malo en ciertos casos. Considerando la superioridad de los Splines, entonces, nos propusimos encontrar un algoritmo que los utilice para conseguir buenas interpolaciones que generen imágenes de calidad superior a la hora de realizar el demosaicing.\\
 
-Conseguir el Spline interpolador de una función $f$ dado un conjunto de puntos \{\(X_0, ..., X_n\)\} y sus respectivos valores de $f(x_j)$ consiste en resolver un sistema \(Ax = b\) que nos permita encontrar los 4 coeficientes de cada uno de los $n-1$ polinomios que lo conformen. Siguiendo la lógica presentada en [\textcolor{red}{referencia al Burden}], donde se despeja el coeficiente que acompaña al término de grado 2 en cada polinomio, se puede llegar a ver que $A$ resulta ser una matriz tridiagonal de $(n+1)\times(n+1)$ que posee el siguiente aspecto (trabajando con splines naturales): \\
+Conseguir el Spline interpolador de una función $f$ dado un conjunto de puntos \{\(X_0, ..., X_n\)\} y sus respectivos valores de $f(x_j)$ consiste en resolver un sistema \(Ax = b\) que nos permita encontrar los 4 coeficientes de cada uno de los $n-1$ polinomios que lo conformen. Siguiendo la lógica presentada en \textbf{[3]}, donde se despeja el coeficiente que acompaña al término de grado 2 en cada polinomio, se puede llegar a ver que $A$ resulta ser una matriz tridiagonal de $(n+1)\times(n+1)$ que posee el siguiente aspecto (trabajando con splines naturales): \\
 
 \[
 A = \left(
@@ -894,7 +894,7 @@ Y, análogamente, la vertical:
 Utilizando este concepto, modificamos nuestro algoritmo para que, en lugar de combinar la información obtenida mediante el promedio, haga lo siguiente:
 
 \begin{itemize}
-\item Interpolar por filas 
+\item Interpolar por filas
 \item Al realizar la interpolación por columnas, para los pixeles rojos y azules tenemos ahora dos valores posibles de verde. Comparamos los valores de las derivadas horizontal y vertical para el color verde:
 \begin{itemize}
 \item Si la derivada horizontal es mayor que la vertical, entonces le asignamos el valor de verde dado por la interpolación de la columna
@@ -984,7 +984,7 @@ Luego de un análisis sobre qué factor era más conveniente usar, llegamos a la
 
 \[\sigma_G = \partial_xG + \partial_yG \]
 \smallskip
-\[\alpha_G = 
+\[\alpha_G =
 \begin{cases}
 0.5 & \sigma_G = 0 \\
   &  \\
@@ -992,7 +992,7 @@ Luego de un análisis sobre qué factor era más conveniente usar, llegamos a la
 \end{cases}
 \]
 \medskip
-\[\beta_G = 
+\[\beta_G =
 \begin{cases}
 0.5 & \sigma_G = 0 \\
   &  \\
@@ -1121,7 +1121,6 @@ Donde ``generar un spline de rango $r$ para el canal $C$ de acuerdo a \(\partial
 \item La segunda iteración se encargará de completar el canal rojo para los píxeles originalmente azules, y el canal azul para los píxeles originalmente rojos. Notar que podemos utilizar las derivadas direccionales también para estos colores porque en el ciclo anterior nos encargamos de que haya información acerca del rojo y el azul en todos los píxeles verdes.
 \item Por último, el tercer ciclo se encarga de mejorar la interpolación de los canales rojo y azul para los píxeles verdes. En principio, a los píxeles verdes se les había asignado información del rojo y el azul en una sola dirección, pero ahora, aprovechando que tenemos información del rojo y el azul en todos los píxeles, podemos utilizar el criterio del gradiente para mejorar la estimación.
 \end{itemize}
-
 
 
 \newpage
@@ -1438,7 +1437,10 @@ No hay que perder de vista que la implementaci\'on deber\'a ser ejecutada en tie
 
 \textbf{[2]} Henrique S. Malvar, Li wei He, and Ross Cutler. High-quality linear interpolation for
 demosaicing of bayer-patterned color images. In \textit{Proceedings of the IEEE International
-Conference on Speech, Acoustics, and Signal Processing}, 2004.
+Conference on Speech, Acoustics, and Signal Processing}, 2004.\\
+\\
+
+\textbf{[3]} R. Burden y J.D.Faires, \textit{An\'alisis num\'erico}, International Thomson Editors, 1998
 
 \end{document}
 
