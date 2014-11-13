@@ -574,7 +574,6 @@ Es nuestra intención exponer ahora el motivo que consideramos suficiente para d
 Sea dada la siguiente muestra: \\
 \smallskip
 
-
 \begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
  \hline                 
    x & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
@@ -773,6 +772,7 @@ b_i =
 Este sistema tiene la particularidad de que $A$ es estrictamente diagonal dominante, y por lo tanto va a tener solución única, con lo cual sabemos que el método interpolador funcionará correctamente. \\
 
 Una vez resuelto el mismo, sólo queda despejar los coeficientes principales y el de grado 1 de cada polinomio. El algoritmo en su totalidad se describe a continuación:
+\pagebreak
 
 \IncMargin{1em}
 \begin{algorithm}[h!]
@@ -826,6 +826,7 @@ Ya generado el Spline, sólo resta evaluar los puntos que nos interesen para con
 \bigskip
 Donde $a, b, c$ y $d$ son los coeficientes conseguidos a través del algoritmo \texttt{generar_spline}, y $X_j$ es el valor del punto que se corresponde con el polinomio $S_j$ a utilizar. \\
 \indent El algoritmo que resuelve este problema fue implementado de la siguiente manera:
+\pagebreak
 
 \IncMargin{1em}
 \begin{algorithm}[h!]
@@ -862,16 +863,17 @@ Vale la pena mencionar también que el algoritmo recibe como input un entero ya 
 
 \subsubsection*{Aplicación de Splines al problema de demosaicing}
 
-Una vez resuelto el problema de la implementación de los algoritmos que generan el spline e interpolan valores en el mismo, el siguiente paso fue pensar c\'omo aplicarlo al problema que nos concierne: el \textit{demosaicing} de imágenes. Diversos métodos fueron considerados y estudiados, y serán presentados a continuación. \\
-\pagebreak
+Una vez resuelto el problema de la implementación de los algoritmos que generan el spline e interpolan valores en el mismo, el siguiente paso fue pensar c\'omo aplicarlo al problema que nos concierne: el \textit{demosaicing} de imágenes. Diversos métodos fueron considerados y estudiados, y serán presentados a continuación.
+
 \begin{figure}[h!]
-	\caption{cómo se realiza la interpolación}
 	\begin{center}
-	    \includegraphics[scale=0.47]{imagenes/Splines/splines1.png}
+	    \includegraphics[scale=0.45]{imagenes/Splines/splines1.png}
 	\end{center}
+	\caption{cómo se realiza la interpolación}
 	\label{splines1}
 \end{figure}
 
+\pagebreak
 El primer acercamiento que tuvimos con Splines fue simple: para cada pixel, interpolar su fila y su columna (por completo) para los canales faltantes, y asignarle el promedio entre ambos valores obtenidos. \\
 Este método aparenta ser muy similar a la interpolación bilineal, donde se asigna el promedio de los valores de sus vecinos, razón por la cual decidimos comparar cualitativamente los outputs de ambos algoritmos:
 \begin{itemize}
@@ -892,7 +894,21 @@ Este método aparenta ser muy similar a la interpolación bilineal, donde se asi
 	\label{splines2}
 \end{figure}
 
-Respecto al tiempo de ejecución de ambos algoritmos, \textcolor{red}{MEDIR TIEMPOS POR SSH\\}
+Respecto al tiempo de ejecución de ambos algoritmos, el presente método es excesivamente lento, como queda evidenciado en el siguiente gráfico:
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.65]{imagenes/tiempos/bistdg.png}
+    \label{tiemposrang}
+  \end{center}
+\end{figure}
+\pagebreak
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.70]{imagenes/tiempos/bistdt.png}
+    \label{tiempos1}
+  \end{center}
+\end{figure}
 
 En vista de estos resultados, decidimos descartar (o mejor dicho, intentar mejorar) el algoritmo mediante Splines, ya que ni en tiempo ni en calidad lo encontramos superior que los métodos anteriores.\\
 
@@ -907,7 +923,7 @@ Y, análogamente, la vertical:
 
 
 Utilizando este concepto, modificamos nuestro algoritmo para que, en lugar de combinar la información obtenida mediante el promedio, haga lo siguiente:
-
+\pagebreak
 \begin{itemize}
 \item Interpolar por filas 
 \item Al realizar la interpolación por columnas, para los pixeles rojos y azules tenemos ahora dos valores posibles de verde. Comparamos los valores de las derivadas horizontal y vertical para el color verde:
@@ -953,11 +969,25 @@ Generar el spline de toda la columna para el canal verde e interpolar para los p
 Aplicando este método, pudimos observar mejoras en varios de los bordes de nuestras imágenes: los mismos ahora son más suaves, eliminando casi por completo la presencia de varios artifacts, como por ejemplo zipper.\\
 \indent Sin embargo, también hubo algunos aspectos en los cuales la imagen final empeoró: algunas de las lineas más finas mostraron \textit{false colors}, muchas veces con la presencia de algunos píxeles de colores muy fuertes.\\
 
+En relación al tiempo de cómputo, la diferencia entre ambos es prácticamente despreciable: recién para imágenes de más de 2000px comienza a haber una diferencia realmente notoria.
+
+\begin{figure}[h!]
+\begin{center}
+    \includegraphics[scale=0.65]{imagenes/tiempos/stdpropg.png}
+    \label{tiemposrang}
+  \end{center}
+\end{figure}
+\pagebreak
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.70]{imagenes/tiempos/stdpropt.png}
+    \label{tiempos1}
+  \end{center}
+\end{figure}
+
 Respecto a las mediciones de calidad objetivas, los resultados arrojados por PSNR fueron totalmente inesperados: a pesar de ser una diferencia muy chica, PSNR siempre fue superior para la imagen procesada con el método del promedio. Creemos que esto puede deberse a la anormalidad de los colores para ciertos píxeles mencionada en el párrafo anterior, ya que PSNR mide cuánto ``ruido'' hay entre la imagen original y la procesada. \\
 
 De todas maneras, consideramos al método de Splines pesados mediante las derivadas como superior al del promedio, ya que, a la vista, es más notorio que los bordes sean suaves, a que haya algunos pocos píxeles dispersos con colores no muy fieles. \\
-
-Respecto al tiempo de cómputo, \textcolor{red}{MEDIR TIEMPOS POR SSH\\}
 
 \begin{figure}[h!]
 	\begin{center}
@@ -974,7 +1004,7 @@ Respecto al tiempo de cómputo, \textcolor{red}{MEDIR TIEMPOS POR SSH\\}
 
 En estas imágenes se evidencia la mejora que brinda el método de las derivadas sobre los bordes de las imágenes. En el primer caso, el texto aparece mucho más nítido, y el \textit{zipper effect} que se podía percibir en los bordes de la franja marrón del barco es mucho menos visible.\\
 \indent La segunda imagen, por su parte, también muestra notables mejoras en la ventana: combinando los datos mediante el promedio, podía observarse claramente \textit{zipper effect} y \textit{jaggies} en los bordes internos de la misma; pero al procesar la imagen con el algoritmo que hace uso de las derivadas, las líneas ahora aparecen mucho más suaves y definidas. \\
-De todas formas, sigue siendo visible el artifact de Moiré, y pueden verse algunos de los píxeles anormalmente fuertes de los que hablamos antes. \\
+De todas formas, sigue siendo visible el artifact de Moiré, y pueden verse algunos de los píxeles anormalmente fuertes de los que hablamos antes.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -989,6 +1019,7 @@ De todas formas, sigue siendo visible el artifact de Moiré, y pueden verse algu
 \pagebreak
 En estas otras dos imágenes pretendemos dejar en evidencia el problema de los píxeles con colores incorrectos. Como puede verse en ambas, las lineas en el caso del segundo método parecen más definidas y con una alta reducción del \textit{zipper effect} y \textit{jaggies}. Sin embargo, puede observarse la presencia de píxeles, sobre todo verdes y rojos, prácticamente saturados, sobre los bordes más finos. \\
 
+\pagebreak
 Intentando encontrar explicaciones para este fenómeno, concluímos que podía deberse a que estábamos dejando de lado información valiosa a la hora de componer la imagen: sólo usábamos una dirección.\\
 \indent Por esta razón, decidimos no arrojar una de las direcciones, sino buscar alguna manera de utilizar ambas para obtener mejoras en la composición.\\
 El siguiente método surgió entonces como un intento de mejorar el anterior algoritmo.\\
@@ -1014,9 +1045,9 @@ Luego de un análisis sobre qué factor era más conveniente usar, llegamos a la
 1-\frac{\partial_yG}{\sigma_G} & \sigma_G \neq 0
 \end{cases}
 \]
-\pagebreak
-
+\bigskip
 En términos implementativos, el algoritmo que resuelve este problema es el siguiente:
+\pagebreak
 
 \begin{algorithm}[h!]
 \NoCaptionOfAlgo
@@ -1077,9 +1108,21 @@ Las imágenes resultantes luego de ser procesadas con el presente algoritmo no p
 
 Las diferencias entre las imágenes resultantes están acotadas a detalles menores como, por ejemplo, un patrón de Moiré levemente distinto en la primer imagen (el artifact sigue estando igual de presente de todos modos), o un \textit{zipper effect} apenas menos notorio en el balcón de la segunda.\\
 
-Aún más, este algoritmo es considerablemente más lento que el anterior. Teniendo en cuenta el contexto de aplicación, esto no es para nada aceptable: idealmente, un algoritmo de demosaicing debería ser rápido -o al menos producir imágenes de calidad realmente superior que justifiquen el tiempo de cómputo extra requerido.\\
+Aún más, este algoritmo es considerablemente más lento que el anterior. Teniendo en cuenta el contexto de aplicación, esto no es para nada aceptable: idealmente, un algoritmo de demosaicing debería ser rápido -o al menos producir imágenes de calidad realmente superior que justifiquen el tiempo de cómputo extra requerido. Un par de segundos pueden hacer la diferencia si este algoritmo corriese en una cámara fotográfica, por ejemplo.\\
 
-\textcolor{red}{GRAFICO TIEMPO\\}
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.65]{imagenes/tiempos/propderg.png}
+    \label{tiemposrang}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.70]{imagenes/tiempos/propdert.png}
+    \label{tiempos1}
+  \end{center}
+\end{figure}
 
 En conclusión, decidimos descartar este algoritmo: las mejoras eran demasiado sutiles y el tiempo inaceptablemente mayor como para preferirlo.\\
 
@@ -1204,11 +1247,23 @@ Sin embargo, esas diferencias imperceptibles para nuestros ojos, claramente inci
 \end{tabular}
 \end{center}
 
-La mayor diferencia respecto a los métodos anteriores fue la velocidad de cómputo: este método fue claramente superior en todos los casos, sin sacrificar calidad:
+La mayor diferencia respecto a los métodos anteriores fue la velocidad de cómputo: este método fue claramente superior en todos los casos, sin sacrificar calidad.
 
-\textcolor{red}{GRAFICO DE TIEMPOS\\}
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.65]{imagenes/tiempos/derrangg.png}
+    \label{tiemposrang}
+  \end{center}
+\end{figure}
 
-\newpage
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.70]{imagenes/tiempos/derrangt.png}
+    \label{tiempos1}
+  \end{center}
+\end{figure}
+
+\pagebreak
 \subsection{Algoritmo de Malvar, He y Cutler}
 
 Luego de la lectura y estudio de la publicaci\'on \textit{HIGH-QUALITY LINEAR INTERPOLATION
@@ -1234,14 +1289,26 @@ El algoritmo de MHC (Malvar, He y Cutler) consiste en realizar una interpolació
 
 Ese fue el algoritmo que planteamos, y los resultados obtenidos fueron interesantes.\\
 
-En general, este es el método que mejor funcionó dentro del conjunto de los Splines ideados. No llega a igualar al algoritmo original de MHC, pero está realmente cerca. 
+En general, este es el método que mejor funcionó dentro del conjunto de los Splines ideados. No llega a igualar al algoritmo original de MHC, pero está realmente cerca. Algo a resaltar es que todos los bordes de las imágenes procesadas con este método parecen estar mucho más definidos, y los colores más fuertes -incluso más que para el algoritmo de MHC.\\
 
-\textcolor{red}{Los colores son mas fuertes en toda la imagen
-Bordes nitidos (mas que el de malvar?)
-IMAGENES
-PSNR/SSIM
-TIEMPOS\\}
+Respecto a su tiempo de cómputo en comparación al Spline de rango (que era el más rápido hasta el momento), se puede observar que la diferencia en despreciable, con lo cual obtuvimos una mejora en calidad sin sacrificar tiempo:\\
 
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.65]{imagenes/tiempos/rangmhcg.png}
+    \label{tiemposrang}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.70]{imagenes/tiempos/rangmhct.png}
+    \label{tiempos1}
+  \end{center}
+\end{figure}
+
+\pagebreak
+Un análisis y comparación más profundos de este algoritmo vs. las otras opciones se encuentra en las secciones siguientes.
 
 
 
@@ -1586,15 +1653,12 @@ En la Figura \ref{palmas} cabe destacar dos aspectos:
 \item \textbf{False colors}: Algo llamativo que acontece con esta foto es la aparici\'on de una espuma turquesa en la orilla. Si bien bajo el algoritmo de Vecino m\'as cercano posee una pronunciaci\'oon mayor ning\'un algoritmo es capaz de eliminarla del todo. Los resultados obtenidos difieren bastante visualmente de la imagen original. Esta aparici\'on de un color que no existe es un caso m\'as del artifact False Colors.
 \end{itemize}
 
-\newpage
-
-
+\subsubsection*{A modo de cierre}
 Como conclusi\'on, podemos inferir que los lugares donde se muestra una variaci\'on son siempre lugares pertencientes a contornos o bordes de objetos en las im\'agenes. En cambio, en p\'ixeles sobre superficies llanas o parejas del mismo cuerpo la diferencia entre la imagen original y nuestra imagen obtenida es casi nula.\\
 
 Y tambi\'en se puede concluir que para todos los casos de test realizados, coincide que el algoritmo \'optimo es el de MHC.\\
 
-\textit{Se adjuntan las im\'agenes en su tama\~no original.}
-
+\textit{Se adjuntan las im\'agenes en su tama\~no original, además de otros casos de prueba no analizados en detalle en el presente trabajo.}
 
 \newpage
 En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, los valores de psnr y ssim. Se puede ver como el comportamiento es parejo para todas las im\'agenes, es decir respetan el mismo orden entre los algoritmos.
@@ -1616,7 +1680,35 @@ En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, l
 
 \newpage
 \subsection{An\'alisis de tiempos}
-\textcolor{blue}{Aca hay que comparar los tiempos de ejecucion entre todos los algoritmos dispuestos.}
+A continuación presentamos la comparación de tiempos entre los métodos presentados a lo largo del trabajo, para distintos tamaños de imágenes.\\
+Tal como se hizo durante la exploración de artifacts, en el caso de los splines sólo mostraremos resultados pertinentes a la versión de Rango con la mejora del algoritmo de MHC, ya que creemos que es el superior.\\
+
+Asimismo, a pesar de ser el Spline que produce imágenes de mejor calidad (aunque no mejor que MHC, como pudo verse en la sección pasada), el tiempo de cómputo que el mismo requiere es groseramente alto en comparación de los otros algoritmos, como puede verse en el siguiente gráfico, sin necesariamente proveer mejores resultados.
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.65]{imagenes/tiempos/todosg.png}
+    \label{tiempos1}
+  \end{center}
+\end{figure}
+
+Para obtener una mejor comparación entre los otros métodos, adjuntamos otro gráfico sin Splines MHC:
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.65]{imagenes/tiempos/sinspline.png}
+    \label{tiempos2}
+  \end{center}
+\end{figure}
+\pagebreak
+
+Y por último, una tabla con los valores exactos, para poder apreciar mejor las diferencias:
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[scale=0.70]{imagenes/tiempos/todost.png}
+    \label{tiempos3}
+  \end{center}
+\end{figure}
 
 \newpage
 \section{Conclusiones y trabajo futuro}
@@ -1649,10 +1741,9 @@ Con los resultados arrojados por nuestra experimentaci\'on nos vemos condicionad
 
 
 
-
+\pagebreak
 \section{Ap\'endices}
 \subsection{Ap\'endice A: Enunciado} 
-
 
 \includepdf[pages={-}]{Enunciado.pdf}
 
