@@ -80,9 +80,16 @@ La tarea de capturar todos los colores reflejados por el objetivo que se quiere 
 
 El patr\'on que determina qué color será capturado por cada fotosensor es denominado \emph{Color Filter Array} y var\'ia de acuerdo al fabricante de c\'amaras. Existen diversos patrones, en nuestro trabajo nos centraremos en el \textbf{Filtro Bayer}, ya que es un filtro com\'unmente usado debido a que la cantidad de informaci\'on que brinda sobre el canal verde - al cual el ojo humano es más sensible por encontrarse en el centro de su espectro visual y es el canal que brinda mayor informaci\'on sobre la luminiscencia -  duplica a cada uno de los otros dos.
 
-\textcolor{red}{*insertar imágenes por aquí y por allá* (?\\
-AGREGAR IMGS DE OTROS FILTROS
-}
+
+\begin{figure}[h!]
+	\caption{Diversos Color Filter Arrays}
+	\begin{center}
+	\includegraphics[scale=0.50]{imagenes/cfa}
+	\label{cfa}
+  \end{center}
+\end{figure}
+
+\newpage
 
 \begin{figure}[h!]
 	\caption{Bayer CFA}
@@ -159,7 +166,6 @@ Las m\'etricas que vamos a utilizar nosotros como m\'etodo de comparacion de im\
 
 \newpage
 \subsection{Artifacts}
-\textcolor{red}{Explicar cada artifact y agregar grid}
 
 Como se explicó anteriormente, dos de los tres canales de cada p\'ixel son interpolados algorítmicamente. Si bien los métodos que pueden proponerse a tal fin no son limitados, un subconjunto de ellos producirá imágenes que diferirán considerablemente de las que quisieron ser capturadas originalmente. 
 
@@ -167,19 +173,19 @@ Para evaluar el peso de estas diferencias  existen mecanismos cuantitativos (com
 
 Los \textit{artifacts} son efectos visuales indeseados frecuentes que se producen sobre la imagen procesada a causa de una interpolación poco conveniente. 
 
-Ejemplos de artifacts son el efecto <<\emph{Blurring}>>, el <<\emph{False color}>>, el <<\emph{Jaggies}>>,   el <<\emph{efecto Moiré}>> y el <<\emph{Zipper}>>(Figura \ref{zipper}).
+Ejemplos de artifacts son el efecto <<\emph{Blurring}>>, el <<\emph{False color}>>, el <<\emph{Zipper}>>, el <<\emph{Jaggies}>>,   el <<\emph{efecto Moiré}>> y  el <<\emph{Grid}>>.\\
 
-El efecto blurring consiste en la formación de una imagen más difusa que de lo esperado y con menos definición (Ver Figura \ref{blurring}). 
+El efecto \textit{\textbf{Blurring}} consiste en la formación de una imagen más difusa que de lo esperado y con menos definición (Ver Figura \ref{blurring}). \\
 
-El efecto False color, como su nombre lo indica, es la presencia de pixels con valores notoriamente distintos a los reales (Ver Figura \ref{false}). 
+El efecto \textit{\textbf{False color}}, como su nombre lo indica, es la presencia de pixels con valores notoriamente distintos a los reales (Ver Figura \ref{false}). \\
 
-El artifact <<jaggies>> se produce en ciertos casos en los bordes, dándoles un aspecto escalonado (Ver Figura \ref{jaggies}).
+La consecuencia del efecto \textit{\textbf{Zipper}}, por otro lado, es la formación en los contornos de un patrón similar a un cierre éclair (Ver Figura \ref{zipper}).\\
 
-El efecto Moiré - conocido en castellano como <<muaré>> y pronunciado de esta forma - produce en un área de la imagen un patrón que no existe en la imagen real, generado por la interferencia entre el patrón real y la matriz de píxeles en el sensor de la cámara digital (Ver Figura \ref{moire}).
+El artifact \textit{\textbf{Jaggies}} se produce en ciertos casos en los bordes, dándoles un aspecto escalonado (Ver Figura \ref{jaggies}).\\
 
-La consecuencia del efecto Zipper, por otro lado, es la formación en los contornos de un patrón similar a un cierre éclair (Ver Figura \ref{zipper}).
+El efecto \textit{\textbf{Moiré}} - conocido en castellano como <<muaré>> y pronunciado de esta forma - produce en un área de la imagen un patrón que no existe en la imagen real, generado por la interferencia entre el patrón real y la matriz de píxeles en el sensor de la cámara digital (Ver Figura \ref{moire}).\\
 
-Por último, el artifact grid es aquel por el cual se puede notar la formación de una textura de red en una o más zonas de la fotografía procesada. (Ver Figura \ref{grid}). 
+Por último, el artifact\textit{ \textbf{Grid}} es aquel por el cual se puede notar la formación de una textura de red en una o más zonas de la fotografía procesada. (Ver Figura \ref{grid}). 
 
 \begin{figure}[h!]
 	\caption{A la izquierda, la imagen original. A la derecha, la que presenta <<blurring>>.}
@@ -269,10 +275,12 @@ El ejemplo más trivial se encuentra en una imagen monocromática: al ser los va
 
 Los procedimientos y resultados de las experimentaciones realizadas con estos dos criterios se encuentran respectivamente en las Figuras \ref{apxlvecino0}, \ref{apxlvecino1} y \ref{apxlvecino2} para el \textbf{Caso 1} y en las ilustraciones \ref{apxlvecino0}, \ref{apxlvecino1} y \ref{apxlvecinoOTRO2} para el \textbf{Caso 2}.
 
+\newpage
+
 \begin{figure}[h!]
     \caption{}
     \begin{center}
-    \includegraphics[scale=0.35]{imagenes/apxlvecino0}
+    \includegraphics[scale=0.30]{imagenes/apxlvecino0}
     \label{apxlvecino0}
   \end{center}
 \end{figure}
@@ -280,7 +288,7 @@ Los procedimientos y resultados de las experimentaciones realizadas con estos do
 \begin{figure}[h!]
     \caption{}
     \begin{center}
-    \includegraphics[scale=0.45]{imagenes/apxlvecino1}
+    \includegraphics[scale=0.35]{imagenes/apxlvecino1}
     \label{apxlvecino1}
   \end{center}
 \end{figure}
@@ -289,7 +297,7 @@ Los procedimientos y resultados de las experimentaciones realizadas con estos do
 \begin{figure}[h!]
     \caption{Valores para todos los canales luego de la interpolación realizada con un algoritmo de ``vecino más cercano'', \textbf{Caso 1}}
     \begin{center}
-    \includegraphics[scale=0.45]{imagenes/apxlvecino2}
+    \includegraphics[scale=0.35]{imagenes/apxlvecino2}
     \label{apxlvecino2}
   \end{center}
 \end{figure}
@@ -297,10 +305,11 @@ Los procedimientos y resultados de las experimentaciones realizadas con estos do
 \begin{figure}[h!]
     \caption{ Valores para todos los canales luego de la interpolación realizada con un algoritmo de ``vecino más cercano'', \textbf{Caso 2}}
     \begin{center}
-    \includegraphics[scale=0.45]{imagenes/apxlvecinoOTRO2}
+    \includegraphics[scale=0.35]{imagenes/apxlvecinoOTRO2}
     \label{apxlvecinoOTRO2}
   \end{center}
 \end{figure}
+
 
 \newpage
 
@@ -1217,7 +1226,21 @@ El algoritmo se comporta de la siguiente manera: situado en un p\'ixel a estimar
 
 Luego de programar el algoritmo y realizar casos de prueba, los resultados arrojados fueron mejores que para los algoritmos anteriores.\\
 
-\textcolor{red}{Poner fotitos y mediciones... no?}\\
+\subsubsection*{Fusi\'on entre Splines y MHC}
+
+Habiendo visto los buenos resultados que arrojaba el algoritmo de MHC, nos preguntamos si podríamos aplicar algo del mismo a nuestro algoritmo de Splines para conseguir mejores resultados.\\
+
+El algoritmo de MHC (Malvar, He y Cutler) consiste en realizar una interpolación bilineal, y sumarle factores relacionados con los gradientes del punto a estimar. ¿Qué pasaría si realizáramos una primera interpolación con el anterior método de Splines (rango, que fue el que mejor funcionó entre los distintos tipos de Spline) en lugar de con interpolación bilineal, y luego sumáramos los mismos factores que en algoritmo original?\\
+
+Ese fue el algoritmo que planteamos, y los resultados obtenidos fueron interesantes.\\
+
+En general, este es el método que mejor funcionó dentro del conjunto de los Splines ideados. No llega a igualar al algoritmo original de MHC, pero está realmente cerca. 
+
+\textcolor{red}{Los colores son mas fuertes en toda la imagen
+Bordes nitidos (mas que el de malvar?)
+IMAGENES
+PSNR/SSIM
+TIEMPOS\\}
 
 
 
@@ -1225,10 +1248,6 @@ Luego de programar el algoritmo y realizar casos de prueba, los resultados arroj
 \newpage
 \section{Resultados y discusi\'on}
 \subsection{Exploraci\'on de Artifacts}
-
-\textcolor{blue}{Ver si hay otros artifacts mas para agregar.\\
-Ver como arreglar el de Moire y bla...\\
-Poner fotitos de ampliaciones donde se vean bien los artifacts.}
 
 
 En este apartado nos proponemos analizar inicialmente los artifacts observables en una selección de imágenes luego de la ejecución de cada método mencionado para posteriormente poder realizar una comparación entre ellos a nivel visual.
@@ -1248,8 +1267,10 @@ El borde que delimita el pico del mentón del ave presenta el efecto Zipper, mie
 \end{figure}
 
 
-Del mismo modo, en la Figura \ref{barcovecino}  puede verse la forma en que tanto el efecto ``false color" como el ``zipper" tienen lugar en el mástil de la nave, estando presente este último también en la proa junto con el artifact ``jaggies" - por sólo hacer referencia a algunos sectores de la imagen.\\
+Del mismo modo, en la Figura \ref{barcovecino}  puede verse la forma en que tanto el efecto ``false color'' como el ``zipper'' tienen lugar en el mástil de la nave, estando presente este último también en la proa junto con el artifact ``jaggies'' - por sólo hacer referencia a algunos sectores de la imagen.\\
 Es interesante remarcar que la calidad del fondo no empeoró demasiado en relación  a otros sectores. Esto se debe a que los bordes que presenta son escasos y el área es lo suficientemente homogénea.
+
+\newpage
 
 \begin{figure}[h!]
 	\caption{}
@@ -1259,8 +1280,7 @@ Es interesante remarcar que la calidad del fondo no empeoró demasiado en relaci
   \end{center}
 \end{figure}
 
-En la Figura \ref{alemaniavecino} puede verse la forma en que los artifacts ``false color",  ``zipper" y ``jaggies" vuelven a aparecer, 
-acompañados en esta oportunidad del efecto ``moiré" que se advierte en el frente de la casa blanca.
+En la Figura \ref{alemaniavecino} puede verse la forma en que los artifacts ``false color'',  ``zipper'' y ``jaggies'' vuelven a aparecer, acompañados en esta oportunidad del efecto ``moiré'' que se advierte en el frente de la casa blanca.
 
 Por la forma en que se implementó el algoritmo, parece coherente que las líneas horizontales de la imagen no hayan presentado distorciones de gran magnitud.
 
@@ -1271,6 +1291,8 @@ Por la forma en que se implementó el algoritmo, parece coherente que las línea
 	\label{alemaniavecino}
   \end{center}
 \end{figure}
+
+\newpage
 
 Por último, en la Figura \ref{casafarovecino} estos efectos continúan siendo recurrentes. En particular se destaca el efecto moiré generado en el cerco y en la pared de la casa.
 
@@ -1285,12 +1307,14 @@ Por último, en la Figura \ref{casafarovecino} estos efectos continúan siendo r
 
 \subsubsection{Interpolación Bilineal}
 
-En todas las imágenes analizadas luego de aplicarles interpolación bilineal notamos la presencia del artifact ``burring" extendido por toda la superficie.
+En todas las imágenes analizadas luego de aplicarles interpolación bilineal notamos la presencia del artifact ``blurring'' extendido por toda la superficie.
 
 En particular se pueden mencionar otros casos representativos de interés, condensados en las Figuras \ref{vecinobilineal}y \ref{barcobilineal}.
 
 
-Luego del procesamiento con este algoritmo, los efectos ``morié" y ``zipper" continúan apareciendo en el frente de la casa blanca y se produce en el toldo una inesperada distorsión de sus colores originales. 
+Luego del procesamiento con este algoritmo, los efectos ``moiré'' y ``zipper'' continúan apareciendo en el frente de la casa blanca y se produce en el toldo una inesperada distorsión de sus colores originales. 
+
+\newpage
 
 \begin{figure}[h!]
 	\caption{Interpolación bilineal}
@@ -1300,7 +1324,7 @@ Luego del procesamiento con este algoritmo, los efectos ``morié" y ``zipper" co
   \end{center}
 \end{figure}
 
-En el caso del velero se observa tanto la aparición de colores falsos como del efecto ``zipper" en el mástil y principalmente en la proa se hace visible el artifact ``jaggies".
+En el caso del velero se observa tanto la aparición de colores falsos como del efecto ``zipper'' en el mástil y principalmente en la proa se hace visible el artifact ``jaggies''.
 
 \begin{figure}[h!]
 	\caption{Interpolación bilineal}
@@ -1310,10 +1334,12 @@ En el caso del velero se observa tanto la aparición de colores falsos como del 
   \end{center}
 \end{figure}
 
+\newpage
+
 \subsubsection{Malvar-He-Cutler demosaicing}
 
 Al interpolar los valores de los canales desconocidos para cada pixel a partir de este método, analizamos las imágenes obtenidas y citamos como referencia la Figura \ref{mhczoom}, considerando que en las tres imágenes expuestas se evidencian los artifacts más frecuentemente encontrados para este caso.\\
-En ella se puede ver por primera vez la aparición del efecto ``Grid" que tiene lugar en un cerco. También se puede ver la injerencia de los artifacts ``false colors" y ``zipper" en zonas que para las imagenes que se muestran resultaron conflictivas luego del empleo de más de un método.
+En ella se puede ver por primera vez la aparición del efecto ``Grid'' que tiene lugar en un cerco. También se puede ver la injerencia de los artifacts ``false colors'' y ``zipper'' en zonas que para las imagenes que se muestran resultaron conflictivas luego del empleo de más de un método.
 
 
 \begin{figure}[h!]
@@ -1324,43 +1350,39 @@ En ella se puede ver por primera vez la aparición del efecto ``Grid" que tiene 
   \end{center}
 \end{figure}
 
+\newpage
+
 \subsubsection{Splines con Malvar-He-Cutler demosaicing}
 
-El principal problema para este método que se aprecia en la Figura \ref{barcosplineMHC} es la distorsión de los colores originales tanto en el área del mástil como en la de los árboles del fondo. Por otro lado, en la primera zona mencionada parece haberse atenuado - si bien no desaparecido - el efecto causado por el ``zipper".
+El principal problema para este método que se aprecia en la Figura \ref{barcosplineMHC2} es la distorsión de los colores originales tanto en el área del mástil como en la de los árboles del fondo. Por otro lado, en la primera zona mencionada parece haberse atenuado - si bien no desaparecido - el efecto causado por el ``zipper''.
+
+
 
 \begin{figure}[h!]
 	\caption{}
 	\begin{center}
 	\includegraphics[scale=0.06]{imagenes/barcosplineMHC}
-	\label{cercosplineMHC}
+	\label{barcosplineMHC2}
   \end{center}
 \end{figure}
 
+\newpage
 
-En cuanto a la Figura \ref{cercosplineMHC}, la misma presenta en el área del cerco un entramado de Moiré que hasta el momento no había sido observado, así como también un fuerte impacto del artifact ``false colors" - presente la mayor parte de las imágenes analizadas luego de la aplicación de este método.
+En cuanto a la Figura \ref{cercosplineMHC}, la misma presenta en el área del cerco un entramado de Moiré que hasta el momento no había sido observado, así como también un fuerte impacto del artifact ``false colors'' - presente la mayor parte de las imágenes analizadas luego de la aplicación de este método.
 
 
 \begin{figure}[h!]
 	\caption{}
 	\begin{center}
-	\includegraphics[scale=0.1]{imagenes/cercosplineMHC}
+	\includegraphics[scale=0.08]{imagenes/cercosplineMHC}
 	\label{cercosplineMHC}
   \end{center}
 \end{figure}
 
 
 
-EN MHC:\\
-
-Visualmente, podemos definir que las fotos adquirien una mayor definici\'on con contornos menos borrosos e imperfectos. Este algoritmo optimiza la detecci\'on de bordes cuando la diferencia de colores es muy fuerte, por ej. un borde oscuro sobre un fondo claro. Si se comparara con el algoritmo de interpolaci\'on bilineal, en el mismo caso se produc\'ian colores fuertes alrededor de los bordes negros (artifact).
-
-Sim embargo, para los bordes con un menor contraste o bordes m\'as claros, sigue vi\'endose este artifact donde aparecen colores artificiales muy fuertes en la zona de los mismos.
-
-\textcolor{red}{Poner recortes de bordes como estos nombrados arriba}
-
-
 \newpage
-\subsection{An\'alisis cualitativo de los M\'etodos}
+\subsection{Comparaci\'on entre los M\'etodos}
 Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab$\textregistered$  la diferencia (resta) entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro con el objetivo de distinguir id\'oneamente las regiones de la imagen donde exista un error contundente.\\
 
 
@@ -1532,7 +1554,7 @@ La Figura \ref{imagen12} es una imagen con muchas l\'ineas y dibujos con contorn
   \end{center}
 \end{figure}
 
-En la secci\'on de la foto que le corresponde al techo se puede apreciar el artifact de \emph{False Colors}. Ya que aparecen p\'ixeles con tonos y colores que no corresponden a la imagen original. Se puede apreciar como, gradualmente, esta anomal\'ia va desapareciendo otorg\'andole a la imagen mayor nitidez. Por este motivo, se podr\'ia decir tambi\'en que MHC elimina el artifact \emph{mblur}, al menos en este caso.\\
+En la secci\'on de la foto que le corresponde al techo se puede apreciar el artifact de \emph{False Colors}. Ya que aparecen p\'ixeles con tonos y colores que no corresponden a la imagen original. Se puede apreciar como, gradualmente, esta anomal\'ia va desapareciendo otorg\'andole a la imagen mayor nitidez. Por este motivo, se podr\'ia decir tambi\'en que MHC elimina el artifact \emph{blurring}, al menos en este caso.\\
 
 La ventana es un punto de an\'alisis importante ya que las dos primeras estimaciones producen Zipper, mientras que con Splines disminuye hasta la casi inexistencia no llega a estimarse a la perfecci\'on. En el caso de MHC se podr\'ia decir que la ventana se ve con una similitud importante respecto de la imagen original.
 
@@ -1575,7 +1597,7 @@ Y tambi\'en se puede concluir que para todos los casos de test realizados, coinc
 
 
 \newpage
-En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, los valores de psnr y ssim.
+En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, los valores de psnr y ssim. Se puede ver como el comportamiento es parejo para todas las im\'agenes, es decir respetan el mismo orden entre los algoritmos.
 \begin{figure}[h!]
     \caption{Evaluaci\'on de psnr para 12 im\'agenes del mismo tama\~no}
     \begin{center}
@@ -1599,20 +1621,31 @@ En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, l
 \newpage
 \section{Conclusiones y trabajo futuro}
 
+\textcolor{red}{Ademas de completar los puntos suspensivos, hay que agregar algo respecto del tiemmpo empleado por cada uno y si vale la pena esperar o no y bla...}\\
+
+
+
 Es importante conocer nuestras limitaciones. Si bien bajo el algoritmo de MHC la existencia de \emph{Artifacts} es casi nula, hay algunos que persisten y la forma de solucionar esto excede a nuestro trabajo. Por este motivo, nos centraremos en el \'optimo m\'etodo para resolver el \emph{Demosaicing} sin esperar que este sea infalible y meramente real.\\
+
+No hay que perder de vista que la implementaci\'on deber\'a ser ejecutada en tiempo real, lo cual implica que si un algoritmo es muy bueno para la estimaci\'on de la imagen pero tarda un tiempo considerablemente alto no es realmente el \'optimo.\\
+
+Considerando las mediciones de psnr y ssim, las cuales preservaron un comportamiento parejo para todas las mediciones realizadas, se puede establecer un orden entre los algoritmos: Vecino m\'as cercano, Bilineal, Splines y MHC, siendo el primero el de menor puntaje y el \'ultimo el de mayor.\\
 
 Como primera instancia, el Algoritmo de\textit{ Vecino M\'as Cercano} es capaz de esbozar la estructura de la imagen a grandes rasgos. Sin embargo, los bordes no suelen ser muy precisos y la definici\'on tiende a ser de baja calidad. Sumado a que es el m\'etodo donde encontramos mayor diversidad de Artifacts y mayor ocurrencia bajo una misma imagen. Cabe destacar que los valores de psnr y ssim arrojados en nuestra experimentaci\'on para este m\'etodo fueron siempre los menores.\\
 
-La interpolaci\'on Bilineal tiende a ser una buena soluci\'on respecto de los contornos cuadrados que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo.\\
+La \textit{interpolaci\'on Bilineal} tiende a ser una buena soluci\'on respecto de los contornos cuadrados que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo.\\
 
-Los splines bla...\\
+Los \textit{splines} \textcolor{red}{bla...}.
 
-Con los resultados arrojados por nuestra experimentaci\'on nos vemos condicionados a determinar que el m\'etodo \'optimo entre los cuatro probados es el del Algoritmo de Malvar, He y Cutler. Este m\'etodo es el que mejores n\'umeros obtuvo de psnr y ssim para todos los casos evaluados. Adem\'as, es el m\'etodo donde encontramos menor diversidad de artifacts y, sobre todo, menor cantidad de artifacts en una misma imagen. \\
+Como trabajo pendiente, debido a la escasez de tiempo, nos qued\'o la implementaci\'on de una Interpolaci\'on Direccional en sentido diagonal. Nos era de inter\'es este caso porque todos los implementados por nosotros s\'olo toman las direcciones verticales y horizontales (independientemente si se toma la fila/columna entera o s\'olo algunos p\'ixeles). \\
 
-\textcolor{red}{Ademas de completar los puntos suspensivos, hay que agregar algo respecto del tiemmpo empleado por cada uno y si vale la pena esperar o no y bla...\\
-Tambi\'en poner que los valores de ssim y psnr fueron constantes, es decir siempre en el mismo orden.}\\
 
-No hay que perder de vista que la implementaci\'on deber\'a ser ejecutada en tiempo real, lo cual implica que si un algoritmo es muy bueno para la estimaci\'on de la imagen pero tarda un tiempo considerablemente alto no es realmente el \'optimo.
+Bajo el \textit{Algoritmo de Malvar, He y Cutler}, visualmente podemos definir que las fotos adquirien una mayor definici\'on con contornos menos borrosos e imperfectos. Este algoritmo optimiza la detecci\'on de bordes cuando la diferencia de colores es muy fuerte, por ej. un borde oscuro sobre un fondo claro. Si se comparara con el algoritmo de interpolaci\'on bilineal, en el mismo caso se produc\'ian colores fuertes alrededor de los bordes negros (artifact).
+
+Sim embargo, para los bordes con un menor contraste o bordes m\'as claros, sigue vi\'endose este artifact donde aparecen colores artificiales muy fuertes en la zona de los mismos.\\
+
+
+Con los resultados arrojados por nuestra experimentaci\'on nos vemos condicionados a determinar que el m\'etodo \'optimo entre los cuatro probados es el del \textit{Algoritmo de Malvar, He y Cutler}. Este m\'etodo es el que mejores n\'umeros obtuvo de psnr y ssim para todos los casos evaluados. Adem\'as, es el m\'etodo donde encontramos menor diversidad de artifacts y, sobre todo, menor cantidad de artifacts en una misma imagen. \\
 
 
 
