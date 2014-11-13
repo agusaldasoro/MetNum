@@ -434,6 +434,8 @@ Los procedimientos y resultados de las experimentaciones realizadas con estos do
   \end{center}
 \end{figure}
 
+\newpage
+
 Como se ve, en ninguno de los dos casos se logró reconstruir la imagen original, pero sin duda alguna el error en el primer caso fue menor al segundo.\\
 
 El algoritmo planteado evidencia que los resultados proporcionados serán acordes a la imagen que se procesa y a las decisiones arbitrarias que se tomen al implementarlo. \\
@@ -783,7 +785,10 @@ Luego de programar el algoritmo y realizar casos de prueba, los resultados arroj
 \textcolor{red}{Poner fotitos y mediciones... no?}\\
 
 
+
+
 \newpage
+\section{Resultados y discusi\'on}
 \subsection{Exploraci\'on de Artifacts}
 
 \textcolor{blue}{Ver si hay otros artifacts mas para agregar.\\
@@ -799,101 +804,217 @@ Sim embargo, para los bordes con un menor contraste o bordes m\'as claros, sigue
 \textcolor{red}{Poner recortes de bordes como estos nombrados arriba}
 
 
-
-
 \newpage
-\section{Resultados y discusi\'on}
-
-%\newpage
-%\subsection{MHC}
-%Le da una definición/claridad mucho mayor a las fotos, y los bordes oscuros quedan prácticamente perfectos (comparando con bilineal, por ejemplo, aparecen colores fuertes alrededor de los bordes negros). Sigue pasando eso con los bordes blancos/mas claros, pero las zonas donde hay un salto grande entre claro y oscuro, mejora mucho.
-%\textcolor{red}{está medio informal?}
-
-%\newpage
-\subsection{An\'alisis cualitativo de los algoritmos}
-Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab$\textregistered$  la diferencia entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro con el objetivo de distinguir id\'oneamente las regiones de la imagen donde exista un error contundente.\\
-
-\textcolor{blue}{Aca falta agregar todas las fotitos, Y HACERLO PARA SPLINES!!!!!!!!!!!!!!!!!}
-%ESTO PUEDE IR DE PIE DE IMAGEN O ALGO ASI...
-%De este modo, en los siguientes gr\'aficos se denotan los lugares con diferencia num\'erica de la imagen.
-
+\subsection{An\'alisis cualitativo de los M\'etodos}
+Luego de haber generado las im\'agenes con todos los algoritmos que hemos propuesto, nos dispusimos a correr en Matlab$\textregistered$  la diferencia (resta) entre ellas y la imagen original de la cual partimos. Luego de eso, invertimos los colores para poder apreciar mejor d\'onde se notaban las mayores diferencias. A continuaci\'on se incluyen las im\'agenes obtenidas con este proceso, en color blanco y negro con el objetivo de distinguir id\'oneamente las regiones de la imagen donde exista un error contundente.\\
 
 
 \begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=0.40]{imagenes/comparacion/02/collage}
-	\label{imagen2}
-  \end{center}
-\end{figure}
-
-En la Figura \ref{imagen2}  se puede observar que, si bien al ejecutar el algoritmo de MHC disminuye abundantemente la diferencia con la imagen original, al tener una superficie en su mayor\'ia de agua se dificulta a niveles algor\'itmicos aproximar el agua de una manera m\'as real ya que esta no es para nada una superficie pareja. \textcolor{red}{(SI EXPLICO EL PORQUE PASA ESTO, MANDO FRUTA ASI QUE NO VOY A HACERLO)'.}\\
-
-\newpage
-
-\begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=0.40]{imagenes/comparacion/04/collage}
-	\label{imagen4}
-  \end{center}
-\end{figure}
-
-En la Figura \ref{imagen4} se puede apreciar el inconveniente de aproximar p\'ixeles que son borde cuando estos son dados en abundancia y en l\'ineas recta en su mayor\'ia. Inclusive en el mejor caso de esta imagen, (la imagen creada mediante el Algoritmo de MHC) se puede apreciar una notable diferencia con la original en lo que respecta a los bordes. \textcolor{red}{Esto es un ejemplo m\'as de la existencia de artifacts.}\\
-
-\newpage
-
-
-\begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=0.40]{imagenes/comparacion/05/collage}
-	\label{imagen5}
+    \caption{}
+    \begin{center}
+    \includegraphics[scale=0.40]{imagenes/comparacion/02/collage}
+    \label{imagen2}
   \end{center}
 \end{figure}
 
 
-En cuanto a la Figura \ref{imagen5} se aprecia el mismo inconveniente que en la "imagen 1" dado a la existencia de agua, pero a diferencia cuando se corre el algoritmo de MHC la mejor\'ia es notablemente mayor ya que la diferencia entre esta imagen y la foto original es muy peque\~na.\\
-
 \newpage
+
+\begin{figure}[h!]
+    \caption{Imagen Original}
+    \begin{center}
+    \includegraphics[scale=0.15]{imagenes/comparacion/02/img2}
+    \label{imgOri2}
+  \end{center}
+\end{figure}
+
+En la Figura \ref{imagen2}  se puede observar que, si bien al ejecutar el algoritmo de MHC disminuye abundantemente la diferencia con la imagen original, al tener una superficie en su mayor\'ia de agua se dificulta a niveles algor\'itmicos aproximar el agua de una manera m\'as real ya que esta no es para nada una superficie pareja. Estas diferencias tal vez no sean tan visibles al ojo humano, pero en cuanto a diferencia de color p\'ixel a p\'ixel es notorio.
+
+ Tambi\'en se hace presente el artifact que hay sobre la punta superior del mastil, dado que se puede observar la anomalía en los cuatro algoritmos. En un primer momento, se puede apreciar Zipper y Moir\'e
+(en el algoritmo de Vecino M\'as Cercano) y a medida que se van utilizando m\'etodos ``mejores'' este artifact se reduce simplemente a un peque\~no Moir\'e. \\
 
 
 \begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=0.40]{imagenes/comparacion/09/collage}
-	\label{imagen9}
+    \caption{Zoom en imágenes obtenidas mediante los distintos métodos}
+    \begin{center}
+    \includegraphics[scale=1.2]{imagenes/comparacion/02/mastil}
+    \label{mastil}
   \end{center}
 \end{figure}
+
+\newpage
+
+\begin{figure}[h!]
+    \caption{Imagen Original}
+    \begin{center}
+    \includegraphics[scale=0.15]{imagenes/comparacion/04/img4}
+    \label{imagen4}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+    \caption{}
+    \begin{center}
+    \includegraphics[scale=0.40]{imagenes/comparacion/04/collage}
+    \label{imagen4}
+  \end{center}
+\end{figure}
+
+En la Figura \ref{imagen4} se puede apreciar el inconveniente de aproximar p\'ixeles que son borde cuando estos son dados en abundancia y en l\'ineas recta en su mayor\'ia. Inclusive en el mejor caso de esta imagen, (la imagen creada mediante el Algoritmo de MHC) se puede apreciar una notable diferencia con la original en lo que respecta a los bordes.\\
+
+Si ahondamos en la imagen, notamos que es en las ventanas donde perciste el problema para todos los métodos. Si nos detenemos en la imagen obtenida se puede apreciar un artifact en específico: Moir\'e. \\
+
+\begin{figure}[h!]
+    \caption{Zoom en imágenes obtenidas mediante los distintos métodos}
+    \begin{center}
+    \includegraphics[scale=1]{imagenes/comparacion/04/ventanitas}
+    \label{ventanitas}
+  \end{center}
+\end{figure}
+
+El otro inconveniente presente se ubica en el letrero, el cual gradualmente adquiere mayor definici\'on, pero as\'i mismo persiste marcandose la diferencia con el original. \\
+
+\begin{figure}[h!]
+    \caption{Zoom en imágenes obtenidas mediante los distintos métodos}
+    \begin{center}
+    \includegraphics[scale=0.9]{imagenes/comparacion/04/letrero}
+    \label{letrero}
+  \end{center}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h!]
+    \caption{Imagen Original}
+    \begin{center}
+    \includegraphics[scale=0.15]{imagenes/comparacion/05/img5}
+    \label{imgOri2}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+    \caption{}
+    \begin{center}
+    \includegraphics[scale=0.40]{imagenes/comparacion/05/collage}
+    \label{imagen5}
+  \end{center}
+\end{figure}
+
+
+En cuanto a la Figura \ref{imagen5} se puede notar un comportamiento similar al de la imagen en la Figura \ref{imagen2} dado a la existencia de agua, la cual es una superficie dif\'icil de estimar para los m\'as b\'asicos algoritmos.\\
+
+Lo interesante a destacar de este caso, es el gran avance que se realiza mediante el algoritmo de MHC en contraposici\'on de los otros dos. Se puede apreciar que las diferencias entre la imagen estimada por este algoritmo y la imagen original se convierten en \'infimas.
+
+
+\newpage
+
+\begin{figure}[h!]
+    \caption{Imagen Original}
+    \begin{center}
+    \includegraphics[scale=0.15]{imagenes/comparacion/09/img9}
+    \label{imgOri2}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+    \caption{}
+    \begin{center}
+    \includegraphics[scale=0.40]{imagenes/comparacion/09/collage}
+    \label{imagen9}
+  \end{center}
+\end{figure}
+
+\newpage
 
 En la Figura \ref{imagen9} se puede ver un comportamiento similar a lo ya estudiado, lo interesante de destacar en cuanto a esta foto es que al poseer un letrero es una imagen menos abstracta que las anteriores y por lo tanto, se adquiere una definici\'on mayor cuando se tiene una diferencia menor con la original y as\'i facilitar la lectura del cartel.
 
 
+
 \begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=0.05]{imagenes/comparacion/cartel}
-	\label{cartel}
+    \caption{Zoom en imágenes obtenidas mediante los distintos métodos}
+    \begin{center}
+    \includegraphics[scale=0.9]{imagenes/comparacion/09/cartel}
+    \label{cartel}
   \end{center}
 \end{figure}
 
 \newpage
 
-
 \begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=0.40]{imagenes/comparacion/12/collage}
-	\label{imagen12}
+    \caption{Imagen Original}
+    \begin{center}
+    \includegraphics[scale=0.15]{imagenes/comparacion/12/img12}
+    \label{imgOri2}
   \end{center}
 \end{figure}
 
-La Figura \ref{imagen12} es una imagen con muchas l\'ineas y dibujos con contornos. Esto se aprecia en la gran densidad que tiene la imagen que muestra las diferencias entre la imagen original y la imagen obtenida \textcolor{red}{What?} mediante el algoritmo de Vecino M\'as Cercano. Si observamos las im\'agenes obtenidas mediante la resta con sus respectivas originales se denota una gran diferencia entre el Algoritmo de Vecino M\'as Cercano y el Algoritmo de MHC.\\
+\begin{figure}[h!]
+    \caption{}
+    \begin{center}
+    \includegraphics[scale=0.40]{imagenes/comparacion/12/collage}
+    \label{imagen12}
+  \end{center}
+\end{figure}
+
+La Figura \ref{imagen12} es una imagen con muchas l\'ineas y dibujos con contornos. Esto se aprecia en la gran densidad que tiene la imagen que muestra las diferencias entre la imagen original y la imagen obtenida  mediante el algoritmo de Vecino M\'as Cercano. Si observamos las im\'agenes obtenidas mediante la resta con sus respectivas originales se denota una gran diferencia entre el Algoritmo de Vecino M\'as Cercano y el Algoritmo de MHC.\\
+
+\newpage
+
+\begin{figure}[h!]
+    \caption{Zoom en imágenes obtenidas mediante los distintos métodos}
+    \begin{center}
+    \includegraphics[scale=0.9]{imagenes/comparacion/12/techo}
+    \label{imagen12}
+  \end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \caption{Zoom en imágenes obtenidas mediante los distintos métodos}
+    \begin{center}
+    \includegraphics[scale=1.1]{imagenes/comparacion/12/ventanita}
+    \label{imagen12}
+  \end{center}
+\end{figure}
+
+En la secci\'on de la foto que le corresponde al techo se puede apreciar el artifact de \emph{False Colors}. Ya que aparecen p\'ixeles con tonos y colores que no corresponden a la imagen original. Se puede apreciar como, gradualmente, esta anomal\'ia va desapareciendo otorg\'andole a la imagen mayor nitidez. Por este motivo, se podr\'ia decir tambi\'en que MHC elimina el artifact \emph{mblur}, al menos en este caso.\\
+
+La ventana es un punto de an\'alisis importante ya que las dos primeras estimaciones producen Zipper, mientras que con Splines disminuye hasta la casi inexistencia no llega a estimarse a la perfecci\'on. En el caso de MHC se podr\'ia decir que la ventana se ve con una similitud importante respecto de la imagen original.
+
+\newpage
+
+Nos pareci\'o un caso de inter\'es lo ocurrido en la siguiente imagen:
+\begin{figure}[h!]
+    \caption{Imagen Original}
+    \begin{center}
+    \includegraphics[scale=0.15]{imagenes/comparacion/07/img7}
+    \label{imgOri2}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+    \caption{}
+    \begin{center}
+    \includegraphics[scale=1]{imagenes/comparacion/07/palmeritas}
+    \label{palmas}
+  \end{center}
+\end{figure}
+
+\newpage
+
+En la Figura \ref{palmas} cabe destacar dos aspectos:
+
+\begin{itemize}
+\item \textbf{Nitidez de los troncos de las palmeras}: En esta imagen se repite algo que observamos en casos anteriores. El algoritmo de Vecino m\'as cercano produce Zipper notablemente y a medida que se avanza con los algoritmos, este artifact decrementa su existencia. De este modo, lo que sol\'ia ser una l\'inea inexacta y con colores pocos reales termina convirti\'endose en un tronco muy cercano en aspecto al de la imagen original. 
+\item \textbf{False colors}: Algo llamativo que acontece con esta foto es la aparici\'on de una espuma turquesa en la orilla. Si bien bajo el algoritmo de Vecino m\'as cercano posee una pronunciaci\'oon mayor ning\'un algoritmo es capaz de eliminarla del todo. Los resultados obtenidos difieren bastante visualmente de la imagen original. Esta aparici\'on de un color que no existe es un caso m\'as del artifact False Colors.
+\end{itemize}
 
 \newpage
 
 
-Como conclusi\'on, podemos inferir que los lugares donde se muestra una variaci\'on son siempre lugares pertencientes a contornos o bordes de objetos en las im\'agenes. En cambio, en p\'ixeles sobre superficies llanas o parejas del mismo cuerpo la diferencia entre la imagen original y nuestra imagen obtenida es nula.\\
+Como conclusi\'on, podemos inferir que los lugares donde se muestra una variaci\'on son siempre lugares pertencientes a contornos o bordes de objetos en las im\'agenes. En cambio, en p\'ixeles sobre superficies llanas o parejas del mismo cuerpo la diferencia entre la imagen original y nuestra imagen obtenida es casi nula.\\
+
+Y tambi\'en se puede concluir que para todos los casos de test realizados, coincide que el algoritmo \'optimo es el de MHC.\\
 
 \textit{Se adjuntan las im\'agenes en su tama\~no original.}
 
@@ -901,18 +1022,18 @@ Como conclusi\'on, podemos inferir que los lugares donde se muestra una variaci\
 \newpage
 En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, los valores de psnr y ssim.
 \begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=0.75]{imagenes/graficos/psnr}
-	\label{cartel}
+    \caption{Evaluaci\'on de psnr para 12 im\'agenes del mismo tama\~no}
+    \begin{center}
+    \includegraphics[scale=0.75]{imagenes/graficos/psnr}
+    \label{psnr}
   \end{center}
 \end{figure}
 
 \begin{figure}[h!]
-	\caption{}
-	\begin{center}
-	\includegraphics[scale=0.75]{imagenes/graficos/ssim}
-	\label{cartel}
+    \caption{Evaluaci\'on de ssim para 12 im\'agenes del mismo tama\~no}
+    \begin{center}
+    \includegraphics[scale=0.75]{imagenes/graficos/ssim}
+    \label{ssim}
   \end{center}
 \end{figure}
 
@@ -923,6 +1044,20 @@ En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, l
 \newpage
 \section{Conclusiones y trabajo futuro}
 
+Es importante conocer nuestras limitaciones. Si bien bajo el algoritmo de MHC la existencia de \emph{Artifacts} es casi nula, hay algunos que persisten y la forma de solucionar esto excede a nuestro trabajo. Por este motivo, nos centraremos en el \'optimo m\'etodo para resolver el \emph{Demosaicing} sin esperar que este sea infalible y meramente real.\\
+
+Como primera instancia, el Algoritmo de\textit{ Vecino M\'as Cercano} es capaz de esbozar la estructura de la imagen a grandes rasgos. Sin embargo, los bordes no suelen ser muy precisos y la definici\'on tiende a ser de baja calidad. Sumado a que es el m\'etodo donde encontramos mayor diversidad de Artifacts y mayor ocurrencia bajo una misma imagen. Cabe destacar que los valores de psnr y ssim arrojados en nuestra experimentaci\'on para este m\'etodo fueron siempre los menores.\\
+
+La interpolaci\'on Bilineal tiende a ser una buena soluci\'on respecto de los contornos cuadrados que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo.\\
+
+Los splines bla...\\
+
+Con los resultados arrojados por nuestra experimentaci\'on nos vemos condicionados a determinar que el m\'etodo \'optimo entre los cuatro probados es el del Algoritmo de Malvar, He y Cutler. Este m\'etodo es el que mejores n\'umeros obtuvo de psnr y ssim para todos los casos evaluados. Adem\'as, es el m\'etodo donde encontramos menor diversidad de artifacts y, sobre todo, menor cantidad de artifacts en una misma imagen. \\
+
+\textcolor{red}{Ademas de completar los puntos suspensivos, hay que agregar algo respecto del tiemmpo empleado por cada uno y si vale la pena esperar o no y bla...\\
+Tambi\'en poner que los valores de ssim y psnr fueron constantes, es decir siempre en el mismo orden.}\\
+
+No hay que perder de vista que la implementaci\'on deber\'a ser ejecutada en tiempo real, lo cual implica que si un algoritmo es muy bueno para la estimaci\'on de la imagen pero tarda un tiempo considerablemente alto no es realmente el \'optimo.
 
 
 
