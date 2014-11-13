@@ -16,5 +16,5 @@
 \contentsline {section}{\numberline {4}Conclusiones y trabajo futuro}{49}
 \contentsline {section}{\numberline {5}Ap\'endices}{49}
 \contentsline {subsection}{\numberline {5.1}Ap\'endice A: Enunciado}{49}
-\contentsline {subsection}{\numberline {5.2}Ap\'endice B:}{49}
-\contentsline {section}{\numberline {6}Referencias}{50}
+\contentsline {subsection}{\numberline {5.2}Ap\'endice B: Algoritmos}{56}
+\contentsline {section}{\numberline {6}Referencias}{58}

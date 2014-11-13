@@ -449,7 +449,7 @@ $\triangleright$ Por otra parte - y en cierta forma vinculado al ejemplo anterio
 
 
 \newpage
-\subsection*{Decisiones tomadas en el Algoritmo de Vecino M\'as Cercano}
+\subsubsection*{Decisiones tomadas en el Algoritmo de Vecino M\'as Cercano}
 
 A la hora de formular nuestro algoritmo de Vecino m\'as Cercano nos vimos obligados a determinar aspectos que conciernen al dise\~no del mismo. 
 
@@ -1424,11 +1424,104 @@ No hay que perder de vista que la implementaci\'on deber\'a ser ejecutada en tie
 \section{Ap\'endices}
 \subsection{Ap\'endice A: Enunciado} 
 
-%ACORDARSE DE DESCOMENTARLO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\includepdf[pages={-}]{Enunciado.pdf}
+\includepdf[pages={-}]{Enunciado.pdf}
 
-\subsection{Ap\'endice B:}
+\subsection{Ap\'endice B: Algoritmos}
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo Vecino m\'as cercano}
+\For{cada fila de la imagen}{
+	\For{cada columna de la imagen}{
+		\eIf{es una fila de rojos y verdes}{
+			\eIf{es un p\'ixel rojo}{
+				canal verde $\leftarrow$ canal verde del p\'ixel de arriba\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de arriba a la izquierda			
+			}{
+				//Pixel Verde\\
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de la derecha\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de arriba			
+			}
+		}{
+			//Fila de azules y verdes \\
+			\eIf{es un p\'ixel verde}{
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de arriba\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de la izquierda			
+			}{
+				//P\'ixel Azul\\
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de abajo a la derecha\\
+				canal verde $\leftarrow$ canal verde del p\'ixel de la derecha			
+			}
+		}
+	}
+}
+\end{algorithm}
+
+
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo Interpolaci\'on Bilineal}
+\For{cada fila de la imagen}{
+	\For{cada columna de la imagen}{
+		\eIf{es una fila de rojos y verdes}{
+			\eIf{es un p\'ixel rojo}{
+				canal verde $\leftarrow$ promedio de los cuatro de los costados\\
+				canal azul $\leftarrow$ promedio de los cuatro de las diagonales			
+			}{
+				//Pixel Verde\\
+				canal rojo $\leftarrow$ promedio de los dos de los costados\\
+				canal azul $\leftarrow$ promedio entre el de arriba y el de abajo			
+			}
+		}{
+			//Fila de azules y verdes \\
+			\eIf{es un p\'ixel verde}{
+				canal rojo $\leftarrow$ promedio entre el de arriba y el de abajo\\
+				canal azul $\leftarrow$ promedio de los dos de los costados			
+			}{
+				//P\'ixel Azul\\
+				canal rojo $\leftarrow$ promedio de los cuatro de las diagonales			\\
+				canal verde $\leftarrow$ promedio de los cuatro de los costados
+			}
+		}
+	}
+}
+\end{algorithm}
+
+\newpage
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Algoritmo Malvar, He and Cutler}
+\For{cada fila de la imagen}{
+	\For{cada columna de la imagen}{
+		\eIf{es una fila de rojos y verdes}{
+			\eIf{es un p\'ixel rojo}{
+				canal verde $\leftarrow$ promedio de los cuatro verdes de al lado + 1/2 ( valor actual - promedio de las diagonales )\\
+				canal azul $\leftarrow$  promedio de las diagonales (azules) + 3/4 (actual - promedio de los cuatro rojos de al lado a 2 de distancia)
+			
+			}{
+				//Pixel Verde\\
+				canal rojo $\leftarrow$ el promedio de los de los costados + 5/8 ( actual - 1/5 (suma de los dos del costado a dos de distancia + sumatoria de las diagonales - 1/2(suma arriba y abajo)))\\
+				canal azul $\leftarrow$ promedio entre arriba y abajo + 5/8 (actual - 1/5(suma de arriba y abajo a dos de distancia + suma de las diagonales - promedio de los costados a dos de distancia))		
+			}
+		}{
+			//Fila de azules y verdes \\
+			\eIf{es un p\'ixel verde}{
+				canal rojo $\leftarrow$ promedio entre arriba y abajo + 5/8 (actual - 1/5(suma de arriba y abajo a dos de distancia + suma de las diagonales - promedio de los costados a dos de distancia))\\
+				canal azul $\leftarrow$ el promedio de los de los costados + 5/8 ( actual - 1/5 (suma de los dos del costado a dos de distancia + sumatoria de las diagonales - 1/2(suma arriba y abajo)))		
+			}{
+				//P\'ixel Azul\\
+				canal rojo $\leftarrow$  promedio de las diagonales (azules) + 3/4 (actual - promedio de los cuatro rojos de al lado a 2 de distancia)			\\
+				canal verde $\leftarrow$ promedio de los cuatro verdes de al lado + 1/2 ( valor actual - promedio de las diagonales )
+			}
+		}
+	}
+}
+\end{algorithm}
+
+
 \newpage
 \section{Referencias}
  
@@ -1443,30 +1536,3 @@ Conference on Speech, Acoustics, and Signal Processing}, 2004.\\
 \textbf{[3]} R. Burden y J.D.Faires, \textit{An\'alisis num\'erico}, International Thomson Editors, 1998
 
 \end{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
-  \begin{center}
-	\includegraphics[scale=0.66]{imagenes/logouba.jpg}
-	\caption{Descripcion de la figura}
-	\label{nombreparareferenciar}
-  \end{center}
-\end{figure}
-
-
-\paragraph{\textbf{Titulo del parrafo} } Bla bla bla bla.
-Esto se muestra en la figura~\ref{nombreparareferenciar}.
-
-
-
-\begin{codesnippet}
-\begin{verbatim}
-
-struct Pepe {
-
-    ...
-
-};
-
-\end{verbatim}
-\end{codesnippet}
