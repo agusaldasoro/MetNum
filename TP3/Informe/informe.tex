@@ -565,7 +565,6 @@ Es nuestra intención exponer ahora el motivo que consideramos suficiente para d
 Sea dada la siguiente muestra: \\
 \smallskip
 
-<<<<<<< HEAD
 
 \begin{tabular}{ | c || c | c | c | c | c |c | c | c | c | c | c | c | c | c | c |}
  \hline                 
@@ -702,9 +701,6 @@ La carencia de predictibilidad hace del polinomio de Lagrange una mala alternati
 Considerando su superioridad, entonces, nos propusimos encontrar un algoritmo que los utilice para conseguir buenas interpolaciones que generen imágenes de calidad superior a la hora de realizar el demosaicing.\\
 
 Conseguir el Spline interpolador de una función $f$ dado un conjunto de puntos \{\(X_0, ..., X_n\)\} y sus respectivos valores de $f(x_j)$ consiste en resolver un sistema \(Ax = b\) que nos permita encontrar los 4 coeficientes de cada uno de los $n-1$ polinomios que lo conformen. Siguiendo la lógica presentada en [\textbf{3}], donde se despeja el coeficiente que acompaña al término de grado 2 en cada polinomio, se puede llegar a ver que $A$ resulta ser una matriz tridiagonal de $(n+1)\times(n+1)$ que posee el siguiente aspecto (trabajando con splines naturales): \\
-=======
-Conseguir el Spline interpolador de una función $f$ dado un conjunto de puntos \{\(X_0, ..., X_n\)\} y sus respectivos valores de $f(x_j)$ consiste en resolver un sistema \(Ax = b\) que nos permita encontrar los 4 coeficientes de cada uno de los $n-1$ polinomios que lo conformen. Siguiendo la lógica presentada en \textbf{[3]}, donde se despeja el coeficiente que acompaña al término de grado 2 en cada polinomio, se puede llegar a ver que $A$ resulta ser una matriz tridiagonal de $(n+1)\times(n+1)$ que posee el siguiente aspecto (trabajando con splines naturales): \\
->>>>>>> FETCH_HEAD
 
 \[
 A = \left(
@@ -904,7 +900,7 @@ Y, análogamente, la vertical:
 Utilizando este concepto, modificamos nuestro algoritmo para que, en lugar de combinar la información obtenida mediante el promedio, haga lo siguiente:
 
 \begin{itemize}
-\item Interpolar por filas
+\item Interpolar por filas 
 \item Al realizar la interpolación por columnas, para los pixeles rojos y azules tenemos ahora dos valores posibles de verde. Comparamos los valores de las derivadas horizontal y vertical para el color verde:
 \begin{itemize}
 \item Si la derivada horizontal es mayor que la vertical, entonces le asignamos el valor de verde dado por la interpolación de la columna
@@ -994,7 +990,7 @@ Luego de un análisis sobre qué factor era más conveniente usar, llegamos a la
 
 \[\sigma_G = \partial_xG + \partial_yG \]
 \smallskip
-\[\alpha_G =
+\[\alpha_G = 
 \begin{cases}
 0.5 & \sigma_G = 0 \\
   &  \\
@@ -1002,7 +998,7 @@ Luego de un análisis sobre qué factor era más conveniente usar, llegamos a la
 \end{cases}
 \]
 \medskip
-\[\beta_G =
+\[\beta_G = 
 \begin{cases}
 0.5 & \sigma_G = 0 \\
   &  \\
@@ -1149,7 +1145,6 @@ Donde ``generar un spline de rango $r$ para el canal $C$ de acuerdo a \(\partial
 
 El valor de $r$ utilizado fue 3, es decir, se tomaron 3 píxeles del mismo color a ambos lados de cada píxel para realizar la interpolación. Esta selección se debió a que con rangos mucho mayores el algoritmo se volvía más lento, y con rangos más pequeños, los resultados no eran tan buenos.\\
 
-<<<<<<< HEAD
 Al analizar la imágenes generadas, nos sorprendió ver que, a simple vista, la diferencia con el método de las derivadas era imperceptible. De hecho, fue necesario un muy profundo análisis de las imágenes para encontrar diferencias.\\
 
 \begin{figure}[h!]
@@ -1204,8 +1199,6 @@ La mayor diferencia respecto a los métodos anteriores fue la velocidad de cómp
 
 \textcolor{red}{GRAFICO DE TIEMPOS\\}
 
-=======
->>>>>>> FETCH_HEAD
 \newpage
 \subsection{Algoritmo de Malvar, He y Cutler}
 
