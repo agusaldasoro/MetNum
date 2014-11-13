@@ -1713,7 +1713,6 @@ Y por último, una tabla con los valores exactos, para poder apreciar mejor las 
 \newpage
 \section{Conclusiones y trabajo futuro}
 
-\textcolor{red}{Ademas de completar los puntos suspensivos, hay que agregar algo respecto del tiemmpo empleado por cada uno y si vale la pena esperar o no y bla...}\\
 
 
 
@@ -1725,9 +1724,10 @@ Considerando las mediciones de psnr y ssim, las cuales preservaron un comportami
 
 Como primera instancia, el Algoritmo de\textit{ Vecino M\'as Cercano} es capaz de esbozar la estructura de la imagen a grandes rasgos. Sin embargo, los bordes no suelen ser muy precisos y la definici\'on tiende a ser de baja calidad. Sumado a que es el m\'etodo donde encontramos mayor diversidad de Artifacts y mayor ocurrencia bajo una misma imagen. Cabe destacar que los valores de psnr y ssim arrojados en nuestra experimentaci\'on para este m\'etodo fueron siempre los menores.\\
 
-La \textit{interpolaci\'on Bilineal} tiende a ser una buena soluci\'on respecto de los contornos cuadrados que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo.\\
+La \textit{interpolaci\'on Bilineal} tiende a ser una buena soluci\'on respecto de los contornos cuadrados que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo. Tanto este m\'etodo como el de Vecino m\'as cercano tienen una relaci\'on tiempo-calidad bastante acertada ya que tienen los menores tiempos de c\'omputo.\\
 
-Los \textit{splines} \textcolor{red}{bla...}.
+Al utilizar el \textit{spline} con la mejora de MHC se disminuy\'o el blurring de la imagen y si bien frente al ojo humano las diferencias entre este m\'etodo y el del algoritmo propiamente dicho de MHC pueden parecer infimas, al realizar el c\'alculo del psnr y ssim se puede observar una diferencia num\'erica notable. Sin embargo, notamos una mayor diversidad de artifacts en este algoritmo que en el de MHC. Es por estas cuestiones que este algoritmo merece su segunda posici\'on entre los cuatro. Tal como analizamos en el trabajo, se puede notar c\'omo aumenta el tiempo de ejecuci\'on de este m\'etodo a medida que aumenta el tama\~no de la imagen, para una imagen de 2000 x 2000 p\'ixeles requiere un tiempo de c\'omputo muy alto. Dado a que en t\'erminos de veracidad respecto de la imagen original no llega a ser tan leal como el algoritmo puro de MHC, descartamos esta opci\'on por demandar m\'as tiempo y devolver resultados de inferior calidad.
+
 
 Como trabajo pendiente, debido a la escasez de tiempo, nos qued\'o la implementaci\'on de una Interpolaci\'on Direccional en sentido diagonal. Nos era de inter\'es este caso porque todos los implementados por nosotros s\'olo toman las direcciones verticales y horizontales (independientemente si se toma la fila/columna entera o s\'olo algunos p\'ixeles). \\
 
@@ -1737,7 +1737,7 @@ Bajo el \textit{Algoritmo de Malvar, He y Cutler}, visualmente podemos definir q
 Sim embargo, para los bordes con un menor contraste o bordes m\'as claros, sigue vi\'endose este artifact donde aparecen colores artificiales muy fuertes en la zona de los mismos.\\
 
 
-Con los resultados arrojados por nuestra experimentaci\'on nos vemos condicionados a determinar que el m\'etodo \'optimo entre los cuatro probados es el del \textit{Algoritmo de Malvar, He y Cutler}. Este m\'etodo es el que mejores n\'umeros obtuvo de psnr y ssim para todos los casos evaluados. Adem\'as, es el m\'etodo donde encontramos menor diversidad de artifacts y, sobre todo, menor cantidad de artifacts en una misma imagen. \\
+Con los resultados arrojados por nuestra experimentaci\'on nos vemos condicionados a determinar que el m\'etodo \'optimo entre los cuatro probados es el del \textit{Algoritmo de Malvar, He y Cutler}. Este m\'etodo es el que mejores n\'umeros obtuvo de psnr y ssim para todos los casos evaluados. Adem\'as, es el m\'etodo donde encontramos menor diversidad de artifacts y, sobre todo, menor cantidad de artifacts en una misma imagen. M\'as importante a\'un es que su relaci\'on tiempo-calidad es la \'optima ya que devuelve una imagen muy similar a la original con un tiempo de c\'omputo no muy lejano del algoritmo m\'as b\'asico que es Vecino m\'as cercano. \\
 
 
 
