@@ -39,7 +39,7 @@
 \subtitulo{Develando la mentira de los megap\'ixeles}
 \integrante{Aldasoro Agustina}{86/13}{agusaldasoro@gmail.com}
 \integrante{Bouz\'on Mar\'ia Bel\'en}{128/13}{belenbouzon@hotmail.com}
-\integrante{Cairo Gustavo Juan}{89/13}{gjcairo@gmail.com}
+\integrante{Cairo Gustavo Juan}{89/13}{gj.cairo@gmail.com}
 
 \maketitle
 \newpage
@@ -50,7 +50,7 @@
 En el presente trabajo se pretende analizar y comparar distintas alternativas que pretenden dar respuesta al problema de demosaicing. Para ello, las mismas serán implementadas y sometidas a experimentación sobre fotografías crudas sintéticas específicamente seleccionadas para poner de manifiesto las ventajas e inconvenientes del empleo de cada método. \\
 \end{abstract}
 
-\textbf{Palabras clave:} \\
+\noindent \textbf{Palabras clave:} \\
 $\bullet$ Filtro Bayer \\
 $\bullet$ Demosaicing \\
 $\bullet$ Interpolaci\'on \\
@@ -125,23 +125,23 @@ Las métricas subjetivas u objetivas se pueden usar con comparación respecto a 
 
 En nuestro caso de estudio, nos vamos a centrar en la comparaci\'on de la imagen original y la obtenida a trav\'es de los distintos m\'etodos. Por esto mismo, vamos a usar m\'etricas que cuenten con una imagen de referencia.\\
 
- Dos de las m\'etricas m\'as sencillas son el \emph{\textbf{Error cuadr\'atico Medio}} (mse) y \emph{\textbf{Peak signal-to-noise ratio}} (psnr). Ambas cuentan con la capacidad de an\'alisis p\'ixel por p\'ixel.\\
+ Dos de las m\'etricas m\'as sencillas son el \emph{\textbf{Error cuadr\'atico Medio}} (MSE) y \emph{\textbf{Peak signal-to-noise ratio}} (PSNR). Ambas cuentan con la capacidad de an\'alisis p\'ixel por p\'ixel.\\
 
 \[
- \textbf{mse} = \frac{1}{mn} \sum_{i=0}^{m-1} \sum_{j=0}^{n-1} [I(x,y) - K(x,y)]^2
+ \textbf{MSE} = \frac{1}{mn} \sum_{i=0}^{m-1} \sum_{j=0}^{n-1} [I(x,y) - K(x,y)]^2
 \]
   \indent \indent \indent \textit{Donde I y K son imágenes a comparar de tamaño $mxn$.}
 
 
 
 \[
- \textbf{psnr} = 10 \log \frac{(2^n-1)^2}{mse} = 10 \log \frac{255^2}{mse}
+ \textbf{PSNR} = 10 \log \frac{(2^n-1)^2}{MSE} = 10 \log \frac{255^2}{MSE}
 \]
 
-Otro tipo de medidas a tener en cuenta son las que utilizan indicadores de la imagen similares a los presentes en la visi\'on humana, como es el caso de \emph{\textbf{Structural similarity}} (ssim) que es una funci\'on que depende de la luminiscencia, el contraste y la similitud estructural.
+Otro tipo de medidas a tener en cuenta son las que utilizan indicadores de la imagen similares a los presentes en la visi\'on humana, como es el caso de \emph{\textbf{Structural similarity}} (SSIM) que es una funci\'on que depende de la luminiscencia, el contraste y la similitud estructural.
 
 \[
- \textbf{ssim}(x,y) = \frac{(2\mu_x\mu_y+c_1)(2\sigma_{xy}+c_2)}{(\mu_x^2+\mu_y^2+c_1)(\sigma_x^2+\sigma_y^2+c_2)}
+ \textbf{SSIM}(x,y) = \frac{(2\mu_x\mu_y+c_1)(2\sigma_{xy}+c_2)}{(\mu_x^2+\mu_y^2+c_1)(\sigma_x^2+\sigma_y^2+c_2)}
 \]
 
 \noindent Donde, 
@@ -162,7 +162,7 @@ $L$ es el rango din\'amico de los valores de los p\'ixeles (com\'unmente es $2^{
 
 $k_1 = 0,01$ y $k_2 = 0,03$ por default\\
 
-Las m\'etricas que vamos a utilizar nosotros como m\'etodo de comparacion de im\'agenes son \emph{psnr} y \emph{ssim}. Los cuales calcularemos con sus instrucciones respectivas en Matlab$\textregistered$.
+Las m\'etricas que vamos a utilizar nosotros como m\'etodo de comparacion de im\'agenes son \emph{PSNR} y \emph{SSIM}. Los cuales calcularemos con sus instrucciones respectivas en Matlab$\textregistered$.
 
 \newpage
 \subsection{Artifacts}
@@ -363,7 +363,7 @@ Por este motivo, realizamos dos versiones de este algoritmo variando en ellas cu
 
 En el \emph{\textbf{algoritmo 1}} si se est\'a en un p\'ixel rojo se elige al de arriba y si se est\'a en un p\'ixel azul se elige el de la derecha. En cambio, en el \emph{\textbf{algoritmo 2}} si se est\'a en un p\'ixel rojo se elige al de la izquierda y si se est\'a en un p\'ixel azul se elige al de abajo.
 
-Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algunos ejemplos que contienen detallado el valor de psnr y ssim para cada imagen respecto de la original.
+Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algunos ejemplos que contienen detallado el valor de PSNR y SSIM para cada imagen respecto de la original.
 
 \begin{figure}[h!]
 	\caption{}
@@ -371,13 +371,13 @@ Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algun
 	\includegraphics[scale=0.60]{imagenes/Vecino/arbolitos}
 	\label{arbolitos}
 	
-	psnr1 =   14.3119
+	PSNR =   14.3119
 
-psnr2 =   14.3533
+PSNR2 =   14.3533
 
-ssim1 =    0.3819
+SSIM1 =    0.3819
 
-ssim2 =    0.3856
+SSIM2 =    0.3856
   \end{center}
 \end{figure}
 
@@ -387,13 +387,13 @@ ssim2 =    0.3856
 	\includegraphics[scale=0.60]{imagenes/Vecino/zebraCara}
 	\label{zebraCara}
 	
-	psnr1 =   19.8295
+PSNR1 =   19.8295
 
-psnr2 =   20.0706
+PSNR2 =   20.0706
 
-ssim1 =    0.8806
+SSIM1 =    0.8806
 
-ssim2 =    0.8841
+SSIM2 =    0.8841
   \end{center}
 \end{figure}
 
@@ -404,13 +404,13 @@ ssim2 =    0.8841
 	\includegraphics[scale=0.60]{imagenes/Vecino/zebra}
 	\label{Zebra}
 	
-	psnr1 =   21.1167
+	PSNR1 =   21.1167
 
-psnr2 =   21.3368
+PSNR2 =   21.3368
 
-ssim1 =    0.8374
+SSIM1 =    0.8374
 
-ssim2 =    0.8417
+SSIM2 =    0.8417
   \end{center}
 \end{figure}
 
@@ -421,13 +421,13 @@ ssim2 =    0.8417
 	\includegraphics[scale=0.06]{imagenes/Vecino/hawaiicmp}
 	\label{Zebra}
 	
-	psnr1 =   23.2721
+	PSNR1 =   23.2721
 
-psnr2 =   23.2371
+PSNR2 =   23.2371
 
-ssim1 =    0.8560
+SSIM1 =    0.8560
 
-ssim2 =    0.8553
+SSIM2 =    0.8553
   \end{center}
 \end{figure}
 
@@ -439,13 +439,13 @@ ssim2 =    0.8553
 	\includegraphics[scale=0.06]{imagenes/Vecino/piramides3cmp}
 	\label{Zebra}
 	
-	psnr1 =   23.8518
+	PSNR1 =   23.8518
 
-psnr2 =   23.8270
+PSNR2 =   23.8270
 
-ssim1 =    0.7514
+SSIM1 =    0.7514
 
-ssim2 =    0.7515
+SSIM2 =    0.7515
   \end{center}
 \end{figure}
 
@@ -455,13 +455,13 @@ ssim2 =    0.7515
 	\includegraphics[scale=0.70]{imagenes/Vecino/piramides2cmp}
 	\label{Zebra}
 	
-	psnr1 =   21.7691
+PSNR1 =   21.7691
 
-psnr2 =   21.7494
+PSNR2 =   21.7494
 
-ssim1 =    0.9508
+SSIM1 =    0.9508
 
-ssim2 =    0.9506
+SSIM2 =    0.9506
   \end{center}
 \end{figure}
 
@@ -471,14 +471,14 @@ ssim2 =    0.9506
 Se puede apreciar que el Algoritmo 1 es capaz de delimitar mejor bordes que poseen rayas en forma horizontal, en cambio el Algoritmo 2 le da una mejor definici\'on a los bordes verticales. Dada la forma de la implementaci\'on, las anomal\'ias observadas en las imagenes cobran sentido.\\
 
 
-Debido a que no se puede establecer con un criterio cu\'al es m\'as correcta que la otra, ya que la veracidad de la imagen obtenida var\'ia depende la imagen inicial y su estructura. Nosotros optamos por utilizar el \emph{\textbf{Algoritmo 1}}.\\
+Debido a que no se puede establecer con un criterio cu\'al es m\'as correcta que la otra, ya que la definición de la imagen obtenida var\'ia depende la imagen inicial y su estructura. Nosotros optamos por utilizar el \emph{\textbf{Algoritmo 1}}.\\
 
 \textit{Se adjuntan las im\'agenes en su tama\~no original.}
 
 \newpage
 \subsection{Interpolaci\'on Bilineal}
 
-La interpolación bilineal es una composición de interpolaciones lineales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más próximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\
+La interpolación bilineal es una composición de interpolaciones líneales en dos direcciones diferentes. Este método desmerece el caracter arbitrario de asignación de un canal a partir del valor más próximo para el mismo y propone que el resultado final sea calculado teniendo en cuenta y promediando todos los valores cercanos sin priorizar ninguno de ellos. \\
 
 Como la estructura del filtro Bayer sólo asegura para los p\'ixels nativamente azules o rojos tener todas sus posiciones vecinas netamente verdes, aquel es el único caso en que el cálculo de un canal se reduce a computar el promedio de los valores superior, inferior, derecho e izquierdo al espacio que se quiere interpolar.\\
 
@@ -877,7 +877,7 @@ Una vez resuelto el problema de la implementación de los algoritmos que generan
 El primer acercamiento que tuvimos con Splines fue simple: para cada pixel, interpolar su fila y su columna (por completo) para los canales faltantes, y asignarle el promedio entre ambos valores obtenidos. \\
 Este método aparenta ser muy similar a la interpolación bilineal, donde se asigna el promedio de los valores de sus vecinos, razón por la cual decidimos comparar cualitativamente los outputs de ambos algoritmos:
 \begin{itemize}
-\item A simple vista, las imágenes son prácticamente idénticas para ambos métodos. Las diferencias son demasiado mínimas como para ser realmente apreciadas. La versión con splines mostró una mayor presencia de artifacts (principalmente \textit{false colors}) pero no muy notable.
+\item A simple vista, las imágenes son prácticamente idénticas para ambos métodos. Las diferencias resultan lo suficientemente despreciables como para no ser consideradas de importancia.. La versión con splines mostró una mayor presencia de artifacts (principalmente \textit{false colors}) pero no muy notable.
 \item Objetivamente, las mediciones de PSNR arrojaron valores sorpresivamente distintos (alrededor de 1 punto de diferencia), favoreciendo a la interpolación bilineal.
 \end{itemize}
 
@@ -894,7 +894,7 @@ Este método aparenta ser muy similar a la interpolación bilineal, donde se asi
 	\label{splines2}
 \end{figure}
 
-Respecto al tiempo de ejecución de ambos algoritmos, el presente método es excesivamente lento, como queda evidenciado en el siguiente gráfico:
+Respecto al tiempo de ejecución de ambos algoritmos, el presente método resultó ser excesivamente lento, como queda evidenciado en el siguiente gráfico:
 
 \begin{figure}[h!]
     \begin{center}
@@ -922,7 +922,7 @@ Y, análogamente, la vertical:
 \[|\partial_yG(x,y)| \approx |G(x,y-1) - G(x,y+1)|\]
 
 
-Utilizando este concepto, modificamos nuestro algoritmo para que, en lugar de combinar la información obtenida mediante el promedio, haga lo siguiente:
+Utilizando este concepto, modificamos nuestro algoritmo para que, en lugar de combinar la información obtenida mediante el promedio, hiciera lo siguiente:
 \pagebreak
 \begin{itemize}
 \item Interpolar por filas 
@@ -967,9 +967,9 @@ Generar el spline de toda la columna para el canal verde e interpolar para los p
 \bigskip
 
 Aplicando este método, pudimos observar mejoras en varios de los bordes de nuestras imágenes: los mismos ahora son más suaves, eliminando casi por completo la presencia de varios artifacts, como por ejemplo zipper.\\
-\indent Sin embargo, también hubo algunos aspectos en los cuales la imagen final empeoró: algunas de las lineas más finas mostraron \textit{false colors}, muchas veces con la presencia de algunos píxeles de colores muy fuertes.\\
+\indent Sin embargo, también hubo algunos aspectos en los cuales la imagen final empeoró: algunas de las líneas más finas mostraron \textit{false colors}, muchas veces con la presencia de algunos píxeles de colores muy fuertes.\\
 
-En relación al tiempo de cómputo, la diferencia entre ambos es prácticamente despreciable: recién para imágenes de más de 2000px comienza a haber una diferencia realmente notoria.
+En relación al tiempo de cómputo, la diferencia entre ambos es prácticamente despreciable: sólo para imágenes de tamaño superior a 2000px comienza a haber una diferencia realmente notoria.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1017,11 +1017,11 @@ De todas formas, sigue siendo visible el artifact de Moiré, y pueden verse algu
 	\label{splines3}
 \end{figure}
 \pagebreak
-En estas otras dos imágenes pretendemos dejar en evidencia el problema de los píxeles con colores incorrectos. Como puede verse en ambas, las lineas en el caso del segundo método parecen más definidas y con una alta reducción del \textit{zipper effect} y \textit{jaggies}. Sin embargo, puede observarse la presencia de píxeles, sobre todo verdes y rojos, prácticamente saturados, sobre los bordes más finos. \\
+En estas otras dos imágenes pretendemos dejar en evidencia el problema de los píxeles con colores incorrectos. Como puede verse en ambas, las líneas en el caso del segundo método parecen más definidas y con una alta reducción del \textit{zipper effect} y \textit{jaggies}. Sin embargo, puede observarse la presencia de píxeles, sobre todo verdes y rojos, prácticamente saturados, sobre los bordes más finos. \\
 
 \pagebreak
 Intentando encontrar explicaciones para este fenómeno, concluímos que podía deberse a que estábamos dejando de lado información valiosa a la hora de componer la imagen: sólo usábamos una dirección.\\
-\indent Por esta razón, decidimos no arrojar una de las direcciones, sino buscar alguna manera de utilizar ambas para obtener mejoras en la composición.\\
+\indent Por esta razón, decidimos no descartar una de las direcciones, sino buscar alguna manera de utilizar ambas para obtener mejoras en la composición.\\
 El siguiente método surgió entonces como un intento de mejorar el anterior algoritmo.\\
 
 El mismo consiste en, para cada pixel que no sea verde, calcular los valores resultantes de ambas interpolaciones para el canal verde: tanto la de la fila, como la de la columna, y luego multiplicar a cada uno por algún factor relacionado con las derivadas direccionales de ese mismo canal, en el pixel a estimar.\\
@@ -1287,9 +1287,9 @@ Habiendo visto los buenos resultados que arrojaba el algoritmo de MHC, nos pregu
 
 El algoritmo de MHC (Malvar, He y Cutler) consiste en realizar una interpolación bilineal, y sumarle factores relacionados con los gradientes del punto a estimar. ¿Qué pasaría si realizáramos una primera interpolación con el anterior método de Splines (rango, que fue el que mejor funcionó entre los distintos tipos de Spline) en lugar de con interpolación bilineal, y luego sumáramos los mismos factores que en algoritmo original?\\
 
-Ese fue el algoritmo que planteamos, y los resultados obtenidos fueron interesantes.\\
+Decidimos averiguarlo y los resultados obtenidos fueron interesantes:\\
 
-En general, este es el método que mejor funcionó dentro del conjunto de los Splines ideados. No llega a igualar al algoritmo original de MHC, pero está realmente cerca. Algo a resaltar es que todos los bordes de las imágenes procesadas con este método parecen estar mucho más definidos, y los colores más fuertes -incluso más que para el algoritmo de MHC.\\
+En general, este es el método que mejor funcionó dentro del conjunto de los Splines ideados. No llega a igualar al algoritmo original de MHC, pero está realmente cerca. Algo a resaltar es que todos los bordes de las imágenes procesadas con este método parecen estar mucho más definidos, y sus colores ser más fuertes - incluso en mayor medida que para el algoritmo de MHC.\\
 
 Respecto a su tiempo de cómputo en comparación al Spline de rango (que era el más rápido hasta el momento), se puede observar que la diferencia en despreciable, con lo cual obtuvimos una mejora en calidad sin sacrificar tiempo:\\
 
@@ -1570,7 +1570,7 @@ Lo interesante a destacar de este caso, es el gran avance que se realiza mediant
 
 \newpage
 
-En la Figura \ref{imagen9} se puede ver un comportamiento similar a lo ya estudiado, lo interesante de destacar en cuanto a esta foto es que al poseer un letrero es una imagen menos abstracta que las anteriores y por lo tanto, se adquiere una definici\'on mayor cuando se tiene una diferencia menor con la original y as\'i facilitar la lectura del cartel.
+En la Figura \ref{imagen9} se puede ver un comportamiento similar a lo ya estudiado. Lo interesante a destacar en cuanto a esta foto es que el texto escrito en el cartel admite ser tomado como referencia confiable para una evaluación visual de los resultados del método. En otras palabras, deja en mayor evidencia cuán nítidos son los bordes en el contexto general de la imagen.
 
 
 
@@ -1621,9 +1621,9 @@ La Figura \ref{imagen12} es una imagen con muchas l\'ineas y dibujos con contorn
   \end{center}
 \end{figure}
 
-En la secci\'on de la foto que le corresponde al techo se puede apreciar el artifact de \emph{False Colors}. Ya que aparecen p\'ixeles con tonos y colores que no corresponden a la imagen original. Se puede apreciar como, gradualmente, esta anomal\'ia va desapareciendo otorg\'andole a la imagen mayor nitidez. Por este motivo, se podr\'ia decir tambi\'en que MHC elimina el artifact \emph{blurring}, al menos en este caso.\\
+En la secci\'on de la foto que le corresponde al techo se puede apreciar el artifact de \emph{False Colors}. Ya que aparecen p\'ixeles con tonos y colores que no corresponden a la imagen original. Se puede observar como, gradualmente, esta anomal\'ia va desapareciendo otorg\'andole a la imagen mayor nitidez. Por este motivo, se podr\'ia decir tambi\'en que MHC elimina el artifact \emph{blurring}, al menos en este caso.\\
 
-La ventana es un punto de an\'alisis importante ya que las dos primeras estimaciones producen Zipper, mientras que con Splines disminuye hasta la casi inexistencia no llega a estimarse a la perfecci\'on. En el caso de MHC se podr\'ia decir que la ventana se ve con una similitud importante respecto de la imagen original.
+La ventana es un punto de an\'alisis importante ya que las dos primeras estimaciones producen Zipper, mientras que con Splines disminuye hasta resultar casi imperceptible. En el caso de MHC se podr\'ia decir que la ventana se ve con una similitud importante respecto de la imagen original.
 
 \newpage
 
@@ -1649,7 +1649,7 @@ Nos pareci\'o un caso de inter\'es lo ocurrido en la siguiente imagen:
 En la Figura \ref{palmas} cabe destacar dos aspectos:
 
 \begin{itemize}
-\item \textbf{Nitidez de los troncos de las palmeras}: En esta imagen se repite algo que observamos en casos anteriores. El algoritmo de Vecino m\'as cercano produce Zipper notablemente y a medida que se avanza con los algoritmos, este artifact decrementa su existencia. De este modo, lo que sol\'ia ser una l\'inea inexacta y con colores pocos reales termina convirti\'endose en un tronco muy cercano en aspecto al de la imagen original. 
+\item \textbf{Nitidez de los troncos de las palmeras}: En esta imagen se repite algo que observamos en casos anteriores. El algoritmo de Vecino m\'as cercano produce Zipper notablemente y a medida que se avanza con los algoritmos, este artifact decrementa su prevalencia. De este modo, lo que sol\'ia ser una l\'inea inexacta y con colores pocos reales termina convirti\'endose en un tronco muy cercano en aspecto al de la imagen original. 
 \item \textbf{False colors}: Algo llamativo que acontece con esta foto es la aparici\'on de una espuma turquesa en la orilla. Si bien bajo el algoritmo de Vecino m\'as cercano posee una pronunciaci\'oon mayor ning\'un algoritmo es capaz de eliminarla del todo. Los resultados obtenidos difieren bastante visualmente de la imagen original. Esta aparici\'on de un color que no existe es un caso m\'as del artifact False Colors.
 \end{itemize}
 
@@ -1661,9 +1661,9 @@ Y tambi\'en se puede concluir que para todos los casos de test realizados, coinc
 \textit{Se adjuntan las im\'agenes en su tama\~no original, además de otros casos de prueba no analizados en detalle en el presente trabajo.}
 
 \newpage
-En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, los valores de psnr y ssim. Se puede ver como el comportamiento es parejo para todas las im\'agenes, es decir respetan el mismo orden entre los algoritmos.
+En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, los valores de PSNR y SSIM. Se puede ver como el comportamiento es parejo para todas las im\'agenes, es decir respetan el mismo orden entre los algoritmos.
 \begin{figure}[h!]
-    \caption{Evaluaci\'on de psnr para 12 im\'agenes del mismo tama\~no}
+    \caption{Evaluaci\'on de PSNR para 12 im\'agenes del mismo tama\~no}
     \begin{center}
     \includegraphics[scale=0.75]{imagenes/graficos/psnr}
     \label{psnr}
@@ -1671,7 +1671,7 @@ En las siguientes figuras se puede observar como aumentan, acorde al m\'etodo, l
 \end{figure}
 
 \begin{figure}[h!]
-    \caption{Evaluaci\'on de ssim para 12 im\'agenes del mismo tama\~no}
+    \caption{Evaluaci\'on de SSIM para 12 im\'agenes del mismo tama\~no}
     \begin{center}
     \includegraphics[scale=0.75]{imagenes/graficos/ssim}
     \label{ssim}
@@ -1715,33 +1715,29 @@ Y por último, una tabla con los valores exactos, para poder apreciar mejor las 
 
 
 
-
 Es importante conocer nuestras limitaciones. Si bien bajo el algoritmo de MHC la existencia de \emph{Artifacts} es casi nula, hay algunos que persisten y la forma de solucionar esto excede a nuestro trabajo. Por este motivo, nos centraremos en el \'optimo m\'etodo para resolver el \emph{Demosaicing} sin esperar que este sea infalible y meramente real.\\
 
-No hay que perder de vista que la implementaci\'on deber\'a ser ejecutada en tiempo real, lo cual implica que si un algoritmo es muy bueno para la estimaci\'on de la imagen pero tarda un tiempo considerablemente alto no es realmente el \'optimo.\\
+No hay que perder de vista que la implementación puede llegar a tener que ser ejecutada en tiempo real, lo cual implica que si un algoritmo es muy bueno para la estimaci\'on de la imagen pero insume un tiempo considerablemente alto, entonces no es realmente el óptimo.\\
 
-Considerando las mediciones de psnr y ssim, las cuales preservaron un comportamiento parejo para todas las mediciones realizadas, se puede establecer un orden entre los algoritmos: Vecino m\'as cercano, Bilineal, Splines y MHC, siendo el primero el de menor puntaje y el \'ultimo el de mayor.\\
+Considerando las mediciones de PSNR y SSIM, las cuales preservaron un comportamiento parejo para todas las observaciones relevadas, se puede establecer un orden entre los algoritmos: Vecino m\'as cercano, Bilineal, Splines y MHC, siendo el primero el de menor puntaje y el \'ultimo el de mayor.\\
 
-Como primera instancia, el Algoritmo de\textit{ Vecino M\'as Cercano} es capaz de esbozar la estructura de la imagen a grandes rasgos. Sin embargo, los bordes no suelen ser muy precisos y la definici\'on tiende a ser de baja calidad. Sumado a que es el m\'etodo donde encontramos mayor diversidad de Artifacts y mayor ocurrencia bajo una misma imagen. Cabe destacar que los valores de psnr y ssim arrojados en nuestra experimentaci\'on para este m\'etodo fueron siempre los menores.\\
+Como primera instancia, el Algoritmo de\textit{ Vecino M\'as Cercano} es capaz de esbozar la estructura de la imagen a grandes rasgos. Sin embargo, los bordes no suelen ser muy precisos y la definici\'on tiende a ser de baja calidad.  Además, fue el método que produjo mayor diversidad de Artifacts y mayor ocurrencia bajo una misma imagen.\\
+A pesar de que el tiempo de cómputo para este método siempre fue el menor, cabe destacar que los valores de PSNR y SSIM arrojados en nuestra experimentaci\'on para este m\'etodo fueron siempre los menores, además de que la exploración visual y subjetiva de la imágenes producidas deja en evidencia que este método, aunque fácil de implementar y para nada complejo, es por demás grosero a la hora de realizar demosaicing.\\
 
-La \textit{interpolaci\'on Bilineal} tiende a ser una buena soluci\'on respecto de los contornos cuadrados que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo. Tanto este m\'etodo como el de Vecino m\'as cercano tienen una relaci\'on tiempo-calidad bastante acertada ya que tienen los menores tiempos de c\'omputo.\\
+La \textit{interpolaci\'on Bilineal} tiende a ser una buena soluci\'on respecto de los contornos angulosos que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo.\\
+Si tuviésemos que elegir el método más rápido posible y que, sin embargo, produzca resultados medianamente aceptables (para, por ejemplo, el pequeño visor de una cámara digital no profesional), la interpolación bilineal podría ser una buena elección, ya que mejora notablemente Vecino más cercano, sin requerir mucho más tiempo de cómputo.
 
-Al utilizar el \textit{spline} con la mejora de MHC se disminuy\'o el blurring de la imagen y si bien frente al ojo humano las diferencias entre este m\'etodo y el del algoritmo propiamente dicho de MHC pueden parecer infimas, al realizar el c\'alculo del psnr y ssim se puede observar una diferencia num\'erica notable. Sin embargo, notamos una mayor diversidad de artifacts en este algoritmo que en el de MHC. Es por estas cuestiones que este algoritmo merece su segunda posici\'on entre los cuatro. Tal como analizamos en el trabajo, se puede notar c\'omo aumenta el tiempo de ejecuci\'on de este m\'etodo a medida que aumenta el tama\~no de la imagen, para una imagen de 2000 x 2000 p\'ixeles requiere un tiempo de c\'omputo muy alto. Dado a que en t\'erminos de veracidad respecto de la imagen original no llega a ser tan leal como el algoritmo puro de MHC, descartamos esta opci\'on por demandar m\'as tiempo y devolver resultados de inferior calidad.
+Al utilizar el \textit{spline} con la mejora de MHC se disminuy\'o el blurring de la imagen y si bien frente al ojo humano las diferencias entre este m\'etodo y el del algoritmo propiamente dicho de MHC pueden no ser muy visibles, notamos una mayor diversidad de artifacts en el primero. \\
+Tal como analizamos en el trabajo, el tiempo de ejecuci\'on de este m\'etodo es muy elevado, y sólo empeora a medida que aumenta el tama\~no de la imagen a procesar. Dado que en t\'erminos de veracidad respecto de la imagen original no llega a ser tan leal como el algoritmo original de MHC, descartamos esta opci\'on como buena por demandar m\'as tiempo y devolver resultados que se podrían obtener con un algoritmo mucho menos complejo.\\
 
+Bajo el \textit{Algoritmo de Malvar, He y Cutler}, visualmente podemos definir que las fotos adquirien una mayor definici\'on con contornos menos borrosos e imperfectos. Este algoritmo optimiza la detecci\'on de bordes cuando la diferencia de colores es muy fuerte, por ejemplo, un borde oscuro sobre un fondo claro. Si se comparara con el algoritmo de interpolaci\'on bilineal, en el mismo caso se produc\'ian colores fuertes alrededor de los bordes negros (artifact).
 
-Como trabajo pendiente, debido a la escasez de tiempo, nos qued\'o la implementaci\'on de una Interpolaci\'on Direccional en sentido diagonal. Nos era de inter\'es este caso porque todos los implementados por nosotros s\'olo toman las direcciones verticales y horizontales (independientemente si se toma la fila/columna entera o s\'olo algunos p\'ixeles). \\
+Sin embargo, para los bordes con un menor contraste o bordes m\'as claros, sigue vi\'endose este artifact donde aparecen colores artificiales muy fuertes en la zona de los mismos (\textit{Moiré} y \textit{false colors}).\\
 
+Con los resultados arrojados por nuestra experimentaci\'on nos vemos obligados entonces a determinar que el m\'etodo \'optimo entre los cuatro estudiados es el \textit{Algoritmo de Malvar, He y Cutler}. Este m\'etodo es el que mejores n\'umeros obtuvo de PSNR y SSIM para todos los casos evaluados, y el más agradable a la vista. Adem\'as, es el m\'etodo donde encontramos menor diversidad y presencia de artifacts en una misma imagen. M\'as importante a\'un es que su relaci\'on tiempo-calidad es la \'optima, ya que devuelve una imagen muy similar a la original con un tiempo de c\'omputo no muy lejano al de los algoritmos m\'as b\'asicos (Vecino m\'as cercano e Interpolación Bilineal). \\
 
-Bajo el \textit{Algoritmo de Malvar, He y Cutler}, visualmente podemos definir que las fotos adquirien una mayor definici\'on con contornos menos borrosos e imperfectos. Este algoritmo optimiza la detecci\'on de bordes cuando la diferencia de colores es muy fuerte, por ej. un borde oscuro sobre un fondo claro. Si se comparara con el algoritmo de interpolaci\'on bilineal, en el mismo caso se produc\'ian colores fuertes alrededor de los bordes negros (artifact).
+Debido a la escasez de tiempo, queda como trabajo pendiente experimentar qué pasaría con interpolaciones mediante Splines utilizando diagonales (en lugar de las direccinoes horizontal y vertical utilizadas a lo largo del presente trabajo).\\
 
-Sim embargo, para los bordes con un menor contraste o bordes m\'as claros, sigue vi\'endose este artifact donde aparecen colores artificiales muy fuertes en la zona de los mismos.\\
-
-
-Con los resultados arrojados por nuestra experimentaci\'on nos vemos condicionados a determinar que el m\'etodo \'optimo entre los cuatro probados es el del \textit{Algoritmo de Malvar, He y Cutler}. Este m\'etodo es el que mejores n\'umeros obtuvo de psnr y ssim para todos los casos evaluados. Adem\'as, es el m\'etodo donde encontramos menor diversidad de artifacts y, sobre todo, menor cantidad de artifacts en una misma imagen. M\'as importante a\'un es que su relaci\'on tiempo-calidad es la \'optima ya que devuelve una imagen muy similar a la original con un tiempo de c\'omputo no muy lejano del algoritmo m\'as b\'asico que es Vecino m\'as cercano. \\
-
-
-
-\pagebreak
 \section{Ap\'endices}
 \subsection{Ap\'endice A: Enunciado} 
 
@@ -1848,7 +1844,7 @@ Con los resultados arrojados por nuestra experimentaci\'on nos vemos condicionad
 \textbf{[1]} Ron Kimmel. Demosaicing: image reconstruction from color ccd samples. \textit{IMAGE PROCESSING, IEEE TRANSACTIONS ON}, 1999. \\
 \\
 
-\textbf{[2]} Henrique S. Malvar, Li wei He, and Ross Cutler. High-quality linear interpolation for
+\textbf{[2]} Henrique S. Malvar, Li wei He, and Ross Cutler. High-quality línear interpolation for
 demosaicing of bayer-patterned color images. In \textit{Proceedings of the IEEE International
 Conference on Speech, Acoustics, and Signal Processing}, 2004.\\
 \\

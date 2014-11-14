@@ -1,0 +1,42 @@
+================================================
+||Acerca del compilado y la ejecución programa||
+================================================
+
+Para compilar el TP, correr:
+
+-En Linux:
+g++ *.cpp -o tp -std=c++11 -lpthread -lX11
+
+-En OSX:
+g++ -o tp *.cpp -I/usr/X11/include -L/usr/X11/lib -lX11
+
+Para correrlo:
+./tp path_imagen algoritmo
+
+Donde algoritmo puede ser:
+[0] para Vecino Mas Cercano
+[1] para Bilineal
+[2] para el algoritmo de Malvar, He y Cutler (MHC)
+[3] para interpolacion mediante splines, seguida de alguna de las siguiente opciones:
+	's' -metodo standard, interpolando una fila y una columna enteras
+	'd' -interpolacion descartando direcciones en base a las derivadas direccionales
+	'p' -interpolacion otorgando pesos proporcionales en base a las derivadas direccionales
+	'r' -interpolacion tomando un rango de 3 pixeles del mismo color
+	'm' -interpolacion utilizando las mejoras basadas en el algoritmo de Malvar, He y Cutler
+
+
+==================================================
+||Acerca de las mediciones e imágenes procesadas||
+==================================================
+
+A lo largo de la vida del trabajo práctico nos encargamos de probar distintos métodos de interpolación con el fin de mejorar el demosaicing de imágenes. Eso implicó testear los métodos sobre muchas imágenes para poder sacar conclusiones.
+
+Aunque en el informe se incluyeron varias de las imágenes con las que trabajamos (creemos nosotros, de las más representativas), en realidad existe mucho más material que por cuestiones de presentación decidimos descartar.
+De todas maneras, creemos importante permitir el acceso a dicha información en caso de que el lector quisiera ver una mayor gama de resultados, o ver todas las imágenes mencionadas en el informe en tamaño real.
+
+Dado la cantidad de imágenes generadas y su calidad, no nos es posible adjuntarlas todas junto al presente archivo.
+Se provee entonces el siguiente link a Google Drive donde pueden encontrarse todas las imágenes utilizadas, y más:
+
+goo.gl/SCSMHJ
+
+Además, se adjunta la totalidad de los archivos en el CD entregado, para más fácil acceso.
