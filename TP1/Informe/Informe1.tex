@@ -1,0 +1,1078 @@
+%\title{beavtex}
+\documentclass[double, 1.5in, 12pt]{beavtex}
+\usepackage{graphicx}
+\usepackage{rotating} %Package added to allow the rotation of figures and chart on a page, {sidewaysfigure} command
+\usepackage{tablefootnote} %Packaged added to allow footnotes in the tabular environment, use \tablefootnote command
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{float}
+ \usepackage[ruled,vlined,linesnumbered,resetcount,algochapter]{algorithm2e}
+
+\title{Trabajo Pr\'actico N\'umero 1:}
+\subtitle{"No creo que a \'el le gustara eso"}
+\Agustina{Aldasoro, Agustina \ agusaldasoro@gmail.com}
+\Belen{Bouz\'on, Mar\'ia Bel\'en \ belenbouzon@gmail.com}
+\Gustavo{Cairo, Gustavo Juan \ gjcairo@gmail.com}
+
+\submitdate{4 de Septiembre de 2014}
+
+
+\usepackage{todonotes}
+
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\nat}{\mathbb{N}}
+
+\newcommand{\atacante}{sanguijuela}
+\newcommand{\capitan}{Capit\'an Guybrush Threepwood}
+\newcommand{\objeto}{parabrisas}
+\newcommand{\nave}{El Pepino Marino}
+
+\newcommand{\revJ}[1]{{\color{red} #1}}
+
+
+
+\begin{document}
+\maketitle
+\mainmatter
+
+%-------------------------INTRODUCTION-----------------------------
+
+\chapter{Introducci\'on Te\'orica}
+
+Hab\'iendonos sido proporcionados:
+
+\begin{itemize}
+\item la ecuaci\'on del calor que modela de forma gen\'erica el comportamiento de la temperatura T en un punto (x,y) $\in$ $\mathbb{R}^2$ luego de haber consolidado un estado estacionario (figura 1.1) \\
+
+\begin{equation}
+\frac{\partial^2T(x,y)}{\partial x^{2}}+\frac{\partial^2 T(x,y)}{\partial y^{2}} = 0.
+\end{equation}
+
+\item las medidas de un hipot\'etico parabrisas bidimensional cuyos m\'argenes se sabe que mantendr\'an una temperatura constante de -100ºC 
+
+\item y ciertas posiciones del mismo que ser\'an sometidas a una temperatura constante (tambi\'en conocida) aplicada por  una clase id\'ilica y mutante de filo an\'elidos llamados hirud\'ineos (com\'unmente conocidos como "sanguijuelas"),
+
+\end{itemize}
+
+nuestros desaf\'ios consisten en:
+
+\begin{itemize}
+
+\item Proveer un algoritmo que - a partir de la consideraci\'on de los datos reci\'en citados - aproxime la temperatura esperada en condiciones de estabilidad en una cantidad finita de puntos del parabrisas. 
+
+\item Optimizar dicho algoritmo aprovechando los beneficios potencialmente provistos por la estructura del sistema de ecuaciones planteado.
+
+\item Dise\~nar e implementar una funci\'on algor\'itmica que garantice, a partir de la eliminaci\'on de la menor cantidad posible de sanguijuelas, la perdurabilidad del parabrisas (esto es, el resguardo de su punto cr\'itico a una temperatura inferior a los 235 grados Celcius).
+
+\end{itemize}
+
+Como punto de partida y linea de desarrollo que nos permita conseguir estos objetivos, haremos uso e implementaremos en C++ el Algoritmo de Eliminaci\'on Gaussiana, poniendo en discusi\'on posteriormente posibles modificaciones del mismo que permitan adecuarlo a diversos contextos y necesidades.
+
+Dicho algoritmo transforma un sistema lineal Ax= b, A $\in \mathbb{R}^{nxn}$, en uno equi- \- valente Ux=y - donde U es una matriz triangular superior - permitiendo aplicar posteriormente el algoritmo de sustituci\'on regresiva que culmina en la resoluci\'on total del sistema.
+
+
+
+
+
+
+
+%------------------------DESARROLLO--------------------------------
+
+%\chapter{Desarrollo}
+
+\section{Planteo del Sistema de Ecuaciones}
+
+Al  comenzar a plantear un sistema de ecuaciones que pudiera resultar efectivo para la resoluci\'on de los problemas presentados, se puso en cuesti\'on inicialmente el que se desarrolla a continuaci\'on:
+
+Considerando la ecuaci\'on de aproximaci\'on por diferencias finitas de la ecuaci\'on del calor
+\begin{equation}
+t_{ij} \ =\ \frac{ t_{i-1,j} + t_{i+1,j} + t_{i,j-1} + t_{i,j+1}}{4}.\label{eq:calordd}
+\end{equation}
+pensamos que podr\'iamos diseñar una matriz que tuviera para todo i,j una ecuaci\'on asociada en funci\'on de las otras posiciones y que estuviera extendida con cada valor de $t_{ij}$ en el vector independiente (es decir, un sistema de ecuaciones expresadas como en la figura 2.1). R\'apidamente descartamos esa posibilidad, ya que nos encontr\'abamos situando en el vector de t\'erminos independientes, varios que eran ciertamente dependientes.
+
+Luego volvimos a la ecuaci\'on de la que hab\'iamos partido, que nos indicaba la propiedad que inexorablemente cumpl\'ia el comportamiento de la temperatura en funci\'on de la posici\'on consultada  y de la distribuci\'on de las sanguijuelas.  Le restamos a ambos lados $t_{ij}$ y, despejando la ecuaci\'on, obtuvimos una nueva expresi\'on igualada a cero, que determinar\'a finalmente la estructura de nuestro sistema de ecuaciones, dado por:
+
+\begin{equation}
+0 \ =\  t_{i-1,j} + t_{i+1,j} + t_{i,j-1} + t_{i,j+1} - 4.t_{i,j+1}\label{eq:calordd}
+\end{equation}
+
+para todos aquellos puntos a los que no se les aplica una temperatura constante  (es decir, no pertenecen al borde del parabrisas ni se encuentran ocupados por sanguijuelas).
+
+	$T_{ij}$=-100 para todos los puntos del borde.
+
+	$T_{ij}$= $T_s$ para los puntos ocupados por sanguijuelas, siendo $T_s$ la temperatura aplicada por las sanguijuelas.
+
+
+\section{Planteo acerca de las estructura internas de las matrices}
+
+Para representar matrices consideramos inicialmente la estructura cl\'asica: $vector<vector<double>>$. \\
+Esta implementaci\'on permite acceder al elemento M$_{ij}$ mediante la sentencia $matriz[i][j]$. \\
+Almacenamos cada punto discretizado del parabrisas como una inc\'ognita de la matriz, es decir si tenemos una discretizaci\'on de $n+1$ filas por $m+1$ columnas, tendremos una matriz de $(n+1).(m+1)$ filas y $(n+1).(m+1)$ columnas. Si quiero acceder al elemento de la fila $i$, columna $j$ del parabrisas discretizado: considero la inc\'ognita de la columna de la matriz $(k.i)+ j$, siendo $k=\frac{a}{h}+1$. \\
+En cuanto al almacenamiento de nuestra matriz banda, al considerar su morfolog\'ia nos pareci\'o una idea plausible representarla conservando  \'unicamente, los elementos no nulos de la bandas, de la diagonal principal y los t\'erminos independientes. Vi\'endolo gr\'aficamente, si la matriz fuera la siguiente:
+
+
+$
+\left(
+       \begin{array}{p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 1 & -4 & 1 & 0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 & 1 & -4 & 1 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+
+       \end{array}
+\right)
+$
+\emptyline
+\emptyline
+\emptyline
+Se almacenar\'ia de esta forma:\\
+
+$
+\left(
+       \begin{array}{p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}}
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+ 1 & 1 & -4 & 1 & 1 \\
+ 1 & 1 & -4 & 1 & 1 \\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+       \end{array}
+\right)
+$
+
+
+\[
+ \begin{array}{p{6mm}p{6mm}p{6mm}p{6mm}p{6mm}p{6mm}}
+
+\end{array}
+\]
+
+
+Posteriormente advertimos que aquella estructura podr\'ia traernos serios inconvenientes al momento de utilizarla como par\'ametro en el algoritmo de eliminaci\'on gaussiana e intentar hallar la soluci\'on al sistema, dado que los ceros que se encuentran a la derecha de la diagonal y a la izquierda son potencialmente modificables durante este procedimiento, y dichos cambios ser\'ian imperceptibles a pesar de ser determinantes a la hora de hallar la soluci\'on del sistema.
+
+Ejemplo: 
+
+Consideremos la siguiente matriz M $\in \mathbb{R}^{16x17}$ producida a partir de un parabrisas cuadrado de 3 metros de lado, sin sanguijuelas, discretizado definiendo arbitrariamente h=1.
+
+$
+\left(
+       \begin{array}{p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}|c}
+ 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -100  \\
+ 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -100  \\
+ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -100  \\
+ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -100  \\
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -100  \\
+ 0 & 1 & 0 & 0 & 1 & -4 & 1 & 0  & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0  \\
+ 0 & 0 & 1 & 0 & 0 & 1 & -4 & 1  & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0  \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -100  \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -100  \\
+ 0 & 0 & 0 & 0 & 0 & 1 &  0 & 0  & 1 & -4 & 1 & 0 & 0 & 1 & 0 & 0 & 0  \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  & 0 & 1 & -4 & 1 & 0 & 0 & 1 & 0 & 0  \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & -100  \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & -100  \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & -100  \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & -100  \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -100  \\
+       \end{array}
+\right)
+$
+
+\emptyline
+En este caso, si la Eliminaci\'on Gaussiana se estuviera encargando de anular los valores que se encuentran por debajo de la diagonal principal en la quinta columna, eventualmente el resultado en la novena fila ser\'a, para todo j / $ 0<=j<=15$  \begin{equation}
+(a'_{9,j}) = (a_{9,j}) - 4^{-1}*(a_{5,j})
+\end{equation}
+
+Es decir que el elemento $a'_{9,6}$ deber\'a pasar a valer $-4^{-1}$ , pero a causa de un error en la estructura de representaci\'on estr\'iamos omitiendo la relevancia de su modificaci\'on y arribando, en consecuencia, a un resultado incorrecto.
+
+Teniendo en cuenta este inconveniente, resolvimos escoger una opci\'on similar que a nivel espacial era peor que la reci\'en mencionada pero segu\'ia aventajando a la opci\'on cl\'asica. Esta tercera alternativa consisti\'o en computar para cada fila de la matriz original s\'olo los elementos que se encontraran entre el extremo izquierdo de la banda y el derecho (inclusive).
+La matriz presentada con anterioridad quedar\'ia almacenada de la siguiente manera:\\
+
+$
+\left(
+       \begin{array}{p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}p{5mm}}
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 1 & -4 & 1 & 0 & 0 & 1 \\
+1 & 0 & 0 & 1 & -4 & 1 & 0 & 0 & 1 \\
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+       \end{array}
+\right)
+$
+
+
+
+
+\[
+ \begin{array}{p{6mm}p{6mm}p{6mm}p{6mm}p{6mm}p{6mm}p{6mm}p{6mm}p{6mm}p{6mm}}
+
+\end{array}
+\]
+
+Este modo junto con el cl\'asico fueron los que decidimos implementar para experimentar y contrastar sus comportamientos en relaci\'on a los algoritmos que desarrollar\'iamos.
+
+\section{Planteo en relaci\'on al empleo de nuestras estructuras en el problema presentado}
+
+
+Al momento de recibir por par\'ametro las coordenadas del centro de cada sanguijuela, nuestra matriz de posiciones deb\'ia adaptar sus valores de acuerdo al mapeo que se har\'ia de cada una de ellas en el nuevo modelo discreto de representaci\'on. En funci\'on de la longitud de su radio, la ubicaci\'on de su centro y la medida de discretizaci\'on escogida, los mencionados espec\'imenes podr\'ian pasar a estar representados en un \'unico punto, en varios o incluso en ninguno. 
+En principio, para cada sanguijuela deb\'iamos recorrer posici\'on a posici\'on de la matriz discretizada averiguando si pertenec\'ia al sector abarcado por la misma. Para evitarlo, calculamos previamente, a partir de los par\'ametros, un sector cuadrado de puntos fuera de los cuales no existir\'ia la posibilidad de que una sanguijuela en particular tuviera injerencia directa. Determinado este sector, s\'olo deber\'iamos modificar los puntos $p$ pertenecientes al mismo que cumplieran, a su vez,
+ 
+\begin{equation}
+\sqrt{{(p1-c1)}^2 + {(p2-c2)}^2}  \leq  radio
+\end{equation}
+
+Esto lo cumplen aquellos puntos discretizados que representan a alguna coordenada del cont\'inuo cuya distancia al centro C=(c1,c2) de la sanguijuela  es menor o igual al radio de la misma. A dichas posiciones se les asignar\'a posteriormente la temperatura T$_s$ en la matriz de temperaturas, mientras que a las restantes les corresponder\'a la ecuaci\'on de la figura 1.1.
+
+Teniendo en cuenta el empleo subyacente de la aritm\'etica finita, consideramos que planteando una ecuaci\'on equivalente elevando al cuadrado a ambos lados de la desigualdad - eliminando el c\'alculo de la ra\'iz cuadrada - podr\'iamos lograr una mayor precisi\'on y una menor probabilidad de error. Por ende, la ecuaci\'on (2.4) fue sustitu\'ida por la siguiente:
+
+\begin{equation}
+{(p1-c1)}^2 + {(p2-c2)}^2  \leq  {radio}^2
+\end{equation}
+
+En relaci\'on a los casos en que al pasar del plano cont\'inuo al discreto la presencia de las sanguijuelas no se ve\'ia reflejada en ning\'un punto, nos pareci\'o una buena pr\'actica pensar alg\'un criterio para diferenciar y advertir al usuario sobre aquellas discretizaciones que se pudieran considerar como "buenas" de otras que pudieran favorecer la aparici\'on de casos patol\'ogicos en los cuales el c\'alculo de la estimaci\'on de la temperatura fuera groseramente inexacto. Algunos de estos casos se mencionan a continuaci\'on: \\
+\emptyline
+\textit{-La sanguijuela no tiene ning\'un punto discretizado en su interior.} \\
+A fines de preservar el parabrisa, si esto ocurre en puntos cerca del borde no nos es de mayor inter\'es. En cambio, si la ubicaci\'on de la sanguijuela es cerca del punto cr\'itico podr\'ia influir notablemente en su temperatura. Cabe recalcar, que hay que tener en cuenta que esto var\'ia de acuerdo al radio y la temperatura de las sanguijuelas. \\
+\emptyline
+\textit{-La cantidad de sanguijuelas que no tiene ning\'un punto discretizado en su interior y est\'an cerca del punto cr\'itico es alta.} \\
+Podr\'ia pasar que haya una cantidad "alta" de sanguijuelas cerca del borde, pero ninguna tenga un punto en su interior que este discretizado. Las sanguijuelas est\'an, s\'olo que nuestra discretizaci\'on no les permite influir en la temperatura del punto central.\\
+\emptyline
+\textit{-Existe una sanguijuela que no tiene ning\'un punto discretizado en su interior, pero el punto cr\'itico si pertenece a \'el.} \\
+Ejemplo: Hay una sola sanguijuela, que dado por su radio y por su centro, tiene en su interior al punto cr\'itico. En teor\'ia, el punto cr\'itico tendr\'ia el valor T$_s$, pero una vez m\'as la discretizaci\'on dada por el h no nos permitir\'ia verlo. \\
+\\
+ACLARACI\'ON:\\
+Si la temperatura T$_s$ pasada por par\'ametro es menor que 235 grados cent\'igrados, no existe siquiera la posibilidad de que el parabrisas pase a ser inestable.\\
+\\
+
+La idea de informar al usuario sobre estos casos patol\'ogicos fue descartada debido a que en el contexto del presente trabajo cobra relevancia el estudio del comportamiento de las estructuras y algoritmos diseñados en un plano te\'orico global, en detrimento del an\'alisis de los casos particulares.
+
+Sin embargo, sin perder de vista la proyecci\'on de nuestras implementaciones en un hipot\'etico caso real, nos pareci\'o sensato idear una forma produente de estimar la temperatura en el punto cr\'itico cuando el mismo no se hallara discretizado.
+Inicialmente se nos presentaron las siguientes opciones: \\
+- Adjudicarle la temperatura del punto discretizado m\'as pr\'oximo.\\
+- Asignarle la temperatura del promedio de los cuatro puntos discretizados m\'as cercanos.\\
+- Otorgarle la temperatura del promedio de una cantidad de puntos discretizados cercanos proporcional a la cantidad total.
+
+Decidimos resolverlo del siguiente modo:\\
+- Si el punto cr\'itico est\'a discretizado, se le otorga el valor que se calcul\'o en la discretizaci\'on. \\
+- Si el punto cr\'itico est\'a ubicado en el medio del cuadrante armado por la discretizaci\'on, es decir es el \'unico caso en que est\'a a la misma distancia de los cuatro puntos discretizados m\'as cercanos, se le otorga el promedio de estos cuatro valores.\\
+- Si el punto cr\'itico est\'a a la misma distancia de dos puntos discretizados, se le otorga el promedio de estos dos valores.\\
+- En cualquier otro caso, se le otorga al punto cr\'itico el valor del punto discretizado m\'as cercano.\\
+
+ {\color{red}
+PODEMOS PONER LOS DIBUJITOS SI NOS SOBRA TIEMPO. Just saying.\\}
+
+
+\section{Planteo en relaci\'on a la implementaci\'on del Algoritmo de Eliminaci\'on Gaussiana y back substitution}
+
+
+A la hora de pensar maneras de optimizar el c\'omputo de los c\'alculos vinculados a la matriz, tomamos en cuenta la posibilidad de particionarla de forma tal que quedara dividida en patrones que pudieran repetirse, de modo que los mismos pudieran ser resueltos algor\'itmicamente una \'unica vez para luego replicar su resultado en m\'as de una oportunidad. Concluimos, finalmente , que este mecanismo resultar\'ia aplicable s\'olo en casos muy espec\'ificos para los cuales no existe ning\'un indicio de que su probabilidad de ocurrencia pudiera ser significativa. 
+
+Habiendo descartado dicha posibilidad, decidimos optar por implementar una adaptaci\'on del algoritmo de Eliminaci\'on Gaussiana que procurara aprovechar las particularidades de la morfolog\'ia de la estructura de las matrices "Banda". 
+Dicho algoritmo se implement\'o de la siguiente manera:
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Matriz}
+\Output{Void}
+\BlankLine
+\For{$i\leftarrow (k+2)$ \KwTo $(\# filas - k)$}{
+$j\leftarrow 0$ \tcp*[f]{j va a recorrer las columnas} \\
+\While{$j < (posici$\'o$n$ $elemento$ $de$ $la$ $diagonal)$}{\label{forins}
+$com\leftarrow (i+j-k-1)$ \tcp*[f]{\color{red}{GUS: Poner aclaraci\'on abajo.}} \\
+\If{($matriz(i,j) > \varepsilon$)}{
+m $\leftarrow$ matriz(i,j)/matriz(com,PosDiagonal) \\
+Resta Corrida sin la columna Resultado (fila i, fila com) \\
+matriz(i, PosResult) -= matriz(com, PosResult) 
+}}}
+\caption{EGbanda}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+Teniendo en cuenta que bajo las condiciones dadas en nuestro sistema de ecuaciones, es imposible que un elemento de la diagonal principal sea nulo o quede nulo despu\'es de triangular. Decidimos omitir el paso de la Eliminaci\'on Gaussiana donde se  asegura que al momento de triangular no quede un elemento nulo en la diagonal, mediante un intercambio de filas.
+
+Asimismo, luego de esquematizarlo, nos planteamos la posibilidad de optimizar la eficiencia del algoritmo y minimizar su error aplicando pivoteo parcial. Sin embargo, dicha implementaci\'on tendr\'ia un costo extra en complejidad temporal y no influir\'ia en nuestros resultados dado al origen de la matriz. Cre\'imos razonable, en consecuencia, no implementarlo de esa forma en esta oportunidad.\\
+
+
+
+Una observaci\'on de may\'uscula importancia fue notar que el primer algoritmo que desarrollamos con los fines de resolver el sistema triangulado mediante E.G, generaba resultados con errores porcentualmente grandes en relaci\'on a los tolerables. Luego de un an\'alisis te\'orico del problema, nos dimos cuenta de que nos encontr\'abamos dividiendo a cada fila por el coeficiente ubicado en la diagonal para asegurarnos de que al final de la pasada por esa fila, la misma quedara como el vector can\'onico igualado a su resultado. Esto acarreaba error porque hacia menos exacta la cuenta ya que no solo se dividia al vector resultado por un coeficiente cuyo m\'odulo no se encuentra acotado inferiormente, sino que tambi\'en se repet\'ia el procedimiento con los demas coeficientes que luego habr\'ia que triangular. \\
+Por lo tanto, decidimos ir triangulando por filas, es decir, despejar cada elemento desde la \'ultima fila hacia la primera, suplantando en la ecuaci\'on superior los valores obtenidos. \'Unicamente despu\'es de este procedimiento dividir\'iamos por el coeficiente principal, de modo que quede la matriz Identidad igualada a su resultado. \\
+
+
+
+
+%-------------------RESULTADOS--------------------------
+
+\chapter{Resultados}
+Siendo A el ancho del parabrisas, B la altura, H el tama\~no de la discretizaci\'on, R el radio de las sanguijuelas, $\#$S la cantidad de sanguijuelas:
+\section{Caso de test 1}
+%EN REALIDAD ES EL 2
+En nuestro primer intento de test, elegimos los datos de entrada detallados abajo bajo la hip\'otesis de que cada m\'etodo heur\'istico no iba a matar las mismas sanguijuelas, pero si la misma cantidad.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=10cm]{Graficos/test2PRE.png}
+	\caption{Los m\'etodos de entrada para este caso fueron:
+A = 256, 
+B = 256, 
+H = 4, 
+R = 3, 
+Ts = 600, 
+$\#$S = 8}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2variacionPC_h.png}
+	\caption{En el gr\'afico se puede apreciar c\'omo var\'ia la temperatura del punto cr\'itico a medida que se va modificando el h entre 128, 64, 32, 16, 8, 4, 2, 1, 0.5}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2variacionPC_h_mayor_temperatura.png}
+	\caption{Si hacemos la misma prueba, pero aumentando la temperatura a 800 se obtiene un esquema similar}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2variacionPC_h_menor_radio.png}
+	\caption{En cambio, si lo que hacemos es achicar el radio a 1.5, se obtiene}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2_comparacion.png}
+	\caption{}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2_post_d4.png}
+	\caption{Cabe mencionar, el resultado de matar Sanguijuelas de a una, con un h=4:}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test2_postH_d4.png}
+	\caption{El resultado de matar sanguijuelas mediante un algoritmo eur\'istico (da igual cual), con h=4}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+\section{Caso de test 2}
+%EN REALIDAD ES EL 3
+Elegimos los datos de entrada detallados abajo bajo la hip\'otesis de que eligiendo estos par\'ametros las sanguijuelas borradas iba a diferir respecto al algoritmo eur\'istico usado.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=10cm]{Graficos/test3PRE.png}
+	\caption{Los m\'etodos de entrada para este caso fueron:
+A = 512, 
+B = 512, 
+H = 0.5, 
+R = 40, 
+Ts = 500, 
+$\#$S = 7}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test3_varTemp.png}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+No todos los algoritmos eliminan la misma cantidad de sanguijuelas.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test3_deA1_d2.png}
+	\caption{El resultado de matar sanguijuelas mediante el algoritmo de a 1}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+
+En este caso, los dos algoritmos de eliminaci\'on heur\'isticos no elimiman a las mismas sanguijuelas, pero si la misma cantidad.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test3_porcen_d2.png}
+	\caption{El resultado de matar sanguijuelas mediante el algoritmo de 25$\%$}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=14cm]{Graficos/test3_proximidad_2.png}
+	\caption{El resultado de matar sanguijuelas mediante el algoritmo de proximidad}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test3_comparacion_post_matar.png}
+	\caption{}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\section{Caso de test 3}
+
+%EN REALIDAD ES EL 4
+Pusimos una temperatura suficientemente chica (apenas arriba del l\'imite) y colocamos una sola sanguijuela cerca del punto cr\'itico y las dem\'as cerca de los bordes. Nuestra hip\'otesis fue que al influir mayoritariamente una sola sanguijuela en la temperatura del punto cr\'itico, el algoritmo exacto iba a funcionar mejor que cualquier eur\'istico, ya que se matar\'ian sanguijuelas innecesariamente.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4_PREd5.png}
+	\caption{Los m\'etodos de entrada para este caso fueron:
+A = 100, 
+B = 50, 
+H = 5, 
+R = 1, 
+Ts = 240, 
+$\#$S = 13}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4PREd2.png}
+	\caption{El mismo sistema cambiando el h}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4_1d2.png}
+	\caption{Sistema luego de matar con el algoritmo de a 1}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4postH_d2.png}
+	\caption{Sistema luego de matar con alg\'un algoritmo eur\'istico}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=15cm]{Graficos/test4_cmp_tempe.png}
+	\caption{}
+	\label{fig:frog}
+	\end{center}
+\end{figure}
+
+\section{Caso de test 4}
+%EN REALIDAD ES EL 5
+
+
+%------------------------DISCUSION--------------------------------
+
+\chapter{Discusi\'on}
+
+Los resultados presentados en la secci\'on anterior son el producto de un intento de contrastar  diversas hip\'otesis que fuimos formulando conforme nos dedic\'abamos al diseño, la implementaci\'on y el desarrollo del presente trabajo. \\
+A continuaci\'on intentaremos presentar un esbozo de las mismas, junto con una posible interpretaci\'on de los resultados obtenidos. \\
+
+
+
+
+\section{Test 1}
+\textbf{Hip\'otesis:} Cada m\'etodo heur\'istico no matar\'ia las mismas sanguijuelas, pero si la misma cantidad. \\
+\textbf{Discusi\'on:} Sin embargo, en todos los casos -excepto uno- ambos algoritmos eur\'isticos matan a las mismas sanguijuelas.  \\
+Viendo el gr\'afico de distribuci\'on de las sanguijuelas con la discretizacion h= 4, junto a los resultados obtenidos luego de la eliminaci\'on, se puede ver que es el ejemplo de un caso en que “no convendr\'ia” usar el m\'etodo de eliminar de a una. Puesto que al matarla el centro queda a una temperatura riesgosa de 234.551º, muy cercana a la temperatura de muerte. Si se discretizara un poco mas, el algoritmo matar\'ia a dos sanguijuelas. Es decir, que se esta pasando por alto que en realidad el centro est\'a realmente a una temperatura superior a lo que se considera estable. En este caso, se hacen evidentes los peligros de utilizar una mala discretizaci\'on.  \\
+
+\section{Test 2}
+\textbf{Hip\'otesis:}  Las sanguijuelas borradas iban a diferir respecto al algoritmo eur\'istico usado. El algoritmo del 25 $\%$ iba a ser \'optimo. \\
+\textbf{Discusi\'on:} Como muestra en la figura 2.12, contrastando con la hip\'otesis, la temperatura del punto cr\'itico despu\'es de resolver el problema, variando el h, se va a estabilizar antes utilizando la funci\'on de proximidad. Luego, parecen converger todas a lo mismo.\\
+
+\section{Test 3}
+\textbf{Hip\'otesis:} Pusimos una temperatura suficientemente chica (apenas arriba del l\'imite) y colocamos una sola sanguijuela cerca del punto cr\'itico y las dem\'as cerca de los bordes. Nuestra hip\'otesis fue que al influir mayoritariamente una sola sanguijuela en la temperatura del punto cr\'itico, el algoritmo exacto iba a funcionar mejor que cualquier eur\'istico, ya que se matar\'ian sanguijuelas innecesariamente. \\
+\textbf{Discusi\'on:} Todos los algoritmos tardan el mismo tiempo, pero en este caso los algoritmos heuristicos son mucho peores que el de a uno: se mata cuatro veces mas sanquijuelas que para el otro. \\
+
+\section{Test 4}
+\textbf{Hip\'otesis:}
+\textbf{Discusi\'on:}
+\section{Correcta discretizaci\'on}
+
+Uno de los primeros dilemas presentados fue: “¿c\'omo podemos hacer frente a unos par\'ametros que no permiten plasmar fielmente la realidad en el modelo presentado?”.  Esta pregunta naci\'o a partir de una idea que todos los integrantes del grupo inferimos  desde la presentaci\'on del enunciado del trabajo pr\'actico: en una analog\'ia con las sumas de Riemann, donde una longitud \'infima de base de los rect\'angulos permite una mejor aproximaci\'on al valor real de una integral definida (de hecho, su valor se encontrar\'a con el l\'imite de dicha base tendiendo a cero), del mismo modo, la magnitud de error que produzca la estimaci\'on de la temperatura en un punto dado de la superficie estar\'a \'intimamente vinculada con la discretizaci\'on que el usuario decida escoger.  \\
+
+
+Esta dependencia y sus riesgos se ilustran en los resultados “bla” “bla” y “bla”
+[FIGURA DE 4 SANGUIJUELITAS DEJANDO EN CRISIS AL SISTEMA PERO PASANDOSE POR ALTO]  \\
+
+
+En dicho ejemplo se aprecia la forma en que al utilizar una granularidad grosera el sistema informa de una temperatura que indica indefectiblemente que no se ha hallado sanguijuela alguna. Sin embargo, al comenzar a refinar la discretizaci\'on la temperatura se dispara ante la detecci\'on de sanguijuelas que inicialmente hab\'ian pasado inadvertidas, progresivamente pasando a retornar temperaturas cada vez m\'as estabilizadas, es decir,  convergiendo a un \'unico valor mucho m\'as coherente con el sistema desde el punto de vista te\'orico. \\
+
+\section{Dependencia entre el radio y el valor de discretizaci\'on}
+
+En estrecha relaci\'on con lo antedicho, deducimos tambi\'en la dependencia existente entre el radio de las sanguijuelas y el valor de la discretizaci\'on a partir del cual las temperaturas del punto cr\'itico se aproximan lo suficiente a un valor de convergencia. Para definir la validez de nuestros razonamientos, realizamos dos pruebas con instancias cuyos par\'ametros eran id\'enticos, a excepci\'on del radio de las sanguijuelas. \\
+
+Ver \textbf{figure 2.4} (Caso de test 1)\\
+
+De los resultados arrojados se puede interpretar que, si se quiere aproximar una temperatura en alg\'un punto, la granularidad que se debe tomar en el caso de que el radio de las sanguijuelas sean muy pequeñas debe ser m\'as fina que aquella necesaria para lograr un resultado aceptable  en un contexto de sanguijuelas de gran tamaño.\\
+
+
+\section{Desventajas de un h \'optimo}
+Ahora bien, si en varios contextos la calidad de los resultados parece crecer a medida que aumenta la granularidad – es decir, a medida que el h se achica - entonces ¿por qu\'e no se decide optar siempre por hacer empleo de la mayor granularidad posible? La respuesta est\'a en el deseo de los rencorosos: “tarde o temprano todo se paga”. \\
+Parte del costo de hacer que el modelo aproxime lo m\'as fielmente posible a la realidad se visibiliza en las figuras. \\
+
+\color{red}{ BLABLABLABLA.}
+ 
+Allí se puede apreciar la abismal diferencia entre el tiempo de cómputo demandado por dos parabrisas idénticos modelados con granularidades disímiles. \\
+Es necesario aclarar que la eleccci\'on del h m\'as chico no es “arbitraria”. Si se elige un nuevo h muy cercano al anterior, es muy probable que no exista una diferencia significantemente posible. Pero en el ejemplo, se opt\'o por tomar un h que sea la mitad del anterior. Esto hace que se duplique la cantidad de columnas y la cantidad de filas, por lo tanto la cantidad de puntos discretizados va a ser cuatro veces la anterior.
+
+
+\section{Soluci\'on a problemas de tiempo de c\'omputo}
+Pero “¿qui\'en dijo que todo est\'a perdido?” Nosotros venimos a ofrecer una soluci\'on. Visto que las matrices con m\'as posiciones demandan tiempos de procesamiento mayores y considerando que nos interesa poder obtener resultados de calidad, nos aventuramos a comprobar que existe al menos una manera de comprimir lo suficiente la estructura de una matriz  “Banda” como para garantizar una precisi\'on aceptable de los resultados sin comprometer demasiado el tiempo requerido por la computadora para procesarla. \\
+Esta forma de almacenar la matriz fue explicada en la secci\'on “Desarrollo” del presente trabajo, y fue puesta a prueba en numerosas oportunidades para cerciorarnos de que la nueva estructura realmente aventajara a la matriz cl\'asica generada con vectores de vectores. \\
+Los resultados de estas pruebas se observan en las figuras \\
+\color{red}{
+BLA Y BLA (x ej el de matriz vacia y las q puedan usarse para comparar TIEMPO en funcion de BANDA/COMUN aplicando o sin aplicar algoritmos) }\\
+
+ las cuales ponen de manifiesto el tiempo empleado en la resoluci\'on y estabilizaci\'on del sistema para los distintos algoritmos de eliminaci\'on de sanguijuelas en funci\'on de la estructura de base utilizada. \\
+
+
+
+\section{Gasto de energ\'ia vs gasto de tiempo}
+Una vez hubimos terminado de corroborar el costo temporal del c\'alculo de las temperaturas en las diferentes estructuras implementadas, comenzamos a idear formas algor\'itmicas que, de ser necesario, nos permitieran eliminar una cantidad de sanguijuelas que estuvieran impidiendo que el punto central del parabrisas se encontrara por debajo de los 235 grados C. \\
+En vistas a optimizar el cuidado de los recursos energ\'eticos de la nave, la primera idea que se nos ocurr\'o fue la de fijarse qu\'e sanguijuela se encuentra m\'as próxima al punto cr\'itico, eliminarla, recalcular el sistema y averiguar si el sistema est\'a estable para decidir si seguir matando m\'as sanguijuelas es una necesidad. \\
+Como intu\'imos que iba a ser un procedimiento lento, decidimos pensar otras alternativas que pudieran emplearse en contextos de “emergencia”. \\
+La presencia de un rango que acotara las temperaturas posibles de las sanguijuelas o alg\'un dato sobre la posible distribuci\'on de las mismas hubiera facilitado la elecci\'on de un algoritmo que fuera m\'as eficiente en determinado contexto. Sin embargo, al no contar con estos datos debimos apelar a la intuici\'on y al desarrollo de algoritmos m\'as generalizables a diversos contextos aunque menos espec\'ificos y, por ende, tal vez menos competente bajo determinadas condiciones. \\
+Una de estas alternativas consisti\'o en buscar y eliminar cada vez el 25$\%$ de las sanguijuelas que se encontraran en el parabrisas. Las m\'as próximas al punto cr\'itico serían las que desaparecer\'ian y luego se recalcular\'ia el sistema para evaluar la necesidad de aplicar la eliminaci\'on una nueva vez. \\
+Este algoritmo en particular se bas\'o fuertemente en el comportamiento del calor. Sabemos que mientras todas las fuentes de calor apliquen la misma temperatura, las m\'as cercanas al punto cr\'itico ser\'an las que mayor injerencia tengan en la fluctuaci\'on de su temperatura.  \\
+Que la cantidad de sanguijuelas a eliminar sea proporcional a la cantidad de sanguijuelas totales nos pareci\'o una idea sensata que se desprend\'ia de saber que a mayor cantidad de ellas, mayor ser\'ia la temperatura en general (sin superar en ning\'un punto a $T_s$). \\
+Luego de descartar algunos algoritmos menos interesantes desde el punto de vista experimental, incluimos uno que tenía una l\'ogica m\'as arbitraria que heur\'istica. Esto lo hicimos para poder contrastar los resultados del mismo con los que habíamos ideado.\\
+En principio supusimos que el primer algoritmo mencionado ser\'ia m\'as exacto y que ahorrar\'ia m\'as energ\'ia, pero tardar\'ia m\'as. En contraposici\'on, los otros dos ser\'ian menos eficientes en t\'erminos de energ\'ia , pero tardar\'ian menos.  \\
+
+\color{red}{
+[VER Y ANALIZAR LOS GRAFICOS QUE COMPARAN LOS ALGORITMOS. DESCRIBIRLOS. PONER LAS CONCLUSIONES EN CONCLUSIONES!]
+Idea: Podemos aclarar que “mas proximo” esperabamos que fuera cualquiera y dio mejor de lo esperado.” Funcionan relativamente parecido cuando la discretizacion es grande, porque es un mecanismo “paleativo” pero en cuando se empieza a hacer una granularidad mas chiquita y la precision es mayor, el metodo de porcentaje es el mejor: Ya que vas a matar 4 en cualquiera de los dos casos, es preferible que mates aquellas que aumentan mas la temperatura del punto critico. 
+}
+
+
+%\pagebreak[4]
+
+
+%-----------------------CONCLUSION--------------------------------
+
+\chapter{Conclusiones}
+
+Con respecto a la elecci\'on de estructuras, destacamos que elegir almacenar la matriz como la matriz "banda" es lo m\'as acertado en cuanto complejidad espacial. Ya que esta forma de implementaci\'on no tiene ning\'un tipo de restricci\'on por sobre la manera convencional. \\
+Nuestro algoritmo de Eliminaci\'n Gaussiana tiene ciertas mejoras en cuanto complejidad espacial.\\
+
+Calcular, o mejor dicho, estimar la temperatura del punto cr\'itico est\'a \'intimamente relacionado con el tama\~no del h y del r. Por lo visto anteriormente, si un r es muy chico para determinado h, una sanguijuela podr\'ia desaparecer y as\'i dejar de influir con su temperatura en el punto cr\'itico. Cuanto m\'as chico el h, m\'as exacta la cuenta. Cuando h tiende a cero, el punto cr\'itico va a tener su valor real. Por eso mismo es importante, a la hora de utilizar este m\'etodo, saber elegir un h donde la temperatura en el punto cr\'itico ya este estabilizada (Ver gr\'afico). \\
+
+ponemos algo respecto del cambio de temperatura?? \\
+
+A la hora de elegir el "mejor" m\'etodo para eliminar sanguijuelas nos parece importante establecer un equilibrio entre gasto de energ\'ia y gasto de tiempo. Por lo tanto, consideramos que elegir el 25$\%$ de la cantidad de sanguijuelas pertenecientes es una cota acertada por lo demostrado en resultados. \\
+
+
+\chapter{Ap\'endices}
+
+\section{Ap\'endice A}
+
+
+\begin{centering}
+\large\bf Laboratorio de M\'etodos Num\'ericos - Segundo Cuatrimestre 2014 \\
+\large\bf Trabajo Pr\'actico N\'umero 1: \emph{``No creo que a \'el le gustara eso''}\\
+\end{centering}
+
+
+\vskip 0.5 cm
+\hrule
+\vskip 0.1 cm
+
+{\noindent \bf Introducci\'on}
+
+El afamado \capitan\ se encuentra nuevamente en problemas. El
+\objeto\ de su nave \nave\ est\'a siendo atacado simult\'aneamente por varios
+dispositivos hostiles vulgarmente conocidos como \emph{\atacante s
+mutantes}. Estos artefactos se adhieren a los \objeto\ de las naves y
+llevan a cabo su ataque aplicando altas temperaturas sobre la superficie, con
+el objetivo de debilitar la resistencia del mismo y permitir as\'\i \
+un ataque m\'as mort\'\i fero. Cada \atacante\ consta de una \emph{sopapa
+de ataque} circular, que se adhiere al \objeto\ y aplica una temperatura
+constante sobre todos los puntos del \objeto\ en contacto con la sopapa.
+
+Para con\-tra\-rres\-tar estas acciones hostiles, el \capitan\ 
+solamente cuenta con el sistema de refrigeraci\'on de la nave, que puede
+aplicar una temperatura constante de -100${}^o$C a los bordes del \objeto.
+El manual del usuario de la nave dice que si el punto central del \objeto\ 
+alcanza una temperatura de 235${}^o$C, el \objeto\ no resiste la temperatura
+y se destruye. Llamamos a este punto el \emph{punto cr\'\i tico} del
+\objeto.
+
+En caso de que el sistema de refrigeraci\'on no sea suficiente para salvar
+el punto cr\'\i tico, nues\-tro \capitan\ tiene todav\'\i a una posibilidad
+adicional: puede des\-tru\-ir algunas de las \atacante s, pero debe eliminar la
+menor cantidad posible de \atacante s dado que cada eliminaci\'on consume
+energ\'\i a que puede ser vital para la concreci\'on de la misi\'on.
+La situaci\'on es desesperante, y nuestro h\'eroe debe tomar una r\'apida
+determinaci\'on: debe decidir qu\'e \atacante s eliminar de modo tal que el
+\objeto\ resista hasta alcanzar la base m\'as cercana.
+
+{\noindent \bf El modelo}
+
+Suponemos que el \objeto\ es una placa rectangular de $a$ metros de ancho y $b$ metros de altura. Llamemos $T(x,y)$ a la temperatura en el punto dado por las coordenadas $(x,y)$. En el estado estacionario, esta temperatura satisface la ecuaci\'on del calor:
+
+\begin{equation}\label{eq:calor}
+\frac{\partial^2T(x,y)}{\partial x^{2}}+\frac{\partial^2 T(x,y)}{\partial y^{2}} = 0.
+\end{equation}
+
+\noindent La temperatura constante en los bordes queda definida por la siguiente ecuaci\'on:
+\begin{equation}
+T(x,y) = -100^o\textrm{C}~~~~~\textrm{si } x = 0,a \textrm{ \'o } y = 0,b.
+\label{eq:borde}
+\end{equation}
+
+\noindent De forma an\'aloga es posible fijar la temperatura en aquellos puntos cubiertos por una \atacante, considerando $T_s$ a la temperatura ejercida por las mismas.
+
+El problema en derivadas parciales dado por la primera ecuaci\'on con las condiciones de contorno presentadas recientemente, permite encontrar la funci\'on $T$ de temperatura en el \objeto, en funci\'on de los datos mencionados en esta secci\'on.
+
+%(x_j,y_i) = (ib/n,ja/m)
+Para estimar la temperatura computacionalmente, con\-si\-de\-ra\-mos la siguiente discretizaci\'on del \objeto: sea $h \in \mathbb{R}$ la granularidad de la discretizaci\'on, de forma tal que $a = m\times h$ y $b = n \times h$, con $n,m \in \mathbb{N}$, obteniendo as\'i una grilla de $(n+1)\times(m+1)$ puntos. Luego, para $i=0,1,\dots,n$ y $j=0,1,\dots,m$, llamemos $t_{ij} = T(x_j,y_i)$ al valor (desconocido) de la funci\'on $T$ en el punto $(x_j, y_i) = (ih, jh)$, donde el punto $(0,0)$ se corresponde con el extremo inferior izquierdo del \objeto.
+La aproximaci\'on por \emph{diferencias finitas} de la ecuaci\'on del calor afirma que:
+\begin{equation}
+t_{ij} \ =\ \frac{ t_{i-1,j} + t_{i+1,j} + t_{i,j-1} + t_{i,j+1}}{4}.\label{eq:calordd}
+\end{equation}
+
+Es decir, la temperatura de cada punto de la grilla debe ser igual al promedio de las tem\-pe\-ra\-tu\-ras de sus puntos vecinos en la grilla. Adicionalmente, conocemos la temperatura en los bordes, y los datos del problema permiten conocer la temperatura en los puntos que est\'an en contacto con las \atacante s.
+
+{\noindent \bf Enunciado}
+
+Se debe implementar un programa en \verb+C+ o \verb-C++- que tome como entrada los par\'ametros del problema ($a$, $b$, $h$, $r$, $T_s$ y las posiciones de las \atacante s) que calcule la temperatura en el \objeto\ utilizando el modelo propuesto en la secci\'on anterior y que determine a qu\'e \atacante s dispararle con el fin de evitar que se destruya el \objeto. El m\'etodo para determinar las \atacante s que ser\'an destru\'idas queda a criterio del grupo, y puede ser exacto o heur\'istico.
+
+Para resolver este problema, se deber\'a formular un sistema de ecuaciones lineales que permita calcular la temperatura en todos los puntos de la grilla que discretiza el \objeto, e implementar el m\'etodo de Eliminaci\'on Gaussiana (EG) para resolver este sistema particular. Dependiendo de la granularidad utilizada en la discretizaci\'on, el sistema de ecuaciones resultante para este problema puede ser muy grande. Luego, es importante plantear el sistema de ecuaciones de forma tal que posea cierta estructura (i.e., una matriz banda), con el objetivo de explotar esta caracter\'istica tanto desde la \emph{complejidad espacial} como \emph{temporal} del algoritmo.
+
+En funci\'on de la implementaci\'on, como m\'inimo se pide:
+\begin{enumerate}
+\item Representar la matriz del sistema utilizando como estructura de datos los tradicionales arreglos bi-dimensionales. Implementar el algoritmo cl\'asico de EG. \label{enum:EGcomun}
+\item Representar la matriz del sistema aprovechando la estructura banda de la misma, haciendo hincapi\'e en la complejidad espacial.  Realizar las modificaciones necesarias al algoritmo de EG para que aproveche la estructura banda de la matriz. \label{enum:EGbanda}
+\end{enumerate}
+
+En funci\'on de la experimentaci\'on, como m\'inimo deben realizarse los siguientes experimentos:
+
+\begin{itemize}
+\item Considerar al menos dos instancias de prueba, generando discretizaciones variando la granularidad para cada una de ellas y comparando el valor de la temperatura en el punto cr\'itico. Se sugiere presentar gr\'aficos de temperatura para los mismos, ya sea utilizando las herramientas provistas por la c\'atedra o implementando sus propias herramientas de graficaci\'on. 
+\item Analizar el tiempo de c\'omputo requerido en funci\'on de la granularidad de la discretizaci\'on, buscando un compromiso entre la calidad de la soluci\'on obtenida y el tiempo de c\'omputo requerido. Comparar los resultados obtenidos para las variantes propuestas en \ref{enum:EGcomun} y \ref{enum:EGbanda}. 
+\item Estudiar el comportamiento del m\'etodo propuesto para la estimaci\'on de la temperatura en el punto cr\'itico y para la eliminaci\'on de \atacante s.
+\end{itemize}
+
+Finalmente, se deber\'a presentar un informe que incluya una descripci\'on detallada de los m\'etodos implementados y las decisiones tomadas, incluyendo las estructuras utilizadas para representar la matriz banda  y los experimentos realizados, junto con el correspondiente an\'alisis y siguiendo las pautas definidas en el archivo \verb+pautas.pdf+.
+
+{\noindent \bf Programa y formato de archivos}
+
+El programa debe tomar tres par\'ametros (y en ese orden): el archivo de entrada, el archivo de salida y el m\'etodo a ejecutar (0: EG com\'un, 1: EG banda).
+El archivo de entrada contiene los datos del problema (tama\~no del
+\objeto, ubicaci\'on, radio y temperatura de las \atacante s) desde un
+archivo de texto con el siguiente formato:
+
+\begin{verbatim}
+      (a)  (b)  (h)  (r)  (t)  (k)
+      (x1) (y1)
+      (x2) (y2)
+      ...
+      (xk) (yk)
+\end{verbatim}
+
+En esta descripci\'on, $a\in\real_+$ y $b\in\real_+$ representan el ancho
+y largo en metros del \objeto, respectivamente. De acuerdo con la descripci\'on
+de la discretizaci\'on del \objeto, $h$ es la longitud de cada intervalo de discretizaci\'on,
+obteniendo como resultado una grilla de $n+1\in\nat$ filas y $m+1\in\nat$ columnas.
+Por su parte, $r\in\real_+$ representa el radio de las sopapas de ataque de las
+\atacante s (en metros), $t\in\real$ es la temperatura de ataque de las sopapas,
+y $k\in\nat$ es la cantidad de \atacante s. Finalmente, para $i=1,\dots,k$,
+el par $(x_i,y_i)$ representa la ubicaci\'on de la $i$-\'esima sanguijuela en el
+\objeto, suponiendo que el punto $(0,0)$  corresponde al extremo inferior
+izquierdo del mismo.
+
+El archivo de salida contendr\'a los valores de la temperatura en cada punto de la discretizaci\'on utilizando la informaci\'on original del problema (es decir, antes de aplicar el m\'etodo de remoci\'on de sanguijuelas), y ser\'a utilizado para realizar un testeo parcial de correctitud de la implementaci\'on. El formato del archivo de salida contendr\'a, una por l\'inea, el indicador de cada posici\'on de la grilla $i$, $j$ junto con el correspondiente valor de temperatura. A modo de ejemplo, a continuaci\'on se muestran c\'omo se reportan los valores de temperatura para las posiciones $(3,19)$, $(3,20)$, $(4,0)$ y $(4,1)$. 
+
+\begin{verbatim}
+      ...
+      3   19  -92.90878
+      3   20  -100.00000
+      4   0   -100.00000
+      4   1   60.03427
+      ...
+\end{verbatim}
+
+El programa debe ser compilado, ejecutado y testeado utilizando los \emph{scripts} de \emph{python} que acompa\~nan este informe. Estos permiten ejecutar los tests provistos por la c\'atedra, incluyendo la evaluaci\'on de los resultados obtenidos e informando si los mismos son correctos o no. Es requisito que el c\'odigo entregado pase satisfactoriamente los casos de tests provistos para su posterior correcci\'on. Junto con los archivos podr\'an encontrar un archivo \texttt{README} que explica la utilizaci\'on de los mismos.
+
+\vskip 0.5 cm
+\hrule
+\vskip 0.1 cm
+
+{\bf Fecha de entrega} 
+\begin{itemize}
+\item \textsl{Formato electr\'onico:} Jueves 04 de Septiembre de 2014, \underline{hasta las 23:59 hs.}, enviando el trabajo
+(\texttt{informe} + \texttt{c\'odigo}) a \texttt{metnum.lab@gmail.com}. El \texttt{asunto} del email debe comenzar con el texto \verb|[TP1]| seguido
+de la lista de apellidos de los integrantes del grupo. Ejemplo: \texttt{[TP1] D\'iaz, Bianchi, Borghi}
+\item \textsl{Formato f\'isico:} Viernes 05 de Septiembre de 2014, de 17:30 a 18:00 hs.
+\end{itemize}
+
+
+\pagebreak
+
+\section{Ap\'endice B}
+
+C\'odigos fuente de funciones relevantes desde el punto de vista num\'erico:
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+\Input{Matriz}
+\Output{Void}
+\BlankLine
+%\emph{special treatment of the first line}\;
+\For{$i\leftarrow 0$ \KwTo $columna final$}{
+%\emph{special treatment of the first element of line $i$}\;
+\For{$j\leftarrow 0$ \KwTo (\'u$ltima fila - k$)}{\label{forins}
+%\Left$\leftarrow$ \FindCompress{$Im[i,j-1]$}\;
+%\Up$\leftarrow$ \FindCompress{$Im[i-1,]$}\;
+%\This$\leftarrow$ \FindCompress{$Im[i,j]$}\;
+\If{($matriz(i,j) > \varepsilon$)}{%\label{lt} %(\tcp*[h]{O(\Left,\This)==1})
+%\lIf{\Left $<$ \This}{\Union{\Left,\This}}\; 
+m $\leftarrow$ matriz(i,j)/matriz(i,i) \\
+fila j $\leftarrow$ fila j - m.(fila i)
+%\lElse{\Union{\This,\Left}\;}
+}
+%\If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
+%\lIf{\Up $<$ \This}{\Union{\Up,\This}}\;
+%\tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
+%\lElse{\Union{\This,\Up}}\tcp*[r]{\This linked to \Up}\label{lelse}
+%}
+}
+%\lForEach{element $e$ of the line $i$}{\FindCompress{p}}
+}
+\caption{EGcom\'un}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Matriz}
+\Output{Void}
+\BlankLine
+\For{$i\leftarrow (k+2)$ \KwTo $(\# filas - k)$}{
+$j\leftarrow 0$ \tcp*[f]{j va a recorrer las columnas} \\
+\While{$j < (posici$\'o$n$ $elemento$ $de$ $la$ $diagonal)$}{\label{forins}
+$com\leftarrow (i+j-k-1)$ \tcp*[f]{\color{red}{GUS: Poner aclaraci\'on abajo.}} \\
+\If{($matriz(i,j) > \varepsilon$)}{
+m $\leftarrow$ matriz(i,j)/matriz(com,PosDiagonal) \\
+Resta Corrida sin la columna Resultado (fila i, fila com) \\
+matriz(i, PosResult) -= matriz(com, PosResult) 
+}}}
+\caption{EGbanda}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+$\circ$ \textbf{PosResult} es la posici\'on de la columna de resultados. \\
+$\circ$ Decidimos hacer la triangulaci\'on por filas en vez de por columnas. \\
+$\circ$ La resta se debe hacer corrida y no simplemente restar los vectores fila como en la eliminaci\'on Gaussiana com\'un porque las columnas no coinciden fila a fila. Entonces, se hace coincidir la posici\'on de la diagonal del vector superior con su posici\'on correspondiente en el inferior y se comienza la resta, la cual se puede ir haciendo iterativamente ya que las posiciones de las columnas de al lado son consecutivas. En el caso de la columna de resultados, no es la misma situaci\'on, se resta aparte. \\
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Matriz}
+\Output{Void}
+\BlankLine
+
+\If{(tipo == Matriz Com\'un)}{
+matriz.EGcom\'un() \\
+i $\leftarrow$ $\#$filas \\
+\While{(i $\geq$ 0)}{
+	\For{$j\leftarrow $\'u$ltima$ $columna$ \KwTo $i$}{
+		vectorResultado(i) -= matriz(i,j) * matriz(j,PosResult) 
+	}
+	matriz(i,PosResult) = matriz(i,PosResult)/matriz(i,j)
+}}
+\uElseIf{(tipo == Matriz Banda)}{
+matriz.EGbanda() \\
+i $\leftarrow$ ($\#$filas -k -2) \tcp*[f]{Las \'ultimas k-2 filas ya est\'an trianguladas}\\
+\While{(i $>$ k)}{
+	f $\leftarrow$ 1 \\
+	\For{$j\leftarrow$(k+2) $\KwTo$ PosResult}{
+		matriz(i,PosResult) -= matriz(i,j)*matriz(i+f,PosResult)\\
+		f++
+	}
+	matriz(i, PosResult) = matriz(i,PosResult)/matriz(i,PosDiag) \\
+	i$--$
+}}
+\caption{ResolverSistema}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+$\circ$ \textbf{PosResult} es la posici\'on de la columna de resultados. \\
+$\circ$ \textbf{PosDiag} es la posici\'on de la columna de la diagonal. \\
+$\circ$ Para optimizar tiempo de c\'omputo, a medida que se hace el Backward Sustitution, los \'unicos elementos modificados son los de la columna resultados. Es decir, los ceros que habr\'ia que escribir en la matriz se omiten, ya que no se vuelve acceder a ellos. \\
+$\circ$ Una vez triangulada inferiormente la fila, se la divide por el elemento de la diagonal, as\'i queda esa inc\'ognita despejada. Esto tambi\'en se hace solamente en la posici\'on del resultado.\\
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{a, b, r, h, temp, vect, tipo}
+\Output{Parabrisas}
+\BlankLine
+\If{(tipo == Matriz Com\'un)}{
+Redimensiono la matriz con el tama\~no que necesito \\
+\For{$i\leftarrow$ 0 $\KwTo$ $\#$columnas}{
+		\If{(columna i es un elemento del Borde)}{
+			matriz(i,i)$\leftarrow$ 1 \\
+			matriz(i,PosResult)$\leftarrow$ $-$100 \\
+		}
+}
+\For{$i\leftarrow$ 0 $\KwTo$ tama\~no(vect)}{
+		Ataque(vect[i])
+}	
+\For{$i\leftarrow$ 0 $\KwTo$ $\#$columnas}{
+		\If{(matriz(i,i)==0)}{
+			matriz(i,i)$\leftarrow$ $-$4 \\
+			matriz(i,i-1)$\leftarrow$ 1 \\
+			matriz(i,i+1)$\leftarrow$ 1 \\
+			matriz(i,i-$\frac{a}{h}$-1)$\leftarrow$ 1 \\
+			matriz(i,i+$\frac{a}{h}$+1)$\leftarrow$ 1 \\
+		}
+}}
+\uElseIf{(tipo == Matriz Banda)}{
+Redimensiono la matriz con el tama\~no que necesito \\
+\For{$i\leftarrow$ 0 $\KwTo$ $\#$filas}{
+		\If{(elemento de la fila i, columna de la diagonal es un elemento del Borde)}{
+			matriz(i,PosDiag)$\leftarrow$ 1 \\
+			matriz(i,PosResult)$\leftarrow$ $-$100 \\
+		}
+}
+\For{$i\leftarrow$ 0 $\KwTo$ tama\~no(vect)}{
+		Ataque(vect[i])
+}	
+\For{$i\leftarrow$ 0 $\KwTo$ $\#$filas}{
+		\If{(matriz(i,PosDiag)==0)}{
+			matriz(i,PosDiag)$\leftarrow$ $-$4 \\
+			matriz(i,0)$\leftarrow$ 1 \\
+			matriz(i,PosDiag - 1)$\leftarrow$ 1 \\
+			matriz(i,PosDiag + 1)$\leftarrow$ 1 \\
+			matriz(i,PosResult - 1)$\leftarrow$ 1 \\
+		}
+}
+}
+\caption{CrearParabrisas}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Parabrisas, posici\'on: (p1, p2)}
+\Output{Parabrisas}
+\BlankLine
+\If{(La sanguijuela no toca el borde)}{
+C\'alculo de los bordes de la circunferencia \\
+IntervaloX $\leftarrow$ (p1 $-$ radio, p1 $-$ radio)\\
+IntervaloY $\leftarrow$ (p2 $-$ radio, p2 $-$ radio)\\
+i$\leftarrow$ (p1 $-$ radio) \\
+\While{(i $\leq$ p1 + radio)}{
+	c$\leftarrow$ (p2 $-$ radio) \\
+	\While{(c $\leq$ p2 + radio)}{
+		norma2 $\leftarrow$ ${(i-p1)}^{2} + {(c-p2)}^{2}$ \\
+		\If{(norma2 $\leq$  ${radio}^{2}$)}{
+			matriz(fila del elemento (i,c) , PosResult) $\leftarrow$ temp \\
+			matriz(fila del elemento (i,c) , PosDiag) $\leftarrow$ 1 \\
+		}
+	}
+}
+i$\leftarrow$ (p1 $-$ radio) \\
+\While{(i $\leq$ p1 + radio)}{
+	c$\leftarrow$ p2 $-$ radio \\
+	\While{(c $\leq$ p2 + radio)}{
+		norma2 $\leftarrow$ ${(i-p1)}^{2} + {(c-p2)}^{2}$ \\
+		\If{(norma2 $\leq$  ${radio}^{2}$)}{
+			matriz(fila del elemento (i,c) , PosResult) $\leftarrow$ temp \\
+			matriz(fila del elemento (i,c) , PosDiag) $\leftarrow$ 1 \\
+		}
+	}
+}
+Si la sanguijuela modific\'o alg\'un punto de la matriz, la agrego al vector de sanguijuelas Discretizadas \\
+
+}
+
+\caption{Ataque}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+\Input{Matriz}
+\Output{double}
+\BlankLine
+PuntoCr\'itico = (p1,p2) \\
+\eIf{(PuntoCr\'itico est\'a discretizado)}{
+devolver el valor de la matriz que corresponda \\
+}
+{
+C\'alculo de los cuatro puntos que encierran al PuntoCr\'itico: \\
+pArrIzq = (filArri, colIzq) \\
+pArrDer = (filArri, colDer) \\
+pBajIzq = (filAba, colIzq) \\
+pBajDer = (filAba, colDer) \\
+\If{(p1 $-$ promedio(filArri,filAba) $\leq$ $\varepsilon$)}{
+	\If{(p2 $-$ promedio(filArri,filAba)) $\leq$ $\varepsilon$}{
+		\Return Promedio(pArrIzq, pArrDer, pBajIzq, pBajDer)
+	}
+	\uElseIf{(p2 est\'a m\'as cerca de filAba)}{
+		\Return Promedio(pBajDer, pBajIzq)
+	}
+	\Else{
+		\Return Promedio(pArrIzq, pArrDer)	
+	}
+}
+\uElseIf{(p2 $-$ promedio(filArri,filAba) $\leq$ $\varepsilon$)}{
+	\eIf{(p1 est\'a m\'as cerca de colDer)}{
+		\Return Promedio(pArrDer, pBajDer)
+	}{
+		\Return Promedio(pArrIzq, pBajIzq)
+	}
+}
+\Else{
+	\eIf{(PuntoCr\'itico est\'a en la mitad izquierda del cuadrado)}{
+		\eIf{(PuntoCr\'itico est\'a en la parte superior)}{ \tcp*[f]{Est\'a en el segundo cuadrante} \\
+			\Return pArrIzq
+		}{ \tcp*[f]{Est\'a en el tercer cuadrante} \\
+			\Return pBajIzq
+		}
+	}{ \tcp*[f]{Est\'a en la mitad derecha del cuadrado} \\
+		\eIf{(PuntoCr\'itico est\'a en la parte superior)}{ \tcp*[f]{Est\'a en el primer cuadrante} \\
+			\Return pArrDer
+		}{ \tcp*[f]{Est\'a en el cuarto cuadrante} \\
+			\Return pBajDer
+		}
+	}
+}
+}
+
+\caption{C\'alculo del Punto Cr\'itico}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Parabrisas}
+\Output{Void}
+\While{(El parabrisas no sea estable)}{
+	Elijo del vector de sanguijuelas discretizadas al elemento que su centro este m\'as cerca del Punto Cr\'itico. \\
+	Lo borro \\
+	Recalculo el parabrisas con las nuevas sanguijuelas
+}
+\caption{Matar Sanguijuelas de a 1}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Parabrisas}
+\Output{Void}
+\While{(El parabrisas no sea estable)}{
+	Elijo del vector de sanguijuelas discretizadas al 25$\%$ de sus elementos, que su centro sean los m\'as cerca del Punto Cr\'itico. \\
+	Los borro \\
+	Recalculo el parabrisas con las nuevas sanguijuelas
+}
+\caption{Matar 25$\%$ deSanguijuelas}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Parabrisas}
+\Output{Void}
+\While{(El parabrisas no sea estable)}{
+	Elijo del vector de sanguijuelas discretizadas al elemento que su centro este m\'as cerca del Punto Cr\'itico. \\
+	Busco los elementos que sean el 25$\%$ del total, contando al ya obtenido, que esten m\'as cerca de este\\
+	Los borro\\
+	Recalculo el parabrisas con las nuevas sanguijuelas
+}
+\caption{Matar por Proximidad}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+\bibliography{thesis}
+
+\chapter{Referencias}
+\bibliographystyle{plain}
+
+\pagebreak
+
+
+
+
+
+
+
+\end{document}

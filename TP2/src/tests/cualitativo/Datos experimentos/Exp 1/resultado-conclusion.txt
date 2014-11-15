@@ -1,0 +1,44 @@
+Considerando la red:
+
+	http://es.wikipedia.org/wiki/Escuela_filos%C3%B3fica
+	http://es.wikipedia.org/wiki/Empirismo
+	http://es.wikipedia.org/wiki/Racionalismo
+	http://es.wikipedia.org/wiki/Humanismo
+	http://es.wikipedia.org/wiki/Marxismo
+
+	Apuntan a "Racionalismo" (y no son apuntadas por el)
+	http://es.wikipedia.org/wiki/Cr%C3%ADtica_de_la_raz%C3%B3n_pura
+	http://es.wikipedia.org/wiki/Metaf%C3%ADsica
+	http://es.wikipedia.org/wiki/Discurso_del_m%C3%A9todo
+	http://es.wikipedia.org/wiki/L%C3%B3gica_de_Port-Royal
+	http://es.wikipedia.org/wiki/Principio_de_raz%C3%B3n_suficiente
+
+	Apuntan a "empirismo":
+	http://es.wikipedia.org/wiki/Juicio_sint%C3%A9tico_a_priori
+	http://es.wikipedia.org/wiki/Investigaci%C3%B3n_sobre_el_entendimiento_humano
+	http://es.wikipedia.org/wiki/Razonamiento_inductivo
+	http://es.wikipedia.org/wiki/Instrumentalismo
+
+	Apuntan a "humanismo":
+	http://es.wikipedia.org/wiki/Ecd%C3%B3tica
+	http://es.wikipedia.org/wiki/Robert_G._Ingersoll
+	http://es.wikipedia.org/wiki/Antihumanismo
+
+
+Queremos ver si ocurrio que hubs rankeo bien a las paginas "base" (las que apuntan a los grandes conceptos ) y pagerank las desmerecio.
+
+En los gráficos adjuntados se puede observar que las webs mejor puntuadas para PageRank resultaron ser 
+Empirismo
+Racionalismo
+Humanismo
+Metafísica
+Razonamiento inductivo
+Principio de la razón
+
+Si analizamos los resultados de Hits para organizar las autoridades, encontramos en este caso más páginas coincidentes con las priorizadas con el algoritmo de Pagerank. De hecho, las cinco páginas a las que éste último método concede las primeras posiciones, son las mismas que pueden encontrarse en los cinco principales puestos resultantes de Hits para autoridades.  
+
+Ahora bien, Si comparamos con la jerarquía sugerida por Hits (hubs), notamos que una de las webs anteriormente mencionadas (humanismo) tiene valor nulo, mientras que muchas otras sugeridas por este método ni siquiera figuran entre las que PageRank considera webs de importancia (crítica a la razón pura, antihumanismo, etc.)
+Los acuerdos entre ambos gráficos se dan en los casos de las páginas "Empirismo" y "Metafísica", las cuales poseen más links salientes que todas las demás (y apuntan a la mejor autoridad, que es racionalismo) y, a su vez, son apuntadas por más de dos webs. En otras palabras, estas dos páginas no nos interesan realmente a los fines analíticos de la hipótesis en cuestión, dado que al poder ser considerados "hibridos" entre hubs y autoridades, no nos permiten emitir conclusiones claras al respecto.
+Dicho esto, si dercartaramos estos dos casos notaríamos que las coincidencias entre los resultados arrojados son muy disímiles.
+
+Esto nos hace pensar que el nivel de relación que puedan tener los resultados de PageRank con los de HITS, dependerá diréctamente del criterio que se tome para ordenar jerárquicamente los resultados de HITS. Con este ejemplo podemos deducir que si los hubs fueran considerados más importantes que las autoridades, entonces las coincidencias entre los principales resultados de los métodos enunciados serán menores que en el caso en que el nivel de prioridades entre hubs y autoridades se intercambie.

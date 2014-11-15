@@ -1,0 +1,51 @@
+////MED SIZE:
+Abortion
+	Hits Tiempo: 0.072925
+	PageRank Tiempo: 0.044039
+	In-Deg Tiempo: 0.015639
+
+Censorship
+	Hits Tiempo: 0.086402
+	PageRank Tiempo: 0.049683
+	In-Deg Tiempo: 0.016168
+
+Complexity
+	Hits Tiempo: 0.036268
+	PageRank Tiempo: 0.013314
+	In-Deg Tiempo: 0.005197
+
+Death Penalty
+	Hits Tiempo: 0.034213
+	PageRank Tiempo: 0.036862
+	In-Deg Tiempo: 0.009924
+
+Genetic
+	Hits Tiempo: 0.071337
+	PageRank Tiempo: 0.06651
+	In-Deg Tiempo: 0.018436
+
+Geometry
+	Hits Tiempo: 0.025434
+	PageRank Tiempo: 0.010866
+	In-Deg Tiempo: 0.006644
+
+Gun Control
+	Hits Tiempo: 0.058159
+	PageRank Tiempo: 0.043811
+	In-Deg Tiempo: 0.014708
+
+Movies
+	Hits Tiempo: 0.120681
+	PageRank Tiempo: 0.107892
+	In-Deg Tiempo: 0.032868
+
+////LARGE SIZE:
+Notre Dame
+	Hits Tiempo: 4.38623			4.36757
+	PageRank Tiempo: 4.7713		 	4.63464
+	In-Deg Tiempo: 0.727501
+
+Stanford
+	Hits Tiempo: 5.88905
+	PageRank Tiempo: 7.61779
+	In-Deg Tiempo: 0.786145

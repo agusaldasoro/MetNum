@@ -371,7 +371,7 @@ Corrimos ambos algoritmos con diversas fotos, a continuaci\'on se muestran algun
 	\includegraphics[scale=0.60]{imagenes/Vecino/arbolitos}
 	\label{arbolitos}
 	
-	PSNR =   14.3119
+	PSNR1 =   14.3119
 
 PSNR2 =   14.3533
 
@@ -1247,6 +1247,8 @@ Sin embargo, esas diferencias imperceptibles para nuestros ojos, claramente inci
 \end{tabular}
 \end{center}
 
+\newpage
+
 La mayor diferencia respecto a los métodos anteriores fue la velocidad de cómputo: este método fue claramente superior en todos los casos, sin sacrificar calidad.
 
 \begin{figure}[h!]
@@ -1263,7 +1265,7 @@ La mayor diferencia respecto a los métodos anteriores fue la velocidad de cómp
   \end{center}
 \end{figure}
 
-\pagebreak
+\newpage
 \subsection{Algoritmo de Malvar, He y Cutler}
 
 Luego de la lectura y estudio de la publicaci\'on \textit{HIGH-QUALITY LINEAR INTERPOLATION
@@ -1307,7 +1309,7 @@ Respecto a su tiempo de cómputo en comparación al Spline de rango (que era el 
   \end{center}
 \end{figure}
 
-\pagebreak
+
 Un análisis y comparación más profundos de este algoritmo vs. las otras opciones se encuentra en las secciones siguientes.
 
 
@@ -1692,6 +1694,8 @@ Asimismo, a pesar de ser el Spline que produce imágenes de mejor calidad (aunqu
   \end{center}
 \end{figure}
 
+\newpage
+
 Para obtener una mejor comparación entre los otros métodos, adjuntamos otro gráfico sin Splines MHC:
 
 \begin{figure}[h!]
@@ -1700,7 +1704,6 @@ Para obtener una mejor comparación entre los otros métodos, adjuntamos otro gr
     \label{tiempos2}
   \end{center}
 \end{figure}
-\pagebreak
 
 Y por último, una tabla con los valores exactos, para poder apreciar mejor las diferencias:
 \begin{figure}[h!]
@@ -1721,11 +1724,13 @@ No hay que perder de vista que la implementación puede llegar a tener que ser e
 
 Considerando las mediciones de PSNR y SSIM, las cuales preservaron un comportamiento parejo para todas las observaciones relevadas, se puede establecer un orden entre los algoritmos: Vecino m\'as cercano, Bilineal, Splines y MHC, siendo el primero el de menor puntaje y el \'ultimo el de mayor.\\
 
-Como primera instancia, el Algoritmo de\textit{ Vecino M\'as Cercano} es capaz de esbozar la estructura de la imagen a grandes rasgos. Sin embargo, los bordes no suelen ser muy precisos y la definici\'on tiende a ser de baja calidad.  Además, fue el método que produjo mayor diversidad de Artifacts y mayor ocurrencia bajo una misma imagen.\\
+Como primera instancia, el Algoritmo de\textit{ Vecino M\'as Cercano} es capaz de esbozar la estructura de la imagen a grandes rasgos. Sin embargo, los bordes no suelen ser muy precisos y la definici\'on tiende a ser de baja calidad.  Además, fue el método que produjo mayor diversidad de Artifacts y mayor ocurrencia bajo una misma imagen.
+
 A pesar de que el tiempo de cómputo para este método siempre fue el menor, cabe destacar que los valores de PSNR y SSIM arrojados en nuestra experimentaci\'on para este m\'etodo fueron siempre los menores, además de que la exploración visual y subjetiva de la imágenes producidas deja en evidencia que este método, aunque fácil de implementar y para nada complejo, es por demás grosero a la hora de realizar demosaicing.\\
 
-La \textit{interpolaci\'on Bilineal} tiende a ser una buena soluci\'on respecto de los contornos angulosos que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo.\\
-Si tuviésemos que elegir el método más rápido posible y que, sin embargo, produzca resultados medianamente aceptables (para, por ejemplo, el pequeño visor de una cámara digital no profesional), la interpolación bilineal podría ser una buena elección, ya que mejora notablemente Vecino más cercano, sin requerir mucho más tiempo de cómputo.
+La \textit{interpolaci\'on Bilineal} tiende a ser una buena soluci\'on respecto de los contornos angulosos que se generan bajo el m\'etodo de Vecino m\'as cercano, ya que admite un dibujo de contornos m\'as flexible aunque no \'optimo.
+
+Si tuviésemos que elegir el método más rápido posible y que, sin embargo, produzca resultados medianamente aceptables (para, por ejemplo, el pequeño visor de una cámara digital no profesional), la interpolación bilineal podría ser una buena elección, ya que mejora notablemente Vecino más cercano, sin requerir mucho más tiempo de cómputo.\\
 
 Al utilizar el \textit{spline} con la mejora de MHC se disminuy\'o el blurring de la imagen y si bien frente al ojo humano las diferencias entre este m\'etodo y el del algoritmo propiamente dicho de MHC pueden no ser muy visibles, notamos una mayor diversidad de artifacts en el primero. \\
 Tal como analizamos en el trabajo, el tiempo de ejecuci\'on de este m\'etodo es muy elevado, y sólo empeora a medida que aumenta el tama\~no de la imagen a procesar. Dado que en t\'erminos de veracidad respecto de la imagen original no llega a ser tan leal como el algoritmo original de MHC, descartamos esta opci\'on como buena por demandar m\'as tiempo y devolver resultados que se podrían obtener con un algoritmo mucho menos complejo.\\

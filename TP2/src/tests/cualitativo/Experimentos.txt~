@@ -1,0 +1,135 @@
+Pagerank se fija CUANTOS lo apuntan y que peso tienen los que lo apuntan (si los que lo apuntan, apuntan a otros tantos, el peso es menor que otro 
+que es apuntado por la misma cantidad pero apuntan solo a el)
+
+HITS va a considerar importantes las paginas que apunten a paginas que son muy apuntadas (hubs), y paginas que son apuntadas por muchos hubs importantes (autoridades)
+
+
+//Experimento 1: 
+comparacion HITS / pagerank: Vemos en que casos hits devuelve resultados que a PageRank no le parecen importantes. Esto pasa con los hubs. Nuestra hipotesis es que si tomamos un conjunto de paginas base (no apuntadas por ninguna) que apunten a un mismo grupo de conceptos, entonces HITS va a devolver estas bases con buen puntaje (porque apuntan a paginas muy apuntadas) pero pagerank no las va a considerar como destacables, sino que va a devolver las "muy apuntadas" y ningun hub.
+Tomo paginas de corrientes filosoficas y busco que otras pueden estar apuntando a esas mismas SIN estar apuntando a "corrientes filosoficas" ni entre ellas (cosa de que todas resulten hubs y cada corriente una autoridad)
+
+RED 1:
+
+	http://es.wikipedia.org/wiki/Escuela_filos%C3%B3fica
+	http://es.wikipedia.org/wiki/Empirismo
+	http://es.wikipedia.org/wiki/Racionalismo
+	http://es.wikipedia.org/wiki/Humanismo
+
+
+	Apuntan a "Racionalismo" (y no son apuntadas por el)
+	http://es.wikipedia.org/wiki/Cr%C3%ADtica_de_la_raz%C3%B3n_pura
+	http://es.wikipedia.org/wiki/Metaf%C3%ADsica
+	http://es.wikipedia.org/wiki/Discurso_del_m%C3%A9todo
+	http://es.wikipedia.org/wiki/L%C3%B3gica_de_Port-Royal
+	http://es.wikipedia.org/wiki/Principio_de_raz%C3%B3n_suficiente
+
+	Apuntan a "empirismo":
+	http://es.wikipedia.org/wiki/Juicio_sint%C3%A9tico_a_priori
+	http://es.wikipedia.org/wiki/Investigaci%C3%B3n_sobre_el_entendimiento_humano
+	http://es.wikipedia.org/wiki/Razonamiento_inductivo
+	http://es.wikipedia.org/wiki/Instrumentalismo
+
+	Apuntan a "humanismo":
+	http://es.wikipedia.org/wiki/Ecd%C3%B3tica
+	http://es.wikipedia.org/wiki/Robert_G._Ingersoll
+	http://es.wikipedia.org/wiki/Antihumanismo
+
+
+//Experimento 2: 
+Agregamos un link que apunta a todas las corrientes filosoficas (un link que apunta a paginas muy apuntadas, deberia resultar ser el mejor hub). Agregar
+http://es.wikipedia.org/wiki/Escuela_filos%C3%B3fica a la RED 1.
+
+
+//Experimento 3:
+Ademas, para identificar el comportamiento de PageRank estaria bueno ver como cambia el peso de un link apuntado, cuando el que lo apunta es un link que apunta a muchos otros. Por ejemplo, en este caso, tanto empirismo y humanismo tienen cada una 3 links apuntandolos:
+
+RED 2:
+
+	http://es.wikipedia.org/wiki/Escuela_filos%C3%B3fica
+
+	http://es.wikipedia.org/wiki/Empirismo
+	http://es.wikipedia.org/wiki/Racionalismo
+	http://es.wikipedia.org/wiki/Humanismo
+
+	Apuntan a "Racionalismo" (y no son apuntadas por el)
+	http://es.wikipedia.org/wiki/Cr%C3%ADtica_de_la_raz%C3%B3n_pura
+	http://es.wikipedia.org/wiki/Metaf%C3%ADsica
+	http://es.wikipedia.org/wiki/Discurso_del_m%C3%A9todo
+	http://es.wikipedia.org/wiki/L%C3%B3gica_de_Port-Royal
+	http://es.wikipedia.org/wiki/Principio_de_raz%C3%B3n_suficiente
+
+	Apuntan a "empirismo":
+	http://es.wikipedia.org/wiki/Juicio_sint%C3%A9tico_a_priori
+	http://es.wikipedia.org/wiki/Investigaci%C3%B3n_sobre_el_entendimiento_humano
+	http://es.wikipedia.org/wiki/Razonamiento_inductivo
+
+	Apuntan a "humanismo":
+	http://es.wikipedia.org/wiki/Ecd%C3%B3tica
+	http://es.wikipedia.org/wiki/Robert_G._Ingersoll
+	http://es.wikipedia.org/wiki/Antihumanismo
+
+
+Se espera que para PageRank ambas corrientes tengan el mismo peso. Ahora bien, si se realiza una variante agregando a la red algunos otros links salientes de 
+"antihumanismo", se espera que baje el peso de humanismo, dado que se "distribuye" la importancia de Humanismo. Se puede contrastar con:
+
+RED 3:
+
+	http://es.wikipedia.org/wiki/Escuela_filos%C3%B3fica
+	http://es.wikipedia.org/wiki/Empirismo
+	http://es.wikipedia.org/wiki/Racionalismo
+	http://es.wikipedia.org/wiki/Humanismo
+	http://es.wikipedia.org/wiki/Marxismo
+
+	Apuntan a "Racionalismo" (y no son apuntadas por el)
+	http://es.wikipedia.org/wiki/Cr%C3%ADtica_de_la_raz%C3%B3n_pura
+	http://es.wikipedia.org/wiki/Metaf%C3%ADsica
+	http://es.wikipedia.org/wiki/Discurso_del_m%C3%A9todo
+	http://es.wikipedia.org/wiki/L%C3%B3gica_de_Port-Royal
+	http://es.wikipedia.org/wiki/Principio_de_raz%C3%B3n_suficiente
+
+	Apuntan a "empirismo":
+	http://es.wikipedia.org/wiki/Juicio_sint%C3%A9tico_a_priori
+	http://es.wikipedia.org/wiki/Investigaci%C3%B3n_sobre_el_entendimiento_humano
+	http://es.wikipedia.org/wiki/Razonamiento_inductivo
+
+	Apuntan a "humanismo":
+	http://es.wikipedia.org/wiki/Ecd%C3%B3tica
+	http://es.wikipedia.org/wiki/Robert_G._Ingersoll
+	http://es.wikipedia.org/wiki/Antihumanismo
+
+		Salen de antihumanismo:
+		http://es.wikipedia.org/wiki/Raz%C3%B3n
+		http://es.wikipedia.org/wiki/Muerte_de_Dios
+		http://es.wikipedia.org/wiki/Claude_L%C3%A9vi-Strauss
+		http://es.wikipedia.org/wiki/Michel_Foucault
+
+
+
+//Experimento 4:
+Al cambiar la probabilidad de teletransportarse (aumentarla), aumenta la proporcion de tiempo que se pasa en paginas que no tenian un buen puntaje, y disminuye la relevancia de las que resultaban mas importantes.
+
+//Experimento 5:
+Probar una red que carezca de una pagina que las vincule a todas y despues agregarla para ver como se modifica el sistema.
+
+RED 4:
+
+Pagina que las vincula:
+
+		http://es.wikipedia.org/wiki/Matriz_(matem%C3%A1ticas)
+
+Apuntan a "Matriz" y son apuntadas por ella (chequear que no se apunten entre ellas)
+
+		http://es.wikipedia.org/wiki/%C3%81lgebra_lineal
+		http://es.wikipedia.org/wiki/Sistema_de_ecuaciones_lineales
+		http://es.wikipedia.org/wiki/Gottfried_Leibniz
+		http://es.wikipedia.org/wiki/Seki_K%C5%8Dwa
+		http://es.wikipedia.org/wiki/Matriz_transpuesta
+		http://es.wikipedia.org/wiki/Matriz_cuadrada
+		http://es.wikipedia.org/wiki/Teor%C3%ADa_de_grafos
+		http://es.wikipedia.org/wiki/Matriz_de_incidencia
+		http://es.wikipedia.org/wiki/Regla_de_Cramer
+		http://es.wikipedia.org/wiki/James_Joseph_Sylvester
+		http://es.wikipedia.org/wiki/Espacio_dual
+
+
+

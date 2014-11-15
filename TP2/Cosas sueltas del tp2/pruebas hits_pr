@@ -1,0 +1,26 @@
+
+\textbf{Experimento: \itshape{Evaluación de la modificación del sistema luego de forzar a una cantidad arbitraria de hubs a apuntar a una página cuyo peso como autoridad es bajo. }}
+
+Habiendo tomado un conjunto de páginas, calculamos el peso en cuanto a hub de cada una y lo graficamos. Como las páginas 2, 3 y 8 son las que mayor jerarquía tienen en este aspecto, las escogimos para apuntar a la página 7, cuyo peso de autoridad es escaso.\\
+Luego de realizar las modificaciones pertinentes obtuvimos los resultados que posteriormente graficamos y adjuntamos en este informe.\\
+Allí se puede observar que los cambios no sólo acrecentaron la importancia de la página que quisimos apuntalar, sino que incluso la situaron como la mejor autoridad de la red.
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.66]{imagenes/cambioshits}
+	\caption{}
+	\label{cambioshits}
+  \end{center}
+\end{figure}
+
+\textbf{Experimento: \itshape{Evaluación de la modificación del sistema luego de forzar a una cantidad arbitraria de nodos relevantes a apuntar a una página poco destacada.}}
+De manera similar al experimento anterior, quisimos evaluar cuál sería el modo equivalente en el método de PageRank para lograr que una página logre una mejor posición en el ranking.
+Para ello escogimos una red de 14 nodos, calculamos sus puntajes y forzamos a los tres más importantes (nodos 2, 8 y 9) a apuntar a una página con poca visibilidad (nodo 10). El resultado se puede apreciar en el gráfico adjunto: nuevamente se logró el objetivo que nos habíamos propuesto.
+
+\begin{figure}
+  \begin{center}
+	\includegraphics[scale=0.66]{imagenes/cambiospagerank}
+	\caption{}
+	\label{cambiospagerank}
+  \end{center}
+\end{figure}

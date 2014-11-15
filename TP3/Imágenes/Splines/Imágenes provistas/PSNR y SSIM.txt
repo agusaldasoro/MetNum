@@ -1,0 +1,133 @@
+tiempo01 = 17.6458
+tiempoPesos = 18.2409
+
+// IMG 1
+
+psnr01 =   34.3011
+
+psnrPesos =   34.2835
+
+ssim01 =    0.9791
+
+ssimPesos =    0.9792
+
+
+// IMG 2
+
+psnr01 =   27.5097
+
+psnrPesos =   27.6136
+
+ssim01 =    0.8742
+
+ssimPesos =    0.8753
+
+
+// IMG 3
+
+psnr01 =   32.3575
+
+psnrPesos =   32.3066
+
+ssim01 =    0.9686
+
+ssimPesos =    0.9684
+
+
+// IMG 4
+
+psnr01 =   23.1856
+
+psnrPesos =   23.2343
+
+ssim01 =    0.8173
+
+ssimPesos =    0.8176
+
+
+// IMG 5
+
+psnr01 =   32.2398
+
+psnrPesos =   32.2512
+
+ssim01 =    0.9185
+
+ssimPesos =    0.9190
+
+
+// IMG 6
+
+psnr01 =   28.7684
+
+psnrPesos =   28.8284
+
+ssim01 =    0.8984
+
+ssimPesos =    0.8990
+
+
+// IMG 7
+
+psnr01 =   30.9837
+
+psnrPesos =   31.0861
+
+ssim01 =    0.8755
+
+ssimPesos =    0.8763
+
+
+// IMG 8
+
+psnr01 =   27.9308
+
+psnrPesos =   27.9623
+
+ssim01 =    0.9186
+
+ssimPesos =    0.9191
+
+
+// IMG 9
+
+psnr01 =   30.9909
+
+psnrPesos =   30.9867
+
+ssim01 =    0.9489
+
+ssimPesos =    0.9491
+
+
+// IMG 10
+
+psnr01 =   28.1350
+
+psnrPesos =   28.2125
+
+ssim01 =    0.9073
+
+ssimPesos =    0.9080
+
+
+// IMG 11
+
+psnr01 =   29.9840
+
+psnrPesos =   30.0558
+
+ssim01 =    0.9329
+
+ssimPesos =    0.9336
+
+
+// IMG 12
+
+psnr01 =   25.9870
+
+psnrPesos =   26.0737
+
+ssim01 =    0.8789
+
+ssimPesos =    0.8795
